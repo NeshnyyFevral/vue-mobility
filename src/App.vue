@@ -1,6 +1,6 @@
 <template>
   <div>
-    hello
+    hellowewefwefwefwefwefwefwe3wef wef we fwe fw
   </div>
 </template>
 
@@ -11,5 +11,11 @@
 <style module>
   *,
   *::after,
-  *::before{box-sizing: border-box;}
+  *::before {
+    box-sizing: border-box;
+  }
+
+  p {
+    color: red;
+  }
 </style>

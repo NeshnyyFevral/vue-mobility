@@ -1,7 +1,7 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2022": true
     },
     "extends": [
         "plugin:vue/recommended",
@@ -12,15 +12,18 @@
         "sourceType": "module"
     },
     "plugins": [
-        "vue"
+        "simple-import-sort",
+        "vue",
+        "unicorn"
     ],
     "rules": {
         "no-console": "off",
         "import/no-extraneous-dependencies": "off",
         "no-param-reassign": "off",
-        "vue/no-duplicate-attributes": "off",
         "import/prefer-default-export": "off",
         "no-restricted-syntax": "off",
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error",
         "indent": [
             2,
             "tab"

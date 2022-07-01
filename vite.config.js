@@ -1,8 +1,8 @@
+import vitePluginVue from '@vitejs/plugin-vue';
 import { fileURLToPath, URL } from 'url';
 import { defineConfig } from 'vite';
-
-import vitePluginVue from '@vitejs/plugin-vue';
 import vitePluginEslint from 'vite-plugin-eslint';
+import viteStylelintPlugin from 'vite-plugin-stylelint';
 import viteSvgLoader from 'vite-svg-loader';
 
 export default defineConfig({
@@ -10,6 +10,7 @@ export default defineConfig({
 		vitePluginVue(),
 		vitePluginEslint(),
 		viteSvgLoader(),
+		viteStylelintPlugin(),
 	],
 	base: '/vue-mobility/',
 	build: {

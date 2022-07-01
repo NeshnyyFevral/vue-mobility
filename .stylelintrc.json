@@ -1,4 +1,14 @@
 {
-  "extends": "stylelint-config-standard",
-	"customSyntax": "postcss-lit"
+  "extends": [
+    "stylelint-config-recommended-vue"
+  ],
+  "rules": {
+    "color-no-invalid-hex": true,
+    "indentation": [
+      2,
+      {
+        "baseIndentLevel": 1
+      }
+    ]
+  }
 }

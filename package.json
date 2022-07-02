@@ -13,8 +13,7 @@
   "lint-staged": {
     "*.+(js|vue)": [
       "eslint",
-      "stylelint",
-      "git add ."
+      "stylelint"
     ]
   },
   "dependencies": {

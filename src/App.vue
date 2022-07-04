@@ -1,21 +1,17 @@
 <template>
   <div>
-    hellowewefwefwefwefwefwefwe3wef wef we fwe fwацуа ац ацу ацу ацуа цу
+    <UserButton :variant="ButtonVariant.PRIMARY">
+      кнопка
+    </UserButton>
   </div>
 </template>
 
 <script setup>
+import UserButton from '@/components/UI/Button.vue';
+import { ButtonVariant } from '@/enums/Button';
 
 </script>
 
-<style module>
-  *,
-  *::after,
-  *::before {
-    box-sizing: border-box;
-  }
+<style module lang="scss">
 
-  p {
-    color: red;
-  }
 </style>

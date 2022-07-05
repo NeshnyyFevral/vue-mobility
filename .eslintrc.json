@@ -35,10 +35,7 @@
         "simple-import-sort/exports": "error",
         "vue/multi-word-component-names": "off",
         "import/extensions": ["error", "never", { "js": "never", "vue": "always" }],
-        "indent": [
-            2,
-            "tab"
-        ],
+        "indent": ["error", 2] ,
         "no-tabs": 0,
         "quotes": [
             "error",

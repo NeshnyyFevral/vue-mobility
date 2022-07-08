@@ -54,7 +54,7 @@ const afterColor = computed(() => monotoneMap[props.monotone]);
 }
 
 .icon{
-	--icon-color: v-bind(afterColor);
+  --icon-color: v-bind(afterColor);
   fill: var(--icon-color);
 }
 </style>

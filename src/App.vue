@@ -47,5 +47,4 @@ import ArrowUp from '../public/icons/chevron-up.svg';
   width: 20px;
   height: 20px;
 }
-
 </style>

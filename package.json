@@ -8,8 +8,7 @@
     "preview": "vite preview --port 4173",
     "lint:style": "stylelint **/*.{html,vue} --custom-syntax",
     "lint:css": "stylelint **/*.{css,sass,scss} --syntax scss",
-    "precommit": "lint-staged",
-    "lint": "eslint --fix --ext .js,.jsx ."
+    "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.vue": [

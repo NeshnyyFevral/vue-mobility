@@ -1,27 +1,25 @@
 <template>
-  <div>
-    <UserButton
-      :variant="ButtonVariant.PRIMARY"
-      :size="ButtonSize.LARGE"
-    >
-      Button
-    </UserButton>
-    <MoneyStat :monotone="MonotoneVariant.UP">
-      <template #main>
-        <span :class="$style.main">
-          $132.15
-        </span>
-      </template>
-      <template #icon>
-        <ArrowUp :class="$style.icon" />
-      </template>
-      <template #after>
-        <span :class="$style.after">
-          18%
-        </span>
-      </template>
-    </MoneyStat>
-  </div>
+  <UserButton
+    :variant="ButtonVariant.PRIMARY"
+    :size="ButtonSize.LARGE"
+  >
+    Button
+  </UserButton>
+  <MoneyStat :monotone="MonotoneVariant.UP">
+    <template #main>
+      <span :class="$style.main">
+        $132.15
+      </span>
+    </template>
+    <template #icon>
+      <ArrowUp :class="$style.icon" />
+    </template>
+    <template #after>
+      <span :class="$style.after">
+        18%
+      </span>
+    </template>
+  </MoneyStat>
 </template>
 
 <script setup>

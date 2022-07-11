@@ -23,10 +23,8 @@
 </template>
 
 <script setup>
-import MoneyStat from '@/components/MoneyStat.vue';
-import UserButton from '@/components/UI/Button.vue';
-import { ButtonSize, ButtonVariant } from '@/enums/Button';
-import { MonotoneVariant } from '@/enums/Stat';
+import MoneyStat, { MonotoneVariant } from '@/components/MoneyStat.vue';
+import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
 
 import ArrowUp from '../public/icons/chevron-up.svg';
 </script>
@@ -40,8 +38,8 @@ import ArrowUp from '../public/icons/chevron-up.svg';
 
 .icon{
   position: relative;
-  top: 15px;
-  left: 10px;
+  top: 8px;
+  left: 0px;
   width: 20px;
   height: 20px;
 }

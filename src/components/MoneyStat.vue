@@ -12,12 +12,18 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { computed } from '@vue/reactivity';
 
-import { MonotoneVariant } from '@/enums/Stat';
 import GlobalColors from '@/styles/colors';
 
+export const MonotoneVariant = {
+  UP: 'up',
+  DOWN: 'down',
+};
+</script>
+
+<script setup>
 const props = defineProps({
   monotone: {
     type: String,
@@ -48,6 +54,7 @@ const afterColor = computed(() => monotoneMap[props.monotone]);
 }
 .after{
   --text-color: v-bind(afterColor);
+
   color: var(--text-color);
   font-size: 12px;
   font-weight: 600;
@@ -55,6 +62,7 @@ const afterColor = computed(() => monotoneMap[props.monotone]);
 
 .icon{
   --icon-color: v-bind(afterColor);
+
   fill: var(--icon-color);
 }
 </style>

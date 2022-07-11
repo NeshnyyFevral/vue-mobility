@@ -5,6 +5,9 @@
   >
     Button
   </UserButton>
+  <div :class="$style.hello">
+    hello fwefwefwe
+  </div>
 </template>
 
 <script setup>
@@ -13,5 +16,7 @@ import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vu
 </script>
 
 <style module lang="scss">
-
+.hello{
+  font-weight: 500;
+}
 </style>

@@ -1,21 +1,22 @@
 <template>
-  <div>
-    hellowewefwefwefwefwefwefwe3wef wef we fwe fwацуа ац ацу ацу ацуа цу
+  <UserButton
+    :variant="ButtonVariant.PRIMARY"
+    :size="ButtonSize.LARGE"
+  >
+    Button
+  </UserButton>
+  <div :class="$style.hello">
+    hello fwefwefwe
   </div>
 </template>
 
 <script setup>
+import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
 
 </script>
 
-<style module>
-  *,
-  *::after,
-  *::before {
-    box-sizing: border-box;
-  }
-
-  p {
-    color: red;
-  }
+<style module lang="scss">
+.hello{
+  font-weight: 500;
+}
 </style>

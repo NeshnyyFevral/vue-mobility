@@ -23,7 +23,6 @@ export const ButtonVariant = {
   SUCCESS: 'success',
   DEFAULT: 'default',
 };
-
 </script>
 
 <script setup>

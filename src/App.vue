@@ -30,17 +30,19 @@ import ArrowUp from '../public/icons/chevron-up.svg';
 </script>
 <style module lang="scss">
 .main{
-  font-size: 16px;
+  line-height: 32px;
+  font-size: 32px;
 }
 .after{
-  font-size: 12px;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .icon{
   position: relative;
-  top: 8px;
-  left: 0px;
-  width: 20px;
-  height: 20px;
+  top: 10px;
+  left: 4px;
+  width: 30px;
+  height: 30px;
 }
 </style>

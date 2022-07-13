@@ -73,7 +73,7 @@ const size = computed(() => MapButtonSizes[props.size]);
     border: none;
     transition: box-shadow 0.25s linear, opacity 0.25s linear;
 
-    &:hover{
+    &:hover {
       box-shadow: 0 6px 20px -8px  var(--button-color);
       opacity: 0.9;
     }

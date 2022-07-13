@@ -25,6 +25,11 @@ import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vu
 
 </script>
 <style module lang="scss">
-.main{}
-.after{}
+  .main {
+    color: currentColor;
+  }
+
+  .after {
+    color: currentColor;
+  }
 </style>

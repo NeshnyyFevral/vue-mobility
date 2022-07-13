@@ -12,7 +12,7 @@
       </span>
     </template>
     <template #icon>
-      <ArrowUp :class="$style.icon" />
+      <arrowUp :class="$style.icon" />
     </template>
     <template #after>
       <span :class="$style.after">
@@ -23,26 +23,26 @@
 </template>
 
 <script setup>
+import arrowUp from '@/assets/icons/chevron-up.svg';
 import MoneyStat, { MonotoneVariant } from '@/components/MoneyStat.vue';
 import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
-
-import ArrowUp from '../public/icons/chevron-up.svg';
 </script>
 <style module lang="scss">
-.main{
-  line-height: 32px;
-  font-size: 32px;
-}
-.after{
-  font-size: 20px;
-  line-height: 24px;
-}
+  .main {
+    line-height: 32px;
+    font-size: 32px;
+  }
 
-.icon{
-  position: relative;
-  top: 10px;
-  left: 4px;
-  width: 30px;
-  height: 30px;
-}
+  .after {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .icon {
+    position: relative;
+    top: 10px;
+    left: 4px;
+    width: 30px;
+    height: 30px;
+  }
 </style>

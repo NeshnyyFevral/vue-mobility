@@ -41,28 +41,30 @@ const afterColor = computed(() => monotoneMap[props.monotone]);
 </script>
 
 <style module lang="scss">
-.container{
-  display: flex;
-  align-items: flex-end;
-  flex-wrap: wrap;
-}
-.main{
-  color: #616161;
-  font-size: 20px;
-  font-weight: 500;
-  margin-right: 5px;
-}
-.after{
-  --text-color: v-bind(afterColor);
+  .container {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
 
-  color: var(--text-color);
-  font-size: 12px;
-  font-weight: 600;
-}
+  .main {
+    color: #616161;
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: 5px;
+  }
 
-.icon{
-  --icon-color: v-bind(afterColor);
+  .after {
+    --text-color: v-bind(afterColor);
 
-  fill: var(--icon-color);
-}
+    color: var(--text-color);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .icon {
+    --icon-color: v-bind(afterColor);
+
+    fill: var(--icon-color);
+  }
 </style>

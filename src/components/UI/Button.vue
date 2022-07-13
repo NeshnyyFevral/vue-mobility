@@ -58,24 +58,24 @@ const size = computed(() => MapButtonSizes[props.size]);
 </script>
 
 <style module lang="scss">
-.button{
-  --button-color: v-bind(color);
-  --button-size: v-bind(size);
+  .button {
+    --button-color: v-bind(color);
+    --button-size: v-bind(size);
 
-  background-color: var(--button-color);
-  padding: var(--button-size);
-  color: #fff;
-  box-shadow: 0 4px 8px -4px var(--button-color);
-  text-transform: uppercase;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 5px;
-  border: none;
-  transition: box-shadow 0.25s linear, opacity 0.25s linear;
+    background-color: var(--button-color);
+    padding: var(--button-size);
+    color: #fff;
+    box-shadow: 0 4px 8px -4px var(--button-color);
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    transition: box-shadow 0.25s linear, opacity 0.25s linear;
 
-  &:hover{
-    box-shadow: 0 6px 20px -8px  var(--button-color);
-    opacity: 0.9;
+    &:hover{
+      box-shadow: 0 6px 20px -8px  var(--button-color);
+      opacity: 0.9;
+    }
   }
-}
 </style>

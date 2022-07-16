@@ -1,7 +1,9 @@
 <template>
-  <button :class="$style.button">
-    <slot />
-  </button>
+  <div :class="$style.container">
+    <button :class="$style.button">
+      <slot />
+    </button>
+  </div>
 </template>
 
 <script>

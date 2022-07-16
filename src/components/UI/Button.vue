@@ -7,8 +7,13 @@
 <script>
 import { computed } from '@vue/reactivity';
 
-import GlobalSizes from '@/styles/buttonSizes';
 import GlobalColors from '@/styles/colors';
+
+const ButtonSizeValue = {
+  SMALL: '7px 15px',
+  NORMAL: '10px 20px',
+  LARGE: '13px 35px',
+};
 
 export const ButtonSize = {
   SMALL: 'small',
@@ -48,9 +53,9 @@ const MapButtonVariant = {
 };
 
 const MapButtonSizes = {
-  [ButtonSize.SMALL]: GlobalSizes.SMALL,
-  [ButtonSize.NORMAL]: GlobalSizes.NORMAL,
-  [ButtonSize.LARGE]: GlobalSizes.LARGE,
+  [ButtonSize.SMALL]: ButtonSizeValue.SMALL,
+  [ButtonSize.NORMAL]: ButtonSizeValue.NORMAL,
+  [ButtonSize.LARGE]: ButtonSizeValue.LARGE,
 };
 
 const color = computed(() => MapButtonVariant[props.variant]);

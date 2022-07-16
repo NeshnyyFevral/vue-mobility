@@ -1,5 +1,7 @@
 import createApp from './app/index';
 
-const { app } = createApp();
+const { app, router } = createApp();
 
-app.mount('#app');
+app
+  .use(router)
+  .mount('#app');

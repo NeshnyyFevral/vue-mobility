@@ -1,14 +1,13 @@
 import { createApp as _createApp } from 'vue';
 
-// import { createPinia } from 'pinia';
 import App from '../App.vue';
+import createRouter from '../router/index';
 
 export default function createApp() {
-  // const pinia = createPinia();
   const app = _createApp(App);
+  const router = createRouter();
 
   return {
-    // pinia,
-    app,
+    app, router,
   };
 }

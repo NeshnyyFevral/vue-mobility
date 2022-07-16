@@ -32,10 +32,18 @@
       </span>
     </template>
   </TotalStat>
+  <Chip
+    :variant="ChipVariant.PRIMARY"
+    :size="ChipSize.SMALL"
+    :class="$style.chip"
+  >
+    Party
+  </Chip>
 </template>
 
 <script setup>
 import arrowUp from '@/assets/icons/chevron-up.svg';
+import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat from '@/components/MoneyStat.vue';
 import TotalStat, { MonotoneVariant } from '@/components/TotalStat.vue';
 import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
@@ -67,5 +75,9 @@ import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vu
 
   .afterTotal {
     font-size: 12px;
+  }
+
+  .chip {
+    font-size: 14px;
   }
 </style>

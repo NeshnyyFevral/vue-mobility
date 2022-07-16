@@ -3,9 +3,6 @@
     <span :class="$style.main">
       <slot name="main" />
     </span>
-    <span :class="$style.icon">
-      <slot name="icon" />
-    </span>
     <span :class="$style.after">
       <slot name="after" />
     </span>
@@ -15,8 +12,12 @@
 <script>
 import { computed } from '@vue/reactivity';
 
-import { MonotoneVariant } from '@/components/TotalStat.vue';
 import GlobalColors from '@/styles/colors';
+
+export const MonotoneVariant = {
+  UP: 'up',
+  DOWN: 'down',
+};
 </script>
 
 <script setup>
@@ -45,7 +46,7 @@ const afterColor = computed(() => monotoneMap[props.monotone]);
 
   .main {
     margin-right: 5px;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 500;
     color: #616161;
   }
@@ -53,14 +54,10 @@ const afterColor = computed(() => monotoneMap[props.monotone]);
   .after {
     --text-color: v-bind(afterColor);
 
+    position: relative;
+    top: -5px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-color);
-  }
-
-  .icon {
-    --icon-color: v-bind(afterColor);
-
-    fill: var(--icon-color);
   }
 </style>

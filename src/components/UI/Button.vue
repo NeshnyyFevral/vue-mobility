@@ -62,15 +62,15 @@ const size = computed(() => MapButtonSizes[props.size]);
     --button-color: v-bind(color);
     --button-size: v-bind(size);
 
-    background-color: var(--button-color);
     padding: var(--button-size);
-    color: #fff;
-    box-shadow: 0 4px 8px -4px var(--button-color);
-    text-transform: uppercase;
     font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
     cursor: pointer;
-    border-radius: 5px;
+    background-color: var(--button-color);
     border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px -4px var(--button-color);
     transition: box-shadow 0.25s linear, opacity 0.25s linear;
 
     &:hover {

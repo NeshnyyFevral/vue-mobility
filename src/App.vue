@@ -5,18 +5,31 @@
   >
     Button
   </UserButton>
-  <div :class="$style.hello">
-    hello fwefwefwe
-  </div>
+  <TotalStat :monotone="MonotoneVariant.DOWN">
+    <template #main>
+      <span :class="$style.main">
+        $333.12k
+      </span>
+    </template>
+    <template #after>
+      <span :class="$style.after">
+        +12%
+      </span>
+    </template>
+  </TotalStat>
 </template>
 
 <script setup>
+import TotalStat, { MonotoneVariant } from '@/components/TotalStat.vue';
 import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
 
 </script>
-
 <style module lang="scss">
-.hello{
-  font-weight: 500;
-}
+  .main {
+    color: currentColor;
+  }
+
+  .after {
+    color: currentColor;
+  }
 </style>

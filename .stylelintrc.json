@@ -1,12 +1,31 @@
 {
   "extends": [
-    "stylelint-config-recommended-vue"
+    "stylelint-config-standard-scss",
+    "stylelint-config-recommended-vue",
+    "stylelint-config-recess-order",
+    "stylelint-config-css-modules",
+    "stylelint-config-prettier"
   ],
   "rules": {
     "color-no-invalid-hex": true,
+    "declaration-block-semicolon-newline-after": "always",
+    "declaration-block-trailing-semicolon": "always",
+    "block-opening-brace-space-before": "always",
+    "selector-combinator-space-before": "always",
+    "declaration-colon-space-after": "always-single-line",
+    "value-keyword-case": [
+      "lower", {
+      "ignoreFunctions": ["v-bind", "var"],
+      "ignoreKeywords":  ["currentColor"]
+      }
+    ],
+    "function-no-unknown": [
+      true, {
+      "ignoreFunctions": ["v-bind"]
+      }
+    ],
     "indentation": [
-      2,
-      {
+      2, {
         "baseIndentLevel": 1
       }
     ]

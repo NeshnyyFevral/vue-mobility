@@ -1,8 +1,6 @@
 import createApp from './app/index';
-import createRouter from './router';
 
-const { app } = createApp();
-const { router } = createRouter();
+const { app, router } = createApp();
 
 app
   .use(router)

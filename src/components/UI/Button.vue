@@ -29,6 +29,7 @@ export const ButtonVariant = {
   ERROR: 'error',
   SUCCESS: 'success',
   DEFAULT: 'default',
+  INFO: 'info',
 };
 </script>
 
@@ -52,6 +53,7 @@ const MapButtonVariant = {
   [ButtonVariant.WARNING]: GlobalColors.WARNING,
   [ButtonVariant.DEFAULT]: GlobalColors.DEFAULT,
   [ButtonVariant.SUCCESS]: GlobalColors.SUCCESS,
+  [ButtonVariant.INFO]: GlobalColors.INFO,
 };
 
 const MapButtonSizes = {

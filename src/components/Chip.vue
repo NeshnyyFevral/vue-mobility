@@ -10,7 +10,7 @@ import { computed } from 'vue';
 import GlobalColors from '@/styles/colors';
 
 const ChipSizeValue = {
-  SMALL: '2px 5px',
+  SMALL: '2px 7px',
   NORMAL: '5px 10px',
   LARGE: '7px 12px',
 };
@@ -27,6 +27,7 @@ export const ChipVariant = {
   ERROR: 'error',
   SUCCESS: 'success',
   DEFAULT: 'default',
+  INFO: 'info',
 };
 </script>
 
@@ -50,6 +51,7 @@ const MapChipVariant = {
   [ChipVariant.WARNING]: GlobalColors.WARNING,
   [ChipVariant.DEFAULT]: GlobalColors.DEFAULT,
   [ChipVariant.SUCCESS]: GlobalColors.SUCCESS,
+  [ChipVariant.INFO]: GlobalColors.INFO,
 };
 
 const MapChipSizes = {
@@ -69,6 +71,7 @@ const size = computed(() => MapChipSizes[props.size]);
 
     position: relative;
     padding: var(--chip-size);
+    font-size: 14px;
     font-weight: 600;
     color: var(--chip-color);
 

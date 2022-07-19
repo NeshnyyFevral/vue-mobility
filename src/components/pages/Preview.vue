@@ -267,12 +267,27 @@
         </Chip>
       </div>
     </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Chip colors
+      </h3>
+      <div :class="$style.example">
+        <Avatar
+          :size="AvatarSize.SMALL"
+          :variant="AvatarVariant.ERROR"
+          :corner="AvatarCorner.DEFAULT"
+        >
+          ON
+        </Avatar>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import arrowDown from '@/assets/icons/chevron-down.svg';
 import arrowUp from '@/assets/icons/chevron-up.svg';
+import Avatar, { AvatarCorner, AvatarSize, AvatarVariant } from '@/components/Avatar.vue';
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat from '@/components/MoneyStat.vue';
 import TotalStat, { MonotoneVariant } from '@/components/TotalStat.vue';

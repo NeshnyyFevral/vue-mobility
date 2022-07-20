@@ -269,15 +269,288 @@
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
-        Chip colors
+        Avatar sizes
       </h3>
       <div :class="$style.example">
         <Avatar
+          :size="AvatarSize.EXTRALARGE"
+          :variant="AvatarVariant.PRIMARY"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          NE
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.PRIMARY"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          IA
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.NORMAL"
+          :variant="AvatarVariant.PRIMARY"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          OW
+        </Avatar>
+        <Avatar
           :size="AvatarSize.SMALL"
+          :variant="AvatarVariant.PRIMARY"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          GH
+        </Avatar>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Avatar colors
+      </h3>
+      <div :class="$style.example">
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.PRIMARY"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          NE
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
           :variant="AvatarVariant.ERROR"
           :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
         >
-          ON
+          IA
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.INFO"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          OW
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.DEFAULT"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          GH
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.SUCCESS"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          PL
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.WARNING"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          WC
+        </Avatar>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Avatar transparency
+      </h3>
+      <div :class="$style.example">
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.PRIMARY"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.LIGHT"
+          :class="$style.avatar"
+        >
+          NE
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.ERROR"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.LIGHT"
+          :class="$style.avatar"
+        >
+          IA
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.INFO"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.LIGHT"
+          :class="$style.avatar"
+        >
+          OW
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.DEFAULT"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.LIGHT"
+          :class="$style.avatar"
+        >
+          GH
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.SUCCESS"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.LIGHT"
+          :class="$style.avatar"
+        >
+          PL
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.WARNING"
+          :corner="AvatarCorner.DEFAULT"
+          :transparency="AvatarTransparency.LIGHT"
+          :class="$style.avatar"
+        >
+          WC
+        </Avatar>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Avatar rounted
+      </h3>
+      <div :class="$style.example">
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.PRIMARY"
+          :corner="AvatarCorner.ROUNTED"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          NE
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.ERROR"
+          :corner="AvatarCorner.ROUNTED"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          IA
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.INFO"
+          :corner="AvatarCorner.ROUNTED"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          OW
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.DEFAULT"
+          :corner="AvatarCorner.ROUNTED"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          GH
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.SUCCESS"
+          :corner="AvatarCorner.ROUNTED"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          PL
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.WARNING"
+          :corner="AvatarCorner.ROUNTED"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          WC
+        </Avatar>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Avatar rectangle
+      </h3>
+      <div :class="$style.example">
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.PRIMARY"
+          :corner="AvatarCorner.RECTANGLE"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          NE
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.ERROR"
+          :corner="AvatarCorner.RECTANGLE"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          IA
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.INFO"
+          :corner="AvatarCorner.RECTANGLE"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          OW
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.DEFAULT"
+          :corner="AvatarCorner.RECTANGLE"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          GH
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.SUCCESS"
+          :corner="AvatarCorner.RECTANGLE"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          PL
+        </Avatar>
+        <Avatar
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.WARNING"
+          :corner="AvatarCorner.RECTANGLE"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          WC
         </Avatar>
       </div>
     </div>
@@ -287,7 +560,9 @@
 <script setup>
 import arrowDown from '@/assets/icons/chevron-down.svg';
 import arrowUp from '@/assets/icons/chevron-up.svg';
-import Avatar, { AvatarCorner, AvatarSize, AvatarVariant } from '@/components/Avatar.vue';
+import Avatar, {
+  AvatarCorner, AvatarSize, AvatarTransparency, AvatarVariant,
+} from '@/components/Avatar.vue';
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat from '@/components/MoneyStat.vue';
 import TotalStat, { MonotoneVariant } from '@/components/TotalStat.vue';
@@ -326,7 +601,8 @@ import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vu
   .userButton + .userButton,
   .moneyStat + .moneyStat,
   .totalStat + .totalStat,
-  .chip + .chip {
+  .chip + .chip,
+  .avatar + .avatar {
     margin-left: 20px;
   }
 

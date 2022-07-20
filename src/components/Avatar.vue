@@ -11,12 +11,12 @@ import { computed } from '@vue/reactivity';
 
 import GlobalColors from '@/styles/colors';
 
-const AvatarPaddingValue = {
-  SMALL: '5px',
-  NORMAL: '10px',
-  LARGE: '15px',
-  EXTRALARGE: '20px',
-}; // сделать норм круг
+const AvatarSizeValue = {
+  SMALL: '21px',
+  NORMAL: '35px',
+  LARGE: '49px',
+  EXTRALARGE: '70px',
+};
 
 const AvatarFontSizeValue = {
   SMALL: '11px',
@@ -29,6 +29,16 @@ const AvatarBorderRadiusValue = {
   DEFAULT: '50%',
   ROUNTED: '4px',
   RECTANGLE: '0px',
+};
+
+const AvatarTransparencyValue = {
+  DEFAULT: '1',
+  LIGHT: '0.12',
+};
+
+const AvatarTransparencyFontColorValue = {
+  DEFAULT: '#fff',
+  LIGHT: false,
 };
 
 export const AvatarSize = {
@@ -52,6 +62,11 @@ export const AvatarCorner = {
   ROUNTED: 'rounted',
   RECTANGLE: 'rectangle',
 };
+
+export const AvatarTransparency = {
+  DEFAULT: 'default',
+  LIGHT: 'light',
+};
 </script>
 
 <script setup>
@@ -70,7 +85,12 @@ const props = defineProps({
     type: String,
     default: AvatarCorner.DEFAULT,
     validator: (value) => Object.values(AvatarCorner).includes(value),
-  }, // добавить light версию
+  },
+  transparency: {
+    type: String,
+    default: AvatarTransparency.DEFAULT,
+    validator: (value) => Object.values(AvatarTransparency).includes(value),
+  },
 });
 
 const MapAvatarVariant = {
@@ -82,11 +102,11 @@ const MapAvatarVariant = {
   [AvatarVariant.INFO]: GlobalColors.INFO,
 };
 
-const MapAvatarPadding = {
-  [AvatarSize.SMALL]: AvatarPaddingValue.SMALL,
-  [AvatarSize.NORMAL]: AvatarPaddingValue.NORMAL,
-  [AvatarSize.LARGE]: AvatarPaddingValue.LARGE,
-  [AvatarSize.EXTRALARGE]: AvatarPaddingValue.EXTRALARGE,
+const MapAvatarSize = {
+  [AvatarSize.SMALL]: AvatarSizeValue.SMALL,
+  [AvatarSize.NORMAL]: AvatarSizeValue.NORMAL,
+  [AvatarSize.LARGE]: AvatarSizeValue.LARGE,
+  [AvatarSize.EXTRALARGE]: AvatarSizeValue.EXTRALARGE,
 };
 
 const MapAvatarFontSize = {
@@ -102,24 +122,41 @@ const MapAvatarCorner = {
   [AvatarCorner.RECTANGLE]: AvatarBorderRadiusValue.RECTANGLE,
 };
 
+const MapAvatarTransparency = {
+  [AvatarTransparency.DEFAULT]: AvatarTransparencyValue.DEFAULT,
+  [AvatarTransparency.LIGHT]: AvatarTransparencyValue.LIGHT,
+};
+
+const MapAvatarFontColor = {
+  [AvatarTransparency.DEFAULT]: AvatarTransparencyFontColorValue.DEFAULT,
+  [AvatarTransparency.LIGHT]: AvatarTransparencyFontColorValue.LIGHT,
+};
+
+const fontColor = computed(() => (MapAvatarFontColor[props.transparency]
+  ? MapAvatarFontColor[props.transparency] : MapAvatarVariant[props.variant]));
 const color = computed(() => MapAvatarVariant[props.variant]);
-const padding = computed(() => MapAvatarPadding[props.size]);
+const size = computed(() => MapAvatarSize[props.size]);
 const fontSize = computed(() => MapAvatarFontSize[props.size]);
 const borderRadius = computed(() => MapAvatarCorner[props.corner]);
+const opacity = computed(() => MapAvatarTransparency[props.transparency]);
 </script>
 
 <style module lang="scss">
   .container {
     --avatar-color: v-bind(color);
-    --avatar-size: v-bind(padding);
+    --avatar-size: v-bind(size);
     --avatar-font-size: v-bind(fontSize);
     --avatar-border-radius: v-bind(borderRadius);
+    --avatar-opacity: v-bind(opacity);
 
     position: relative;
-    padding: var(--avatar-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--avatar-size);
+    height: var(--avatar-size);
     font-size: var(--avatar-font-size);
-    font-weight: 600;
-    color: var(--avatar-color);
+    font-weight: 400;
     text-transform: uppercase;
 
     &::after {
@@ -132,12 +169,15 @@ const borderRadius = computed(() => MapAvatarCorner[props.corner]);
       content: "";
       background-color: var(--avatar-color);
       border-radius: var(--avatar-border-radius);
+      opacity: var(--avatar-opacity);
     }
   }
 
   .avatar {
+    --avatar-font-color: v-bind(fontColor);
+
     position: relative;
     z-index: 1000;
-    color: #fff;
+    color: var(--avatar-font-color);
   }
 </style>

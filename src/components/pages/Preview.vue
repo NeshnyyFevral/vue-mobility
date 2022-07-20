@@ -6,25 +6,13 @@
       </h3>
       <div :class="$style.example">
         <UserButton
+          v-for="size in Object.values(ButtonSize)"
+          :key="size"
           :variant="ButtonVariant.PRIMARY"
-          :size="ButtonSize.LARGE"
+          :size="size"
           :class="$style.userButton"
         >
-          LARGE
-        </UserButton>
-        <UserButton
-          :variant="ButtonVariant.PRIMARY"
-          :size="ButtonSize.NORMAL"
-          :class="$style.userButton"
-        >
-          NORMAL
-        </UserButton>
-        <UserButton
-          :variant="ButtonVariant.PRIMARY"
-          :size="ButtonSize.SMALL"
-          :class="$style.userButton"
-        >
-          SMALL
+          {{ size }}
         </UserButton>
       </div>
     </div>
@@ -34,97 +22,31 @@
       </h3>
       <div :class="$style.example">
         <UserButton
-          :variant="ButtonVariant.PRIMARY"
+          v-for="variant in Object.values(ButtonVariant)"
+          :key="variant"
+          :variant="variant"
           :size="ButtonSize.SMALL"
           :class="$style.userButton"
         >
-          PRIMARY
-        </UserButton>
-        <UserButton
-          :variant="ButtonVariant.ERROR"
-          :size="ButtonSize.SMALL"
-          :class="$style.userButton"
-        >
-          ERROR
-        </UserButton>
-        <UserButton
-          :variant="ButtonVariant.INFO"
-          :size="ButtonSize.SMALL"
-          :class="$style.userButton"
-        >
-          INFO
-        </UserButton>
-        <UserButton
-          :variant="ButtonVariant.DEFAULT"
-          :size="ButtonSize.SMALL"
-          :class="$style.userButton"
-        >
-          DEFAULT
-        </UserButton>
-        <UserButton
-          :variant="ButtonVariant.SUCCESS"
-          :size="ButtonSize.SMALL"
-          :class="$style.userButton"
-        >
-          SUCCESS
-        </UserButton>
-        <UserButton
-          :variant="ButtonVariant.WARNING"
-          :size="ButtonSize.SMALL"
-          :class="$style.userButton"
-        >
-          WARNING
+          {{ variant }}
         </UserButton>
       </div>
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
-        Money stat
+        Money stat positive sizes
       </h3>
       <div :class="$style.example">
         <MoneyStat
+          v-for="size in Object.values(MoneyStatSize)"
+          :key="size"
           :class="$style.moneyStat"
-          :monotone="MonotoneVariant.UP"
-        >
-          <template #main>
-            <span :class="$style.mainMoneyLarge">
-              $69.93
-            </span>
-          </template>
-          <template #icon>
-            <arrowUp :class="$style.iconMoneyLarge" />
-          </template>
-          <template #after>
-            <span :class="$style.afterMoneyLarge">
-              18%
-            </span>
-          </template>
-        </MoneyStat>
-        <MoneyStat
-          :class="$style.moneyStat"
-          :monotone="MonotoneVariant.DOWN"
-        >
-          <template #main>
-            <span :class="$style.mainMoneyNormal">
-              $132.15
-            </span>
-          </template>
-          <template #icon>
-            <arrowDown :class="$style.iconMoneyNormal" />
-          </template>
-          <template #after>
-            <span :class="$style.afterMoneyNormal">
-              23%
-            </span>
-          </template>
-        </MoneyStat>
-        <MoneyStat
-          :class="$style.moneyStat"
-          :monotone="MonotoneVariant.UP"
+          :monotone="MoneyStatVariant.UP"
+          :size="size"
         >
           <template #main>
             <span :class="$style.mainMoney">
-              $40.293
+              $69.93
             </span>
           </template>
           <template #icon>
@@ -132,7 +54,7 @@
           </template>
           <template #after>
             <span :class="$style.afterMoney">
-              7%
+              18%
             </span>
           </template>
         </MoneyStat>
@@ -140,51 +62,77 @@
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
-        Total stat
+        Money stat negative sizes
+      </h3>
+      <div :class="$style.example">
+        <MoneyStat
+          v-for="size in Object.values(MoneyStatSize)"
+          :key="size"
+          :class="$style.moneyStat"
+          :monotone="MoneyStatVariant.DOWN"
+          :size="size"
+        >
+          <template #main>
+            <span :class="$style.mainMoney">
+              $69.93
+            </span>
+          </template>
+          <template #icon>
+            <arrowDown :class="$style.iconMoney" />
+          </template>
+          <template #after>
+            <span :class="$style.afterMoney">
+              18%
+            </span>
+          </template>
+        </MoneyStat>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Total stat positive size
       </h3>
       <div :class="$style.example">
         <TotalStat
+          v-for="size in Object.values(TotalStatSize)"
+          :key="size"
           :class="$style.totalStat"
-          :monotone="MonotoneVariant.UP"
+          :monotone="TotalStatVariant.UP"
+          :size="size"
         >
           <template #main>
-            <span :class="$style.mainTotalLarge">
+            <span :class="$style.mainTotal">
               53.12k
             </span>
           </template>
           <template #after>
-            <span :class="$style.afterTotalLarge">
+            <span :class="$style.afterTotal">
               +34%
             </span>
           </template>
         </TotalStat>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Total stat negative size
+      </h3>
+      <div :class="$style.example">
         <TotalStat
+          v-for="size in Object.values(TotalStatSize)"
+          :key="size"
           :class="$style.totalStat"
-          :monotone="MonotoneVariant.DOWN"
-        >
-          <template #main>
-            <span :class="$style.mainTotalNormal">
-              333.12k
-            </span>
-          </template>
-          <template #after>
-            <span :class="$style.afterTotalNormal">
-              -17%
-            </span>
-          </template>
-        </TotalStat>
-        <TotalStat
-          :class="$style.totalStat"
-          :monotone="MonotoneVariant.DOWN"
+          :monotone="TotalStatVariant.DOWN"
+          :size="size"
         >
           <template #main>
             <span :class="$style.mainTotal">
-              99.12k
+              53.12k
             </span>
           </template>
           <template #after>
             <span :class="$style.afterTotal">
-              -12%
+              -34%
             </span>
           </template>
         </TotalStat>
@@ -196,25 +144,13 @@
       </h3>
       <div :class="$style.example">
         <Chip
+          v-for="size in Object.values(ChipSize)"
+          :key="size"
           :variant="ChipVariant.PRIMARY"
-          :size="ChipSize.LARGE"
+          :size="size"
           :class="$style.chip"
         >
-          Large
-        </Chip>
-        <Chip
-          :variant="ChipVariant.PRIMARY"
-          :size="ChipSize.NORMAL"
-          :class="$style.chip"
-        >
-          Normal
-        </Chip>
-        <Chip
-          :variant="ChipVariant.PRIMARY"
-          :size="ChipSize.SMALL"
-          :class="$style.chip"
-        >
-          Small
+          {{ size }}
         </Chip>
       </div>
     </div>
@@ -224,46 +160,13 @@
       </h3>
       <div :class="$style.example">
         <Chip
-          :variant="ChipVariant.PRIMARY"
+          v-for="variant in Object.values(ChipVariant)"
+          :key="variant"
+          :variant="variant"
           :size="ChipSize.NORMAL"
           :class="$style.chip"
         >
-          Primary
-        </Chip>
-        <Chip
-          :variant="ChipVariant.INFO"
-          :size="ChipSize.NORMAL"
-          :class="$style.chip"
-        >
-          Info
-        </Chip>
-        <Chip
-          :variant="ChipVariant.WARNING"
-          :size="ChipSize.SMALL"
-          :class="$style.chip"
-        >
-          Warning
-        </Chip>
-        <Chip
-          :variant="ChipVariant.DEFAULT"
-          :size="ChipSize.SMALL"
-          :class="$style.chip"
-        >
-          Default
-        </Chip>
-        <Chip
-          :variant="ChipVariant.ERROR"
-          :size="ChipSize.SMALL"
-          :class="$style.chip"
-        >
-          Error
-        </Chip>
-        <Chip
-          :variant="ChipVariant.SUCCESS"
-          :size="ChipSize.SMALL"
-          :class="$style.chip"
-        >
-          Success
+          {{ variant }}
         </Chip>
       </div>
     </div>
@@ -273,40 +176,15 @@
       </h3>
       <div :class="$style.example">
         <Avatar
-          :size="AvatarSize.EXTRALARGE"
+          v-for="size in Object.values(AvatarSize)"
+          :key="size"
+          :size="size"
           :variant="AvatarVariant.PRIMARY"
           :corner="AvatarCorner.DEFAULT"
           :transparency="AvatarTransparency.DEFAULT"
           :class="$style.avatar"
         >
           NE
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.PRIMARY"
-          :corner="AvatarCorner.DEFAULT"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          IA
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.NORMAL"
-          :variant="AvatarVariant.PRIMARY"
-          :corner="AvatarCorner.DEFAULT"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          OW
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.SMALL"
-          :variant="AvatarVariant.PRIMARY"
-          :corner="AvatarCorner.DEFAULT"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          GH
         </Avatar>
       </div>
     </div>
@@ -316,58 +194,15 @@
       </h3>
       <div :class="$style.example">
         <Avatar
+          v-for="variant in Object.values(AvatarVariant)"
+          :key="variant"
           :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.PRIMARY"
+          :variant="variant"
           :corner="AvatarCorner.DEFAULT"
           :transparency="AvatarTransparency.DEFAULT"
           :class="$style.avatar"
         >
-          NE
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.ERROR"
-          :corner="AvatarCorner.DEFAULT"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          IA
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.INFO"
-          :corner="AvatarCorner.DEFAULT"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          OW
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.DEFAULT"
-          :corner="AvatarCorner.DEFAULT"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          GH
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.SUCCESS"
-          :corner="AvatarCorner.DEFAULT"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          PL
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.WARNING"
-          :corner="AvatarCorner.DEFAULT"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          WC
+          NT
         </Avatar>
       </div>
     </div>
@@ -377,58 +212,15 @@
       </h3>
       <div :class="$style.example">
         <Avatar
+          v-for="variant in Object.values(AvatarVariant)"
+          :key="variant"
           :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.PRIMARY"
+          :variant="variant"
           :corner="AvatarCorner.DEFAULT"
           :transparency="AvatarTransparency.LIGHT"
           :class="$style.avatar"
         >
-          NE
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.ERROR"
-          :corner="AvatarCorner.DEFAULT"
-          :transparency="AvatarTransparency.LIGHT"
-          :class="$style.avatar"
-        >
-          IA
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.INFO"
-          :corner="AvatarCorner.DEFAULT"
-          :transparency="AvatarTransparency.LIGHT"
-          :class="$style.avatar"
-        >
-          OW
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.DEFAULT"
-          :corner="AvatarCorner.DEFAULT"
-          :transparency="AvatarTransparency.LIGHT"
-          :class="$style.avatar"
-        >
-          GH
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.SUCCESS"
-          :corner="AvatarCorner.DEFAULT"
-          :transparency="AvatarTransparency.LIGHT"
-          :class="$style.avatar"
-        >
-          PL
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.WARNING"
-          :corner="AvatarCorner.DEFAULT"
-          :transparency="AvatarTransparency.LIGHT"
-          :class="$style.avatar"
-        >
-          WC
+          PP
         </Avatar>
       </div>
     </div>
@@ -438,53 +230,10 @@
       </h3>
       <div :class="$style.example">
         <Avatar
+          v-for="variant in Object.values(AvatarVariant)"
+          :key="variant"
           :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.PRIMARY"
-          :corner="AvatarCorner.ROUNTED"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          NE
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.ERROR"
-          :corner="AvatarCorner.ROUNTED"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          IA
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.INFO"
-          :corner="AvatarCorner.ROUNTED"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          OW
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.DEFAULT"
-          :corner="AvatarCorner.ROUNTED"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          GH
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.SUCCESS"
-          :corner="AvatarCorner.ROUNTED"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          PL
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.WARNING"
+          :variant="variant"
           :corner="AvatarCorner.ROUNTED"
           :transparency="AvatarTransparency.DEFAULT"
           :class="$style.avatar"
@@ -499,58 +248,15 @@
       </h3>
       <div :class="$style.example">
         <Avatar
+          v-for="variant in Object.values(AvatarVariant)"
+          :key="variant"
           :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.PRIMARY"
+          :variant="variant"
           :corner="AvatarCorner.RECTANGLE"
           :transparency="AvatarTransparency.DEFAULT"
           :class="$style.avatar"
         >
-          NE
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.ERROR"
-          :corner="AvatarCorner.RECTANGLE"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          IA
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.INFO"
-          :corner="AvatarCorner.RECTANGLE"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          OW
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.DEFAULT"
-          :corner="AvatarCorner.RECTANGLE"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          GH
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.SUCCESS"
-          :corner="AvatarCorner.RECTANGLE"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          PL
-        </Avatar>
-        <Avatar
-          :size="AvatarSize.LARGE"
-          :variant="AvatarVariant.WARNING"
-          :corner="AvatarCorner.RECTANGLE"
-          :transparency="AvatarTransparency.DEFAULT"
-          :class="$style.avatar"
-        >
-          WC
+          VC
         </Avatar>
       </div>
     </div>
@@ -564,8 +270,8 @@ import Avatar, {
   AvatarCorner, AvatarSize, AvatarTransparency, AvatarVariant,
 } from '@/components/Avatar.vue';
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
-import MoneyStat from '@/components/MoneyStat.vue';
-import TotalStat, { MonotoneVariant } from '@/components/TotalStat.vue';
+import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';
+import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalStat.vue';
 import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
 </script>
 
@@ -599,89 +305,13 @@ import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vu
   }
 
   .userButton + .userButton,
-  .moneyStat + .moneyStat,
   .totalStat + .totalStat,
   .chip + .chip,
   .avatar + .avatar {
     margin-left: 20px;
   }
 
-  .mainMoney {
-    font-size: 16px;
-    line-height: 16px;
+  .moneyStat + .moneyStat {
+    margin-left: 10px;
   }
-
-  .afterMoney {
-    font-size: 12px;
-    line-height: 12px;
-  }
-
-  .iconMoney {
-    position: relative;
-    top: 8px;
-    left: 2px;
-    width: 20px;
-    height: 20px;
-  }
-
-  .mainMoneyLarge {
-    font-size: 36px;
-    line-height: 36px;
-  }
-
-  .afterMoneyLarge {
-    font-size: 24px;
-    line-height: 24px;
-  }
-
-  .iconMoneyLarge {
-    position: relative;
-    top: 11px;
-    left: 5px;
-    width: 30px;
-    height: 30px;
-  }
-
-  .mainMoneyNormal {
-    font-size: 24px;
-    line-height: 24px;
-  }
-
-  .afterMoneyNormal {
-    font-size: 12px;
-    line-height: 12px;
-  }
-
-  .iconMoneyNormal {
-    position: relative;
-    top: 8px;
-    left: 2px;
-    width: 20px;
-    height: 20px;
-  }
-
-  .mainTotal {
-    font-size: 20px;
-  }
-
-  .afterTotal {
-    font-size: 12px;
-  }
-
-  .mainTotalLarge {
-    font-size: 32px;
-  }
-
-  .afterTotalLarge {
-    font-size: 20px;
-  }
-
-  .mainTotalNormal {
-    font-size: 26px;
-  }
-
-  .afterTotalNormal {
-    font-size: 16px;
-  }
-
 </style>

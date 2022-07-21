@@ -155,9 +155,11 @@ const opacity = computed(() => MapAvatarTransparency[props.transparency]);
     justify-content: center;
     width: var(--avatar-size);
     height: var(--avatar-size);
+    overflow: hidden;
     font-size: var(--avatar-font-size);
     font-weight: 400;
     text-transform: uppercase;
+    background-size: contain;
 
     &::after {
       position: absolute;
@@ -179,5 +181,13 @@ const opacity = computed(() => MapAvatarTransparency[props.transparency]);
     position: relative;
     z-index: 1000;
     color: var(--avatar-font-color);
+  }
+
+  .avatar img {
+    --avatar-border-radius: v-bind(borderRadius);
+
+    display: block;
+    width: 100%;
+    border-radius: var(--avatar-border-radius);
   }
 </style>

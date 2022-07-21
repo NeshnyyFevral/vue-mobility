@@ -256,7 +256,28 @@
           :transparency="AvatarTransparency.DEFAULT"
           :class="$style.avatar"
         >
-          VC
+          GB
+        </Avatar>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Avatar image cycle
+      </h3>
+      <div :class="$style.example">
+        <Avatar
+          v-for="corner in Object.values(AvatarCorner)"
+          :key="corner"
+          :size="AvatarSize.LARGE"
+          :variant="AvatarVariant.DEFAULT"
+          :corner="corner"
+          :transparency="AvatarTransparency.DEFAULT"
+          :class="$style.avatar"
+        >
+          <img
+            src="@/assets/avatars/1.png"
+            alt="avatar"
+          >
         </Avatar>
       </div>
     </div>

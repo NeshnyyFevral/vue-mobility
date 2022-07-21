@@ -3,11 +3,13 @@
     <span :class="$style.main">
       <slot name="main" />
     </span>
-    <span :class="$style.icon">
-      <slot name="icon" />
-    </span>
     <span :class="$style.after">
-      <slot name="after" />
+      <span :class="$style.icon">
+        <slot name="icon" />
+      </span>
+      <span :class="$style.afterText">
+        <slot name="after" />
+      </span>
     </span>
   </div>
 </template>
@@ -144,6 +146,11 @@ const left = computed(() => MapSizeLeft[props.size]);
   }
 
   .after {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .afterText {
     --text-color: v-bind(afterColor);
     --stat-size: v-bind(sizeAfter);
 

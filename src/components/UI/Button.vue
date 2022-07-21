@@ -15,6 +15,11 @@ const ButtonSizeValue = {
   LARGE: '13px 35px',
 };
 
+const ButtonExtensionValue = {
+  DEFAULT: 'auto',
+  BLOCK: '100%',
+};
+
 export const ButtonSize = {
   SMALL: 'small',
   NORMAL: 'normal',
@@ -29,6 +34,11 @@ export const ButtonVariant = {
   DEFAULT: 'default',
   INFO: 'info',
 };
+
+export const ButtonExtension = {
+  DEFAULT: 'default',
+  BLOCK: 'block',
+};
 </script>
 
 <script setup>
@@ -42,6 +52,11 @@ const props = defineProps({
     type: String,
     default: ButtonSize.NORMAL,
     validator: (value) => Object.values(ButtonSize).includes(value),
+  },
+  extension: {
+    type: String,
+    default: ButtonExtension.DEFAULT,
+    validator: (value) => Object.values(ButtonExtension).includes(value),
   },
 });
 
@@ -59,17 +74,24 @@ const MapButtonSizes = {
   [ButtonSize.NORMAL]: ButtonSizeValue.NORMAL,
   [ButtonSize.LARGE]: ButtonSizeValue.LARGE,
 };
+const MapButtonExtension = {
+  [ButtonExtension.DEFAULT]: ButtonExtensionValue.DEFAULT,
+  [ButtonExtension.BLOCK]: ButtonExtensionValue.BLOCK,
+};
 
 const color = computed(() => MapButtonVariant[props.variant]);
 const size = computed(() => MapButtonSizes[props.size]);
+const width = computed(() => MapButtonExtension[props.extension]);
 </script>
 
 <style module lang="scss">
   .button {
     --button-color: v-bind(color);
     --button-size: v-bind(size);
+    --button-width: v-bind(width);
 
     display: block;
+    min-width: var(--button-width);
     padding: var(--button-size);
     font-weight: 600;
     color: #fff;

@@ -18,6 +18,21 @@
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
+        Button block
+      </h3>
+      <div :class="$style.example">
+        <UserButton
+          :variant="ButtonVariant.PRIMARY"
+          :size="ButtonSize.NORMAL"
+          :extension="ButtonExtension.BLOCK"
+          :class="$style.userButton"
+        >
+          Button block
+        </UserButton>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
         Button colors
       </h3>
       <div :class="$style.example">
@@ -293,7 +308,7 @@ import Avatar, {
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';
 import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalStat.vue';
-import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
+import UserButton, { ButtonExtension, ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
 </script>
 
 <style module lang="scss">

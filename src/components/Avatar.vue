@@ -132,8 +132,11 @@ const MapAvatarFontColor = {
   [AvatarTransparency.LIGHT]: AvatarTransparencyFontColorValue.LIGHT,
 };
 
-const fontColor = computed(() => (MapAvatarFontColor[props.transparency]
-  ? MapAvatarFontColor[props.transparency] : MapAvatarVariant[props.variant]));
+const fontColor = computed(() => (
+  MapAvatarFontColor[props.transparency]
+    ? MapAvatarFontColor[props.transparency]
+    : MapAvatarVariant[props.variant]
+));
 const color = computed(() => MapAvatarVariant[props.variant]);
 const size = computed(() => MapAvatarSize[props.size]);
 const fontSize = computed(() => MapAvatarFontSize[props.size]);

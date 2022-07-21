@@ -281,6 +281,20 @@
         </Avatar>
       </div>
     </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Input
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :placeholder="'CVV'"
+          :type="'text'"
+          :height="InputHeight.SMALL"
+          :width="InputWidth.NORMAL"
+          :corner="InputCorner.DEFAULT"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -294,6 +308,7 @@ import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';
 import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalStat.vue';
 import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
+import UserInput, { InputCorner, InputHeight, InputWidth } from '@/components/UI/Input.vue';
 </script>
 
 <style module lang="scss">

@@ -309,6 +309,7 @@ import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';
 import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalStat.vue';
 import UserButton, { ButtonExtension, ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
+
 </script>
 
 <style module lang="scss">

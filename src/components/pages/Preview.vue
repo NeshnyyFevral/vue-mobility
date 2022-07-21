@@ -262,7 +262,7 @@
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
-        Avatar image cycle
+        Avatar image
       </h3>
       <div :class="$style.example">
         <Avatar

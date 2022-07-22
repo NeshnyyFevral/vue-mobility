@@ -283,15 +283,52 @@
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
-        Input
+        Input width
       </h3>
       <div :class="$style.example">
         <UserInput
-          :placeholder="'CVV'"
+          v-for="width in Object.values(InputWidth)"
+          :key="width"
+          :placeholder="width"
+          :type="'text'"
+          :height="InputHeight.SMALL"
+          :width="width"
+          :corner="InputCorner.DEFAULT"
+          :class="$style.inputWidth"
+        />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Input height
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          v-for="height in Object.values(InputHeight)"
+          :key="height"
+          :placeholder="height"
+          :type="'text'"
+          :height="height"
+          :width="InputWidth.NORMAL"
+          :corner="InputCorner.DEFAULT"
+          :class="$style.input"
+        />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Input corner
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          v-for="corner in Object.values(InputCorner)"
+          :key="corner"
+          :placeholder="corner"
           :type="'text'"
           :height="InputHeight.SMALL"
           :width="InputWidth.NORMAL"
-          :corner="InputCorner.DEFAULT"
+          :corner="corner"
+          :class="$style.input"
         />
       </div>
     </div>
@@ -323,7 +360,7 @@ import UserInput, { InputCorner, InputHeight, InputWidth } from '@/components/UI
 
   .example {
     display: flex;
-    flex-direction: row;
+    flex-flow: wrap row;
     align-items: center;
   }
 
@@ -334,7 +371,7 @@ import UserInput, { InputCorner, InputHeight, InputWidth } from '@/components/UI
   }
 
   .item {
-    height: 150px;
+    height: 170px;
     padding: 15px;
     background-color: #fff;
     border-radius: 12px;
@@ -343,11 +380,18 @@ import UserInput, { InputCorner, InputHeight, InputWidth } from '@/components/UI
   .userButton + .userButton,
   .totalStat + .totalStat,
   .chip + .chip,
-  .avatar + .avatar {
+  .avatar + .avatar,
+  .input + .input {
     margin-left: 20px;
   }
 
-  .moneyStat + .moneyStat {
+  .moneyStat + .moneyStat,
+  .inputWidth + .inputWidth {
     margin-left: 10px;
+  }
+
+  .inputWidth:last-child {
+    margin-top: 10px;
+    margin-left: 0;
   }
 </style>

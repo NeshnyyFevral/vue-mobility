@@ -185,7 +185,6 @@ const shadow = computed(() => (
 
     position: relative;
     z-index: 1000;
-    display: block;
     min-width: var(--button-width);
     padding: var(--button-size);
     font-weight: 600;

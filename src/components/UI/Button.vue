@@ -20,6 +20,36 @@ const ButtonExtensionValue = {
   BLOCK: '100%',
 };
 
+const ButtonBorderValue = {
+  DEFAULT: 'none',
+  OUTLINED: '1px solid',
+  UNLIMITED: 'none',
+};
+
+const ButtonFontColorValue = {
+  DEFAULT: '#fff',
+  OUTLINED: false,
+  UNLIMITED: false,
+};
+
+const ButtonBGValue = {
+  DEFAULT: false,
+  OUTLINED: 'transparent',
+  UNLIMITED: 'transparent',
+};
+
+const ButtonShadowValue = {
+  DEFAULT: false,
+  OUTLINED: 'none',
+  UNLIMITED: 'none',
+};
+
+const ButtonAfterValue = {
+  DEFAULT: 'none',
+  OUTLINED: 'block',
+  UNLIMITED: 'block',
+};
+
 export const ButtonSize = {
   SMALL: 'small',
   NORMAL: 'normal',
@@ -38,6 +68,12 @@ export const ButtonVariant = {
 export const ButtonExtension = {
   DEFAULT: 'default',
   BLOCK: 'block',
+};
+
+export const ButtonBorder = {
+  DEFAULT: 'default',
+  OUTLINED: 'outlined',
+  UNLIMITED: 'unlimited',
 };
 </script>
 
@@ -58,6 +94,11 @@ const props = defineProps({
     default: ButtonExtension.DEFAULT,
     validator: (value) => Object.values(ButtonExtension).includes(value),
   },
+  border: {
+    type: String,
+    default: ButtonBorder.DEFAULT,
+    validator: (value) => Object.values(ButtonBorder).includes(value),
+  },
 });
 
 const MapButtonVariant = {
@@ -74,14 +115,62 @@ const MapButtonSizes = {
   [ButtonSize.NORMAL]: ButtonSizeValue.NORMAL,
   [ButtonSize.LARGE]: ButtonSizeValue.LARGE,
 };
+
 const MapButtonExtension = {
   [ButtonExtension.DEFAULT]: ButtonExtensionValue.DEFAULT,
   [ButtonExtension.BLOCK]: ButtonExtensionValue.BLOCK,
 };
 
+const MapButtonBorder = {
+  [ButtonBorder.DEFAULT]: ButtonBorderValue.DEFAULT,
+  [ButtonBorder.OUTLINED]: ButtonBorderValue.OUTLINED,
+  [ButtonBorder.UNLIMITED]: ButtonBorderValue.UNLIMITED,
+};
+
+const MapButtonFontColor = {
+  [ButtonBorder.DEFAULT]: ButtonFontColorValue.DEFAULT,
+  [ButtonBorder.OUTLINED]: ButtonFontColorValue.OUTLINED,
+  [ButtonBorder.UNLIMITED]: ButtonFontColorValue.UNLIMITED,
+};
+
+const MapButtonBG = {
+  [ButtonBorder.DEFAULT]: ButtonBGValue.DEFAULT,
+  [ButtonBorder.OUTLINED]: ButtonBGValue.OUTLINED,
+  [ButtonBorder.UNLIMITED]: ButtonBGValue.UNLIMITED,
+};
+
+const MapButtonShadow = {
+  [ButtonBorder.DEFAULT]: ButtonShadowValue.DEFAULT,
+  [ButtonBorder.OUTLINED]: ButtonShadowValue.OUTLINED,
+  [ButtonBorder.UNLIMITED]: ButtonShadowValue.UNLIMITED,
+};
+
+const MapButtonAfter = {
+  [ButtonBorder.DEFAULT]: ButtonAfterValue.DEFAULT,
+  [ButtonBorder.OUTLINED]: ButtonAfterValue.OUTLINED,
+  [ButtonBorder.UNLIMITED]: ButtonAfterValue.UNLIMITED,
+};
+
 const color = computed(() => MapButtonVariant[props.variant]);
 const size = computed(() => MapButtonSizes[props.size]);
 const width = computed(() => MapButtonExtension[props.extension]);
+const border = computed(() => MapButtonBorder[props.border]);
+const after = computed(() => MapButtonAfter[props.border]);
+const fontColor = computed(() => (
+  MapButtonFontColor[props.border]
+    ? MapButtonFontColor[props.border]
+    : MapButtonVariant[props.variant]
+));
+const background = computed(() => (
+  MapButtonBG[props.border]
+    ? MapButtonBG[props.border]
+    : MapButtonVariant[props.variant]
+));
+const shadow = computed(() => (
+  MapButtonShadow[props.border]
+    ? MapButtonShadow[props.border]
+    : MapButtonVariant[props.variant]
+));
 </script>
 
 <style module lang="scss">
@@ -89,23 +178,51 @@ const width = computed(() => MapButtonExtension[props.extension]);
     --button-color: v-bind(color);
     --button-size: v-bind(size);
     --button-width: v-bind(width);
+    --button-border: v-bind(border);
+    --button-font-color: v-bind(fontColor);
+    --button-background: v-bind(background);
+    --button-shadow: v-bind(shadow);
 
+    position: relative;
+    z-index: 1000;
     display: block;
     min-width: var(--button-width);
     padding: var(--button-size);
     font-weight: 600;
-    color: #fff;
+    color: var(--button-font-color);
     text-transform: uppercase;
     cursor: pointer;
-    background-color: var(--button-color);
-    border: none;
+    background-color: var(--button-background);
+    border: var(--button-border);
+    border-color: var(--button-color);
     border-radius: 5px;
-    box-shadow: 0 4px 8px -4px var(--button-color);
+    box-shadow: 0 4px 8px -4px var(--button-shadow);
     transition: box-shadow 0.25s linear, opacity 0.25s linear;
 
     &:hover {
-      box-shadow: 0 6px 20px -8px  var(--button-color);
+      box-shadow: 0 6px 20px -8px var(--button-shadow);
       opacity: 0.9;
+    }
+
+    &::after {
+      --button-color: v-bind(color);
+      --button-after: v-bind(after);
+
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      display: var(--button-after);
+      content: '';
+      background-color: var(--button-color);
+      opacity: 0;
+      transition: opacity 0.2s linear;
+    }
+
+    &:hover::after {
+      opacity: 0.15;
     }
   }
 </style>

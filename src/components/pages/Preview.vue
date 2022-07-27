@@ -49,6 +49,23 @@
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
+        Button borders
+      </h3>
+      <div :class="$style.example">
+        <UserButton
+          v-for="border in Object.values(ButtonBorder)"
+          :key="border"
+          :variant="ButtonVariant.PRIMARY"
+          :size="ButtonSize.SMALL"
+          :class="$style.userButton"
+          :border="border"
+        >
+          {{ border }}
+        </UserButton>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
         Money stat positive sizes
       </h3>
       <div :class="$style.example">
@@ -308,7 +325,9 @@ import Avatar, {
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';
 import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalStat.vue';
-import UserButton, { ButtonExtension, ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
+import UserButton, {
+  ButtonBorder, ButtonExtension, ButtonSize, ButtonVariant,
+} from '@/components/UI/Button.vue';
 
 </script>
 

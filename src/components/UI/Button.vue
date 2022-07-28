@@ -27,6 +27,7 @@ export const ButtonVariant = {
   ERROR: 'error',
   SUCCESS: 'success',
   DEFAULT: 'default',
+  INFO: 'info',
 };
 </script>
 
@@ -50,6 +51,7 @@ const MapButtonVariant = {
   [ButtonVariant.WARNING]: GlobalColors.WARNING,
   [ButtonVariant.DEFAULT]: GlobalColors.DEFAULT,
   [ButtonVariant.SUCCESS]: GlobalColors.SUCCESS,
+  [ButtonVariant.INFO]: GlobalColors.INFO,
 };
 
 const MapButtonSizes = {
@@ -67,6 +69,7 @@ const size = computed(() => MapButtonSizes[props.size]);
     --button-color: v-bind(color);
     --button-size: v-bind(size);
 
+    display: block;
     padding: var(--button-size);
     font-weight: 600;
     color: #fff;

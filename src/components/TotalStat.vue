@@ -14,26 +14,85 @@ import { computed } from '@vue/reactivity';
 
 import GlobalColors from '@/styles/colors';
 
-export const MonotoneVariant = {
+const TotalStatSizeMainValue = {
+  SMALL: '16px',
+  NORMAL: '20px',
+  LARGE: '26px',
+  EXTRALARGE: '32px',
+};
+
+const TotalStatSizeAfterValue = {
+  SMALL: '10px',
+  NORMAL: '12px',
+  LARGE: '16px',
+  EXTRALARGE: '20px',
+};
+
+const TotalStatTopValue = {
+  SMALL: '-3px',
+  NORMAL: '-4px',
+  LARGE: '-5px',
+  EXTRALARGE: '-7px',
+};
+
+export const TotalStatVariant = {
   UP: 'up',
   DOWN: 'down',
 };
+
+export const TotalStatSize = {
+  SMALL: 'small',
+  NORMAL: 'normal',
+  LARGE: 'large',
+  EXTRALARGE: 'extra large',
+};
+
 </script>
 
 <script setup>
 const props = defineProps({
   monotone: {
     type: String,
-    default: MonotoneVariant.UP,
-    validator: (value) => Object.values(MonotoneVariant).includes(value),
+    default: TotalStatVariant.UP,
+    validator: (value) => Object.values(TotalStatVariant).includes(value),
+  },
+  size: {
+    type: String,
+    default: TotalStatSize.SMALL,
+    validator: (value) => Object.values(TotalStatSize).includes(value),
   },
 });
 
-const monotoneMap = {
-  [MonotoneVariant.UP]: GlobalColors.SUCCESS,
-  [MonotoneVariant.DOWN]: GlobalColors.ERROR,
+const MapMonotone = {
+  [TotalStatVariant.UP]: GlobalColors.SUCCESS,
+  [TotalStatVariant.DOWN]: GlobalColors.ERROR,
 };
-const afterColor = computed(() => monotoneMap[props.monotone]);
+
+const MapSizeMain = {
+  [TotalStatSize.SMALL]: TotalStatSizeMainValue.SMALL,
+  [TotalStatSize.NORMAL]: TotalStatSizeMainValue.NORMAL,
+  [TotalStatSize.LARGE]: TotalStatSizeMainValue.LARGE,
+  [TotalStatSize.EXTRALARGE]: TotalStatSizeMainValue.EXTRALARGE,
+};
+
+const MapSizeAfter = {
+  [TotalStatSize.SMALL]: TotalStatSizeAfterValue.SMALL,
+  [TotalStatSize.NORMAL]: TotalStatSizeAfterValue.NORMAL,
+  [TotalStatSize.LARGE]: TotalStatSizeAfterValue.LARGE,
+  [TotalStatSize.EXTRALARGE]: TotalStatSizeAfterValue.EXTRALARGE,
+};
+
+const MapSizeTop = {
+  [TotalStatSize.SMALL]: TotalStatTopValue.SMALL,
+  [TotalStatSize.NORMAL]: TotalStatTopValue.NORMAL,
+  [TotalStatSize.LARGE]: TotalStatTopValue.LARGE,
+  [TotalStatSize.EXTRALARGE]: TotalStatTopValue.EXTRALARGE,
+};
+
+const afterColor = computed(() => MapMonotone[props.monotone]);
+const sizeMain = computed(() => MapSizeMain[props.size]);
+const sizeAfter = computed(() => MapSizeAfter[props.size]);
+const top = computed(() => MapSizeTop[props.size]);
 
 </script>
 
@@ -45,19 +104,23 @@ const afterColor = computed(() => monotoneMap[props.monotone]);
   }
 
   .main {
+    --stat-size: v-bind(sizeMain);
+
     margin-right: 5px;
-    font-size: 24px;
+    font-size: var(--stat-size);
     font-weight: 500;
     color: #616161;
   }
 
   .after {
-    --text-color: v-bind(afterColor);
+    --stat-color: v-bind(afterColor);
+    --stat-size: v-bind(sizeAfter);
+    --stat-top: v-bind(top);
 
     position: relative;
-    top: -5px;
-    font-size: 12px;
+    top: var(--stat-top);
+    font-size: var(--stat-size);
     font-weight: 500;
-    color: var(--text-color);
+    color: var(--stat-color);
   }
 </style>

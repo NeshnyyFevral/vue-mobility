@@ -24,8 +24,8 @@
         <UserButton
           :variant="ButtonVariant.PRIMARY"
           :size="ButtonSize.NORMAL"
-          :extension="ButtonExtension.BLOCK"
           :class="$style.userButton"
+          block
         >
           Button block
         </UserButton>
@@ -53,14 +53,27 @@
       </h3>
       <div :class="$style.example">
         <UserButton
-          v-for="border in Object.values(ButtonBorder)"
-          :key="border"
           :variant="ButtonVariant.PRIMARY"
           :size="ButtonSize.SMALL"
           :class="$style.userButton"
-          :border="border"
         >
-          {{ border }}
+          default
+        </UserButton>
+        <UserButton
+          :variant="ButtonVariant.PRIMARY"
+          :size="ButtonSize.SMALL"
+          :class="$style.userButton"
+          outlined
+        >
+          outlined
+        </UserButton>
+        <UserButton
+          :variant="ButtonVariant.PRIMARY"
+          :size="ButtonSize.SMALL"
+          :class="$style.userButton"
+          unlimited
+        >
+          unlimited
         </UserButton>
       </div>
     </div>
@@ -325,9 +338,7 @@ import Avatar, {
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';
 import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalStat.vue';
-import UserButton, {
-  ButtonBorder, ButtonExtension, ButtonSize, ButtonVariant,
-} from '@/components/UI/Button.vue';
+import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
 
 </script>
 

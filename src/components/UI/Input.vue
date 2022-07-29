@@ -1,9 +1,10 @@
 <template>
-  <input
+  <component
+    :is="props.multiline"
     :placeholder="props.placeholder"
     :type="props.type"
     :class="$style.input"
-  >
+  />
 </template>
 
 <script>
@@ -11,39 +12,25 @@ import { computed } from '@vue/reactivity';
 
 import GlobalColors from '@/styles/colors';
 
-const InputHeightValue = {
+const InputSizeValue = {
   SMALL: '40px',
   NORMAL: '52px',
   LARGE: '56px',
 };
 
-const InputWidthValue = {
-  SMALL: '56px',
-  NORMAL: '170px',
-  LARGE: '300px',
-  BLOCK: '100%',
-};
-
-const InputCornerValue = {
+const InputRadiusValue = {
   DEFAULT: '5px',
   ROUNTED: '28px',
   RECTANGLE: '0px',
 };
 
-export const InputHeight = {
+export const InputSize = {
   SMALL: 'small',
   NORMAL: 'normal',
   LARGE: 'large',
 };
 
-export const InputWidth = {
-  SMALL: 'small',
-  NORMAL: 'normal',
-  LARGE: 'large',
-  BLOCK: 'block',
-};
-
-export const InputCorner = {
+export const InputRadius = {
   DEFAULT: 'dafault',
   ROUNTED: 'rounted',
   RECTANGLE: 'rectangle',
@@ -60,64 +47,54 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  height: {
+  size: {
     type: String,
-    default: InputHeight.NORMAL,
-    validator: (value) => Object.values(InputHeight).includes(value),
+    default: InputSize.NORMAL,
+    validator: (value) => Object.values(InputSize).includes(value),
   },
-  width: {
+  radius: {
     type: String,
-    default: InputWidth.NORMAL,
-    validator: (value) => Object.values(InputWidth).includes(value),
+    default: InputRadius.DEFAULT,
+    validator: (value) => Object.values(InputRadius).includes(value),
   },
-  corner: {
+  multiline: {
     type: String,
-    default: InputCorner.DEFAULT,
-    validator: (value) => Object.values(InputCorner).includes(value),
+    default: 'text',
   },
 });
 
-const MapInputHeight = {
-  [InputHeight.SMALL]: InputHeightValue.SMALL,
-  [InputHeight.NORMAL]: InputHeightValue.NORMAL,
-  [InputHeight.LARGE]: InputHeightValue.LARGE,
+const MapInputSize = {
+  [InputSize.SMALL]: InputSizeValue.SMALL,
+  [InputSize.NORMAL]: InputSizeValue.NORMAL,
+  [InputSize.LARGE]: InputSizeValue.LARGE,
 };
 
-const MapInputWidth = {
-  [InputWidth.SMALL]: InputWidthValue.SMALL,
-  [InputWidth.NORMAL]: InputWidthValue.NORMAL,
-  [InputWidth.LARGE]: InputWidthValue.LARGE,
-  [InputWidth.BLOCK]: InputWidthValue.BLOCK,
+const MapInputRadius = {
+  [InputRadius.DEFAULT]: InputRadiusValue.DEFAULT,
+  [InputRadius.ROUNTED]: InputRadiusValue.ROUNTED,
+  [InputRadius.RECTANGLE]: InputRadiusValue.RECTANGLE,
 };
 
-const MapInputCorner = {
-  [InputCorner.DEFAULT]: InputCornerValue.DEFAULT,
-  [InputCorner.ROUNTED]: InputCornerValue.ROUNTED,
-  [InputCorner.RECTANGLE]: InputCornerValue.RECTANGLE,
-};
-
-const height = computed(() => MapInputHeight[props.height]);
-const width = computed(() => MapInputWidth[props.width]);
-const borderRadius = computed(() => MapInputCorner[props.corner]);
+const size = computed(() => MapInputSize[props.size]);
+const radius = computed(() => MapInputRadius[props.radius]);
 </script>
 
 <style module lang="scss">
   .input {
-    --input-height: v-bind(height);
-    --input-width: v-bind(width);
+    --input-size: v-bind(size);
     --input-color: v-bind(GlobalColors.PRIMARY);
-    --input-border-radius: v-bind(borderRadius);
+    --input-radius: v-bind(radius);
 
     display: block;
-    width: var(--input-width);
-    min-height: var(--input-height);
+    min-width: 100%;
+    min-height: var(--input-size);
     padding: 10px 12px;
     font-size: 14px;
     font-weight: 400;
     color: #616161;
     background-color: transparent;
     border: 1px solid rgb(94 86 105 / 28%);
-    border-radius: var(--input-border-radius);
+    border-radius: var(--input-radius);
 
     &:focus {
       outline-color: var(--input-color);

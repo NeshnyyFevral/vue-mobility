@@ -281,54 +281,37 @@
         </Avatar>
       </div>
     </div>
-    <div :class="$style.item">
+    <div :class="[$style.item, $style.itemInput]">
       <h3 :class="$style.exampleTitle">
-        Input width
+        Input size
       </h3>
       <div :class="$style.example">
         <UserInput
-          v-for="width in Object.values(InputWidth)"
-          :key="width"
-          :placeholder="width"
+          v-for="size in Object.values(InputSize)"
+          :key="size"
+          :placeholder="size"
           :type="'text'"
-          :height="InputHeight.SMALL"
-          :width="width"
-          :corner="InputCorner.DEFAULT"
-          :class="$style.inputWidth"
+          :size="size"
+          :radius="InputRadius.DEFAULT"
+          :class="$style.input"
+          :multiline="'input'"
         />
       </div>
     </div>
-    <div :class="$style.item">
+    <div :class="[$style.item, $style.itemInput]">
       <h3 :class="$style.exampleTitle">
-        Input height
+        Input radius
       </h3>
       <div :class="$style.example">
         <UserInput
-          v-for="height in Object.values(InputHeight)"
-          :key="height"
-          :placeholder="height"
+          v-for="radius in Object.values(InputRadius)"
+          :key="radius"
+          :placeholder="radius"
           :type="'text'"
-          :height="height"
-          :width="InputWidth.NORMAL"
-          :corner="InputCorner.DEFAULT"
+          :size="InputSize.SMALL"
+          :radius="radius"
           :class="$style.input"
-        />
-      </div>
-    </div>
-    <div :class="$style.item">
-      <h3 :class="$style.exampleTitle">
-        Input corner
-      </h3>
-      <div :class="$style.example">
-        <UserInput
-          v-for="corner in Object.values(InputCorner)"
-          :key="corner"
-          :placeholder="corner"
-          :type="'text'"
-          :height="InputHeight.SMALL"
-          :width="InputWidth.NORMAL"
-          :corner="corner"
-          :class="$style.input"
+          :multiline="'input'"
         />
       </div>
     </div>
@@ -345,11 +328,10 @@ import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';
 import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalStat.vue';
 import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
-import UserInput, { InputCorner, InputHeight, InputWidth } from '@/components/UI/Input.vue';
+import UserInput, { InputRadius, InputSize } from '@/components/UI/Input.vue';
 </script>
 
 <style module lang="scss">
-
   .container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -362,6 +344,7 @@ import UserInput, { InputCorner, InputHeight, InputWidth } from '@/components/UI
     display: flex;
     flex-flow: wrap row;
     align-items: center;
+    justify-items: center;
   }
 
   .exampleTitle {
@@ -371,27 +354,29 @@ import UserInput, { InputCorner, InputHeight, InputWidth } from '@/components/UI
   }
 
   .item {
+    justify-content: center;
     height: 170px;
     padding: 15px;
     background-color: #fff;
     border-radius: 12px;
   }
 
+  .itemInput {
+    height: 260px;
+  }
+
   .userButton + .userButton,
   .totalStat + .totalStat,
   .chip + .chip,
-  .avatar + .avatar,
-  .input + .input {
+  .avatar + .avatar {
     margin-left: 20px;
   }
 
-  .moneyStat + .moneyStat,
-  .inputWidth + .inputWidth {
+  .moneyStat + .moneyStat {
     margin-left: 10px;
   }
 
-  .inputWidth:last-child {
+  .input + .input {
     margin-top: 10px;
-    margin-left: 0;
   }
 </style>

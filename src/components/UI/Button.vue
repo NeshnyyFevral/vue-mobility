@@ -6,18 +6,19 @@
       props.outlined && $style.buttonOutlined,
       props.unlimited && $style.buttonUnlimited
     ]"
-    @click="rippleAnimation"
+    @click="onClick"
   >
     <slot />
+    <Ripple :items="items" />
   </button>
 </template>
 
 <script>
 import { computed } from '@vue/reactivity';
 
+import Ripple from '@/components/Ripple.vue';
+import { useRipple } from '@/hooks/useRipple';
 import GlobalColors from '@/styles/colors';
-
-const rippleDuration = '600ms';
 
 const ButtonSizeValue = {
   SMALL: '7px 15px',
@@ -85,27 +86,15 @@ const MapButtonSizes = {
 const color = computed(() => MapButtonVariant[props.variant]);
 const size = computed(() => MapButtonSizes[props.size]);
 
-const rippleAnimation = (event) => {
+const { add, items } = useRipple();
+
+const onClick = (event) => {
   const button = event.target;
-  if (button.tagName !== 'BUTTON') return;
-  const rippleItem = document.createElement('span');
-  const radius = button.clientWidth / 2;
+  const left = event.pageX - button.offsetLeft - 15;
+  const top = event.pageY - button.offsetTop - 15;
 
-  rippleItem.style.width = `${button.clientWidth}px`;
-  rippleItem.style.height = `${button.clientWidth}px`;
-
-  rippleItem.style.left = `${event.clientX - button.offsetLeft - radius}px`;
-  rippleItem.style.top = `${event.clientY - button.offsetTop - radius}px`;
-
-  if (button.classList.value.includes('buttonOutlined') || button.classList.value.includes('buttonUnlimited')) {
-    rippleItem.classList.add('colorRipple');
-  }
-  rippleItem.classList.add('rippleItem');
-  button.append(rippleItem);
-
-  setTimeout(() => {
-    rippleItem.remove();
-  }, parseInt(rippleDuration, 10));
+  const rippleColor = getComputedStyle(button).color;
+  add(top, left, rippleColor);
 };
 </script>
 
@@ -184,35 +173,6 @@ const rippleAnimation = (event) => {
 
     &:hover {
       box-shadow: none;
-    }
-  }
-
-</style>
-
-<style lang="scss">
-  .rippleItem {
-    --ripple-duration: v-bind(rippleDuration);
-
-    position: absolute;
-    z-index: 10;
-    background-color: rgb(255 255 255 / 40%);
-    border-radius: 50%;
-    opacity: 1;
-    transform: scale(0);
-    animation: ripple var(--ripple-duration) linear;
-  }
-
-  .colorRipple {
-    --ripple-color: v-bind(color);
-
-    background-color: var(--ripple-color);
-    opacity: 0.4;
-  }
-
-  @keyframes ripple {
-    to {
-      opacity: 0;
-      transform: scale(4);
     }
   }
 </style>

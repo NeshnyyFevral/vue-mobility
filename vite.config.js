@@ -1,6 +1,8 @@
 import vitePluginVue from '@vitejs/plugin-vue';
 import path from 'path';
-import { defineConfig } from 'vite';
+import {
+  defineConfig,
+} from 'vite';
 import vitePluginEslint from 'vite-plugin-eslint';
 import viteStylelintPlugin from 'vite-plugin-stylelint';
 import viteSvgLoader from 'vite-svg-loader';

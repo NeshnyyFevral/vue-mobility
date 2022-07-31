@@ -14,7 +14,6 @@ defineProps({
     default: () => [],
   },
 });
-
 </script>
 
 <style module lang="scss">

@@ -333,12 +333,27 @@
 import arrowDown from '@/assets/icons/chevron-down.svg';
 import arrowUp from '@/assets/icons/chevron-up.svg';
 import Avatar, {
-  AvatarCorner, AvatarSize, AvatarTransparency, AvatarVariant,
+  AvatarCorner,
+  AvatarSize,
+  AvatarTransparency,
+  AvatarVariant,
 } from '@/components/Avatar.vue';
-import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
-import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';
-import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalStat.vue';
-import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
+import Chip, {
+  ChipSize,
+  ChipVariant,
+} from '@/components/Chip.vue';
+import MoneyStat, {
+  MoneyStatSize,
+  MoneyStatVariant,
+} from '@/components/MoneyStat.vue';
+import TotalStat, {
+  TotalStatSize,
+  TotalStatVariant,
+} from '@/components/TotalStat.vue';
+import UserButton, {
+  ButtonSize,
+  ButtonVariant,
+} from '@/components/UI/Button.vue';
 
 </script>
 

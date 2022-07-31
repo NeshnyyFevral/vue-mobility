@@ -14,10 +14,14 @@
 </template>
 
 <script>
-import { computed } from '@vue/reactivity';
+import {
+  computed,
+} from '@vue/reactivity';
 
 import Ripple from '@/components/Ripple.vue';
-import { useRipple } from '@/hooks/useRipple';
+import {
+  useRipple,
+} from '@/hooks/useRipple';
 import GlobalColors from '@/styles/colors';
 
 const ButtonSizeValue = {
@@ -86,7 +90,10 @@ const MapButtonSizes = {
 const color = computed(() => MapButtonVariant[props.variant]);
 const size = computed(() => MapButtonSizes[props.size]);
 
-const { add, items } = useRipple();
+const {
+  add,
+  items,
+} = useRipple();
 
 const onClick = (event) => {
   const button = event.target;

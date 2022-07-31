@@ -1,55 +1,63 @@
 {
-    "env": {
-        "browser": true,
-        "es2022": true
-    },
-    "extends": [
-        "plugin:vue/recommended",
-        "airbnb-base"
-    ],
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "simple-import-sort",
-        "vue",
-        "unicorn",
-        "modules-newlines"
-    ],
-    "settings": {
-        "import/resolver": {
-            "alias": {
-              "map": [
-                ["@", "./src"]
-              ]
-            }
-          }
-    },
-    "rules": {
-        "no-console": "off",
-        "import/no-extraneous-dependencies": "off",
-        "no-param-reassign": "off",
-        "import/prefer-default-export": "off",
-        "no-restricted-syntax": "off",
-        "simple-import-sort/imports": "error",
-        "simple-import-sort/exports": "error",
-        "vue/multi-word-component-names": "off",
-        "vue/no-multiple-template-root": "off",
-        "object-curly-newline": ["error", {
-            "ObjectExpression": { "multiline": true, "minProperties": 1 },
-            "ObjectPattern": { "multiline": true, "minProperties": 1 },
-            "ImportDeclaration": "always",
-            "ExportDeclaration": "always"
-         }],
-        "modules-newlines/import-declaration-newline": "error",
-        "modules-newlines/export-declaration-newline": "error",
-        "import/extensions": ["error", "never", { "js": "never", "vue": "always" }],
-        "indent": ["error", 2] ,
-        "no-tabs": 0,
-        "quotes": [
-            "error",
-            "single"
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "extends": [
+    "plugin:vue/recommended",
+    "airbnb-base"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "simple-import-sort",
+    "vue",
+    "unicorn",
+    "modules-newlines"
+  ],
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@", "./src"]
         ]
+      }
     }
+  },
+  "rules": {
+    "no-console": "off",
+    "import/no-extraneous-dependencies": "off",
+    "no-param-reassign": "off",
+    "import/prefer-default-export": "off",
+    "no-restricted-syntax": "off",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "vue/multi-word-component-names": "off",
+    "vue/no-multiple-template-root": "off",
+    "object-curly-newline": ["error", {
+      "ObjectExpression": { "multiline": true, "minProperties": 1 },
+      "ObjectPattern": { "multiline": true, "minProperties": 1 },
+      "ImportDeclaration": "always",
+      "ExportDeclaration": "always"
+    }],
+    "modules-newlines/import-declaration-newline": "error",
+    "modules-newlines/export-declaration-newline": "error",
+    "import/extensions": [
+      "error", 
+      "never", { 
+        "js": "never", 
+        "vue": "always" 
+      }
+    ],
+    "indent": [
+      "error", 2
+    ] ,
+    "no-tabs": 0,
+    "quotes": [
+      "error",
+      "single"
+    ]
+  }
 }

@@ -1,7 +1,8 @@
-import createApp from './app/index';
+import createApp from '@/app/index';
 
 const {
-  app, router,
+  app,
+  router,
 } = createApp();
 
 app

@@ -338,6 +338,10 @@ import Avatar, {
   AvatarTransparency,
   AvatarVariant,
 } from '@/components/Avatar.vue';
+import UserButton, {
+  ButtonSize,
+  ButtonVariant,
+} from '@/components/Basic/Button.vue';
 import Chip, {
   ChipSize,
   ChipVariant,
@@ -350,10 +354,6 @@ import TotalStat, {
   TotalStatSize,
   TotalStatVariant,
 } from '@/components/TotalStat.vue';
-import UserButton, {
-  ButtonSize,
-  ButtonVariant,
-} from '@/components/UI/Button.vue';
 
 </script>
 

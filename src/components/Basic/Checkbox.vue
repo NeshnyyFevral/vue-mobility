@@ -12,7 +12,7 @@
       :class="$style.input"
       :disabled="props.disabled"
       type="checkbox"
-      @change="changeValue"
+      @change="emits('changeValue')"
     >
     <span :class="$style.text">
       <span v-if="props.value">{{ props.trueValue }}</span>
@@ -44,11 +44,12 @@ export const checboxVariant = {
 </script>
 
 <script setup>
+const emits = defineEmits(['changeValue']);
+
 const props = defineProps({
-  variant: {
+  label: {
     type: String,
-    default: checboxVariant.DEFAULT,
-    validator: (value) => Object.values(checboxVariant).includes(value),
+    default: '',
   },
   value: {
     type: Boolean,
@@ -58,13 +59,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  label: {
-    type: String,
-    default: '',
-  },
   disabled: {
     type: Boolean,
     default: false,
+  },
+  variant: {
+    type: String,
+    default: checboxVariant.DEFAULT,
+    validator: (value) => Object.values(checboxVariant).includes(value),
   },
   trueValue: {
     type: String,
@@ -75,13 +77,6 @@ const props = defineProps({
     default: '',
   },
 });
-
-const emits = defineEmits(['changeValue']);
-
-const changeValue = (event) => {
-  console.log(event.target.checked);
-  emits('changeValue');
-};
 
 const MapCheckboxVarian = {
   [checboxVariant.DEFAULT]: GlobalColors.DEFAULT,

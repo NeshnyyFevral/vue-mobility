@@ -99,12 +99,12 @@ const color = computed(() => MapCheckboxVarian[props.variant]);
   }
 
   .text {
-    --color-checkbox: v-bind(GlobalColors.DEFAULT);
+    --checkbox-color: v-bind(GlobalColors.DEFAULT);
 
     display: flex;
     align-items: center;
     font-size: 16px;
-    color: var(--color-checkbox);
+    color: var(--checkbox-color);
 
     &::before {
       z-index: 10;
@@ -114,13 +114,13 @@ const color = computed(() => MapCheckboxVarian[props.variant]);
       padding: 0;
       margin-right: 10px;
       content: '';
-      border: 2.5px var(--color-checkbox) solid;
+      border: 2.5px var(--checkbox-color) solid;
       border-radius: 2px;
     }
   }
 
   .cycle {
-    --color-checkbox: v-bind(GlobalColors.DEFAULT);
+    --checkbox-color: v-bind(GlobalColors.DEFAULT);
 
     position: absolute;
     top: -11px;
@@ -129,7 +129,7 @@ const color = computed(() => MapCheckboxVarian[props.variant]);
     width: 40px;
     height: 40px;
     content: '';
-    background-color: var(--color-checkbox);
+    background-color: var(--checkbox-color);
     border-radius: 50%;
     opacity: 0;
     transition: opacity 0.2s linear;
@@ -154,25 +154,25 @@ const color = computed(() => MapCheckboxVarian[props.variant]);
     opacity: 0;
 
     &:checked + .text::before {
-      --color-checkbox: v-bind(color);
+      --checkbox-color: v-bind(color);
 
-      background-color: var(--color-checkbox);
+      background-color: var(--checkbox-color);
       background-image: url('@/assets/icons/check-mark.svg');
       background-repeat: no-repeat;
       background-size: cover;
-      border-color: var(--color-checkbox);
+      border-color: var(--checkbox-color);
     }
 
     &:checked + .text + .cycle {
-      --color-checkbox: v-bind(color);
+      --checkbox-color: v-bind(color);
 
-      background-color: var(--color-checkbox);
+      background-color: var(--checkbox-color);
     }
   }
 
   .disabled .input:checked + .text::before {
-    --color-checkbox: v-bind(GlobalColors.DEFAULT);
+    --checkbox-color: v-bind(GlobalColors.DEFAULT);
 
-    background-color: var(--color-checkbox);
+    background-color: var(--checkbox-color);
   }
 </style>

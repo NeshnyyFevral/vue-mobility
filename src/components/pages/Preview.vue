@@ -283,11 +283,11 @@
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
-        Toggle checkbox
+        Checkbox toggle
       </h3>
       <div :class="$style.example">
         <Checkbox
-          :label="'firstCheckbox'"
+          :label="'checkbox 1'"
           :class="$style.checkbox"
           :value="checkboxFirstValue"
           :variant="checboxVariant.PRIMARY"
@@ -295,7 +295,7 @@
           @changeValue="checkboxFirstValue = !checkboxFirstValue"
         />
         <Checkbox
-          :label="'secondCheckbox'"
+          :label="'checkbox 2'"
           :class="$style.checkbox"
           :value="checkboxSecondValue"
           :variant="checboxVariant.PRIMARY"
@@ -312,7 +312,7 @@
         <Checkbox
           v-for="variant in Object.values(checboxVariant)"
           :key="variant"
-          :label="variant"
+          :label="`${variant.toString()}Checkbox`"
           :class="$style.checkbox"
           :value="mapCheckboxColor[variant]"
           :variant="variant"
@@ -372,6 +372,98 @@
         />
       </div>
     </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Switch toggle
+      </h3>
+      <div :class="$style.example">
+        <Checkbox
+          :class="$style.checkbox"
+          :label="'switch 1'"
+          :value="switchFirstValue"
+          toggle
+          switch
+          :variant="checboxVariant.PRIMARY"
+          @changeValue="switchFirstValue = !switchFirstValue"
+        />
+        <Checkbox
+          :class="$style.checkbox"
+          :label="'switch 2'"
+          :value="switchSecondValue"
+          toggle
+          switch
+          :variant="checboxVariant.PRIMARY"
+          @changeValue="switchSecondValue = !switchSecondValue"
+        />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Switch colors
+      </h3>
+      <div :class="$style.example">
+        <Checkbox
+          v-for="variant in Object.values(checboxVariant)"
+          :key="variant"
+          :class="$style.checkbox"
+          :label="`${variant.toString()}Switch`"
+          :value="mapSwitchColor[variant]"
+          switch
+          :variant="variant"
+          @changeValue="mapSwitchColor[variant] = !mapSwitchColor[variant]"
+        >
+          {{ variant }}
+        </Checkbox>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Switch disabled
+      </h3>
+      <div :class="$style.example">
+        <Checkbox
+          :class="$style.checkbox"
+          :label="'switch 3'"
+          :value="false"
+          switch
+          disabled
+          :variant="checboxVariant.PRIMARY"
+        >
+          off disabled
+        </Checkbox>
+        <Checkbox
+          :class="$style.checkbox"
+          :label="'switch 4'"
+          :value="true"
+          switch
+          disabled
+          :variant="checboxVariant.PRIMARY"
+        >
+          on disabled
+        </Checkbox>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Switch slot + userValue
+      </h3>
+      <div :class="$style.example">
+        <Checkbox
+          :class="$style.checkbox"
+          :label="'switch 5'"
+          :value="switchFlatValue"
+          :true-value="'show'"
+          :false-value="'hide'"
+          switch
+          :variant="checboxVariant.PRIMARY"
+          @changeValue="switchFlatValue = !switchFlatValue"
+        >
+          <p style="margin-right: 10px;">
+            switch:
+          </p>
+        </Checkbox>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -403,6 +495,20 @@ const mapCheckboxColor = ref({
 
 const checkboxAnotherFirstValue = ref(true);
 const checkboxAnotherSecondValue = ref(true);
+
+const switchFirstValue = ref(true);
+const switchSecondValue = ref(false);
+
+const mapSwitchColor = ref({
+  primary: true,
+  warning: true,
+  error: true,
+  success: true,
+  default: true,
+  info: true,
+});
+
+const switchFlatValue = ref(false);
 </script>
 
 <style module lang="scss">

@@ -281,6 +281,64 @@
         </Avatar>
       </div>
     </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Input Basic
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :placeholder="'Basic input'"
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :radius="InputRadius.RECTANGLE"
+          :label="'input 1'"
+        />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Input outlined
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :placeholder="'Outlined input'"
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :label="'input 2'"
+          outlined
+        />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Input shaped
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :placeholder="'Shaped'"
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :label="'input 3'"
+          outlined
+          shaped
+        />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Input solo
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :placeholder="'Solo'"
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :label="'input 4'"
+          outlined
+          solo
+        />
+      </div>
+    </div>
     <div :class="[$style.item, $style.itemInput]">
       <h3 :class="$style.exampleTitle">
         Input size
@@ -290,11 +348,12 @@
           v-for="size in Object.values(InputSize)"
           :key="size"
           :placeholder="size"
-          :type="'text'"
           :size="size"
           :radius="InputRadius.DEFAULT"
           :class="$style.input"
           :multiline="'input'"
+          :label="`${size.toString()}Size`"
+          outlined
         />
       </div>
     </div>
@@ -307,11 +366,37 @@
           v-for="radius in Object.values(InputRadius)"
           :key="radius"
           :placeholder="radius"
-          :type="'text'"
           :size="InputSize.SMALL"
           :radius="radius"
           :class="$style.input"
           :multiline="'input'"
+          :label="`${radius.toString()}Radius`"
+          outlined
+        />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Input solo
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :placeholder="'Disabled'"
+          :size="InputSize.SMALL"
+          :radius="InputRadius.RECTANGLE"
+          :class="$style.input"
+          :label="'input 5'"
+          :value="'Jhon Doe'"
+          disabled
+        />
+        <UserInput
+          :placeholder="'Readonly'"
+          :size="InputSize.SMALL"
+          :radius="InputRadius.RECTANGLE"
+          :class="$style.input"
+          :label="'input 6'"
+          :value="'Moe Gilsberg'"
+          readonly
         />
       </div>
     </div>
@@ -324,11 +409,11 @@ import arrowUp from '@/assets/icons/chevron-up.svg';
 import Avatar, {
   AvatarCorner, AvatarSize, AvatarTransparency, AvatarVariant,
 } from '@/components/Avatar.vue';
+import UserButton, { ButtonSize, ButtonVariant } from '@/components/Basic/Button.vue';
+import UserInput, { InputRadius, InputSize } from '@/components/Basic/Input.vue';
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';
 import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalStat.vue';
-import UserButton, { ButtonSize, ButtonVariant } from '@/components/UI/Button.vue';
-import UserInput, { InputRadius, InputSize } from '@/components/UI/Input.vue';
 </script>
 
 <style module lang="scss">

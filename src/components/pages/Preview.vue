@@ -400,6 +400,74 @@
         />
       </div>
     </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Input counter
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :placeholder="'Regular'"
+          :size="InputSize.SMALL"
+          :radius="InputRadius.RECTANGLE"
+          :class="$style.input"
+          :label="'input 7'"
+          :value="'Lorem ipsum dolor sit amet'"
+          :counter="count"
+          :rules="rules"
+          :hint="'This field uses counter prop'"
+        />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Input maxlength
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :placeholder="'Regular'"
+          :size="InputSize.SMALL"
+          :radius="InputRadius.RECTANGLE"
+          :class="$style.input"
+          :label="'input 8'"
+          :value="'Lorem ipsum dolor sit amet'"
+          :maxlength="count"
+          :rules="rules"
+          :hint="'This field uses maxlength prop'"
+        />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Custom colors
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :placeholder="'First name'"
+          :size="InputSize.SMALL"
+          :radius="InputRadius.RECTANGLE"
+          :class="$style.input"
+          :label="'input 9'"
+          :value="'Lorem ipsum dolor sit amet'"
+          :variant="InputVariant.SUCCESS"
+        />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Input clearable
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :placeholder="'First name'"
+          :size="InputSize.SMALL"
+          :radius="InputRadius.RECTANGLE"
+          :class="$style.input"
+          :label="'input 10'"
+          clearable
+          :value="'Lorem ipsum dolor sit amet'"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -410,10 +478,14 @@ import Avatar, {
   AvatarCorner, AvatarSize, AvatarTransparency, AvatarVariant,
 } from '@/components/Avatar.vue';
 import UserButton, { ButtonSize, ButtonVariant } from '@/components/Basic/Button.vue';
-import UserInput, { InputRadius, InputSize } from '@/components/Basic/Input.vue';
+import UserInput, { InputRadius, InputSize, InputVariant } from '@/components/Basic/Input.vue';
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';
 import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalStat.vue';
+
+const count = 25;
+const rules = [(value) => value.length <= count || `max ${count} characters`];
+
 </script>
 
 <style module lang="scss">

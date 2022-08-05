@@ -7,6 +7,7 @@
       solo && $style.solo,
       disabled && $style.disabled,
       readonly && $style.readonly,
+      error && $style.error
     ]"
   >
     <component
@@ -19,22 +20,44 @@
       ]"
       :disabled="disabled"
       :readonly="readonly"
-      :value="value"
+      :value="inputValue"
+      :maxlength="maxlength || 524288"
       @input="checkValue"
     />
-    <div
-      :id="label"
-      :class="$style.desc"
-    >
-      {{ placeholder }}
+    <div :class="$style.details">
+      <div
+        :id="label"
+        :class="$style.desc"
+      >
+        {{ placeholder }}
+      </div>
+      <div :class="$style.line" />
+      <div
+        v-if="counter || maxlength"
+        :class="$style.counter"
+      >
+        {{ inputValue.length }} / {{ counter || maxlength }}
+      </div>
+      <div
+        v-if="hint"
+        :class="$style.hint"
+      >
+        {{ hintValue }}
+      </div>
+      <div v-if="clearable && dirty">
+        <cross
+          :class="$style.crossIcon"
+          @click="clearInput"
+        />
+      </div>
     </div>
-    <div :class="$style.line" />
   </label>
 </template>
 
 <script>
 import { computed, onMounted, ref } from 'vue';
 
+import cross from '@/assets/icons/cross.svg';
 import GlobalColors from '@/styles/colors';
 
 const InputSizeValue = {
@@ -60,10 +83,24 @@ export const InputRadius = {
   ROUNTED: 'rounted',
   RECTANGLE: 'rectangle',
 };
+
+export const InputVariant = {
+  PRIMARY: 'primary',
+  WARNING: 'warning',
+  ERROR: 'error',
+  SUCCESS: 'success',
+  DEFAULT: 'default',
+  INFO: 'info',
+};
 </script>
 
 <script setup>
 const props = defineProps({
+  variant: {
+    type: String,
+    default: InputVariant.PRIMARY,
+    validator: (value) => Object.values(InputVariant).includes(value),
+  },
   placeholder: {
     type: String,
     default: '',
@@ -110,7 +147,36 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  counter: {
+    type: Number,
+    default: 0,
+  },
+  maxlength: {
+    type: Number,
+    default: 0,
+  },
+  rules: {
+    type: Array,
+    default: () => [],
+  },
+  hint: {
+    type: String,
+    default: '',
+  },
+  clearable: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+const MapInputVariant = {
+  [InputVariant.ERROR]: GlobalColors.ERROR,
+  [InputVariant.PRIMARY]: GlobalColors.PRIMARY,
+  [InputVariant.WARNING]: GlobalColors.WARNING,
+  [InputVariant.DEFAULT]: GlobalColors.DEFAULT,
+  [InputVariant.SUCCESS]: GlobalColors.SUCCESS,
+  [InputVariant.INFO]: GlobalColors.INFO,
+};
 
 const MapInputSize = {
   [InputSize.SMALL]: InputSizeValue.SMALL,
@@ -126,12 +192,46 @@ const MapInputRadius = {
 
 const size = computed(() => MapInputSize[props.size]);
 const radius = computed(() => MapInputRadius[props.radius]);
+const color = computed(() => MapInputVariant[props.variant]);
 
 const dirty = ref(false);
+const inputValue = ref('');
+const error = ref(false);
+const hintValue = ref('');
 
-onMounted(() => { dirty.value = !!props.value; });
+const checkRules = (rules) => {
+  rules.forEach((rule) => {
+    const ruleValue = rule(inputValue.value);
 
-const checkValue = (event) => { dirty.value = !!event.target.value; };
+    if (typeof ruleValue === 'string') {
+      hintValue.value = ruleValue;
+      error.value = true;
+    } else {
+      hintValue.value = props.hint;
+      error.value = false;
+    }
+  });
+};
+
+onMounted(() => {
+  dirty.value = !!props.value;
+  inputValue.value = props.value;
+  hintValue.value = props.hint;
+
+  checkRules(props.rules);
+});
+
+const checkValue = (event) => {
+  dirty.value = !!event.target.value;
+  inputValue.value = event.target.value;
+
+  checkRules(props.rules);
+};
+
+const clearInput = () => {
+  inputValue.value = '';
+  dirty.value = false;
+};
 </script>
 
 <style module lang="scss">
@@ -149,7 +249,7 @@ const checkValue = (event) => { dirty.value = !!event.target.value; };
 
   .input {
     --input-size: v-bind(size);
-    --input-color: v-bind(GlobalColors.PRIMARY);
+    --input-color: v-bind(color);
     --input-radius: v-bind(radius);
 
     display: block;
@@ -182,6 +282,12 @@ const checkValue = (event) => { dirty.value = !!event.target.value; };
   .outlined .input {
     padding: 10px 12px;
     border: 1px solid rgb(94 86 105 / 28%);
+  }
+
+  .error .input {
+    --input-color: v-bind(GlobalColors.ERROR);
+
+    border-color: var(--input-color);
   }
 
   .solo .input {
@@ -223,34 +329,48 @@ const checkValue = (event) => { dirty.value = !!event.target.value; };
     transform-origin: top left;
   }
 
-  .outlined .desc {
+  .outlined .details .desc {
     left: 12px;
   }
 
-  .dirty + .desc {
+  .dirty + .details .desc {
     top: 0;
     color: #616161;
     transform: translateY(-40%) scale(0.75);
   }
 
-  .input:focus + .desc {
-    --desc-color: v-bind(GlobalColors.PRIMARY);
+  .error .details .desc {
+    --desc-color: v-bind(GlobalColors.ERROR);
+
+    color: var(--desc-color);
+    animation: error 0.5s linear;
+    animation-delay: 0.2s;
+  }
+
+  .input:focus + .details .desc {
+    --desc-color: v-bind(color);
 
     top: 0;
     color: var(--desc-color);
     transform: translateY(-40%) scale(0.75);
   }
 
-  .solo .dirty + .desc {
+  .solo .dirty + .details .desc {
     display: none;
   }
 
-  .solo .input:focus + .desc {
+  .error .input:focus + .details .desc {
+    --desc-color: v-bind(GlobalColors.ERROR);
+
+    color: var(--desc-color);
+  }
+
+  .solo .input:focus + .details .desc {
     display: none;
   }
 
   .line {
-    --line-color: v-bind(GlobalColors.PRIMARY);
+    --line-color: v-bind(color);
 
     position: absolute;
     bottom: -1.5px;
@@ -262,12 +382,97 @@ const checkValue = (event) => { dirty.value = !!event.target.value; };
       left 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
-  .outlined .line {
+  .outlined .details .line {
     display: none;
   }
 
-  .input:focus + .desc + .line {
+  .error .details .line {
+    --line-color: v-bind(GlobalColors.ERROR);
+
+    background-color: var(--line-color);
+  }
+
+  .input:focus + .details .line {
     left: 0;
     width: 100%;
+  }
+
+  .counter, .hint {
+    position: absolute;
+    right: 0;
+    bottom: -22px;
+    font-size: 12px;
+  }
+
+  .hint {
+    --hint-color: v-bind(GlobalColors.DEFAULT);
+
+    bottom: -10px;
+    left: 0;
+    color: var(--hint-color);
+    opacity: 0;
+    transition: bottom 0.3s cubic-bezier(.25,.8,.5,1),
+      opacity 0.3s cubic-bezier(.25,.8,.5,1);
+  }
+
+  .error .details .counter {
+    --counter-color: v-bind(GlobalColors.ERROR);
+
+    color: var(--counter-color);
+  }
+
+  .error .details .hint {
+    --hint-color: v-bind(GlobalColors.ERROR);
+
+    color: var(--hint-color);
+  }
+
+  .input:focus + .details .hint {
+    bottom: -22px;
+    opacity: 1;
+  }
+
+  .crossIcon {
+    position: absolute;
+    right: 16px;
+    bottom: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    fill: #616161;
+    transition: fill 0.2s linear;
+  }
+
+  .input:focus + .details .crossIcon {
+    --icon-color: v-bind(color);
+
+    fill: var(--icon-color);
+  }
+
+  @keyframes error {
+    20% {
+      margin-right: 0;
+      margin-left: -5px;
+    }
+
+    40% {
+      margin-right: -5px;
+      margin-left: 0;
+    }
+
+    60% {
+      margin-right: 0;
+      margin-left: -3px;
+    }
+
+    80% {
+      margin-right: -2px;
+      margin-left: 0;
+    }
+
+    100% {
+      margin-right: 0;
+      margin-left: 0;
+    }
   }
 </style>

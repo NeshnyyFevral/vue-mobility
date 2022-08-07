@@ -383,7 +383,6 @@
         <UserInput
           :placeholder="'Disabled'"
           :size="InputSize.SMALL"
-          :radius="InputRadius.RECTANGLE"
           :class="$style.input"
           :label="'input 5'"
           :value="'Jhon Doe'"
@@ -392,7 +391,6 @@
         <UserInput
           :placeholder="'Readonly'"
           :size="InputSize.SMALL"
-          :radius="InputRadius.RECTANGLE"
           :class="$style.input"
           :label="'input 6'"
           :value="'Moe Gilsberg'"
@@ -408,7 +406,6 @@
         <UserInput
           :placeholder="'Regular'"
           :size="InputSize.SMALL"
-          :radius="InputRadius.RECTANGLE"
           :class="$style.input"
           :label="'input 7'"
           :value="'Lorem ipsum dolor sit amet'"
@@ -426,7 +423,6 @@
         <UserInput
           :placeholder="'Regular'"
           :size="InputSize.SMALL"
-          :radius="InputRadius.RECTANGLE"
           :class="$style.input"
           :label="'input 8'"
           :value="'Lorem ipsum dolor sit amet'"
@@ -444,7 +440,6 @@
         <UserInput
           :placeholder="'First name'"
           :size="InputSize.SMALL"
-          :radius="InputRadius.RECTANGLE"
           :class="$style.input"
           :label="'input 9'"
           :value="'Lorem ipsum dolor sit amet'"
@@ -460,12 +455,84 @@
         <UserInput
           :placeholder="'First name'"
           :size="InputSize.SMALL"
-          :radius="InputRadius.RECTANGLE"
           :class="$style.input"
           :label="'input 10'"
           clearable
           :value="'Lorem ipsum dolor sit amet'"
         />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Input prefixes and suffixes
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :placeholder="'Email address'"
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :label="'input 11'"
+          :value="'ivan.turovskiy'"
+          :suffix="'@gmail.com'"
+        />
+        <UserInput
+          :placeholder="'Amount'"
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :label="'input 11'"
+          :value="'ivan.turovskiy'"
+          :prefix="'$$'"
+        />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Validation
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :placeholder="'Email address'"
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :label="'input 12'"
+          :value="''"
+          :rules="[rulesEmail.required, rulesEmail.email]"
+        />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Validate on blur
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :placeholder="'Email address'"
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :label="'input 13'"
+          :value="''"
+          validate-on-blur
+          :rules="[rulesEmail.required, rulesEmail.email]"
+        />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Input uses slot
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :label="'input 14'"
+          :value="''"
+        >
+          <div :class="$style.slot">
+            <cross :class="$style.icon" />
+            <span>cross</span>
+            <cross :class="$style.icon" />
+          </div>
+        </UserInput>
       </div>
     </div>
   </div>
@@ -474,6 +541,7 @@
 <script setup>
 import arrowDown from '@/assets/icons/chevron-down.svg';
 import arrowUp from '@/assets/icons/chevron-up.svg';
+import cross from '@/assets/icons/cross.svg';
 import Avatar, {
   AvatarCorner, AvatarSize, AvatarTransparency, AvatarVariant,
 } from '@/components/Avatar.vue';
@@ -485,6 +553,13 @@ import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalSt
 
 const count = 25;
 const rules = [(value) => value.length <= count || `max ${count} characters`];
+const rulesEmail = {
+  required: (value) => !!value || 'Required.',
+  email: (value) => {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(value) || 'Invalid e-mail.';
+  },
+};
 
 </script>
 
@@ -535,5 +610,16 @@ const rules = [(value) => value.length <= count || `max ${count} characters`];
 
   .input + .input {
     margin-top: 10px;
+  }
+
+  .slot {
+    display: flex;
+    align-items: center;
+  }
+
+  .icon {
+    width: 16px;
+    height: 16px;
+    fill: #000;
   }
 </style>

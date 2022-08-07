@@ -7,9 +7,17 @@
       solo && $style.solo,
       disabled && $style.disabled,
       readonly && $style.readonly,
-      error && $style.error
+      error && $style.error,
+      focus && $style.focus,
+      validateOnBlur && $style.validateOnBlur
     ]"
   >
+    <span
+      v-if="prefix"
+      :class="$style.prefix"
+    >
+      {{ prefix }}
+    </span>
     <component
       :is="multiline"
       :id="label"
@@ -23,13 +31,18 @@
       :value="inputValue"
       :maxlength="maxlength || 524288"
       @input="checkValue"
+      @focus="checkValue"
+      @blur="blurInput"
     />
     <div :class="$style.details">
       <div
         :id="label"
         :class="$style.desc"
       >
-        {{ placeholder }}
+        <span v-if="placeholder">{{ placeholder }}</span>
+        <span v-else>
+          <slot />
+        </span>
       </div>
       <div :class="$style.line" />
       <div
@@ -38,10 +51,7 @@
       >
         {{ inputValue.length }} / {{ counter || maxlength }}
       </div>
-      <div
-        v-if="hint"
-        :class="$style.hint"
-      >
+      <div :class="$style.hint">
         {{ hintValue }}
       </div>
       <div v-if="clearable && dirty">
@@ -51,6 +61,12 @@
         />
       </div>
     </div>
+    <span
+      v-if="suffix"
+      :class="$style.suffix"
+    >
+      {{ suffix }}
+    </span>
   </label>
 </template>
 
@@ -167,6 +183,18 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  suffix: {
+    type: String,
+    default: '',
+  },
+  prefix: {
+    type: String,
+    default: '',
+  },
+  validateOnBlur: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const MapInputVariant = {
@@ -195,17 +223,22 @@ const radius = computed(() => MapInputRadius[props.radius]);
 const color = computed(() => MapInputVariant[props.variant]);
 
 const dirty = ref(false);
-const inputValue = ref('');
 const error = ref(false);
+const focus = ref(false);
+const inputValue = ref('');
 const hintValue = ref('');
+const finnalyValue = ref('');
 
 const checkRules = (rules) => {
+  let flag = false;
   rules.forEach((rule) => {
-    const ruleValue = rule(inputValue.value);
+    if (flag) return;
+    const ruleValue = rule(finnalyValue.value);
 
     if (typeof ruleValue === 'string') {
       hintValue.value = ruleValue;
       error.value = true;
+      flag = true;
     } else {
       hintValue.value = props.hint;
       error.value = false;
@@ -214,36 +247,51 @@ const checkRules = (rules) => {
 };
 
 onMounted(() => {
-  dirty.value = !!props.value;
   inputValue.value = props.value;
   hintValue.value = props.hint;
+  finnalyValue.value = props.prefix + inputValue.value + props.suffix;
+  dirty.value = !!finnalyValue.value;
 
   checkRules(props.rules);
 });
 
 const checkValue = (event) => {
-  dirty.value = !!event.target.value;
   inputValue.value = event.target.value;
+  finnalyValue.value = props.prefix + inputValue.value + props.suffix;
+  dirty.value = !!finnalyValue.value;
+  focus.value = true;
 
   checkRules(props.rules);
+  if (props.validateOnBlur) {
+    error.value = !props.validateOnBlur;
+  }
 };
 
 const clearInput = () => {
   inputValue.value = '';
   dirty.value = false;
 };
+
+const blurInput = () => {
+  focus.value = false;
+  checkRules(props.rules);
+};
 </script>
 
 <style module lang="scss">
   .container {
     position: relative;
+    display: flex;
+    align-items: center;
     width: 100%;
     cursor: text;
+    border-bottom: 1px solid rgb(94 86 105 / 28%);
   }
 
   .disabled {
     pointer-events: none;
     user-select: none;
+    border-bottom: 1px dashed rgb(97 97 97);
     opacity: 0.6;
   }
 
@@ -253,7 +301,7 @@ const clearInput = () => {
     --input-radius: v-bind(radius);
 
     display: block;
-    min-width: 100%;
+    width: 100%;
     min-height: var(--input-size);
     padding: 10px 0;
     font-size: 14px;
@@ -261,7 +309,6 @@ const clearInput = () => {
     color: #616161;
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid rgb(94 86 105 / 28%);
     border-radius: var(--input-radius);
     outline: none;
 
@@ -271,8 +318,8 @@ const clearInput = () => {
     }
   }
 
-  .disabled .input {
-    border-bottom: 1px dashed rgb(97 97 97);
+  .outlined {
+    border: none;
   }
 
   .outlined::after {
@@ -365,6 +412,14 @@ const clearInput = () => {
     color: var(--desc-color);
   }
 
+  .validateOnBlur .input:focus + .details .desc {
+    --desc-color: v-bind(color);
+
+    top: 0;
+    color: var(--desc-color);
+    transform: translateY(-40%) scale(0.75);
+  }
+
   .solo .input:focus + .details .desc {
     display: none;
   }
@@ -397,6 +452,16 @@ const clearInput = () => {
     width: 100%;
   }
 
+  .validateOnBlur .input:focus + .details .line {
+    --line-color: v-bind(color);
+
+    background-color: var(--line-color);
+  }
+
+  .validateOnBlur .input:focus {
+    caret-color: var(--line-color);
+  }
+
   .counter, .hint {
     position: absolute;
     right: 0;
@@ -424,12 +489,23 @@ const clearInput = () => {
   .error .details .hint {
     --hint-color: v-bind(GlobalColors.ERROR);
 
+    bottom: -22px;
     color: var(--hint-color);
+    opacity: 1;
   }
 
   .input:focus + .details .hint {
+    --hint-color: v-bind(GlobalColors.ERROR);
+
     bottom: -22px;
+    color: var(--hint-color);
     opacity: 1;
+  }
+
+  .validateOnBlur .input:focus + .details .hint {
+    bottom: -10px;
+    left: 0;
+    opacity: 0;
   }
 
   .crossIcon {
@@ -447,6 +523,28 @@ const clearInput = () => {
     --icon-color: v-bind(color);
 
     fill: var(--icon-color);
+  }
+
+  .prefix, .suffix {
+    --text-color: v-bind(GlobalColors.DEFAULT);
+
+    font-size: 14px;
+    color: var(--text-color);
+    transition: color 0.2s cubic-bezier(.25,.8,.5,1);
+  }
+
+  .prefix {
+    margin-right: 5px;
+  }
+
+  .suffix {
+    margin-left: 5px;
+  }
+
+  .focus .prefix, .focus .suffix {
+    --text-color: v-bind(color);
+
+    color: var(--text-color);
   }
 
   @keyframes error {

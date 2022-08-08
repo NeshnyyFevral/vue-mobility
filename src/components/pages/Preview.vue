@@ -589,7 +589,7 @@
     </div>
     <div :class="[$style.item, $style.itemInput]">
       <h3 :class="$style.exampleTitle">
-        Input icons
+        Input password
       </h3>
       <div :class="$style.example">
         <UserInput

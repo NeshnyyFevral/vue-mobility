@@ -57,6 +57,7 @@
           :id="label"
           :class="[
             $style.desc,
+            error && $style.error,
             prependInner.icon !== 'span' && $style.moveDesc
           ]"
         >
@@ -511,6 +512,12 @@ const iconClick = (icon) => {
     color: var(--desc-color);
   }
 
+  .input:focus + .error {
+    --desc-color: v-bind(GlobalColors.ERROR);
+
+    color: var(--desc-color);
+  }
+
   .line {
     --line-color: v-bind(color);
 
@@ -525,14 +532,14 @@ const iconClick = (icon) => {
       background-color 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
-  .outlined .details .line {
-    display: none;
-  }
-
-  .error .container .details .line {
+  .error .line {
     --line-color: v-bind(GlobalColors.ERROR);
 
     background-color: var(--line-color);
+  }
+
+  .outlined .details .line {
+    display: none;
   }
 
   .input:focus + .details .line {
@@ -555,6 +562,7 @@ const iconClick = (icon) => {
     right: 0;
     bottom: -22px;
     font-size: 12px;
+    transition: color 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
   .hint {
@@ -568,13 +576,13 @@ const iconClick = (icon) => {
       opacity 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
-  .error .container .details .counter {
+  .error .counter {
     --counter-color: v-bind(GlobalColors.ERROR);
 
     color: var(--counter-color);
   }
 
-  .error .container .details .hint {
+  .error .hint {
     --hint-color: v-bind(GlobalColors.ERROR);
 
     bottom: -22px;
@@ -627,13 +635,17 @@ const iconClick = (icon) => {
     margin-left: 5px;
   }
 
-  .focus .container .prefix, .focus .container .suffix {
+  .focus .container .prefix,
+  .focus .container .suffix {
     --text-color: v-bind(color);
 
     color: var(--text-color);
   }
 
-  .append, .prepend, .appendInner, .prependInner {
+  .append,
+  .prepend,
+  .appendInner,
+  .prependInner {
     width: 30px;
     height: 30px;
     cursor: pointer;

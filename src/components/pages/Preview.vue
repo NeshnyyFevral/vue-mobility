@@ -479,7 +479,7 @@
           :placeholder="'Amount'"
           :size="InputSize.SMALL"
           :class="$style.input"
-          :label="'input 11'"
+          :label="'input 12'"
           :value="'ivan.turovskiy'"
           :prefix="'$$'"
         />
@@ -494,7 +494,7 @@
           :placeholder="'Email address'"
           :size="InputSize.SMALL"
           :class="$style.input"
-          :label="'input 12'"
+          :label="'input 13'"
           :value="''"
           :rules="[rulesEmail.required, rulesEmail.email]"
         />
@@ -509,7 +509,7 @@
           :placeholder="'Email address'"
           :size="InputSize.SMALL"
           :class="$style.input"
-          :label="'input 13'"
+          :label="'input 14'"
           :value="''"
           validate-on-blur
           :rules="[rulesEmail.required, rulesEmail.email]"
@@ -524,7 +524,7 @@
         <UserInput
           :size="InputSize.SMALL"
           :class="$style.input"
-          :label="'input 14'"
+          :label="'input 15'"
           :value="''"
         >
           <div :class="$style.slot">
@@ -535,13 +535,100 @@
         </UserInput>
       </div>
     </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Input progress (in developing...)
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :label="'input 16'"
+          :value="''"
+        />
+      </div>
+    </div>
+    <div :class="[$style.item, $style.itemInput]">
+      <h3 :class="$style.exampleTitle">
+        Input icons
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :label="'input 17'"
+          :value="''"
+          :placeholder="'Prepend'"
+          :prepend="{icon: eyeOn}"
+        />
+        <UserInput
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :label="'input 18'"
+          :value="''"
+          :placeholder="'Prepend inner'"
+          :prepend-inner="{icon: eyeOn}"
+        />
+        <UserInput
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :label="'input 19'"
+          :value="''"
+          :placeholder="'Append inner'"
+          :append-inner="{icon: eyeOn}"
+        />
+        <UserInput
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :label="'input 20'"
+          :value="''"
+          :placeholder="'Append'"
+          :append="{icon: eyeOn}"
+        />
+      </div>
+    </div>
+    <div :class="[$style.item, $style.itemInput]">
+      <h3 :class="$style.exampleTitle">
+        Input icons
+      </h3>
+      <div :class="$style.example">
+        <UserInput
+          :size="InputSize.SMALL"
+          :class="[$style.input, $style.password]"
+          :label="'input 21'"
+          :value="'123'"
+          :rules="rulesPassword"
+          :placeholder="'Your password'"
+          :hint="'At least 8 characters'"
+          :counter="8"
+          :visiable="show1 ? 'text' : 'password'"
+          :append-inner="{icon: show1 ? eyeOff : eyeOn, click() {show1 = !show1}}"
+        />
+        <UserInput
+          :size="InputSize.SMALL"
+          :class="[$style.input, $style.password]"
+          :label="'input 22'"
+          :value="'123'"
+          :rules="rulesPassword"
+          :placeholder="'Your password'"
+          :hint="'At least 8 characters'"
+          :counter="8"
+          :visiable="show2 ? 'text' : 'password'"
+          :append-inner="{icon: show2 ? eyeOff : eyeOn, click() {show2 = !show2}}"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+
 import arrowDown from '@/assets/icons/chevron-down.svg';
 import arrowUp from '@/assets/icons/chevron-up.svg';
 import cross from '@/assets/icons/cross.svg';
+import eyeOff from '@/assets/icons/eye-off.svg';
+import eyeOn from '@/assets/icons/eye-on.svg';
 import Avatar, {
   AvatarCorner, AvatarSize, AvatarTransparency, AvatarVariant,
 } from '@/components/Avatar.vue';
@@ -561,6 +648,9 @@ const rulesEmail = {
   },
 };
 
+const rulesPassword = [(value) => value.length >= 8 || 'min 8 characters'];
+const show1 = ref(true);
+const show2 = ref(false);
 </script>
 
 <style module lang="scss">
@@ -587,14 +677,14 @@ const rulesEmail = {
 
   .item {
     justify-content: center;
-    height: 170px;
+    height: 168px;
     padding: 15px;
     background-color: #fff;
     border-radius: 12px;
   }
 
   .itemInput {
-    height: 260px;
+    height: 280px;
   }
 
   .userButton + .userButton,
@@ -621,5 +711,9 @@ const rulesEmail = {
     width: 16px;
     height: 16px;
     fill: #000;
+  }
+
+  .password + .password {
+    margin-top: 60px;
   }
 </style>

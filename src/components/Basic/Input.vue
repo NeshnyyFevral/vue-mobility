@@ -1,73 +1,107 @@
 <template>
-  <label
-    :for="label"
+  <div
     :class="[
-      $style.container,
-      outlined && $style.outlined,
-      solo && $style.solo,
-      disabled && $style.disabled,
-      readonly && $style.readonly,
-      error && $style.error,
+      $style.root,
       focus && $style.focus,
-      validateOnBlur && $style.validateOnBlur
+      error && $style.error,
     ]"
   >
-    <span
-      v-if="prefix"
-      :class="$style.prefix"
-    >
-      {{ prefix }}
-    </span>
     <component
-      :is="multiline"
-      :id="label"
-      :class="[
-        $style.input,
-        dirty && $style.dirty,
-        shaped && $style.shaped
-      ]"
-      :disabled="disabled"
-      :readonly="readonly"
-      :value="inputValue"
-      :maxlength="maxlength || 524288"
-      @input="checkValue"
-      @focus="checkValue"
-      @blur="blurInput"
+      :is="prepend.icon"
+      v-if="prepend.icon !== 'span'"
+      :class="$style.prepend"
+      @focus="iconClick(prepend)"
     />
-    <div :class="$style.details">
-      <div
-        :id="label"
-        :class="$style.desc"
-      >
-        <span v-if="placeholder">{{ placeholder }}</span>
-        <span v-else>
-          <slot />
-        </span>
-      </div>
-      <div :class="$style.line" />
-      <div
-        v-if="counter || maxlength"
-        :class="$style.counter"
-      >
-        {{ inputValue.length }} / {{ counter || maxlength }}
-      </div>
-      <div :class="$style.hint">
-        {{ hintValue }}
-      </div>
-      <div v-if="clearable && dirty">
-        <cross
-          :class="$style.crossIcon"
-          @click="clearInput"
-        />
-      </div>
-    </div>
-    <span
-      v-if="suffix"
-      :class="$style.suffix"
+    <label
+      :for="label"
+      :class="[
+        $style.container,
+        outlined && $style.outlined,
+        solo && $style.solo,
+        disabled && $style.disabled,
+        readonly && $style.readonly,
+        validateOnBlur && $style.validateOnBlur
+      ]"
     >
-      {{ suffix }}
-    </span>
-  </label>
+      <span
+        v-if="prefix"
+        :class="$style.prefix"
+      >
+        {{ prefix }}
+      </span>
+      <component
+        :is="prependInner.icon"
+        v-if="prependInner.icon !== 'span'"
+        :class="$style.prependInner"
+        @focus="iconClick(prependInner)"
+      />
+      <component
+        :is="multiline"
+        :id="label"
+        :type="visiable"
+        :class="[
+          $style.input,
+          dirty && $style.dirty,
+          shaped && $style.shaped
+        ]"
+        :disabled="disabled"
+        :readonly="readonly"
+        :value="inputValue"
+        :maxlength="maxlength || 524288"
+        @input="checkValue"
+        @focus="checkValue"
+        @blur="blurInput"
+      />
+      <div :class="$style.details">
+        <div
+          :id="label"
+          :class="[
+            $style.desc,
+            prependInner.icon !== 'span' && $style.moveDesc
+          ]"
+        >
+          <span v-if="placeholder">{{ placeholder }}</span>
+          <span v-else>
+            <slot />
+          </span>
+        </div>
+        <div :class="$style.line" />
+        <div
+          v-if="counter || maxlength"
+          :class="$style.counter"
+        >
+          {{ inputValue.length }} / {{ counter || maxlength }}
+        </div>
+        <div :class="$style.hint">
+          {{ hintValue }}
+        </div>
+        <div v-if="clearable && dirty">
+          <cross
+            :class="$style.crossIcon"
+            @click="clearInput"
+          />
+        </div>
+      </div>
+      <span
+        v-if="suffix"
+        :class="$style.suffix"
+      >
+        {{ suffix }}
+      </span>
+      <component
+        :is="appendInner.icon"
+        v-if="appendInner.icon !== 'span'"
+        :class="$style.appendInner"
+        @focus="iconClick(appendInner)"
+      />
+    </label>
+    <component
+      :is="append.icon"
+      v-if="append.icon !== 'span'"
+      :class="$style.append"
+      @focus="iconClick(append)"
+    />
+  </div>
 </template>
 
 <script>
@@ -77,9 +111,9 @@ import cross from '@/assets/icons/cross.svg';
 import GlobalColors from '@/styles/colors';
 
 const InputSizeValue = {
-  SMALL: '40px',
-  NORMAL: '48px',
-  LARGE: '56px',
+  SMALL: '32px',
+  NORMAL: '46px',
+  LARGE: '58px',
 };
 
 const InputRadiusValue = {
@@ -116,6 +150,10 @@ const props = defineProps({
     type: String,
     default: InputVariant.PRIMARY,
     validator: (value) => Object.values(InputVariant).includes(value),
+  },
+  visiable: {
+    type: String,
+    default: 'text',
   },
   placeholder: {
     type: String,
@@ -195,6 +233,34 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  prepend: {
+    type: Object,
+    default: () => ({
+      icon: 'span',
+      click() {},
+    }),
+  },
+  prependInner: {
+    type: Object,
+    default: () => ({
+      icon: 'span',
+      click() {},
+    }),
+  },
+  append: {
+    type: Object,
+    default: () => ({
+      icon: 'span',
+      click() {},
+    }),
+  },
+  appendInner: {
+    type: Object,
+    default: () => ({
+      icon: 'span',
+      click() {},
+    }),
+  },
 });
 
 const MapInputVariant = {
@@ -251,8 +317,6 @@ onMounted(() => {
   hintValue.value = props.hint;
   finnalyValue.value = props.prefix + inputValue.value + props.suffix;
   dirty.value = !!finnalyValue.value;
-
-  checkRules(props.rules);
 });
 
 const checkValue = (event) => {
@@ -276,9 +340,21 @@ const blurInput = () => {
   focus.value = false;
   checkRules(props.rules);
 };
+
+const iconClick = (icon) => {
+  icon.click();
+};
+
 </script>
 
 <style module lang="scss">
+
+  .root {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
   .container {
     position: relative;
     display: flex;
@@ -286,6 +362,13 @@ const blurInput = () => {
     width: 100%;
     cursor: text;
     border-bottom: 1px solid rgb(94 86 105 / 28%);
+    transition: border-color 0.3s cubic-bezier(.25,.8,.5,1);
+  }
+
+  .error .container {
+    --border-color: v-bind(GlobalColors.ERROR);
+
+    border-color: var(--border-color);
   }
 
   .disabled {
@@ -303,7 +386,7 @@ const blurInput = () => {
     display: block;
     width: 100%;
     min-height: var(--input-size);
-    padding: 10px 0;
+    padding: 13px 0 7px;
     font-size: 14px;
     font-weight: 400;
     color: #616161;
@@ -331,16 +414,16 @@ const blurInput = () => {
     border: 1px solid rgb(94 86 105 / 28%);
   }
 
-  .error .input {
-    --input-color: v-bind(GlobalColors.ERROR);
-
-    border-color: var(--input-color);
-  }
-
   .solo .input {
     box-shadow: 0 1px 3px 0 rgb(94 86 105 / 20%),
       0 3px 1px -2px rgb(94 86 105 / 12%),
       0 2px 2px 0 rgb(94 86 105 / 14%);
+  }
+
+  .error .container .input {
+    --input-color: v-bind(GlobalColors.ERROR);
+
+    border-color: var(--input-color);
   }
 
   .outlined .shaped {
@@ -376,6 +459,10 @@ const blurInput = () => {
     transform-origin: top left;
   }
 
+  .moveDesc {
+    left: 30px;
+  }
+
   .outlined .details .desc {
     left: 12px;
   }
@@ -386,7 +473,7 @@ const blurInput = () => {
     transform: translateY(-40%) scale(0.75);
   }
 
-  .error .details .desc {
+  .error .container .details .desc {
     --desc-color: v-bind(GlobalColors.ERROR);
 
     color: var(--desc-color);
@@ -406,12 +493,6 @@ const blurInput = () => {
     display: none;
   }
 
-  .error .input:focus + .details .desc {
-    --desc-color: v-bind(GlobalColors.ERROR);
-
-    color: var(--desc-color);
-  }
-
   .validateOnBlur .input:focus + .details .desc {
     --desc-color: v-bind(color);
 
@@ -424,6 +505,12 @@ const blurInput = () => {
     display: none;
   }
 
+  .error .container .input:focus + .details .desc {
+    --desc-color: v-bind(GlobalColors.ERROR);
+
+    color: var(--desc-color);
+  }
+
   .line {
     --line-color: v-bind(color);
 
@@ -434,14 +521,15 @@ const blurInput = () => {
     height: 3px;
     background-color: var(--line-color);
     transition: width 0.3s cubic-bezier(.25,.8,.5,1),
-      left 0.3s cubic-bezier(.25,.8,.5,1);
+      left 0.3s cubic-bezier(.25,.8,.5,1),
+      background-color 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
   .outlined .details .line {
     display: none;
   }
 
-  .error .details .line {
+  .error .container .details .line {
     --line-color: v-bind(GlobalColors.ERROR);
 
     background-color: var(--line-color);
@@ -480,13 +568,13 @@ const blurInput = () => {
       opacity 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
-  .error .details .counter {
+  .error .container .details .counter {
     --counter-color: v-bind(GlobalColors.ERROR);
 
     color: var(--counter-color);
   }
 
-  .error .details .hint {
+  .error .container .details .hint {
     --hint-color: v-bind(GlobalColors.ERROR);
 
     bottom: -22px;
@@ -495,8 +583,6 @@ const blurInput = () => {
   }
 
   .input:focus + .details .hint {
-    --hint-color: v-bind(GlobalColors.ERROR);
-
     bottom: -22px;
     color: var(--hint-color);
     opacity: 1;
@@ -541,10 +627,43 @@ const blurInput = () => {
     margin-left: 5px;
   }
 
-  .focus .prefix, .focus .suffix {
+  .focus .container .prefix, .focus .container .suffix {
     --text-color: v-bind(color);
 
     color: var(--text-color);
+  }
+
+  .append, .prepend, .appendInner, .prependInner {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: fill 0.2s cubic-bezier(.25,.8,.5,1);
+  }
+
+  .prependInner, .prepend {
+    margin-right: 5px;
+  }
+
+  .appendInner, .append {
+    margin-left: 5px;
+  }
+
+  .focus .prepend,
+  .focus .append,
+  .focus .container .prependInner,
+  .focus .container .appendInner {
+    --icon-color: v-bind(color);
+
+    fill: var(--icon-color);
+  }
+
+  .error .prepend,
+  .error .append,
+  .error .container .prependInner,
+  .error .container .appendInner {
+    --icon-color: v-bind(GlobalColors.ERROR);
+
+    fill: var(--icon-color);
   }
 
   @keyframes error {

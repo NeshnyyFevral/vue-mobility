@@ -537,14 +537,17 @@
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
-        Input progress (in developing...)
+        Input progress
       </h3>
       <div :class="$style.example">
         <UserInput
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 16'"
+          :placeholder="'Progress'"
           :value="''"
+          progress
+          :amount="30"
         />
       </div>
     </div>

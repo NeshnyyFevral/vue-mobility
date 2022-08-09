@@ -4,6 +4,7 @@
       $style.root,
       focus && $style.focus,
       error && $style.error,
+      progress && $style.progress
     ]"
   >
     <component
@@ -58,7 +59,8 @@
           :class="[
             $style.desc,
             error && $style.error,
-            prependInner.icon !== 'span' && $style.moveDesc
+            prependInner.icon !== 'span' && $style.moveDesc,
+            progress && $style.progress
           ]"
         >
           <span v-if="placeholder">{{ placeholder }}</span>
@@ -178,6 +180,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  progress: {
+    type: Boolean,
+    default: false,
+  },
+  amount: {
+    type: Number,
+    default: 0,
+  },
   label: {
     type: String,
     default: '',
@@ -264,6 +274,13 @@ const props = defineProps({
   },
 });
 
+const dirty = ref(false);
+const error = ref(false);
+const focus = ref(false);
+const inputValue = ref('');
+const hintValue = ref('');
+const finnalyValue = ref('');
+
 const MapInputVariant = {
   [InputVariant.ERROR]: GlobalColors.ERROR,
   [InputVariant.PRIMARY]: GlobalColors.PRIMARY,
@@ -288,13 +305,14 @@ const MapInputRadius = {
 const size = computed(() => MapInputSize[props.size]);
 const radius = computed(() => MapInputRadius[props.radius]);
 const color = computed(() => MapInputVariant[props.variant]);
-
-const dirty = ref(false);
-const error = ref(false);
-const focus = ref(false);
-const inputValue = ref('');
-const hintValue = ref('');
-const finnalyValue = ref('');
+const progressWidth = computed(() => `${Math.min(100, (finnalyValue.value.length / props.amount) * 100)}%`);
+const progressColor = computed(
+  () => [
+    GlobalColors.ERROR,
+    GlobalColors.WARNING,
+    GlobalColors.SUCCESS,
+  ][Math.floor(Number.parseInt(progressWidth.value, 10) / 40)],
+);
 
 const checkRules = (rules) => {
   let flag = false;
@@ -325,6 +343,7 @@ const checkValue = (event) => {
   finnalyValue.value = props.prefix + inputValue.value + props.suffix;
   dirty.value = !!finnalyValue.value;
   focus.value = true;
+  if (props.progress) { error.value = (progressColor.value === GlobalColors.ERROR); }
 
   checkRules(props.rules);
   if (props.validateOnBlur) {
@@ -364,6 +383,36 @@ const iconClick = (icon) => {
     cursor: text;
     border-bottom: 1px solid rgb(94 86 105 / 28%);
     transition: border-color 0.3s cubic-bezier(.25,.8,.5,1);
+  }
+
+  .progress .container {
+    --progress-color: v-bind(progressColor);
+    --progress-width: v-bind(progressWidth);
+
+    border: none;
+
+    &::after {
+      position: absolute;
+      bottom: -5px;
+      width: var(--progress-width);
+      height: 6px;
+      content: '';
+      background-color: var(--progress-color);
+      opacity: 1;
+      transition: width 0.5s cubic-bezier(.25,.8,.5,1),
+        background-color 0.5s cubic-bezier(.25,.8,.5,1);
+    }
+
+    &::before {
+      position: absolute;
+      bottom: -5px;
+      width: 100%;
+      height: 6px;
+      content: '';
+      background-color: var(--progress-color);
+      opacity: 0.3;
+      transition: background-color 0.5s cubic-bezier(.25,.8,.5,1);
+    }
   }
 
   .error .container {
@@ -536,6 +585,10 @@ const iconClick = (icon) => {
     --line-color: v-bind(GlobalColors.ERROR);
 
     background-color: var(--line-color);
+  }
+
+  .progress .line {
+    display: none;
   }
 
   .outlined .details .line {

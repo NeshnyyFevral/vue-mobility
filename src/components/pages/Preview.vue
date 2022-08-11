@@ -289,7 +289,7 @@
         <RadioGroup>
           <Radio
             :class="$style.radio"
-            :variant="radioVariant.PRIMARY"
+            :variant="RadioVariant.PRIMARY"
             :value="'radio1'"
             :label="'radio1'"
             :name="'RadioGroup1'"
@@ -297,7 +297,7 @@
           />
           <Radio
             :class="$style.radio"
-            :variant="radioVariant.PRIMARY"
+            :variant="RadioVariant.PRIMARY"
             :value="'radio2'"
             :label="'radio2'"
             :name="'RadioGroup1'"
@@ -309,14 +309,14 @@
         >
           <Radio
             :class="$style.radioColumn"
-            :variant="radioVariant.PRIMARY"
+            :variant="RadioVariant.PRIMARY"
             :value="'radio1'"
             :label="'radio3'"
             :name="'RadioGroup2'"
           />
           <Radio
             :class="$style.radioColumn"
-            :variant="radioVariant.PRIMARY"
+            :variant="RadioVariant.PRIMARY"
             :value="'radio2'"
             :label="'radio4'"
             checked
@@ -332,7 +332,7 @@
       <div :class="$style.example">
         <RadioGroup>
           <Radio
-            v-for="variant in Object.values(radioVariant)"
+            v-for="variant in Object.values(RadioVariant)"
             :key="variant"
             :class="$style.radio"
             :variant="variant"
@@ -352,7 +352,7 @@
         <RadioGroup>
           <Radio
             :class="$style.radio"
-            :variant="radioVariant.PRIMARY"
+            :variant="RadioVariant.PRIMARY"
             :label="'radio5'"
             :name="'RadioGroup4'"
             checked
@@ -365,7 +365,7 @@
           </Radio>
           <Radio
             :class="$style.radio"
-            :variant="radioVariant.PRIMARY"
+            :variant="RadioVariant.PRIMARY"
             :label="'radio6'"
             :name="'RadioGroup4'"
             user-slot
@@ -388,7 +388,7 @@ import Avatar, {
   AvatarCorner, AvatarSize, AvatarTransparency, AvatarVariant,
 } from '@/components/Avatar.vue';
 import UserButton, { ButtonSize, ButtonVariant } from '@/components/Basic/Button.vue';
-import Radio, { radioVariant } from '@/components/Basic/Radio.vue';
+import Radio, { RadioVariant } from '@/components/Basic/Radio.vue';
 import RadioGroup from '@/components/Basic/RadioGroup.vue';
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';

@@ -1,26 +1,20 @@
 <template>
   <label
-    :for="props.label"
+    :for="label"
     :class="$style.container"
   >
     <input
-      :id="props.label"
+      :id="label"
       :class="$style.input"
       :name="props.name"
       type="radio"
-      :checked="props.checked"
+      :checked="checked"
     >
     <span :class="$style.text">
-      <span
-        v-if="props.userSlot"
-        :id="props.label"
-      >
+      <span v-if="userSlot">
         <slot />
       </span>
-      <span
-        v-else
-        :id="props.label"
-      >{{ props.value }}</span>
+      <span v-else>{{ value }}</span>
     </span>
     <span :class="$style.cycle" />
   </label>

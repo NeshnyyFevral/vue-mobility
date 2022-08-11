@@ -547,7 +547,7 @@
           :placeholder="'Progress'"
           :value="''"
           progress
-          :amount="30"
+          :counter="30"
         />
       </div>
     </div>
@@ -562,32 +562,45 @@
           :label="'input 17'"
           :value="''"
           :placeholder="'Prepend'"
-          :prepend="{icon: eyeOn}"
-        />
+        >
+          <template #prepend>
+            <eyeOff :class="$style.prependInputIcon" />
+          </template>
+        </UserInput>
         <UserInput
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 18'"
           :value="''"
           :placeholder="'Prepend inner'"
-          :prepend-inner="{icon: eyeOn}"
-        />
+          move-desc
+        >
+          <template #prependInner>
+            <eyeOn :class="$style.prependInputIcon" />
+          </template>
+        </UserInput>
         <UserInput
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 19'"
           :value="''"
           :placeholder="'Append inner'"
-          :append-inner="{icon: eyeOn}"
-        />
+        >
+          <template #appendInner>
+            <eyeOff :class="$style.appendInputIcon" />
+          </template>
+        </UserInput>
         <UserInput
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 20'"
           :value="''"
           :placeholder="'Append'"
-          :append="{icon: eyeOn}"
-        />
+        >
+          <template #append>
+            <eyeOn :class="$style.appendInputIcon" />
+          </template>
+        </UserInput>
       </div>
     </div>
     <div :class="[$style.item, $style.itemInput]">
@@ -605,8 +618,15 @@
           :hint="'At least 8 characters'"
           :counter="8"
           :visiable="show1 ? 'text' : 'password'"
-          :append-inner="{icon: show1 ? eyeOff : eyeOn, click() {show1 = !show1}}"
-        />
+        >
+          <template #appendInner>
+            <component
+              :is="show1 ? eyeOff : eyeOn"
+              :class="$style.appendInputIcon"
+              @focus="show1 = !show1"
+            />
+          </template>
+        </UserInput>
         <UserInput
           :size="InputSize.SMALL"
           :class="[$style.input, $style.password]"
@@ -617,8 +637,15 @@
           :hint="'At least 8 characters'"
           :counter="8"
           :visiable="show2 ? 'text' : 'password'"
-          :append-inner="{icon: show2 ? eyeOff : eyeOn, click() {show2 = !show2}}"
-        />
+        >
+          <template #appendInner>
+            <component
+              :is="show2 ? eyeOff : eyeOn"
+              :class="$style.appendInputIcon"
+              @focus="show1 = !show1"
+            />
+          </template>
+        </UserInput>
       </div>
     </div>
   </div>
@@ -714,6 +741,21 @@ const show2 = ref(false);
     width: 16px;
     height: 16px;
     fill: #000;
+  }
+
+  .prependInputIcon,
+  .appendInputIcon {
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+  }
+
+  .prependInputIcon {
+    margin-right: 5px;
+  }
+
+  .appendInputIcon {
+    margin-left: 5px;
   }
 
   .password + .password {

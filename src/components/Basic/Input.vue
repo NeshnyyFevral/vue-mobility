@@ -7,12 +7,9 @@
       progress && $style.progress
     ]"
   >
-    <component
-      :is="prepend.icon"
-      v-if="prepend.icon !== 'span'"
-      :class="$style.prepend"
-      @focus="iconClick(prepend)"
-    />
+    <span :class="$style.prepend">
+      <slot name="prepend" />
+    </span>
     <label
       :for="label"
       :class="[
@@ -30,12 +27,9 @@
       >
         {{ prefix }}
       </span>
-      <component
-        :is="prependInner.icon"
-        v-if="prependInner.icon !== 'span'"
-        :class="$style.prependInner"
-        @focus="iconClick(prependInner)"
-      />
+      <span :class="$style.prependInner">
+        <slot name="prependInner" />
+      </span>
       <component
         :is="multiline"
         :id="label"
@@ -59,8 +53,8 @@
           :class="[
             $style.desc,
             error && $style.error,
-            prependInner.icon !== 'span' && $style.moveDesc,
-            progress && $style.progress
+            progress && $style.progress,
+            moveDesc && $style.moveDesc
           ]"
         >
           <span v-if="placeholder">{{ placeholder }}</span>
@@ -70,7 +64,7 @@
         </div>
         <div :class="$style.line" />
         <div
-          v-if="counter || maxlength"
+          v-if="!progress && (counter || maxlength)"
           :class="$style.counter"
         >
           {{ inputValue.length }} / {{ counter || maxlength }}
@@ -91,19 +85,13 @@
       >
         {{ suffix }}
       </span>
-      <component
-        :is="appendInner.icon"
-        v-if="appendInner.icon !== 'span'"
-        :class="$style.appendInner"
-        @focus="iconClick(appendInner)"
-      />
+      <span :class="$style.appendInner">
+        <slot name="appendInner" />
+      </span>
     </label>
-    <component
-      :is="append.icon"
-      v-if="append.icon !== 'span'"
-      :class="$style.append"
-      @focus="iconClick(append)"
-    />
+    <span :class="$style.append">
+      <slot name="append" />
+    </span>
   </div>
 </template>
 
@@ -114,7 +102,7 @@ import cross from '@/assets/icons/cross.svg';
 import GlobalColors from '@/styles/colors';
 
 const InputSizeValue = {
-  SMALL: '32px',
+  SMALL: '40px',
   NORMAL: '46px',
   LARGE: '58px',
 };
@@ -184,10 +172,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  amount: {
-    type: Number,
-    default: 0,
-  },
   label: {
     type: String,
     default: '',
@@ -244,33 +228,9 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  prepend: {
-    type: Object,
-    default: () => ({
-      icon: 'span',
-      click() {},
-    }),
-  },
-  prependInner: {
-    type: Object,
-    default: () => ({
-      icon: 'span',
-      click() {},
-    }),
-  },
-  append: {
-    type: Object,
-    default: () => ({
-      icon: 'span',
-      click() {},
-    }),
-  },
-  appendInner: {
-    type: Object,
-    default: () => ({
-      icon: 'span',
-      click() {},
-    }),
+  moveDesc: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -305,7 +265,7 @@ const MapInputRadius = {
 const size = computed(() => MapInputSize[props.size]);
 const radius = computed(() => MapInputRadius[props.radius]);
 const color = computed(() => MapInputVariant[props.variant]);
-const progressWidth = computed(() => `${Math.min(100, (finnalyValue.value.length / props.amount) * 100)}%`);
+const progressWidth = computed(() => `${Math.min(100, (finnalyValue.value.length / props.counter) * 100)}%`);
 const progressColor = computed(
   () => [
     GlobalColors.ERROR,
@@ -361,9 +321,9 @@ const blurInput = () => {
   checkRules(props.rules);
 };
 
-const iconClick = (icon) => {
+/* const iconClick = (icon) => {
   icon.click();
-};
+}; */
 
 </script>
 
@@ -436,7 +396,7 @@ const iconClick = (icon) => {
     display: block;
     width: 100%;
     min-height: var(--input-size);
-    padding: 13px 0 7px;
+    padding: 13px 0 4px;
     font-size: 14px;
     font-weight: 400;
     color: #616161;
@@ -500,7 +460,6 @@ const iconClick = (icon) => {
     font-weight: 400;
     color: var(--desc-color);
     pointer-events: none;
-    background-color: #fff;
     transition: transform 0.3s cubic-bezier(.25,.8,.5,1),
       scale 0.3s cubic-bezier(.25,.8,.5,1),
       top 0.3s cubic-bezier(.25,.8,.5,1),
@@ -510,17 +469,18 @@ const iconClick = (icon) => {
   }
 
   .moveDesc {
-    left: 30px;
+    left: 34px;
   }
 
   .outlined .details .desc {
     left: 12px;
+    background-color: #fff;
   }
 
   .dirty + .details .desc {
     top: 0;
     color: #616161;
-    transform: translateY(-40%) scale(0.75);
+    transform: translateY(-20%) scale(0.75);
   }
 
   .error .container .details .desc {
@@ -536,7 +496,7 @@ const iconClick = (icon) => {
 
     top: 0;
     color: var(--desc-color);
-    transform: translateY(-40%) scale(0.75);
+    transform: translateY(-20%) scale(0.75);
   }
 
   .solo .dirty + .details .desc {
@@ -675,6 +635,7 @@ const iconClick = (icon) => {
   .prefix, .suffix {
     --text-color: v-bind(GlobalColors.DEFAULT);
 
+    margin-top: 9px;
     font-size: 14px;
     color: var(--text-color);
     transition: color 0.2s cubic-bezier(.25,.8,.5,1);
@@ -699,18 +660,8 @@ const iconClick = (icon) => {
   .prepend,
   .appendInner,
   .prependInner {
-    width: 30px;
-    height: 30px;
     cursor: pointer;
     transition: fill 0.2s cubic-bezier(.25,.8,.5,1);
-  }
-
-  .prependInner, .prepend {
-    margin-right: 5px;
-  }
-
-  .appendInner, .append {
-    margin-left: 5px;
   }
 
   .focus .prepend,

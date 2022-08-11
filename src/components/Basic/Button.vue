@@ -2,9 +2,9 @@
   <button
     :class="[
       $style.button,
-      props.block && $style.buttonBlock,
-      props.outlined && $style.buttonOutlined,
-      props.unlimited && $style.buttonUnlimited
+      block && $style.block,
+      outlined && $style.outlined,
+      unlimited && $style.unlimited
     ]"
     @click="onClick"
   >
@@ -147,26 +147,26 @@ const onClick = (event) => {
     }
   }
 
-  .buttonBlock {
+  .block {
     min-width: 100%;
     text-align: center;
   }
 
-  .buttonOutlined {
+  .outlined {
     --button-color: v-bind(color);
 
     color: var(--button-color);
     border: 1px solid var(--button-color);
   }
 
-  .buttonUnlimited {
+  .unlimited {
     --button-color: v-bind(color);
 
     color: var(--button-color);
   }
 
-  .buttonOutlined,
-  .buttonUnlimited {
+  .outlined,
+  .unlimited {
     background-color: transparent;
     box-shadow: none;
 

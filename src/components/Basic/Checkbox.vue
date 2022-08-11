@@ -1,33 +1,32 @@
 <template>
   <label
-    :for="props.label"
+    :for="label"
     :class="[
       $style.container,
-      props.disabled && $style.disabled
+      disabled && $style.disabled,
     ]"
   >
     <input
-      :id="props.label"
-      :checked="props.value"
+      :id="label"
+      :checked="value"
       :class="$style.input"
-      :disabled="props.disabled"
+      :disabled="disabled"
       type="checkbox"
-      @change="emits('changeValue')"
+      @change="emits('changeValue', $event.target.checked)"
     >
     <span
       :class="[
         $style.text,
-        props.switch && $style.switch
+        props.switch && $style.switch,
       ]"
     >
-      <span v-if="props.toggle">
-        {{ `${props.value.toString()}` }}
-      </span>
-      <span v-else>
+      <checkIcon
+        v-if="!props.switch"
+        :class="$style.icon"
+      />
+      <span>
         <slot />
       </span>
-      <span v-if="props.value">{{ props.trueValue }}</span>
-      <span v-else>{{ props.falseValue }}</span>
     </span>
     <span :class="$style.cycle" />
   </label>
@@ -36,9 +35,10 @@
 <script>
 import { computed } from 'vue';
 
+import checkIcon from '@/assets/icons/check-mark.svg';
 import GlobalColors from '@/styles/colors';
 
-export const checboxVariant = {
+export const ChecboxVariant = {
   PRIMARY: 'primary',
   WARNING: 'warning',
   ERROR: 'error',
@@ -60,10 +60,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  toggle: {
-    type: Boolean,
-    default: false,
-  },
   disabled: {
     type: Boolean,
     default: false,
@@ -74,26 +70,18 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: checboxVariant.DEFAULT,
-    validator: (value) => Object.values(checboxVariant).includes(value),
-  },
-  trueValue: {
-    type: String,
-    default: '',
-  },
-  falseValue: {
-    type: String,
-    default: '',
+    default: ChecboxVariant.DEFAULT,
+    validator: (value) => Object.values(ChecboxVariant).includes(value),
   },
 });
 
 const MapCheckboxVarian = {
-  [checboxVariant.DEFAULT]: GlobalColors.DEFAULT,
-  [checboxVariant.ERROR]: GlobalColors.ERROR,
-  [checboxVariant.INFO]: GlobalColors.INFO,
-  [checboxVariant.PRIMARY]: GlobalColors.PRIMARY,
-  [checboxVariant.SUCCESS]: GlobalColors.SUCCESS,
-  [checboxVariant.WARNING]: GlobalColors.WARNING,
+  [ChecboxVariant.DEFAULT]: GlobalColors.DEFAULT,
+  [ChecboxVariant.ERROR]: GlobalColors.ERROR,
+  [ChecboxVariant.INFO]: GlobalColors.INFO,
+  [ChecboxVariant.PRIMARY]: GlobalColors.PRIMARY,
+  [ChecboxVariant.SUCCESS]: GlobalColors.SUCCESS,
+  [ChecboxVariant.WARNING]: GlobalColors.WARNING,
 };
 
 const color = computed(() => MapCheckboxVarian[props.variant]);
@@ -141,6 +129,7 @@ const color = computed(() => MapCheckboxVarian[props.variant]);
       border: 2.5px var(--switch-color) solid;
       border-radius: 10px;
       opacity: 0.4;
+      transition: background-color 0.3s cubic-bezier(.25,.8,.5,1);
     }
 
     &::after {
@@ -156,7 +145,8 @@ const color = computed(() => MapCheckboxVarian[props.variant]);
       box-shadow: 0 1px 3px 0 rgb(94 86 105 / 20%),
         0 2px 1px -1px rgb(94 86 105 / 12%),
         0 1px 1px 0 rgb(94 86 105 / 14%);
-      transition: transform 0.3s cubic-bezier(.25,.8,.5,1);
+      transition: transform 0.3s cubic-bezier(.25,.8,.5,1),
+        background-color 0.3s cubic-bezier(.25,.8,.5,1);
       transform: translateY(-50%);
     }
   }
@@ -190,6 +180,10 @@ const color = computed(() => MapCheckboxVarian[props.variant]);
     }
   }
 
+  .icon {
+    display: none;
+  }
+
   .input {
     position: absolute;
     z-index: -1;
@@ -199,10 +193,18 @@ const color = computed(() => MapCheckboxVarian[props.variant]);
       --checkbox-color: v-bind(color);
 
       background-color: var(--checkbox-color);
-      background-image: url('@/assets/icons/check-mark.svg');
-      background-repeat: no-repeat;
-      background-size: cover;
       border-color: var(--checkbox-color);
+    }
+
+    &:checked + .text .icon {
+      position: absolute;
+      top: 50%;
+      left: 1.5px;
+      display: block;
+      width: 15px;
+      height: 15px;
+      fill: #fff;
+      transform: translateY(-50%);
     }
 
     &:checked + .text + .cycle {

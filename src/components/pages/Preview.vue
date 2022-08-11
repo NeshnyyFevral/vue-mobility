@@ -290,18 +290,20 @@
           :label="'checkbox 1'"
           :class="$style.checkbox"
           :value="checkboxFirstValue"
-          :variant="checboxVariant.PRIMARY"
-          toggle
+          :variant="ChecboxVariant.PRIMARY"
           @changeValue="checkboxFirstValue = !checkboxFirstValue"
-        />
+        >
+          {{ computedCheckboxFirstValue }}
+        </Checkbox>
         <Checkbox
           :label="'checkbox 2'"
           :class="$style.checkbox"
           :value="checkboxSecondValue"
-          :variant="checboxVariant.PRIMARY"
-          toggle
+          :variant="ChecboxVariant.PRIMARY"
           @changeValue="checkboxSecondValue = !checkboxSecondValue"
-        />
+        >
+          {{ computedCheckboxSecondValue }}
+        </Checkbox>
       </div>
     </div>
     <div :class="$style.item">
@@ -310,7 +312,7 @@
       </h3>
       <div :class="$style.example">
         <Checkbox
-          v-for="variant in Object.values(checboxVariant)"
+          v-for="variant in Object.values(ChecboxVariant)"
           :key="variant"
           :label="`${variant.toString()}Checkbox`"
           :class="$style.checkbox"
@@ -331,8 +333,8 @@
           :label="'onDisabledCheckbox'"
           :class="$style.checkbox"
           :value="true"
+          :variant="ChecboxVariant.PRIMARY"
           disabled
-          :variant="checboxVariant.PRIMARY"
         >
           on disabled
         </Checkbox>
@@ -340,8 +342,8 @@
           :label="'offDisabledCheckbox'"
           :class="$style.checkbox"
           :value="false"
+          :variant="ChecboxVariant.PRIMARY"
           disabled
-          :variant="checboxVariant.PRIMARY"
         >
           off disabled
         </Checkbox>
@@ -356,20 +358,20 @@
           :label="'anotherValueFirst'"
           :class="$style.checkbox"
           :value="checkboxAnotherFirstValue"
-          :true-value="'Верно'"
-          :false-value="'Неверно'"
-          :variant="checboxVariant.PRIMARY"
+          :variant="ChecboxVariant.PRIMARY"
           @changeValue="checkboxAnotherFirstValue = !checkboxAnotherFirstValue"
-        />
+        >
+          {{ anotherValueFirst }}
+        </Checkbox>
         <Checkbox
           :label="'anotherValueSecond'"
           :class="$style.checkbox"
           :value="checkboxAnotherSecondValue"
-          :true-value="'1'"
-          :false-value="'0'"
-          :variant="checboxVariant.SUCCESS"
+          :variant="ChecboxVariant.SUCCESS"
           @changeValue="checkboxAnotherSecondValue = !checkboxAnotherSecondValue"
-        />
+        >
+          {{ anotherValueSecond }}
+        </Checkbox>
       </div>
     </div>
     <div :class="$style.item">
@@ -381,20 +383,22 @@
           :class="$style.checkbox"
           :label="'switch 1'"
           :value="switchFirstValue"
-          toggle
+          :variant="ChecboxVariant.PRIMARY"
           switch
-          :variant="checboxVariant.PRIMARY"
           @changeValue="switchFirstValue = !switchFirstValue"
-        />
+        >
+          {{ computedSwitchFirstValue }}
+        </Checkbox>
         <Checkbox
           :class="$style.checkbox"
           :label="'switch 2'"
           :value="switchSecondValue"
-          toggle
+          :variant="ChecboxVariant.PRIMARY"
           switch
-          :variant="checboxVariant.PRIMARY"
           @changeValue="switchSecondValue = !switchSecondValue"
-        />
+        >
+          {{ computedSwitchSecondValue }}
+        </Checkbox>
       </div>
     </div>
     <div :class="$style.item">
@@ -403,13 +407,13 @@
       </h3>
       <div :class="$style.example">
         <Checkbox
-          v-for="variant in Object.values(checboxVariant)"
+          v-for="variant in Object.values(ChecboxVariant)"
           :key="variant"
           :class="$style.checkbox"
           :label="`${variant.toString()}Switch`"
           :value="mapSwitchColor[variant]"
-          switch
           :variant="variant"
+          switch
           @changeValue="mapSwitchColor[variant] = !mapSwitchColor[variant]"
         >
           {{ variant }}
@@ -425,9 +429,9 @@
           :class="$style.checkbox"
           :label="'switch 3'"
           :value="false"
+          :variant="ChecboxVariant.PRIMARY"
           switch
           disabled
-          :variant="checboxVariant.PRIMARY"
         >
           off disabled
         </Checkbox>
@@ -435,9 +439,9 @@
           :class="$style.checkbox"
           :label="'switch 4'"
           :value="true"
+          :variant="ChecboxVariant.PRIMARY"
           switch
           disabled
-          :variant="checboxVariant.PRIMARY"
         >
           on disabled
         </Checkbox>
@@ -451,16 +455,12 @@
         <Checkbox
           :class="$style.checkbox"
           :label="'switch 5'"
-          :value="switchFlatValue"
-          :true-value="'show'"
-          :false-value="'hide'"
+          :value="switchMergeValue"
+          :variant="ChecboxVariant.PRIMARY"
           switch
-          :variant="checboxVariant.PRIMARY"
-          @changeValue="switchFlatValue = !switchFlatValue"
+          @changeValue="switchMergeValue = !switchMergeValue"
         >
-          <p style="margin-right: 10px;">
-            switch:
-          </p>
+          switch: {{ computedSwitchMergeValue }}
         </Checkbox>
       </div>
     </div>
@@ -468,7 +468,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import arrowDown from '@/assets/icons/chevron-down.svg';
 import arrowUp from '@/assets/icons/chevron-up.svg';
@@ -476,13 +476,16 @@ import Avatar, {
   AvatarCorner, AvatarSize, AvatarTransparency, AvatarVariant,
 } from '@/components/Avatar.vue';
 import UserButton, { ButtonSize, ButtonVariant } from '@/components/Basic/Button.vue';
-import Checkbox, { checboxVariant } from '@/components/Basic/Checkbox.vue';
+import Checkbox, { ChecboxVariant } from '@/components/Basic/Checkbox.vue';
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';
 import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalStat.vue';
 
 const checkboxFirstValue = ref(true);
 const checkboxSecondValue = ref(false);
+
+const computedCheckboxFirstValue = computed(() => (checkboxFirstValue.value === true ? 'false' : 'true'));
+const computedCheckboxSecondValue = computed(() => (checkboxSecondValue.value === true ? 'false' : 'true'));
 
 const mapCheckboxColor = ref({
   primary: true,
@@ -494,10 +497,16 @@ const mapCheckboxColor = ref({
 });
 
 const checkboxAnotherFirstValue = ref(true);
-const checkboxAnotherSecondValue = ref(true);
+const checkboxAnotherSecondValue = ref(false);
+
+const anotherValueFirst = computed(() => (checkboxAnotherFirstValue.value === true ? 'неверно' : 'верно'));
+const anotherValueSecond = computed(() => (checkboxAnotherSecondValue.value === true ? '0' : '1'));
 
 const switchFirstValue = ref(true);
 const switchSecondValue = ref(false);
+
+const computedSwitchFirstValue = computed(() => (switchFirstValue.value === true ? 'false' : 'true'));
+const computedSwitchSecondValue = computed(() => (switchSecondValue.value === true ? 'false' : 'true'));
 
 const mapSwitchColor = ref({
   primary: true,
@@ -508,7 +517,9 @@ const mapSwitchColor = ref({
   info: true,
 });
 
-const switchFlatValue = ref(false);
+const switchMergeValue = ref(false);
+
+const computedSwitchMergeValue = computed(() => (switchMergeValue.value === true ? 'hide' : 'show'));
 </script>
 
 <style module lang="scss">

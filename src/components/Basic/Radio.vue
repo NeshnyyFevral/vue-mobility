@@ -31,7 +31,7 @@ import { computed } from 'vue';
 
 import GlobalColors from '@/styles/colors';
 
-export const radioVariant = {
+export const RadioVariant = {
   PRIMARY: 'primary',
   WARNING: 'warning',
   ERROR: 'error',
@@ -61,8 +61,8 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: radioVariant.DEFAULT,
-    validator: (value) => Object.values(radioVariant).includes(value),
+    default: RadioVariant.DEFAULT,
+    validator: (value) => Object.values(RadioVariant).includes(value),
   },
   checked: {
     type: Boolean,
@@ -71,12 +71,12 @@ const props = defineProps({
 });
 
 const MapRadioVarian = {
-  [radioVariant.DEFAULT]: GlobalColors.DEFAULT,
-  [radioVariant.ERROR]: GlobalColors.ERROR,
-  [radioVariant.INFO]: GlobalColors.INFO,
-  [radioVariant.PRIMARY]: GlobalColors.PRIMARY,
-  [radioVariant.SUCCESS]: GlobalColors.SUCCESS,
-  [radioVariant.WARNING]: GlobalColors.WARNING,
+  [RadioVariant.DEFAULT]: GlobalColors.DEFAULT,
+  [RadioVariant.ERROR]: GlobalColors.ERROR,
+  [RadioVariant.INFO]: GlobalColors.INFO,
+  [RadioVariant.PRIMARY]: GlobalColors.PRIMARY,
+  [RadioVariant.SUCCESS]: GlobalColors.SUCCESS,
+  [RadioVariant.WARNING]: GlobalColors.WARNING,
 };
 
 const color = computed(() => MapRadioVarian[props.variant]);

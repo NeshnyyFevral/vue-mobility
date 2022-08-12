@@ -87,13 +87,13 @@ const color = computed(() => MapRadioVarian[props.variant]);
   }
 
   .text {
-    --radio-color: v-bind(GlobalColors.DEFAULT);
+    --text-color: v-bind(GlobalColors.DEFAULT);
 
     position: relative;
     display: flex;
     align-items: center;
     font-size: 16px;
-    color: var(--radio-color);
+    color: var(--text-color);
 
     &::before {
       display: inline-block;
@@ -102,7 +102,7 @@ const color = computed(() => MapRadioVarian[props.variant]);
       padding: 0;
       margin-right: 10px;
       content: '';
-      border: 2px var(--radio-color) solid;
+      border: 2px var(--text-color) solid;
       border-radius: 50%;
     }
 
@@ -124,7 +124,7 @@ const color = computed(() => MapRadioVarian[props.variant]);
   }
 
   .cycle {
-    --radio-color: v-bind(GlobalColors.DEFAULT);
+    --cycle-color: v-bind(GlobalColors.DEFAULT);
 
     position: absolute;
     top: -11px;
@@ -133,7 +133,7 @@ const color = computed(() => MapRadioVarian[props.variant]);
     width: 40px;
     height: 40px;
     content: '';
-    background-color: var(--radio-color);
+    background-color: var(--cycle-color);
     border-radius: 50%;
     opacity: 0;
     transition: opacity 0.2s linear;
@@ -149,22 +149,16 @@ const color = computed(() => MapRadioVarian[props.variant]);
     opacity: 0;
 
     &:checked + .text::before {
-      --radio-color: v-bind(color);
-
       border-color: var(--radio-color);
     }
 
     &:checked + .text::after {
-      --radio-color: v-bind(color);
-
       background-color: var(--radio-color);
       border-color: var(--radio-color);
       opacity: 1;
     }
 
     &:checked + .text + .cycle {
-      --radio-color: v-bind(color);
-
       background-color: var(--radio-color);
     }
   }

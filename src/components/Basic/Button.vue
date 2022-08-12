@@ -126,8 +126,6 @@ const onClick = (event) => {
     transition: box-shadow 0.25s linear, opacity 0.25s linear;
 
     &::after {
-      --button-color: v-bind(color);
-
       position: absolute;
       top: 0;
       right: 0;
@@ -153,15 +151,11 @@ const onClick = (event) => {
   }
 
   .outlined {
-    --button-color: v-bind(color);
-
     color: var(--button-color);
     border: 1px solid var(--button-color);
   }
 
   .unlimited {
-    --button-color: v-bind(color);
-
     color: var(--button-color);
   }
 

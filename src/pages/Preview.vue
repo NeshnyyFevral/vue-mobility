@@ -95,7 +95,7 @@
             </span>
           </template>
           <template #icon>
-            <arrowUp :class="$style.iconMoney" />
+            <ArrowUp :class="$style.iconMoney" />
           </template>
           <template #after>
             <span :class="$style.afterMoney">
@@ -123,7 +123,7 @@
             </span>
           </template>
           <template #icon>
-            <arrowDown :class="$style.iconMoney" />
+            <ArrowDown :class="$style.iconMoney" />
           </template>
           <template #after>
             <span :class="$style.afterMoney">
@@ -330,8 +330,8 @@
 </template>
 
 <script setup>
-import arrowDown from '@/assets/icons/chevron-down.svg';
-import arrowUp from '@/assets/icons/chevron-up.svg';
+import ArrowDown from '@/assets/icons/chevron-down.svg';
+import ArrowUp from '@/assets/icons/chevron-up.svg';
 import Avatar, {
   AvatarCorner,
   AvatarSize,

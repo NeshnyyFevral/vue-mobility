@@ -73,7 +73,7 @@
           {{ hintValue }}
         </div>
         <div v-if="clearable && dirty">
-          <cross
+          <Cross
             :class="$style.crossIcon"
             @click="clearInput"
           />
@@ -98,7 +98,7 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 
-import cross from '@/assets/icons/cross.svg';
+import Cross from '@/assets/icons/cross.svg';
 import GlobalColors from '@/styles/colors';
 
 const InputSizeValue = {
@@ -275,15 +275,15 @@ const progressColor = computed(
 );
 
 const checkRules = (rules) => {
-  let flag = false;
+  let fail = false;
   rules.forEach((rule) => {
-    if (flag) return;
+    if (fail) return;
     const ruleValue = rule(finnalyValue.value);
 
     if (typeof ruleValue === 'string') {
       hintValue.value = ruleValue;
       error.value = true;
-      flag = true;
+      fail = true;
     } else {
       hintValue.value = props.hint;
       error.value = false;
@@ -303,9 +303,13 @@ const checkValue = (event) => {
   finnalyValue.value = props.prefix + inputValue.value + props.suffix;
   dirty.value = !!finnalyValue.value;
   focus.value = true;
-  if (props.progress) { error.value = (progressColor.value === GlobalColors.ERROR); }
+
+  if (props.progress) {
+    error.value = (progressColor.value === GlobalColors.ERROR);
+  }
 
   checkRules(props.rules);
+
   if (props.validateOnBlur) {
     error.value = !props.validateOnBlur;
   }
@@ -320,11 +324,6 @@ const blurInput = () => {
   focus.value = false;
   checkRules(props.rules);
 };
-
-/* const iconClick = (icon) => {
-  icon.click();
-}; */
-
 </script>
 
 <style module lang="scss">
@@ -376,9 +375,9 @@ const blurInput = () => {
   }
 
   .error .container {
-    --border-color: v-bind(GlobalColors.ERROR);
+    --error-color: v-bind(GlobalColors.ERROR);
 
-    border-color: var(--border-color);
+    border-color: var(--error-color);
   }
 
   .disabled {
@@ -431,9 +430,7 @@ const blurInput = () => {
   }
 
   .error .container .input {
-    --input-color: v-bind(GlobalColors.ERROR);
-
-    border-color: var(--input-color);
+    border-color: var(--error-color);
   }
 
   .outlined .shaped {
@@ -484,9 +481,7 @@ const blurInput = () => {
   }
 
   .error .container .details .desc {
-    --desc-color: v-bind(GlobalColors.ERROR);
-
-    color: var(--desc-color);
+    color: var(--error-color);
     animation: error 0.5s linear;
     animation-delay: 0.2s;
   }
@@ -504,11 +499,9 @@ const blurInput = () => {
   }
 
   .validateOnBlur .input:focus + .details .desc {
-    --desc-color: v-bind(color);
-
     top: 0;
     color: var(--desc-color);
-    transform: translateY(-40%) scale(0.75);
+    transform: translateY(-20%) scale(0.75);
   }
 
   .solo .input:focus + .details .desc {
@@ -516,15 +509,11 @@ const blurInput = () => {
   }
 
   .error .container .input:focus + .details .desc {
-    --desc-color: v-bind(GlobalColors.ERROR);
-
-    color: var(--desc-color);
+    color: var(--error-color);
   }
 
   .input:focus + .error {
-    --desc-color: v-bind(GlobalColors.ERROR);
-
-    color: var(--desc-color);
+    color: var(--error-color);
   }
 
   .line {
@@ -542,9 +531,7 @@ const blurInput = () => {
   }
 
   .error .line {
-    --line-color: v-bind(GlobalColors.ERROR);
-
-    background-color: var(--line-color);
+    background-color: var(--error-color);
   }
 
   .progress .line {
@@ -561,8 +548,6 @@ const blurInput = () => {
   }
 
   .validateOnBlur .input:focus + .details .line {
-    --line-color: v-bind(color);
-
     background-color: var(--line-color);
   }
 
@@ -590,9 +575,7 @@ const blurInput = () => {
   }
 
   .error .counter {
-    --counter-color: v-bind(GlobalColors.ERROR);
-
-    color: var(--counter-color);
+    color: var(--error-color);
   }
 
   .error .hint {
@@ -677,9 +660,7 @@ const blurInput = () => {
   .error .append,
   .error .container .prependInner,
   .error .container .appendInner {
-    --icon-color: v-bind(GlobalColors.ERROR);
-
-    fill: var(--icon-color);
+    fill: var(--error-color);
   }
 
   @keyframes error {

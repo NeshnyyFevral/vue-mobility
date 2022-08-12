@@ -50,7 +50,7 @@
             </span>
           </template>
           <template #icon>
-            <arrowUp :class="$style.iconMoney" />
+            <ArrowUp :class="$style.iconMoney" />
           </template>
           <template #after>
             <span :class="$style.afterMoney">
@@ -78,7 +78,7 @@
             </span>
           </template>
           <template #icon>
-            <arrowDown :class="$style.iconMoney" />
+            <ArrowDown :class="$style.iconMoney" />
           </template>
           <template #after>
             <span :class="$style.afterMoney">
@@ -528,9 +528,9 @@
           :value="''"
         >
           <div :class="$style.slot">
-            <cross :class="$style.icon" />
+            <Cross :class="$style.icon" />
             <span>cross</span>
-            <cross :class="$style.icon" />
+            <Cross :class="$style.icon" />
           </div>
         </UserInput>
       </div>
@@ -564,7 +564,7 @@
           :placeholder="'Prepend'"
         >
           <template #prepend>
-            <eyeOff :class="$style.prependInputIcon" />
+            <EyeOff :class="$style.prependInputIcon" />
           </template>
         </UserInput>
         <UserInput
@@ -576,7 +576,7 @@
           move-desc
         >
           <template #prependInner>
-            <eyeOn :class="$style.prependInputIcon" />
+            <EyeOn :class="$style.prependInputIcon" />
           </template>
         </UserInput>
         <UserInput
@@ -587,7 +587,7 @@
           :placeholder="'Append inner'"
         >
           <template #appendInner>
-            <eyeOff :class="$style.appendInputIcon" />
+            <EyeOff :class="$style.appendInputIcon" />
           </template>
         </UserInput>
         <UserInput
@@ -598,7 +598,7 @@
           :placeholder="'Append'"
         >
           <template #append>
-            <eyeOn :class="$style.appendInputIcon" />
+            <EyeOn :class="$style.appendInputIcon" />
           </template>
         </UserInput>
       </div>
@@ -621,7 +621,7 @@
         >
           <template #appendInner>
             <component
-              :is="show1 ? eyeOff : eyeOn"
+              :is="show1 ? EyeOff : EyeOn"
               :class="$style.appendInputIcon"
               @focus="show1 = !show1"
             />
@@ -640,9 +640,9 @@
         >
           <template #appendInner>
             <component
-              :is="show2 ? eyeOff : eyeOn"
+              :is="show2 ? EyeOff : EyeOn"
               :class="$style.appendInputIcon"
-              @focus="show1 = !show1"
+              @focus="show2 = !show2"
             />
           </template>
         </UserInput>
@@ -654,11 +654,11 @@
 <script setup>
 import { ref } from 'vue';
 
-import arrowDown from '@/assets/icons/chevron-down.svg';
-import arrowUp from '@/assets/icons/chevron-up.svg';
-import cross from '@/assets/icons/cross.svg';
-import eyeOff from '@/assets/icons/eye-off.svg';
-import eyeOn from '@/assets/icons/eye-on.svg';
+import ArrowDown from '@/assets/icons/chevron-down.svg';
+import ArrowUp from '@/assets/icons/chevron-up.svg';
+import Cross from '@/assets/icons/cross.svg';
+import EyeOff from '@/assets/icons/eye-off.svg';
+import EyeOn from '@/assets/icons/eye-on.svg';
 import Avatar, {
   AvatarCorner, AvatarSize, AvatarTransparency, AvatarVariant,
 } from '@/components/Avatar.vue';

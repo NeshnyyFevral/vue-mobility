@@ -17,11 +17,11 @@
     <span
       :class="[
         $style.text,
-        props.switch && $style.switch,
+        toggle && $style.toggle,
       ]"
     >
-      <checkIcon
-        v-if="!props.switch"
+      <CheckIcon
+        v-if="!toggle"
         :class="$style.icon"
       />
       <span>
@@ -35,7 +35,7 @@
 <script>
 import { computed } from 'vue';
 
-import checkIcon from '@/assets/icons/check-mark.svg';
+import CheckIcon from '@/assets/icons/check-mark.svg';
 import GlobalColors from '@/styles/colors';
 
 export const ChecboxVariant = {
@@ -64,7 +64,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  switch: {
+  toggle: {
     type: Boolean,
     default: false,
   },
@@ -114,19 +114,17 @@ const color = computed(() => MapCheckboxVarian[props.variant]);
     }
   }
 
-  .switch {
+  .toggle {
     position: relative;
 
     &::before {
-      --switch-color: v-bind(GlobalColors.DEFAULT);
-
       display: inline-block;
       width: 38px;
       height: 14px;
       margin-right: 10px;
       content: '';
-      background-color: var(--switch-color);
-      border: 2.5px var(--switch-color) solid;
+      background-color: var(--checkbox-color);
+      border: 2.5px var(--checkbox-color) solid;
       border-radius: 10px;
       opacity: 0.4;
       transition: background-color 0.3s cubic-bezier(.25,.8,.5,1);
@@ -152,7 +150,7 @@ const color = computed(() => MapCheckboxVarian[props.variant]);
   }
 
   .cycle {
-    --checkbox-color: v-bind(GlobalColors.DEFAULT);
+    --cycle-color: v-bind(GlobalColors.DEFAULT);
 
     position: absolute;
     top: -11px;
@@ -161,7 +159,7 @@ const color = computed(() => MapCheckboxVarian[props.variant]);
     width: 40px;
     height: 40px;
     content: '';
-    background-color: var(--checkbox-color);
+    background-color: var(--cycle-color);
     border-radius: 50%;
     opacity: 0;
     transition: opacity 0.2s linear, transform 0.3s cubic-bezier(.25,.8,.5,1);
@@ -208,42 +206,33 @@ const color = computed(() => MapCheckboxVarian[props.variant]);
     }
 
     &:checked + .text + .cycle {
-      --checkbox-color: v-bind(color);
+      --cycle-color: v-bind(color);
 
+      background-color: var(--cycle-color);
+    }
+
+    &:checked + .toggle::before {
       background-color: var(--checkbox-color);
     }
 
-    &:checked + .switch::before {
-      --checkbox-color: v-bind(color);
-
-      background-color: var(--checkbox-color);
-      background-image: none;
-    }
-
-    &:checked + .switch::after {
+    &:checked + .toggle::after {
       --checkbox-color: v-bind(color);
 
       background-color: var(--checkbox-color);
       transform: translate3d(18px, -50%, 0);
     }
 
-    &:checked + .switch + .cycle {
-      --checkbox-color: v-bind(color);
-
-      background-color: var(--checkbox-color);
+    &:checked + .toggle + .cycle {
+      background-color: var(--cycle-color);
       transform: translateX(18px);
     }
   }
 
   .disabled .input:checked + .text::before {
-    --checkbox-color: v-bind(GlobalColors.DEFAULT);
-
     background-color: var(--checkbox-color);
   }
 
-  .disabled .input:checked + .switch::before {
-    --switch-color: v-bind(color);
-
-    background-color: var(--switch-color);
+  .disabled .input:checked + .toggle::before {
+    background-color: var(--checkbox-color);
   }
 </style>

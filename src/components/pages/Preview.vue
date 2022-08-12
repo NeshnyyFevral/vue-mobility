@@ -50,7 +50,7 @@
             </span>
           </template>
           <template #icon>
-            <arrowUp :class="$style.iconMoney" />
+            <ArrowUp :class="$style.iconMoney" />
           </template>
           <template #after>
             <span :class="$style.afterMoney">
@@ -78,7 +78,7 @@
             </span>
           </template>
           <template #icon>
-            <arrowDown :class="$style.iconMoney" />
+            <ArrowDown :class="$style.iconMoney" />
           </template>
           <template #after>
             <span :class="$style.afterMoney">
@@ -384,7 +384,7 @@
           :label="'switch 1'"
           :value="switchFirstValue"
           :variant="ChecboxVariant.PRIMARY"
-          switch
+          toggle
           @changeValue="switchFirstValue = !switchFirstValue"
         >
           {{ computedSwitchFirstValue }}
@@ -394,7 +394,7 @@
           :label="'switch 2'"
           :value="switchSecondValue"
           :variant="ChecboxVariant.PRIMARY"
-          switch
+          toggle
           @changeValue="switchSecondValue = !switchSecondValue"
         >
           {{ computedSwitchSecondValue }}
@@ -413,7 +413,7 @@
           :label="`${variant.toString()}Switch`"
           :value="mapSwitchColor[variant]"
           :variant="variant"
-          switch
+          toggle
           @changeValue="mapSwitchColor[variant] = !mapSwitchColor[variant]"
         >
           {{ variant }}
@@ -430,7 +430,7 @@
           :label="'switch 3'"
           :value="false"
           :variant="ChecboxVariant.PRIMARY"
-          switch
+          toggle
           disabled
         >
           off disabled
@@ -440,7 +440,7 @@
           :label="'switch 4'"
           :value="true"
           :variant="ChecboxVariant.PRIMARY"
-          switch
+          toggle
           disabled
         >
           on disabled
@@ -457,7 +457,7 @@
           :label="'switch 5'"
           :value="switchMergeValue"
           :variant="ChecboxVariant.PRIMARY"
-          switch
+          toggle
           @changeValue="switchMergeValue = !switchMergeValue"
         >
           switch: {{ computedSwitchMergeValue }}
@@ -470,8 +470,8 @@
 <script setup>
 import { computed, ref } from 'vue';
 
-import arrowDown from '@/assets/icons/chevron-down.svg';
-import arrowUp from '@/assets/icons/chevron-up.svg';
+import ArrowDown from '@/assets/icons/chevron-down.svg';
+import ArrowUp from '@/assets/icons/chevron-up.svg';
 import Avatar, {
   AvatarCorner, AvatarSize, AvatarTransparency, AvatarVariant,
 } from '@/components/Avatar.vue';
@@ -559,6 +559,6 @@ const computedSwitchMergeValue = computed(() => (switchMergeValue.value === true
   }
 
   .moneyStat + .moneyStat {
-    margin-left: 10px;
+    margin-left: 7px;
   }
 </style>

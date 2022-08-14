@@ -1,7 +1,7 @@
 import { createRouter as _createRouter, createWebHashHistory } from 'vue-router';
 
-import Home from '@/components/pages/Home.vue';
-import Preview from '@/components/pages/Preview.vue';
+import Home from '@/pages/Home.vue';
+import Preview from '@/pages/Preview.vue';
 
 export default function createRouter() {
   return _createRouter({

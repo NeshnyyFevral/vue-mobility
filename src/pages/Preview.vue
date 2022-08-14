@@ -326,6 +326,103 @@
         </Avatar>
       </div>
     </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Radio direction
+      </h3>
+      <div :class="$style.example">
+        <RadioGroup>
+          <Radio
+            :class="$style.radio"
+            :variant="RadioVariant.PRIMARY"
+            :value="'radio1'"
+            :label="'radio1'"
+            :name="'RadioGroup1'"
+            checked
+          />
+          <Radio
+            :class="$style.radio"
+            :variant="RadioVariant.PRIMARY"
+            :value="'radio2'"
+            :label="'radio2'"
+            :name="'RadioGroup1'"
+          />
+        </RadioGroup>
+        <RadioGroup
+          :class="$style.radioGroupColumn"
+          column
+        >
+          <Radio
+            :class="$style.radioColumn"
+            :variant="RadioVariant.PRIMARY"
+            :value="'radio1'"
+            :label="'radio3'"
+            :name="'RadioGroup2'"
+          />
+          <Radio
+            :class="$style.radioColumn"
+            :variant="RadioVariant.PRIMARY"
+            :value="'radio2'"
+            :label="'radio4'"
+            checked
+            :name="'RadioGroup2'"
+          />
+        </RadioGroup>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Radio colors
+      </h3>
+      <div :class="$style.example">
+        <RadioGroup>
+          <Radio
+            v-for="variant in Object.values(RadioVariant)"
+            :key="variant"
+            :class="$style.radio"
+            :variant="variant"
+            :value="`${variant.toString()}`"
+            :label="`${variant.toString()}`"
+            :name="'RadioGroup3'"
+            checked
+          />
+        </RadioGroup>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Radio slot
+      </h3>
+      <div :class="$style.example">
+        <RadioGroup>
+          <Radio
+            :class="$style.radio"
+            :variant="RadioVariant.PRIMARY"
+            :label="'radio5'"
+            :name="'RadioGroup4'"
+            checked
+            user-slot
+          >
+            <p>
+              radio
+              <strong style="color: blueviolet;"> slot 1</strong>
+            </p>
+          </Radio>
+          <Radio
+            :class="$style.radio"
+            :variant="RadioVariant.PRIMARY"
+            :label="'radio6'"
+            :name="'RadioGroup4'"
+            user-slot
+          >
+            <p>
+              radio
+              <strong style="color: red;"> slot 2</strong>
+            </p>
+          </Radio>
+        </RadioGroup>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -342,6 +439,10 @@ import UserButton, {
   ButtonSize,
   ButtonVariant,
 } from '@/components/Basic/Button.vue';
+import Radio, {
+  RadioVariant,
+} from '@/components/Basic/Radio.vue';
+import RadioGroup from '@/components/Basic/RadioGroup.vue';
 import Chip, {
   ChipSize,
   ChipVariant,
@@ -393,7 +494,24 @@ import TotalStat, {
     margin-left: 20px;
   }
 
-  .moneyStat + .moneyStat {
+  .moneyStat + .moneyStat,
+  .radio + .radio {
     margin-left: 10px;
+  }
+
+  .radioGroupColumn {
+    position: relative;
+    margin-left: 30px;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: -15px;
+      display: inline-block;
+      width: 1.5px;
+      height: 100%;
+      content: '';
+      background-color: #616161;
+    }
   }
 </style>

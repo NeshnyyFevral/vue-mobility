@@ -616,7 +616,7 @@
           :size="size"
           :radius="InputRadius.DEFAULT"
           :class="$style.input"
-          :multiline="'input'"
+          :tag="'input'"
           :label="`${size.toString()}Size`"
           outlined
         />
@@ -634,7 +634,7 @@
           :size="InputSize.SMALL"
           :radius="radius"
           :class="$style.input"
-          :multiline="'input'"
+          :tag="'input'"
           :label="`${radius.toString()}Radius`"
           outlined
         />
@@ -882,7 +882,7 @@
           :placeholder="'Your password'"
           :hint="'At least 8 characters'"
           :counter="8"
-          :visiable="show1 ? 'text' : 'password'"
+          :type="show1 ? 'text' : 'password'"
         >
           <template #appendInner>
             <component
@@ -901,7 +901,7 @@
           :placeholder="'Your password'"
           :hint="'At least 8 characters'"
           :counter="8"
-          :visiable="show2 ? 'text' : 'password'"
+          :type="show2 ? 'text' : 'password'"
         >
           <template #appendInner>
             <component

@@ -31,9 +31,9 @@
         <slot name="prependInner" />
       </span>
       <component
-        :is="multiline"
+        :is="tag"
         :id="label"
-        :type="visiable"
+        :type="type"
         :class="[
           $style.input,
           dirty && $style.dirty,
@@ -142,7 +142,7 @@ const props = defineProps({
     default: InputVariant.PRIMARY,
     validator: (value) => Object.values(InputVariant).includes(value),
   },
-  visiable: {
+  type: {
     type: String,
     default: 'text',
   },
@@ -160,7 +160,7 @@ const props = defineProps({
     default: InputRadius.DEFAULT,
     validator: (value) => Object.values(InputRadius).includes(value),
   },
-  multiline: {
+  tag: {
     type: String,
     default: 'input',
   },

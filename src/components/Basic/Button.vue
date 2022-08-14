@@ -69,7 +69,6 @@ const size = computed(() => MapButtonSizes[props.size]);
     --button-color: v-bind(color);
     --button-size: v-bind(size);
 
-    display: block;
     padding: var(--button-size);
     font-weight: 600;
     color: #fff;

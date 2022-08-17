@@ -4,7 +4,3 @@
     Preview
   </router-link>
 </template>
-
-<script setup>
-
-</script>

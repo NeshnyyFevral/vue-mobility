@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import Cross from '@/assets/icons/cross.svg';
 import GlobalColors from '@/styles/colors';
@@ -234,12 +234,12 @@ const props = defineProps({
   },
 });
 
-const dirty = ref(false);
-const error = ref(false);
+const inputValue = ref(props.value);
+const hintValue = ref(props.hint);
+const finnalyValue = ref(props.prefix + inputValue.value + props.suffix);
 const focus = ref(false);
-const inputValue = ref('');
-const hintValue = ref('');
-const finnalyValue = ref('');
+const error = ref(false);
+const dirty = ref(!!finnalyValue.value);
 
 const MapInputVariant = {
   [InputVariant.ERROR]: GlobalColors.ERROR,
@@ -290,13 +290,6 @@ const checkRules = (rules) => {
     }
   });
 };
-
-onMounted(() => {
-  inputValue.value = props.value;
-  hintValue.value = props.hint;
-  finnalyValue.value = props.prefix + inputValue.value + props.suffix;
-  dirty.value = !!finnalyValue.value;
-});
 
 const checkValue = (event) => {
   inputValue.value = event.target.value;

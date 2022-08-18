@@ -10,7 +10,12 @@
     </button>
     <div :class="$style.right">
       <button :class="$style.languageButton">
-        English
+        <img
+          :src="languageIcon"
+          :alt="`${language}`"
+          :class="$style.languageIcon"
+        >
+        {{ language }}
       </button>
       <button :class="$style.button">
         <ThemeDarkIcon :class="$style.theme" />
@@ -34,19 +39,40 @@
   </div>
 </template>
 
-<script setup>
+<script>
+import { computed } from 'vue';
+
 import NotifyIcon from '@/assets/icons/notification.svg';
 import SearchIcon from '@/assets/icons/search.svg';
 import ThemeDarkIcon from '@/assets/icons/themeDark.svg';
 import Avatar, { AvatarCorner, AvatarSize } from '@/components/Avatar.vue';
 import GlobalColors from '@/styles/colors';
 
-defineProps({
+export const LanguageVariant = {
+  ENGLISH: 'English',
+  FRENCH: 'French',
+  ARABIC: 'Arabic',
+};
+</script>
+
+<script setup>
+const props = defineProps({
   active: {
     type: Boolean,
     default: false,
   },
+  language: {
+    type: String,
+    default: LanguageVariant.ENGLISH,
+    validator: (value) => Object.values(LanguageVariant).includes(value),
+  },
+  width: {
+    type: String,
+    required: true,
+  },
 });
+
+const languageIcon = computed(() => new URL(`../assets/icons/${props.language}.png`, import.meta.url));
 </script>
 
 <style module lang="scss">
@@ -56,6 +82,10 @@ defineProps({
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 10px 0;
+    margin-bottom: 40px;
+    transition: padding 0.2s cubic-bezier(.25,.8,.5,1),
+      background-color 0.2s cubic-bezier(.25,.8,.5,1);
   }
 
   .right {
@@ -97,18 +127,15 @@ defineProps({
     cursor: pointer;
     background: transparent;
     border: none;
+  }
 
-    &::before {
-      position: absolute;
-      top: 50%;
-      left: -27px;
-      width: 22px;
-      height: 14px;
-      content: '';
-      background-image: url('@/assets/icons/flagUSA.png');
-      background-size: cover;
-      transform: translateY(-50%);
-    }
+  .languageIcon {
+    position: absolute;
+    top: 50%;
+    left: -27px;
+    width: 22px;
+    height: 14px;
+    transform: translateY(-50%);
   }
 
   .search,
@@ -116,6 +143,20 @@ defineProps({
   .notify {
     width: 23px;
     height: 23px;
+  }
+
+  .active {
+    --header-width: v-bind(props.width);
+
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: var(--header-width);
+    padding: 10px 20px;
+    background-color: rgba($color: #fff, $alpha: 85%);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 8px -4px rgb(94 86 105 / 42%);
+    backdrop-filter: blur(8px);
   }
 
 </style>

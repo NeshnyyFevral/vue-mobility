@@ -16,6 +16,7 @@ import GlobalColors from '@/styles/colors';
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 10px;
     color: var(--text-color);
   }
 </style>

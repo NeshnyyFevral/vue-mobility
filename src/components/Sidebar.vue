@@ -15,11 +15,72 @@
         @click="switchSidebar"
       />
     </div>
+    <div :class="$style.content">
+      <ListGroup :title="'Dashboards'">
+        <template #prepend>
+          <DashboardsIcon />
+        </template>
+        <SidebarItem default-icon>
+          CRM
+        </SidebarItem>
+        <SidebarItem default-icon>
+          Analytics
+        </SidebarItem>
+        <SidebarItem default-icon>
+          eCommerce
+        </SidebarItem>
+      </ListGroup>
+      <ListGroup :title="'Dashboards'">
+        <template #prepend>
+          <DashboardsIcon />
+        </template>
+        <SidebarItem default-icon>
+          CRM
+        </SidebarItem>
+        <SidebarItem default-icon>
+          Analytics
+        </SidebarItem>
+        <SidebarItem default-icon>
+          eCommerce
+        </SidebarItem>
+      </ListGroup>
+      <ListGroup :title="'Dashboards'">
+        <template #prepend>
+          <DashboardsIcon />
+        </template>
+        <SidebarItem default-icon>
+          CRM
+        </SidebarItem>
+        <SidebarItem default-icon>
+          Analytics
+        </SidebarItem>
+        <SidebarItem default-icon>
+          eCommerce
+        </SidebarItem>
+      </ListGroup>
+      <ListGroup :title="'Dashboards'">
+        <template #prepend>
+          <DashboardsIcon />
+        </template>
+        <SidebarItem default-icon>
+          CRM
+        </SidebarItem>
+        <SidebarItem default-icon>
+          Analytics
+        </SidebarItem>
+        <SidebarItem default-icon>
+          eCommerce
+        </SidebarItem>
+      </ListGroup>
+    </div>
   </div>
 </template>
 
 <script setup>
+import DashboardsIcon from '@/assets/icons/dashboards.svg';
 import LogoIcon from '@/assets/icons/logo.svg';
+import ListGroup from '@/components/Basic/ListGroup.vue';
+import SidebarItem from '@/components/SidebarItem.vue';
 
 defineProps({
   open: {
@@ -95,5 +156,10 @@ const switchSidebar = () => {
 
   .open .title {
     display: block;
+  }
+
+  .content {
+    font-size: 16px;
+    color: rgb(94 86 105 / 87%);
   }
 </style>

@@ -85,7 +85,8 @@ const languageIcon = computed(() => new URL(`../assets/icons/${props.language}.p
     padding: 10px 0;
     margin-bottom: 40px;
     transition: padding 0.2s cubic-bezier(.25,.8,.5,1),
-      background-color 0.2s cubic-bezier(.25,.8,.5,1);
+      background-color 0.2s cubic-bezier(.25,.8,.5,1),
+      width 0.2s cubic-bezier(.25,.8,.5,1);
   }
 
   .right {

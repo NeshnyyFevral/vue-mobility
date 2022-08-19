@@ -11,6 +11,7 @@
         $style.content,
         openSidebar && $style.openSidebar
       ]"
+      @transitionend="scroll"
     >
       <div
         ref="wrapper"
@@ -94,17 +95,16 @@ import Sidebar from '@/components/Sidebar.vue';
 
 const active = ref(false);
 const openSidebar = ref(true);
-
-const switchSidebar = () => {
-  openSidebar.value = !openSidebar.value;
-};
-
 const wrapper = ref(null);
 const headerWidth = ref(0);
 
 const scroll = () => {
   headerWidth.value = wrapper.value?.clientWidth || 0;
   active.value = !!window.scrollY;
+};
+
+const switchSidebar = () => {
+  openSidebar.value = !openSidebar.value;
 };
 
 window.addEventListener('scroll', scroll);

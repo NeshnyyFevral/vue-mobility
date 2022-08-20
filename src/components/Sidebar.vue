@@ -142,7 +142,7 @@ const switchSidebar = () => {
     z-index: 9999;
     width: 55px;
     height: 100vh;
-    padding-right: 20px;
+    padding: 0;
     overflow-x: hidden;
     background-color: #F5F5F5;
     transition: width 0.3s cubic-bezier(.25,.8,.5,1);
@@ -150,10 +150,12 @@ const switchSidebar = () => {
 
   .open {
     width: 260px;
+    padding-right: 20px;
   }
 
   .active {
     width: 260px;
+    padding-right: 20px;
     box-shadow: 0 5px 6px -3px rgb(94 86 105 / 20%),
       0 3px 16px 2px rgb(94 86 105 / 12%),
       0 9px 12px 1px rgb(94 86 105 / 14%);

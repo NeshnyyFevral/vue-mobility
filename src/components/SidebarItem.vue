@@ -36,6 +36,7 @@ defineProps({
     display: flex;
     align-items: center;
     width: 100%;
+    min-width: 230px;
     padding: 10px 18px 10px 22px;
     margin-bottom: 5px;
     cursor: pointer;

@@ -70,6 +70,7 @@ onMounted(() => {
     position: relative;
     z-index: 100;
     width: 100%;
+    min-width: 230px;
   }
 
   .button {

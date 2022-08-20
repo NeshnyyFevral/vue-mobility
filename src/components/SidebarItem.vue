@@ -29,11 +29,13 @@ defineProps({
 
 <style module lang="scss">
   .root {
+    --text-color: rgb(94 86 105 / 87%);
+
     position: relative;
     z-index: 99;
     display: flex;
     align-items: center;
-    width: 230px;
+    width: 100%;
     padding: 10px 18px 10px 22px;
     margin-bottom: 5px;
     cursor: pointer;
@@ -50,9 +52,14 @@ defineProps({
 
   .title {
     position: relative;
-    margin-left: 40px;
+    margin-left: 0;
     font-size: 16px;
     font-weight: 400;
+    color: var(--text-color);
+  }
+
+  .defaultIcon .title {
+    margin-left: 7px;
   }
 
   .defaultIcon .title::before {
@@ -65,5 +72,12 @@ defineProps({
     border: 1px solid currentColor;
     border-radius: 50%;
     transform: translateY(-50%);
+  }
+
+  .prependIcon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    fill: var(--text-color);
   }
 </style>

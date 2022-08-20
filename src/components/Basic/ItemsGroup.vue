@@ -1,12 +1,16 @@
 <template>
-  <div :class="$style.root">
+  <div
+    :class="[
+      $style.root,
+      defaultIcon && $style.defaultIcon
+    ]"
+  >
     <button
       :class="[
         $style.button,
-        open && $style.buttonOpen,
-        !open && $style.buttonClose
+        open && $style.buttonOpen
       ]"
-      @click="open = !open"
+      @click="openList"
     >
       <span :class="$style.prependIcon">
         <slot name="prepend" />
@@ -17,6 +21,7 @@
       <ArrowIcon :class="$style.arrowIcon" />
     </button>
     <div
+      ref="items"
       :class="[
         $style.listItems,
         open && $style.listOpen,
@@ -28,7 +33,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 import ArrowIcon from '@/assets/icons/chevron-down.svg';
 
@@ -37,9 +42,25 @@ defineProps({
     type: String,
     default: '',
   },
+  defaultIcon: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const open = ref(false);
+const open = ref(true);
+const items = ref(null);
+const listHeight = ref('');
+
+const openList = () => { open.value = !open.value; };
+
+const culcHeight = () => { listHeight.value = `${items.value?.clientHeight}px`; };
+
+onMounted(() => {
+  culcHeight();
+  open.value = false;
+});
+
 </script>
 
 <style module lang="scss">
@@ -48,12 +69,14 @@ const open = ref(false);
 
     position: relative;
     z-index: 100;
-    width: 230px;
+    width: 100%;
   }
 
   .button {
+    position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
     padding: 10px 18px 10px 22px;
     margin-bottom: 5px;
     font-size: 16px;
@@ -62,8 +85,7 @@ const open = ref(false);
     border: none;
     border-top-right-radius: 32px;
     border-bottom-right-radius: 32px;
-    transition: background-color 0.3s cubic-bezier(.25,.8,.5,1),
-      margin 0.3s cubic-bezier(.25,.8,.5,1);
+    transition: background-color 0.3s cubic-bezier(.25,.8,.5,1);
 
     &:hover {
       background-color: rgb(94 86 105 / 8%);
@@ -77,7 +99,6 @@ const open = ref(false);
   }
 
   .buttonOpen {
-    margin-bottom: 132.6px;
     background-color: rgb(94 86 105 / 8%);
 
     &:hover {
@@ -86,7 +107,9 @@ const open = ref(false);
   }
 
   .arrowIcon {
-    margin-left: 26px;
+    position: absolute;
+    top: 25%;
+    right: 10px;
     transition: transform 0.3s cubic-bezier(.25,.8,.5,1);
     transform: rotate(-90deg);
   }
@@ -96,6 +119,7 @@ const open = ref(false);
   }
 
   .title {
+    position: relative;
     font-weight: 400;
     color: var(--text-color);
   }
@@ -105,17 +129,31 @@ const open = ref(false);
   }
 
   .listItems {
-    display: none;
-    margin-bottom: 5px;
-    transition: margin 0.3s cubic-bezier(.25,.8,.5,1);
+    height: 0;
+    overflow-y: hidden;
+    transition: height 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
   .listOpen {
+    --list-height: v-bind(listHeight);
+
+    height: var(--list-height);
+    margin-bottom: 5px;
+  }
+
+  .defaultIcon .button .title {
+    margin-left: 7px;
+  }
+
+  .defaultIcon .button .title::before {
     position: absolute;
-    top: 49px;
-    z-index: 1;
-    display: block;
-    flex-direction: column;
-    margin-bottom: 132px;
+    top: 50%;
+    left: -33px;
+    width: 10px;
+    height: 10px;
+    content: '';
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    transform: translateY(-50%);
   }
 </style>

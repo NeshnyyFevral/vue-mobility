@@ -42,9 +42,9 @@
 <script>
 import { computed } from 'vue';
 
-import NotifyIcon from '@/assets/icons/notification.svg';
-import SearchIcon from '@/assets/icons/search.svg';
-import ThemeDarkIcon from '@/assets/icons/themeDark.svg';
+import NotifyIcon from '@/assets/icons/Header/notification.svg';
+import SearchIcon from '@/assets/icons/Header/search.svg';
+import ThemeDarkIcon from '@/assets/icons/Header/themeDark.svg';
 import Avatar, { AvatarCorner, AvatarSize } from '@/components/Avatar.vue';
 import GlobalColors from '@/styles/colors';
 
@@ -72,7 +72,7 @@ const props = defineProps({
   },
 });
 
-const languageIcon = computed(() => new URL(`../assets/icons/${props.language}.png`, import.meta.url));
+const languageIcon = computed(() => new URL(`../assets/icons/Header/${props.language}.png`, import.meta.url));
 </script>
 
 <style module lang="scss">

@@ -2,8 +2,11 @@
   <div :class="$style.root">
     <div :class="$style.sidebar">
       <Sidebar
+        :active="activeSidebar"
         :open="openSidebar"
-        @switchSidebar="switchSidebar"
+        @switchSidebar="openSidebar = !openSidebar"
+        @mouseenter="activeSidebar = true"
+        @mouseleave="activeSidebar = false"
       />
     </div>
     <div
@@ -95,16 +98,13 @@ import Sidebar from '@/components/Sidebar.vue';
 
 const active = ref(false);
 const openSidebar = ref(true);
+const activeSidebar = ref(false);
 const wrapper = ref(null);
 const headerWidth = ref(0);
 
 const scroll = () => {
   headerWidth.value = wrapper.value?.clientWidth || 0;
   active.value = !!window.scrollY;
-};
-
-const switchSidebar = () => {
-  openSidebar.value = !openSidebar.value;
 };
 
 window.addEventListener('scroll', scroll);

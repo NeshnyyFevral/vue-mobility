@@ -18,104 +18,184 @@
         />
       </div>
     </div>
-    <div :class="$style.content">
-      <ItemsGroup :title="'Dashboards'">
-        <template #prepend>
-          <DashboardsIcon />
-        </template>
-        <SidebarItem default-icon>
-          CRM
+    <div :class="$style.container">
+      <div :class="$style.content">
+        <ItemsGroup
+          :sidebar-closed="closedItemsGroup"
+          :title="'Dashboards'"
+        >
+          <template #prepend>
+            <DashboardsIcon />
+          </template>
+          <SidebarItem
+            v-for="item in dashboards"
+            :key="item.title"
+            default-icon
+          >
+            {{ item.title }}
+          </SidebarItem>
+        </ItemsGroup>
+        <div
+          :class="[
+            $style.titleWrapper,
+            !open && $style.titleWrapperHide,
+            active && $style.titleWrapperShow
+          ]"
+        >
+          <span :class="$style.line" />
+          <h3 :class="$style.title">
+            Apps and pages
+          </h3>
+        </div>
+        <SidebarItem>
+          <template #prepend>
+            <CalendarIcon />
+          </template>
+          Calendar
         </SidebarItem>
-        <SidebarItem default-icon>
-          Analytics
+        <SidebarItem>
+          <template #prepend>
+            <ChatIcon />
+          </template>
+          Chat
         </SidebarItem>
-        <SidebarItem default-icon>
-          eCommerce
+        <SidebarItem>
+          <template #prepend>
+            <EmailIcon />
+          </template>
+          Email
         </SidebarItem>
-      </ItemsGroup>
-      <div
-        :class="[
-          $style.titleWrapper,
-          !open && $style.titleWrapperHide,
-          active && $style.titleWrapperShow
-        ]"
-      >
-        <span :class="$style.line" />
-        <h3 :class="$style.title">
-          Apps and pages
-        </h3>
+        <ItemsGroup
+          :sidebar-closed="closedItemsGroup"
+          :title="'Invoice'"
+        >
+          <template #prepend>
+            <InvoiceIcon />
+          </template>
+          <SidebarItem
+            v-for="item in invoice"
+            :key="item.title"
+            default-icon
+          >
+            {{ item.title }}
+          </SidebarItem>
+        </ItemsGroup>
+        <ItemsGroup
+          :sidebar-closed="closedItemsGroup"
+          :title="'User'"
+        >
+          <template #prepend>
+            <UserIcon />
+          </template>
+          <SidebarItem
+            v-for="item in user"
+            :key="item.title"
+            default-icon
+          >
+            {{ item.title }}
+          </SidebarItem>
+        </ItemsGroup>
+        <ItemsGroup
+          :sidebar-closed="closedItemsGroup"
+          :title="'Pages'"
+        >
+          <template #prepend>
+            <PagesIcon />
+          </template>
+          <SidebarItem
+            v-for="item in pages"
+            :key="item.title"
+            default-icon
+          >
+            {{ item.title }}
+          </SidebarItem>
+        </ItemsGroup>
+        <div
+          :class="[
+            $style.titleWrapper,
+            !open && $style.titleWrapperHide,
+            active && $style.titleWrapperShow
+          ]"
+        >
+          <span :class="$style.line" />
+          <h3 :class="$style.title">
+            User interface
+          </h3>
+        </div>
+        <SidebarItem>
+          <template #prepend>
+            <TypographyIcon />
+          </template>
+          Typography
+        </SidebarItem>
+        <SidebarItem>
+          IconsIcon
+          <template #prepend>
+            <IconsIcon />
+          </template>
+          Icons
+        </SidebarItem>
+        <SidebarItem>
+          <template #prepend>
+            <GamificationIcon />
+          </template>
+          Gamification
+        </SidebarItem>
+        <ItemsGroup
+          :sidebar-closed="closedItemsGroup"
+          :title="'Cards'"
+        >
+          <template #prepend>
+            <CardsIcon />
+          </template>
+          <SidebarItem
+            v-for="item in cards"
+            :key="item.title"
+            default-icon
+          >
+            {{ item.title }}
+          </SidebarItem>
+        </ItemsGroup>
+        <ItemsGroup
+          :sidebar-closed="closedItemsGroup"
+          :title="'Components'"
+        >
+          <template #prepend>
+            <ComponentsIcon />
+          </template>
+          <SidebarItem
+            v-for="item in components"
+            :key="item.title"
+            default-icon
+          >
+            {{ item.title }}
+          </SidebarItem>
+        </ItemsGroup>
       </div>
-      <SidebarItem>
-        <template #prepend>
-          <CalendarIcon />
-        </template>
-        Calendar
-      </SidebarItem>
-      <SidebarItem>
-        <template #prepend>
-          <ChatIcon />
-        </template>
-        Chat
-      </SidebarItem>
-      <SidebarItem>
-        <template #prepend>
-          <EmailIcon />
-        </template>
-        Email
-      </SidebarItem>
-      <ItemsGroup :title="'Invoice'">
-        <template #prepend>
-          <InvoiceIcon />
-        </template>
-        <SidebarItem default-icon>
-          List
-        </SidebarItem>
-        <SidebarItem default-icon>
-          Preview
-        </SidebarItem>
-        <SidebarItem default-icon>
-          Edit
-        </SidebarItem>
-        <SidebarItem default-icon>
-          Add
-        </SidebarItem>
-      </ItemsGroup>
-      <ItemsGroup :title="'User'">
-        <template #prepend>
-          <UserIcon />
-        </template>
-        <SidebarItem default-icon>
-          User list
-        </SidebarItem>
-        <SidebarItem default-icon>
-          User view
-        </SidebarItem>
-      </ItemsGroup>
-      <ItemsGroup :title="'Pages'">
-        <template #prepend>
-          <PagesIcon />
-        </template>
-        <SidebarItem default-icon>
-          User view
-        </SidebarItem>
-      </ItemsGroup>
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue';
+
 import CalendarIcon from '@/assets/icons/Sidebar/calendar.svg';
+import CardsIcon from '@/assets/icons/Sidebar/cards.svg';
 import ChatIcon from '@/assets/icons/Sidebar/chat.svg';
+import ComponentsIcon from '@/assets/icons/Sidebar/components.svg';
 import DashboardsIcon from '@/assets/icons/Sidebar/dashboards.svg';
 import EmailIcon from '@/assets/icons/Sidebar/email.svg';
+import GamificationIcon from '@/assets/icons/Sidebar/gamification.svg';
+import IconsIcon from '@/assets/icons/Sidebar/icons.svg';
 import InvoiceIcon from '@/assets/icons/Sidebar/invoice.svg';
 import LogoIcon from '@/assets/icons/Sidebar/logo.svg';
 import PagesIcon from '@/assets/icons/Sidebar/pages.svg';
+import TypographyIcon from '@/assets/icons/Sidebar/typography.svg';
 import UserIcon from '@/assets/icons/Sidebar/user.svg';
 import ItemsGroup from '@/components/Basic/ItemsGroup.vue';
 import SidebarItem from '@/components/SidebarItem.vue';
 
-defineProps({
+const props = defineProps({
   open: {
     type: Boolean,
     default: true,
@@ -128,9 +208,61 @@ defineProps({
 
 const emits = defineEmits(['switchSidebar']);
 
-const switchSidebar = () => {
-  emits('switchSidebar');
-};
+const switchSidebar = () => { emits('switchSidebar'); };
+
+const closedItemsGroup = computed(() => !props.open && !props.active);
+
+const dashboards = [
+  { title: 'CRM', url: '' },
+  { title: 'Analytics', url: '' },
+  { title: 'eCommerce', url: '' },
+];
+
+const invoice = [
+  { title: 'List', url: '' },
+  { title: 'Preview', url: '' },
+  { title: 'Edit', url: '' },
+  { title: 'Add', url: '' },
+];
+
+const user = [
+  { title: 'User list', url: '' },
+  { title: 'User view', url: '' },
+];
+
+const pages = [
+  { title: 'Knowledge Base', url: '' },
+  { title: 'Account Setting', url: '' },
+  { title: 'Pricing', url: '' },
+  { title: 'FAQ', url: '' },
+];
+
+const cards = [
+  { title: 'Basic', url: '' },
+  { title: 'Statistics', url: '' },
+  { title: 'Advance', url: '' },
+  { title: 'Actions', url: '' },
+  { title: 'Chart', url: '' },
+];
+
+const components = [
+  { title: 'Alert', url: '' },
+  { title: 'Avatar', url: '' },
+  { title: 'Badge', url: '' },
+  { title: 'Button', url: '' },
+  { title: 'Chip', url: '' },
+  { title: 'Dialog', url: '' },
+  { title: 'Expansion Panel  ', url: '' },
+  { title: 'List', url: '' },
+  { title: 'Menu', url: '' },
+  { title: 'Pagination', url: '' },
+  { title: 'Snackbar', url: '' },
+  { title: 'Stepper', url: '' },
+  { title: 'Tabs', url: '' },
+  { title: 'Timeline', url: '' },
+  { title: 'Tooltip', url: '' },
+  { title: 'Treeview', url: '' },
+];
 </script>
 
 <style module lang="scss">
@@ -141,21 +273,21 @@ const switchSidebar = () => {
     left: 0;
     z-index: 9999;
     width: 55px;
-    height: 100vh;
+    height: 100%;
     padding: 0;
-    overflow-x: hidden;
+    overflow: hidden;
     background-color: #F5F5F5;
     transition: width 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
   .open {
     width: 260px;
-    padding-right: 20px;
+    padding-right: 3px;
   }
 
   .active {
     width: 260px;
-    padding-right: 20px;
+    padding-right: 3px;
     box-shadow: 0 5px 6px -3px rgb(94 86 105 / 20%),
       0 3px 16px 2px rgb(94 86 105 / 12%),
       0 9px 12px 1px rgb(94 86 105 / 14%);
@@ -215,21 +347,48 @@ const switchSidebar = () => {
     }
   }
 
-  .active .headerWrapper {
-    opacity: 1;
-  }
-
+  .active .headerWrapper,
+  .open .headerWrapper,
   .open .headerButton::after {
     opacity: 1;
   }
 
-  .open .headerWrapper {
-    opacity: 1;
+  .container {
+    height: 90%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgb(199 199 199);
+      border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #999;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #eee;
+      border-radius: 5px;
+    }
+  }
+
+  .open .container,
+  .active .container {
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 
   .content {
+    height: 100%;
+    padding-right: 10px;
     font-size: 16px;
     color: rgb(94 86 105 / 87%);
+
   }
 
   .titleWrapper {
@@ -246,6 +405,7 @@ const switchSidebar = () => {
     font-size: 12px;
     font-weight: 400;
     text-transform: uppercase;
+    white-space: nowrap;
     background-color: #F5F5F5;
   }
 

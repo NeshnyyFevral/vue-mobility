@@ -125,7 +125,7 @@ onUnmounted(() => { window.removeEventListener('scroll', scroll); });
   }
 
   .openSidebar {
-    margin-left: 180px;
+    margin-left: 190px;
   }
 
   .wrapper {

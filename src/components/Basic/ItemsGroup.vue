@@ -8,7 +8,7 @@
     <button
       :class="[
         $style.button,
-        open && $style.buttonOpen
+        !sidebarClosed && open && $style.buttonOpen
       ]"
       @click="openList"
     >
@@ -24,7 +24,7 @@
       ref="items"
       :class="[
         $style.listItems,
-        open && $style.listOpen,
+        !sidebarClosed && open && $style.listOpen,
       ]"
     >
       <slot />
@@ -43,6 +43,10 @@ defineProps({
     default: '',
   },
   defaultIcon: {
+    type: Boolean,
+    default: false,
+  },
+  sidebarClosed: {
     type: Boolean,
     default: false,
   },

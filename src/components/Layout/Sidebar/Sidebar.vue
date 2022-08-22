@@ -20,7 +20,7 @@
     </div>
     <div :class="$style.container">
       <div :class="$style.content">
-        <ItemsGroup
+        <SidebarGroup
           :sidebar-closed="closedItemsGroup"
           :title="'Dashboards'"
         >
@@ -34,7 +34,7 @@
           >
             {{ item.title }}
           </SidebarItem>
-        </ItemsGroup>
+        </SidebarGroup>
         <div
           :class="[
             $style.titleWrapper,
@@ -65,7 +65,7 @@
           </template>
           Email
         </SidebarItem>
-        <ItemsGroup
+        <SidebarGroup
           :sidebar-closed="closedItemsGroup"
           :title="'Invoice'"
         >
@@ -79,8 +79,8 @@
           >
             {{ item.title }}
           </SidebarItem>
-        </ItemsGroup>
-        <ItemsGroup
+        </SidebarGroup>
+        <SidebarGroup
           :sidebar-closed="closedItemsGroup"
           :title="'User'"
         >
@@ -94,8 +94,8 @@
           >
             {{ item.title }}
           </SidebarItem>
-        </ItemsGroup>
-        <ItemsGroup
+        </SidebarGroup>
+        <SidebarGroup
           :sidebar-closed="closedItemsGroup"
           :title="'Pages'"
         >
@@ -109,7 +109,7 @@
           >
             {{ item.title }}
           </SidebarItem>
-        </ItemsGroup>
+        </SidebarGroup>
         <div
           :class="[
             $style.titleWrapper,
@@ -141,7 +141,7 @@
           </template>
           Gamification
         </SidebarItem>
-        <ItemsGroup
+        <SidebarGroup
           :sidebar-closed="closedItemsGroup"
           :title="'Cards'"
         >
@@ -155,8 +155,8 @@
           >
             {{ item.title }}
           </SidebarItem>
-        </ItemsGroup>
-        <ItemsGroup
+        </SidebarGroup>
+        <SidebarGroup
           :sidebar-closed="closedItemsGroup"
           :title="'Components'"
         >
@@ -170,7 +170,7 @@
           >
             {{ item.title }}
           </SidebarItem>
-        </ItemsGroup>
+        </SidebarGroup>
       </div>
     </div>
   </div>
@@ -192,8 +192,8 @@ import LogoIcon from '@/assets/icons/Sidebar/logo.svg';
 import PagesIcon from '@/assets/icons/Sidebar/pages.svg';
 import TypographyIcon from '@/assets/icons/Sidebar/typography.svg';
 import UserIcon from '@/assets/icons/Sidebar/user.svg';
-import ItemsGroup from '@/components/Basic/ItemsGroup.vue';
-import SidebarItem from '@/components/SidebarItem.vue';
+import SidebarGroup from '@/components/Layout/Sidebar/SidebarGroup.vue';
+import SidebarItem from '@/components/Layout/Sidebar/SidebarItem.vue';
 
 const props = defineProps({
   open: {

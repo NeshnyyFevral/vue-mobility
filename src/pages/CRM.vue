@@ -92,9 +92,9 @@
 <script setup>
 import { onUnmounted, ref } from 'vue';
 
-import Footer from '@/components/Footer.vue';
-import Header, { LanguageVariant } from '@/components/Header.vue';
-import Sidebar from '@/components/Sidebar.vue';
+import Footer from '@/components/Layout/Footer.vue';
+import Header, { LanguageVariant } from '@/components/Layout/Header.vue';
+import Sidebar from '@/components/Layout/Sidebar/Sidebar.vue';
 
 const active = ref(false);
 const openSidebar = ref(true);

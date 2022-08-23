@@ -1,9 +1,11 @@
 <template>
-  <div
+  <router-link
     :class="[
       $style.root,
+      $style.link,
       defaultIcon && $style.defaultIcon
     ]"
+    :to="url"
   >
     <span :class="$style.prependIcon">
       <slot name="prepend" />
@@ -11,7 +13,7 @@
     <h3 :class="$style.title">
       <slot />
     </h3>
-  </div>
+  </router-link>
 </template>
 
 <script setup>
@@ -23,6 +25,10 @@ defineProps({
   defaultIcon: {
     type: Boolean,
     default: false,
+  },
+  url: {
+    type: String,
+    default: '',
   },
 });
 </script>
@@ -39,6 +45,7 @@ defineProps({
     min-width: 230px;
     padding: 10px 18px 10px 22px;
     margin-bottom: 5px;
+    text-decoration: none;
     cursor: pointer;
     background: transparent;
     border: none;

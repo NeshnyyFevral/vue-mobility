@@ -30,6 +30,7 @@
           <SidebarItem
             v-for="item in dashboards"
             :key="item.title"
+            :url="item.url"
             default-icon
           >
             {{ item.title }}
@@ -47,19 +48,19 @@
             Apps and pages
           </h3>
         </div>
-        <SidebarItem>
+        <SidebarItem :url="'/apps/preview'">
           <template #prepend>
             <CalendarIcon />
           </template>
-          Calendar
+          Preview
         </SidebarItem>
-        <SidebarItem>
+        <SidebarItem :url="'/apps/chat'">
           <template #prepend>
             <ChatIcon />
           </template>
           Chat
         </SidebarItem>
-        <SidebarItem>
+        <SidebarItem :url="'/apps/email'">
           <template #prepend>
             <EmailIcon />
           </template>
@@ -75,6 +76,7 @@
           <SidebarItem
             v-for="item in invoice"
             :key="item.title"
+            :url="`/apps${item.url}`"
             default-icon
           >
             {{ item.title }}
@@ -90,6 +92,7 @@
           <SidebarItem
             v-for="item in user"
             :key="item.title"
+            :url="`/apps${item.url}`"
             default-icon
           >
             {{ item.title }}
@@ -105,6 +108,7 @@
           <SidebarItem
             v-for="item in pages"
             :key="item.title"
+            :url="`/apps${item.url}`"
             default-icon
           >
             {{ item.title }}
@@ -122,20 +126,19 @@
             User interface
           </h3>
         </div>
-        <SidebarItem>
+        <SidebarItem :url="'/ui/typography'">
           <template #prepend>
             <TypographyIcon />
           </template>
           Typography
         </SidebarItem>
-        <SidebarItem>
-          IconsIcon
+        <SidebarItem :url="'/ui/icons'">
           <template #prepend>
             <IconsIcon />
           </template>
           Icons
         </SidebarItem>
-        <SidebarItem>
+        <SidebarItem :url="'/ui/gamification'">
           <template #prepend>
             <GamificationIcon />
           </template>
@@ -151,6 +154,7 @@
           <SidebarItem
             v-for="item in cards"
             :key="item.title"
+            :url="`/ui${item.url}`"
             default-icon
           >
             {{ item.title }}
@@ -166,6 +170,7 @@
           <SidebarItem
             v-for="item in components"
             :key="item.title"
+            :url="`/ui${item.url}`"
             default-icon
           >
             {{ item.title }}
@@ -213,36 +218,36 @@ const switchSidebar = () => { emits('switchSidebar'); };
 const closedItemsGroup = computed(() => !props.open && !props.active);
 
 const dashboards = [
-  { title: 'CRM', url: '' },
-  { title: 'Analytics', url: '' },
-  { title: 'eCommerce', url: '' },
+  { title: 'CRM', url: '/dashboards/crm' },
+  { title: 'Analytics', url: '/dashboards/analytics' },
+  { title: 'eCommerce', url: '/dashboards/ecommerce' },
 ];
 
 const invoice = [
-  { title: 'List', url: '' },
-  { title: 'Preview', url: '' },
-  { title: 'Edit', url: '' },
-  { title: 'Add', url: '' },
+  { title: 'List', url: '/invoice/list' },
+  { title: 'Preview', url: '/invoice/preview' },
+  { title: 'Edit', url: '/invoice/edit' },
+  { title: 'Add', url: '/invoice/add' },
 ];
 
 const user = [
-  { title: 'User list', url: '' },
-  { title: 'User view', url: '' },
+  { title: 'User list', url: '/user/user-list' },
+  { title: 'User view', url: '/user/user-view' },
 ];
 
 const pages = [
-  { title: 'Knowledge Base', url: '' },
-  { title: 'Account Setting', url: '' },
-  { title: 'Pricing', url: '' },
-  { title: 'FAQ', url: '' },
+  { title: 'Knowledge Base', url: '/pages/knowledge-base' },
+  { title: 'Account Setting', url: '/pages/account-setting' },
+  { title: 'Pricing', url: '/pages/pricing' },
+  { title: 'FAQ', url: '/pages/faq' },
 ];
 
 const cards = [
-  { title: 'Basic', url: '' },
-  { title: 'Statistics', url: '' },
-  { title: 'Advance', url: '' },
-  { title: 'Actions', url: '' },
-  { title: 'Chart', url: '' },
+  { title: 'Basic', url: '/cards/basic' },
+  { title: 'Statistics', url: '/cards/statistics' },
+  { title: 'Advance', url: '/cards/advance' },
+  { title: 'Actions', url: '/cards/actions' },
+  { title: 'Chart', url: '/cards/chart' },
 ];
 
 const components = [

@@ -14,14 +14,10 @@
 </template>
 
 <script>
-import {
-  computed,
-} from '@vue/reactivity';
+import { computed } from '@vue/reactivity';
 
 import Ripple from '@/components/Ripple.vue';
-import {
-  useRipple,
-} from '@/hooks/useRipple';
+import { useRipple } from '@/hooks/useRipple';
 import GlobalColors from '@/styles/colors';
 
 const ButtonSizeValue = {

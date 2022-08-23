@@ -7,9 +7,7 @@
 </template>
 
 <script>
-import {
-  computed,
-} from '@vue/reactivity';
+import { computed } from '@vue/reactivity';
 
 import GlobalColors from '@/styles/colors';
 

@@ -610,10 +610,7 @@
 </template>
 
 <script setup>
-import {
-  computed,
-  ref,
-} from 'vue';
+import { computed, ref } from 'vue';
 
 import ArrowDown from '@/assets/icons/chevron-down.svg';
 import ArrowUp from '@/assets/icons/chevron-up.svg';
@@ -627,17 +624,10 @@ import UserButton, {
   ButtonSize,
   ButtonVariant,
 } from '@/components/Basic/Button.vue';
-import Checkbox, {
-  ChecboxVariant,
-} from '@/components/Basic/Checkbox.vue';
-import Radio, {
-  RadioVariant,
-} from '@/components/Basic/Radio.vue';
+import Checkbox, { ChecboxVariant } from '@/components/Basic/Checkbox.vue';
+import Radio, { RadioVariant } from '@/components/Basic/Radio.vue';
 import RadioGroup from '@/components/Basic/RadioGroup.vue';
-import Chip, {
-  ChipSize,
-  ChipVariant,
-} from '@/components/Chip.vue';
+import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat, {
   MoneyStatSize,
   MoneyStatVariant,

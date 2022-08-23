@@ -1,6 +1,4 @@
-import {
-  reactive,
-} from 'vue';
+import { reactive } from 'vue';
 
 export const useRipple = () => {
   const items = reactive([]);

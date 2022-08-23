@@ -33,9 +33,7 @@
 </template>
 
 <script>
-import {
-  computed,
-} from 'vue';
+import { computed } from 'vue';
 
 import CheckIcon from '@/assets/icons/check-mark.svg';
 import GlobalColors from '@/styles/colors';

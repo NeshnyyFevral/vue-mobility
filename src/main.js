@@ -1,9 +1,6 @@
 import createApp from '@/app/index';
 
-const {
-  app,
-  router,
-} = createApp();
+const { app, router } = createApp();
 
 app
   .use(router)

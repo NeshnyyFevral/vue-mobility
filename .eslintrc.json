@@ -14,8 +14,8 @@
   "plugins": [
     "simple-import-sort",
     "vue",
-    "unicorn",
-    "modules-newlines"
+    "unicorn"
+    // "modules-newlines"
   ],
   "settings": {
     "import/resolver": {
@@ -37,13 +37,13 @@
     "vue/multi-word-component-names": "off",
     "vue/no-multiple-template-root": "off",
     "object-curly-newline": ["error", {
-      "ObjectExpression": { "multiline": true, "minProperties": 1 },
-      "ObjectPattern": { "multiline": true, "minProperties": 1 },
-      "ImportDeclaration": "always",
-      "ExportDeclaration": "always"
+      "ObjectExpression": { "multiline": true, "minProperties": 3 },
+      "ObjectPattern": { "multiline": true, "minProperties": 3 },
+      "ImportDeclaration": { "multiline": true, "minProperties": 3 },
+      "ExportDeclaration": { "multiline": true, "minProperties": 3 }
     }],
-    "modules-newlines/import-declaration-newline": "error",
-    "modules-newlines/export-declaration-newline": "error",
+    // "modules-newlines/import-declaration-newline": "error",
+    // "modules-newlines/export-declaration-newline": "error",
     "import/extensions": [
       "error", 
       "never", { 

@@ -151,7 +151,7 @@ const languageIcon = computed(() => new URL(`../../../assets/icons/Header/${prop
 
     position: fixed;
     top: 0;
-    z-index: 99999;
+    z-index: 8888;
     width: var(--header-width);
     padding: 10px 20px;
     background-color: rgba($color: #fff, $alpha: 85%);

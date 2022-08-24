@@ -8,7 +8,7 @@
     <button
       :class="[
         $style.button,
-        !sidebarClosed && open && $style.buttonOpen
+        !closedItemsGroup && open && $style.buttonOpen
       ]"
       @click="openList"
     >
@@ -24,7 +24,7 @@
       ref="items"
       :class="[
         $style.listItems,
-        !sidebarClosed && open && $style.listOpen,
+        !closedItemsGroup && open && $style.listOpen,
       ]"
     >
       <slot />
@@ -33,11 +33,11 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 
 import ArrowIcon from '@/assets/icons/chevron-down.svg';
 
-defineProps({
+const props = defineProps({
   title: {
     type: String,
     default: '',
@@ -46,25 +46,21 @@ defineProps({
     type: Boolean,
     default: false,
   },
-  sidebarClosed: {
+  closedItemsGroup: {
     type: Boolean,
     default: false,
   },
+  count: {
+    type: Number,
+    default: 0,
+  },
 });
 
-const open = ref(true);
+const open = ref(false);
 const items = ref(null);
-const listHeight = ref('');
+const listHeight = ref(`${props.count * 49}px`);
 
 const openList = () => { open.value = !open.value; };
-
-const culcHeight = () => { listHeight.value = `${items.value?.clientHeight}px`; };
-
-onMounted(() => {
-  culcHeight();
-  open.value = false;
-});
-
 </script>
 
 <style module lang="scss">

@@ -15,14 +15,24 @@
         <button
           :class="$style.headerButton"
           @click="switchSidebar"
-        />
+        >
+          <CrossIcon
+            v-if="open"
+            :class="$style.menu"
+          />
+          <MenuIcon
+            v-else
+            :class="$style.menu"
+          />
+        </button>
       </div>
     </div>
     <div :class="$style.container">
       <div :class="$style.content">
         <SidebarGroup
-          :sidebar-closed="closedItemsGroup"
+          :closed-items-group="closedItemsGroup"
           :title="'Dashboards'"
+          :count="dashboards.length"
         >
           <template #prepend>
             <DashboardsIcon />
@@ -48,7 +58,7 @@
             Apps and pages
           </h3>
         </div>
-        <SidebarItem :to="'/apps/preview'">
+        <SidebarItem :to="{ name: Routes.PREVIEW }">
           <template #prepend>
             <CalendarIcon />
           </template>
@@ -67,8 +77,9 @@
           Email
         </SidebarItem>
         <SidebarGroup
-          :sidebar-closed="closedItemsGroup"
+          :closed-items-group="closedItemsGroup"
           :title="'Invoice'"
+          :count="invoice.length"
         >
           <template #prepend>
             <InvoiceIcon />
@@ -83,8 +94,9 @@
           </SidebarItem>
         </SidebarGroup>
         <SidebarGroup
-          :sidebar-closed="closedItemsGroup"
+          :closed-items-group="closedItemsGroup"
           :title="'User'"
+          :count="user.length"
         >
           <template #prepend>
             <UserIcon />
@@ -99,8 +111,9 @@
           </SidebarItem>
         </SidebarGroup>
         <SidebarGroup
-          :sidebar-closed="closedItemsGroup"
+          :closed-items-group="closedItemsGroup"
           :title="'Pages'"
+          :count="pages.length"
         >
           <template #prepend>
             <PagesIcon />
@@ -145,8 +158,9 @@
           Gamification
         </SidebarItem>
         <SidebarGroup
-          :sidebar-closed="closedItemsGroup"
+          :closed-items-group="closedItemsGroup"
           :title="'Cards'"
+          :count="cards.length"
         >
           <template #prepend>
             <CardsIcon />
@@ -161,8 +175,9 @@
           </SidebarItem>
         </SidebarGroup>
         <SidebarGroup
-          :sidebar-closed="closedItemsGroup"
+          :closed-items-group="closedItemsGroup"
           :title="'Components'"
+          :count="components.length"
         >
           <template #prepend>
             <ComponentsIcon />
@@ -184,6 +199,7 @@
 <script setup>
 import { computed } from 'vue';
 
+import CrossIcon from '@/assets/icons/cross.svg';
 import CalendarIcon from '@/assets/icons/Sidebar/calendar.svg';
 import CardsIcon from '@/assets/icons/Sidebar/cards.svg';
 import ChatIcon from '@/assets/icons/Sidebar/chat.svg';
@@ -194,6 +210,7 @@ import GamificationIcon from '@/assets/icons/Sidebar/gamification.svg';
 import IconsIcon from '@/assets/icons/Sidebar/icons.svg';
 import InvoiceIcon from '@/assets/icons/Sidebar/invoice.svg';
 import LogoIcon from '@/assets/icons/Sidebar/logo.svg';
+import MenuIcon from '@/assets/icons/Sidebar/menu.svg';
 import PagesIcon from '@/assets/icons/Sidebar/pages.svg';
 import TypographyIcon from '@/assets/icons/Sidebar/typography.svg';
 import UserIcon from '@/assets/icons/Sidebar/user.svg';
@@ -224,49 +241,49 @@ const dashboards = [
 ];
 
 const invoice = [
-  { title: 'List', url: '/invoice/list' },
-  { title: 'Preview', url: '/invoice/preview' },
-  { title: 'Edit', url: '/invoice/edit' },
-  { title: 'Add', url: '/invoice/add' },
+  { title: 'List', route: {} },
+  { title: 'Preview', route: {} },
+  { title: 'Edit', route: {} },
+  { title: 'Add', route: {} },
 ];
 
 const user = [
-  { title: 'User list', url: '/user/user-list' },
-  { title: 'User view', url: '/user/user-view' },
+  { title: 'User list', route: {} },
+  { title: 'User view', route: {} },
 ];
 
 const pages = [
-  { title: 'Knowledge Base', url: '/pages/knowledge-base' },
-  { title: 'Account Setting', url: '/pages/account-setting' },
-  { title: 'Pricing', url: '/pages/pricing' },
-  { title: 'FAQ', url: '/pages/faq' },
+  { title: 'Knowledge Base', route: {} },
+  { title: 'Account Setting', route: {} },
+  { title: 'Pricing', route: {} },
+  { title: 'FAQ', route: {} },
 ];
 
 const cards = [
-  { title: 'Basic', url: '/cards/basic' },
-  { title: 'Statistics', url: '/cards/statistics' },
-  { title: 'Advance', url: '/cards/advance' },
-  { title: 'Actions', url: '/cards/actions' },
-  { title: 'Chart', url: '/cards/chart' },
+  { title: 'Basic', route: {} },
+  { title: 'Statistics', route: {} },
+  { title: 'Advance', route: {} },
+  { title: 'Actions', route: {} },
+  { title: 'Chart', route: {} },
 ];
 
 const components = [
-  { title: 'Alert', url: '' },
-  { title: 'Avatar', url: '' },
-  { title: 'Badge', url: '' },
-  { title: 'Button', url: '' },
-  { title: 'Chip', url: '' },
-  { title: 'Dialog', url: '' },
-  { title: 'Expansion Panel  ', url: '' },
-  { title: 'List', url: '' },
-  { title: 'Menu', url: '' },
-  { title: 'Pagination', url: '' },
-  { title: 'Snackbar', url: '' },
-  { title: 'Stepper', url: '' },
-  { title: 'Tabs', url: '' },
-  { title: 'Timeline', url: '' },
-  { title: 'Tooltip', url: '' },
-  { title: 'Treeview', url: '' },
+  { title: 'Alert', route: {} },
+  { title: 'Avatar', route: {} },
+  { title: 'Badge', route: {} },
+  { title: 'Button', route: {} },
+  { title: 'Chip', route: {} },
+  { title: 'Dialog', route: {} },
+  { title: 'Expansion Panel  ', route: {} },
+  { title: 'List', route: {} },
+  { title: 'Menu', route: {} },
+  { title: 'Pagination', route: {} },
+  { title: 'Snackbar', route: {} },
+  { title: 'Stepper', route: {} },
+  { title: 'Tabs', route: {} },
+  { title: 'Timeline', route: {} },
+  { title: 'Tooltip', route: {} },
+  { title: 'Treeview', route: {} },
 ];
 </script>
 
@@ -277,11 +294,12 @@ const components = [
     left: 0;
     z-index: 9999;
     width: 55px;
-    height: 100%;
+    height: 100vh;
     padding: 0;
     overflow: hidden;
     background-color: #F5F5F5;
-    transition: width 0.3s cubic-bezier(.25,.8,.5,1);
+    transition: width 0.3s cubic-bezier(.25,.8,.5,1),
+      transform 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
   .open {
@@ -334,6 +352,7 @@ const components = [
     background-color: transparent;
     border: 2px solid rgb(94 86 105 / 87%);
     border-radius: 50%;
+    transition: right 0.3s cubic-bezier(.25,.8,.5,1);
     transform: translateY(-50%);
 
     &::after {
@@ -349,6 +368,10 @@ const components = [
       transition: opacity 0.2s cubic-bezier(.25,.8,.5,1);
       transform: translate3d(-50%, -50%, 0);
     }
+  }
+
+  .menu {
+    fill: none;
   }
 
   .active .headerWrapper,
@@ -438,5 +461,40 @@ const components = [
 
   .titleWrapperShow .line {
     left: 0;
+  }
+
+  @media screen and (max-width: 1270px) {
+    .root {
+      overflow: visible;
+      transform: translateX(-300px);
+    }
+
+    .open {
+      transform: translateX(0);
+    }
+
+    .headerWrapper {
+      opacity: 1;
+    }
+
+    .headerButton {
+      right: -200px;
+      width: 30px;
+      height: 30px;
+      border: none;
+      fill: rgb(94 86 105 / 87%);
+
+      &::after {
+        display: none;
+      }
+    }
+
+    .open .headerButton {
+      right: -85px;
+    }
+
+    .menu {
+      fill: rgb(94 86 105 / 87%);
+    }
   }
 </style>

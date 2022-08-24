@@ -30,7 +30,7 @@
           <SidebarItem
             v-for="item in dashboards"
             :key="item.title"
-            :url="item.url"
+            :to="item.route"
             default-icon
           >
             {{ item.title }}
@@ -48,19 +48,19 @@
             Apps and pages
           </h3>
         </div>
-        <SidebarItem :url="'/apps/preview'">
+        <SidebarItem :to="'/apps/preview'">
           <template #prepend>
             <CalendarIcon />
           </template>
           Preview
         </SidebarItem>
-        <SidebarItem :url="'/apps/chat'">
+        <SidebarItem :to="'/apps/chat'">
           <template #prepend>
             <ChatIcon />
           </template>
           Chat
         </SidebarItem>
-        <SidebarItem :url="'/apps/email'">
+        <SidebarItem :to="'/apps/email'">
           <template #prepend>
             <EmailIcon />
           </template>
@@ -76,7 +76,7 @@
           <SidebarItem
             v-for="item in invoice"
             :key="item.title"
-            :url="`/apps${item.url}`"
+            :to="`/apps${item.url}`"
             default-icon
           >
             {{ item.title }}
@@ -92,7 +92,7 @@
           <SidebarItem
             v-for="item in user"
             :key="item.title"
-            :url="`/apps${item.url}`"
+            :to="`/apps${item.url}`"
             default-icon
           >
             {{ item.title }}
@@ -108,7 +108,7 @@
           <SidebarItem
             v-for="item in pages"
             :key="item.title"
-            :url="`/apps${item.url}`"
+            :to="`/apps${item.url}`"
             default-icon
           >
             {{ item.title }}
@@ -126,19 +126,19 @@
             User interface
           </h3>
         </div>
-        <SidebarItem :url="'/ui/typography'">
+        <SidebarItem :to="'/ui/typography'">
           <template #prepend>
             <TypographyIcon />
           </template>
           Typography
         </SidebarItem>
-        <SidebarItem :url="'/ui/icons'">
+        <SidebarItem :to="'/ui/icons'">
           <template #prepend>
             <IconsIcon />
           </template>
           Icons
         </SidebarItem>
-        <SidebarItem :url="'/ui/gamification'">
+        <SidebarItem :to="'/ui/gamification'">
           <template #prepend>
             <GamificationIcon />
           </template>
@@ -154,7 +154,7 @@
           <SidebarItem
             v-for="item in cards"
             :key="item.title"
-            :url="`/ui${item.url}`"
+            :to="`/ui${item.url}`"
             default-icon
           >
             {{ item.title }}
@@ -170,7 +170,7 @@
           <SidebarItem
             v-for="item in components"
             :key="item.title"
-            :url="`/ui${item.url}`"
+            :to="`/ui${item.url}`"
             default-icon
           >
             {{ item.title }}
@@ -197,8 +197,9 @@ import LogoIcon from '@/assets/icons/Sidebar/logo.svg';
 import PagesIcon from '@/assets/icons/Sidebar/pages.svg';
 import TypographyIcon from '@/assets/icons/Sidebar/typography.svg';
 import UserIcon from '@/assets/icons/Sidebar/user.svg';
-import SidebarGroup from '@/components/Layout/Sidebar/SidebarGroup.vue';
-import SidebarItem from '@/components/Layout/Sidebar/SidebarItem.vue';
+import SidebarGroup from '@/components/Layout/Units/Sidebar/SidebarGroup.vue';
+import SidebarItem from '@/components/Layout/Units/Sidebar/SidebarItem.vue';
+import { Routes } from '@/router';
 
 const props = defineProps({
   open: {
@@ -212,15 +213,14 @@ const props = defineProps({
 });
 
 const emits = defineEmits(['switchSidebar']);
-
 const switchSidebar = () => { emits('switchSidebar'); };
 
 const closedItemsGroup = computed(() => !props.open && !props.active);
 
 const dashboards = [
-  { title: 'CRM', url: '/dashboards/crm' },
-  { title: 'Analytics', url: '/dashboards/analytics' },
-  { title: 'eCommerce', url: '/dashboards/ecommerce' },
+  { title: 'CRM', route: { name: Routes.CRM } },
+  { title: 'Analytics', route: { name: Routes.PREVIEW } },
+  { title: 'eCommerce', route: { name: Routes.PREVIEW } },
 ];
 
 const invoice = [
@@ -271,7 +271,6 @@ const components = [
 </script>
 
 <style module lang="scss">
-
   .root {
     position: fixed;
     top: 0;

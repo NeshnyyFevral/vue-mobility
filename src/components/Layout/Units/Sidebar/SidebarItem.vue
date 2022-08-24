@@ -5,7 +5,7 @@
       $style.link,
       defaultIcon && $style.defaultIcon
     ]"
-    :to="url"
+    :to="to"
   >
     <span :class="$style.prependIcon">
       <slot name="prepend" />
@@ -26,9 +26,9 @@ defineProps({
     type: Boolean,
     default: false,
   },
-  url: {
-    type: String,
-    default: '',
+  to: {
+    type: Object,
+    default: () => {},
   },
 });
 </script>

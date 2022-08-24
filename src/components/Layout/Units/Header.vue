@@ -72,7 +72,7 @@ const props = defineProps({
   },
 });
 
-const languageIcon = computed(() => new URL(`../../assets/icons/Header/${props.language}.png`, import.meta.url));
+const languageIcon = computed(() => new URL(`../../../assets/icons/Header/${props.language}.png`, import.meta.url));
 </script>
 
 <style module lang="scss">
@@ -151,7 +151,7 @@ const languageIcon = computed(() => new URL(`../../assets/icons/Header/${props.l
 
     position: fixed;
     top: 0;
-    z-index: 1000;
+    z-index: 99999;
     width: var(--header-width);
     padding: 10px 20px;
     background-color: rgba($color: #fff, $alpha: 85%);

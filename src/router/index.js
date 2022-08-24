@@ -1,25 +1,23 @@
-import { createRouter as _createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter as _createRouter, createWebHistory } from 'vue-router';
 
-import CRM from '@/pages/CRM.vue';
-// import Home from '@/pages/Home.vue';
-import Preview from '@/pages/Preview.vue';
+export const Routes = {
+  PREVIEW: 'preview',
+  CRM: 'crm',
+};
 
 export default function createRouter() {
   return _createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: [
       {
         path: '/',
-        redirect: { name: 'CRM' },
+        name: Routes.CRM,
+        component: () => import('@/pages/CRM.vue'),
       },
       {
         path: '/apps/preview',
-        component: Preview,
-      },
-      {
-        path: '/dashboards/crm',
-        name: 'CRM',
-        component: CRM,
+        name: Routes.PREVIEW,
+        component: () => import('@/pages/Preview.vue'),
       },
     ],
   });

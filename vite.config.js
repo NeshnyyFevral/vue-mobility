@@ -22,7 +22,6 @@ export default defineConfig({
       },
     },
   },
-  base: '/vue-mobility/',
   build: {
     outDir: './docs',
   },

@@ -11,13 +11,20 @@ export default function createRouter() {
     routes: [
       {
         path: '/',
-        name: Routes.CRM,
-        component: () => import('@/pages/CRM.vue'),
-      },
-      {
-        path: '/apps/preview',
-        name: Routes.PREVIEW,
-        component: () => import('@/pages/Preview.vue'),
+        name: 'default',
+        component: () => import('@/components/Layout/Default.vue'),
+        children: [
+          {
+            path: '/',
+            name: Routes.CRM,
+            component: () => import('@/pages/CRM.vue'),
+          },
+          {
+            path: 'preview',
+            name: Routes.PREVIEW,
+            component: () => import('@/pages/Preview.vue'),
+          },
+        ],
       },
     ],
   });

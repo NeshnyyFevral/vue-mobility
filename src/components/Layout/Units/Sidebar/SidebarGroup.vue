@@ -8,9 +8,9 @@
     <button
       :class="[
         $style.button,
-        !closedItemsGroup && open && $style.buttonOpen
+        active && !closedItemsGroup && $style.buttonOpen
       ]"
-      @click="open = !open"
+      @click="openList"
     >
       <span :class="$style.prependIcon">
         <slot name="prepend" />
@@ -24,7 +24,7 @@
       ref="items"
       :class="[
         $style.listItems,
-        !closedItemsGroup && open && $style.listOpen,
+        active && !closedItemsGroup && $style.listOpen,
       ]"
     >
       <slot />
@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import ArrowIcon from '@/assets/icons/chevron-down.svg';
 
@@ -54,11 +54,25 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  activeList: {
+    type: String,
+    default: '',
+  },
 });
+const emits = defineEmits(['openList', 'closeList']);
 
-const open = ref(false);
 const items = ref(null);
 const listHeight = ref(`${props.count * 49}px`);
+
+const active = computed(() => (props.activeList === props.title));
+
+const openList = () => {
+  if (active.value) {
+    emits('closeList', '');
+  } else {
+    emits('openList', props.title);
+  }
+};
 </script>
 
 <style module lang="scss">

@@ -1,5 +1,5 @@
 <template>
-  <Default>
+  <p>
     Lorem ipsum dolor sit amet consectetur adipisicing elit.
     Pariatur architecto assumenda optio ipsam consectetur, om
     nis animi ab quibusdam ea minus harum autem distinctio accus
@@ -49,9 +49,5 @@
     rchitecto quas esse. Doloremque necessitatibus, itaque animi a
     sumenda labore nulla ducimus commodi est aliquam blan
     ditiis.
-  </Default>
+  </p>
 </template>
-
-<script setup>
-import Default from '@/components/Layout/Default.vue';
-</script>

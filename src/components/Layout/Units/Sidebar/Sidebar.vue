@@ -13,17 +13,14 @@
           materio
         </h1>
         <button
-          :class="$style.headerButton"
+          :class="[
+            $style.headerButton,
+            $style.menu
+          ]"
           @click="switchSidebar"
         >
-          <CrossIcon
-            v-if="open"
-            :class="$style.menu"
-          />
-          <MenuIcon
-            v-else
-            :class="$style.menu"
-          />
+          <CrossIcon v-if="open" />
+          <MenuIcon v-else />
         </button>
       </div>
     </div>
@@ -33,6 +30,9 @@
           :closed-items-group="closedItemsGroup"
           :title="'Dashboards'"
           :count="dashboards.length"
+          :active-list="activeList"
+          @openList="toggleList"
+          @closeList="toggleList"
         >
           <template #prepend>
             <DashboardsIcon />
@@ -41,10 +41,11 @@
             v-for="item in dashboards"
             :key="item.title"
             :to="item.route"
+            :title="item.title"
+            :active-link="activeLink"
             default-icon
-          >
-            {{ item.title }}
-          </SidebarItem>
+            @choiceLink="choiceLink"
+          />
         </SidebarGroup>
         <div
           :class="[
@@ -58,28 +59,43 @@
             Apps and pages
           </h3>
         </div>
-        <SidebarItem :to="{ name: Routes.PREVIEW }">
+        <SidebarItem
+          :title="'Preview'"
+          :active-link="activeLink"
+          :to="{ name: Routes.PREVIEW }"
+          @choiceLink="choiceLink"
+        >
           <template #prepend>
             <CalendarIcon />
           </template>
-          Preview
         </SidebarItem>
-        <SidebarItem :to="'/apps/chat'">
+        <SidebarItem
+          :title="'Chat'"
+          :to="{}"
+          :active-link="activeLink"
+          @choiceLink="choiceLink"
+        >
           <template #prepend>
             <ChatIcon />
           </template>
-          Chat
         </SidebarItem>
-        <SidebarItem :to="'/apps/email'">
+        <SidebarItem
+          :title="'Email'"
+          :to="{}"
+          :active-link="activeLink"
+          @choiceLink="choiceLink"
+        >
           <template #prepend>
             <EmailIcon />
           </template>
-          Email
         </SidebarItem>
         <SidebarGroup
           :closed-items-group="closedItemsGroup"
           :title="'Invoice'"
           :count="invoice.length"
+          :active-list="activeList"
+          @openList="toggleList"
+          @closeList="toggleList"
         >
           <template #prepend>
             <InvoiceIcon />
@@ -87,16 +103,20 @@
           <SidebarItem
             v-for="item in invoice"
             :key="item.title"
-            :to="`/apps${item.url}`"
+            :to="{}"
+            :title="item.title"
+            :active-link="activeLink"
             default-icon
-          >
-            {{ item.title }}
-          </SidebarItem>
+            @choiceLink="choiceLink"
+          />
         </SidebarGroup>
         <SidebarGroup
           :closed-items-group="closedItemsGroup"
           :title="'User'"
           :count="user.length"
+          :active-list="activeList"
+          @openList="toggleList"
+          @closeList="toggleList"
         >
           <template #prepend>
             <UserIcon />
@@ -104,16 +124,20 @@
           <SidebarItem
             v-for="item in user"
             :key="item.title"
-            :to="`/apps${item.url}`"
+            :to="{}"
+            :title="item.title"
+            :active-link="activeLink"
             default-icon
-          >
-            {{ item.title }}
-          </SidebarItem>
+            @choiceLink="choiceLink"
+          />
         </SidebarGroup>
         <SidebarGroup
           :closed-items-group="closedItemsGroup"
           :title="'Pages'"
           :count="pages.length"
+          :active-list="activeList"
+          @openList="toggleList"
+          @closeList="toggleList"
         >
           <template #prepend>
             <PagesIcon />
@@ -121,11 +145,12 @@
           <SidebarItem
             v-for="item in pages"
             :key="item.title"
-            :to="`/apps${item.url}`"
+            :to="{}"
+            :title="item.title"
+            :active-link="activeLink"
             default-icon
-          >
-            {{ item.title }}
-          </SidebarItem>
+            @choiceLink="choiceLink"
+          />
         </SidebarGroup>
         <div
           :class="[
@@ -139,28 +164,44 @@
             User interface
           </h3>
         </div>
-        <SidebarItem :to="'/ui/typography'">
+        <SidebarItem
+          :title="'Typography'"
+          :to="{}"
+          :active-link="activeLink"
+          @choiceLink="choiceLink"
+        >
           <template #prepend>
             <TypographyIcon />
           </template>
           Typography
         </SidebarItem>
-        <SidebarItem :to="'/ui/icons'">
+        <SidebarItem
+          :title="'Icons'"
+          :to="{}"
+          :active-link="activeLink"
+          @choiceLink="choiceLink"
+        >
           <template #prepend>
             <IconsIcon />
           </template>
-          Icons
         </SidebarItem>
-        <SidebarItem :to="'/ui/gamification'">
+        <SidebarItem
+          :title="'Gamification'"
+          :to="{}"
+          :active-link="activeLink"
+          @choiceLink="choiceLink"
+        >
           <template #prepend>
             <GamificationIcon />
           </template>
-          Gamification
         </SidebarItem>
         <SidebarGroup
           :closed-items-group="closedItemsGroup"
           :title="'Cards'"
           :count="cards.length"
+          :active-list="activeList"
+          @openList="toggleList"
+          @closeList="toggleList"
         >
           <template #prepend>
             <CardsIcon />
@@ -168,16 +209,20 @@
           <SidebarItem
             v-for="item in cards"
             :key="item.title"
-            :to="`/ui${item.url}`"
+            :title="item.title"
+            :to="{}"
+            :active-link="activeLink"
             default-icon
-          >
-            {{ item.title }}
-          </SidebarItem>
+            @choiceLink="choiceLink"
+          />
         </SidebarGroup>
         <SidebarGroup
           :closed-items-group="closedItemsGroup"
           :title="'Components'"
           :count="components.length"
+          :active-list="activeList"
+          @openList="toggleList"
+          @closeList="toggleList"
         >
           <template #prepend>
             <ComponentsIcon />
@@ -185,11 +230,12 @@
           <SidebarItem
             v-for="item in components"
             :key="item.title"
-            :to="`/ui${item.url}`"
+            :title="item.title"
+            :to="{}"
+            :active-link="activeLink"
             default-icon
-          >
-            {{ item.title }}
-          </SidebarItem>
+            @choiceLink="choiceLink"
+          />
         </SidebarGroup>
       </div>
     </div>
@@ -197,7 +243,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 import CrossIcon from '@/assets/icons/cross.svg';
 import CalendarIcon from '@/assets/icons/Sidebar/calendar.svg';
@@ -229,8 +275,14 @@ const props = defineProps({
   },
 });
 
+const activeLink = ref('');
+const activeList = ref('');
+
 const emits = defineEmits(['switchSidebar']);
 const switchSidebar = () => { emits('switchSidebar'); };
+
+const choiceLink = (title) => { activeLink.value = title; };
+const toggleList = (title) => { activeList.value = title; };
 
 const closedItemsGroup = computed(() => !props.open && !props.active);
 
@@ -242,7 +294,6 @@ const dashboards = [
 
 const invoice = [
   { title: 'List', route: {} },
-  { title: 'Preview', route: {} },
   { title: 'Edit', route: {} },
   { title: 'Add', route: {} },
 ];

@@ -3,21 +3,27 @@
     :class="[
       $style.root,
       $style.link,
-      defaultIcon && $style.defaultIcon
+      defaultIcon && $style.defaultIcon,
+      active && $style.active
     ]"
     :to="to"
+    @click="choiceLink"
   >
     <span :class="$style.prependIcon">
       <slot name="prepend" />
     </span>
     <h3 :class="$style.title">
-      <slot />
+      {{ title }}
     </h3>
   </router-link>
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue';
+
+import GlobalColors from '@/styles/colors';
+
+const props = defineProps({
   title: {
     type: String,
     default: '',
@@ -30,9 +36,17 @@ defineProps({
     type: Object,
     default: () => {},
   },
+  activeLink: {
+    type: String,
+    default: '',
+  },
 });
-</script>
+const emits = defineEmits(['choiceLink']);
 
+const choiceLink = () => { emits('choiceLink', props.title); };
+
+const active = computed(() => props.title === props.activeLink);
+</script>
 <style module lang="scss">
   .root {
     --text-color: rgb(94 86 105 / 87%);
@@ -51,10 +65,10 @@ defineProps({
     border: none;
     border-top-right-radius: 32px;
     border-bottom-right-radius: 32px;
-    transition: background-color 0.3s cubic-bezier(.25,.8,.5,1);
+    transition: background 0.3s cubic-bezier(.25,.8,.5,1);
 
     &:hover {
-      background-color: rgb(94 86 105 / 8%);
+      background: rgb(94 86 105 / 8%);
     }
   }
 
@@ -64,6 +78,7 @@ defineProps({
     font-size: 16px;
     font-weight: 400;
     color: var(--text-color);
+    transition: color 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
   .defaultIcon .title {
@@ -87,5 +102,24 @@ defineProps({
     height: 24px;
     margin-right: 10px;
     fill: var(--text-color);
+    transition: fill 0.3s cubic-bezier(.25,.8,.5,1);
+  }
+
+  .active {
+    --bg-color: v-bind(GlobalColors.PRIMARY);
+
+    background: linear-gradient(98deg,#cea0ff, var(--bg-color) 94%);
+
+    &:hover {
+      background: linear-gradient(98deg,#cea0ff, var(--bg-color) 100%);
+    }
+  }
+
+  .active .title {
+    color: #fff;
+  }
+
+  .active .prependIcon {
+    fill: #fff;
   }
 </style>

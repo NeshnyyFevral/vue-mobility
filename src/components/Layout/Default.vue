@@ -36,7 +36,7 @@
           />
         </header>
         <main :class="$style.main">
-          <slot />
+          <router-view />
         </main>
       </div>
       <footer :class="$style.footer">
@@ -71,7 +71,7 @@ onUnmounted(() => { window.removeEventListener('scroll', scroll); });
 <style module lang="scss">
   .root {
     display: flex;
-    gap: 30px;
+    gap: 15px;
     max-width: 1400px;
     padding: 0 10px;
     margin: 0 auto;

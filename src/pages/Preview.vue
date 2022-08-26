@@ -1088,4 +1088,10 @@ const show2 = ref(false);
   .password + .password {
     margin-top: 60px;
   }
+
+  @media screen and (max-width: 996px) {
+    .container {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
 </style>

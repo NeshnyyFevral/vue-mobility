@@ -10,7 +10,7 @@
         $style.button,
         !closedItemsGroup && open && $style.buttonOpen
       ]"
-      @click="openList"
+      @click="open = !open"
     >
       <span :class="$style.prependIcon">
         <slot name="prepend" />
@@ -59,8 +59,6 @@ const props = defineProps({
 const open = ref(false);
 const items = ref(null);
 const listHeight = ref(`${props.count * 49}px`);
-
-const openList = () => { open.value = !open.value; };
 </script>
 
 <style module lang="scss">

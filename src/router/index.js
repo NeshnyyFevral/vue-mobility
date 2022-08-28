@@ -10,12 +10,12 @@ export default function createRouter() {
     history: createWebHistory(),
     routes: [
       {
-        path: '/',
+        path: '/vue-mobility/',
         name: 'default',
         component: () => import('@/components/Layout/Default.vue'),
         children: [
           {
-            path: '/',
+            path: '/vue-mobility/',
             name: Routes.CRM,
             component: () => import('@/pages/CRM.vue'),
           },

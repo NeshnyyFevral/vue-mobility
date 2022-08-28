@@ -25,6 +25,7 @@ export default defineConfig({
   build: {
     outDir: './docs',
   },
+  base: '/vue-mobility/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

@@ -27,26 +27,19 @@
     <div :class="$style.container">
       <div :class="$style.content">
         <SidebarGroup
-          :closed-items-group="closedItemsGroup"
-          :title="'Dashboards'"
-          :count="dashboards.length"
+          v-for="item in main"
+          :key="item.title"
+          :title="item.title"
+          :list="item.list"
+          :icon="item.icon"
+          :count="item.list.length"
           :active-list="activeList"
+          :closed-items-group="closedItemsGroup"
+          :active-link="activeLink"
           @openList="toggleList"
           @closeList="toggleList"
-        >
-          <template #prepend>
-            <DashboardsIcon />
-          </template>
-          <SidebarItem
-            v-for="item in dashboards"
-            :key="item.title"
-            :to="item.route"
-            :title="item.title"
-            :active-link="activeLink"
-            default-icon
-            @choiceLink="choiceLink"
-          />
-        </SidebarGroup>
+          @choiceLink="choiceLink"
+        />
         <div
           :class="[
             $style.titleWrapper,
@@ -59,99 +52,20 @@
             Apps and pages
           </h3>
         </div>
-        <SidebarItem
-          :title="'Preview'"
-          :active-link="activeLink"
-          :to="{ name: Routes.PREVIEW }"
-          @choiceLink="choiceLink"
-        >
-          <template #prepend>
-            <CalendarIcon />
-          </template>
-        </SidebarItem>
-        <SidebarItem
-          :title="'Chat'"
-          :to="{}"
-          :active-link="activeLink"
-          @choiceLink="choiceLink"
-        >
-          <template #prepend>
-            <ChatIcon />
-          </template>
-        </SidebarItem>
-        <SidebarItem
-          :title="'Email'"
-          :to="{}"
-          :active-link="activeLink"
-          @choiceLink="choiceLink"
-        >
-          <template #prepend>
-            <EmailIcon />
-          </template>
-        </SidebarItem>
         <SidebarGroup
-          :closed-items-group="closedItemsGroup"
-          :title="'Invoice'"
-          :count="invoice.length"
+          v-for="item in appsAndPages"
+          :key="item.title"
+          :title="item.title"
+          :list="item.list"
+          :icon="item.icon"
+          :count="item.list.length"
           :active-list="activeList"
+          :closed-items-group="closedItemsGroup"
+          :active-link="activeLink"
           @openList="toggleList"
           @closeList="toggleList"
-        >
-          <template #prepend>
-            <InvoiceIcon />
-          </template>
-          <SidebarItem
-            v-for="item in invoice"
-            :key="item.title"
-            :to="{}"
-            :title="item.title"
-            :active-link="activeLink"
-            default-icon
-            @choiceLink="choiceLink"
-          />
-        </SidebarGroup>
-        <SidebarGroup
-          :closed-items-group="closedItemsGroup"
-          :title="'User'"
-          :count="user.length"
-          :active-list="activeList"
-          @openList="toggleList"
-          @closeList="toggleList"
-        >
-          <template #prepend>
-            <UserIcon />
-          </template>
-          <SidebarItem
-            v-for="item in user"
-            :key="item.title"
-            :to="{}"
-            :title="item.title"
-            :active-link="activeLink"
-            default-icon
-            @choiceLink="choiceLink"
-          />
-        </SidebarGroup>
-        <SidebarGroup
-          :closed-items-group="closedItemsGroup"
-          :title="'Pages'"
-          :count="pages.length"
-          :active-list="activeList"
-          @openList="toggleList"
-          @closeList="toggleList"
-        >
-          <template #prepend>
-            <PagesIcon />
-          </template>
-          <SidebarItem
-            v-for="item in pages"
-            :key="item.title"
-            :to="{}"
-            :title="item.title"
-            :active-link="activeLink"
-            default-icon
-            @choiceLink="choiceLink"
-          />
-        </SidebarGroup>
+          @choiceLink="choiceLink"
+        />
         <div
           :class="[
             $style.titleWrapper,
@@ -164,79 +78,20 @@
             User interface
           </h3>
         </div>
-        <SidebarItem
-          :title="'Typography'"
-          :to="{}"
-          :active-link="activeLink"
-          @choiceLink="choiceLink"
-        >
-          <template #prepend>
-            <TypographyIcon />
-          </template>
-          Typography
-        </SidebarItem>
-        <SidebarItem
-          :title="'Icons'"
-          :to="{}"
-          :active-link="activeLink"
-          @choiceLink="choiceLink"
-        >
-          <template #prepend>
-            <IconsIcon />
-          </template>
-        </SidebarItem>
-        <SidebarItem
-          :title="'Gamification'"
-          :to="{}"
-          :active-link="activeLink"
-          @choiceLink="choiceLink"
-        >
-          <template #prepend>
-            <GamificationIcon />
-          </template>
-        </SidebarItem>
         <SidebarGroup
-          :closed-items-group="closedItemsGroup"
-          :title="'Cards'"
-          :count="cards.length"
+          v-for="item in UserInterface"
+          :key="item.title"
+          :title="item.title"
+          :list="item.list"
+          :icon="item.icon"
+          :count="item.list.length"
           :active-list="activeList"
+          :closed-items-group="closedItemsGroup"
+          :active-link="activeLink"
           @openList="toggleList"
           @closeList="toggleList"
-        >
-          <template #prepend>
-            <CardsIcon />
-          </template>
-          <SidebarItem
-            v-for="item in cards"
-            :key="item.title"
-            :title="item.title"
-            :to="{}"
-            :active-link="activeLink"
-            default-icon
-            @choiceLink="choiceLink"
-          />
-        </SidebarGroup>
-        <SidebarGroup
-          :closed-items-group="closedItemsGroup"
-          :title="'Components'"
-          :count="components.length"
-          :active-list="activeList"
-          @openList="toggleList"
-          @closeList="toggleList"
-        >
-          <template #prepend>
-            <ComponentsIcon />
-          </template>
-          <SidebarItem
-            v-for="item in components"
-            :key="item.title"
-            :title="item.title"
-            :to="{}"
-            :active-link="activeLink"
-            default-icon
-            @choiceLink="choiceLink"
-          />
-        </SidebarGroup>
+          @choiceLink="choiceLink"
+        />
       </div>
     </div>
   </div>
@@ -246,22 +101,21 @@
 import { computed, ref } from 'vue';
 
 import CrossIcon from '@/assets/icons/cross.svg';
-import CalendarIcon from '@/assets/icons/Sidebar/calendar.svg';
+// import CalendarIcon from '@/assets/icons/Sidebar/calendar.svg';
 import CardsIcon from '@/assets/icons/Sidebar/cards.svg';
-import ChatIcon from '@/assets/icons/Sidebar/chat.svg';
+// import ChatIcon from '@/assets/icons/Sidebar/chat.svg';
 import ComponentsIcon from '@/assets/icons/Sidebar/components.svg';
 import DashboardsIcon from '@/assets/icons/Sidebar/dashboards.svg';
-import EmailIcon from '@/assets/icons/Sidebar/email.svg';
-import GamificationIcon from '@/assets/icons/Sidebar/gamification.svg';
-import IconsIcon from '@/assets/icons/Sidebar/icons.svg';
+// import EmailIcon from '@/assets/icons/Sidebar/email.svg';
+// import GamificationIcon from '@/assets/icons/Sidebar/gamification.svg';
+// import IconsIcon from '@/assets/icons/Sidebar/icons.svg';
 import InvoiceIcon from '@/assets/icons/Sidebar/invoice.svg';
 import LogoIcon from '@/assets/icons/Sidebar/logo.svg';
 import MenuIcon from '@/assets/icons/Sidebar/menu.svg';
 import PagesIcon from '@/assets/icons/Sidebar/pages.svg';
-import TypographyIcon from '@/assets/icons/Sidebar/typography.svg';
+// import TypographyIcon from '@/assets/icons/Sidebar/typography.svg';
 import UserIcon from '@/assets/icons/Sidebar/user.svg';
 import SidebarGroup from '@/components/Layout/Units/Sidebar/SidebarGroup.vue';
-import SidebarItem from '@/components/Layout/Units/Sidebar/SidebarItem.vue';
 import { Routes } from '@/router';
 
 const props = defineProps({
@@ -286,55 +140,84 @@ const toggleList = (title) => { activeList.value = title; };
 
 const closedItemsGroup = computed(() => !props.open && !props.active);
 
-const dashboards = [
-  { title: 'CRM', route: { name: Routes.CRM } },
-  { title: 'Analytics', route: { name: Routes.PREVIEW } },
-  { title: 'eCommerce', route: { name: Routes.PREVIEW } },
+const main = [
+  {
+    title: 'Dashboards',
+    icon: DashboardsIcon,
+    list: [
+      { title: 'CRM', route: { name: Routes.CRM } },
+      { title: 'Analytics', route: {} },
+      { title: 'eCommerce', route: {} },
+    ],
+  },
 ];
 
-const invoice = [
-  { title: 'List', route: {} },
-  { title: 'Edit', route: {} },
-  { title: 'Add', route: {} },
+const appsAndPages = [
+  {
+    title: 'Pages',
+    icon: PagesIcon,
+    list: [
+      { title: 'Preview', route: { name: Routes.PREVIEW } },
+      { title: 'Knowledge Base', route: {} },
+      { title: 'Account Setting', route: {} },
+      { title: 'Pricing', route: {} },
+      { title: 'FAQ', route: {} },
+    ],
+  },
+  {
+    title: 'Invoice',
+    icon: InvoiceIcon,
+    list: [
+      { title: 'List', route: {} },
+      { title: 'Edit', route: {} },
+      { title: 'Add', route: {} },
+    ],
+  },
+  {
+    title: 'User',
+    icon: UserIcon,
+    list: [
+      { title: 'User list', route: {} },
+      { title: 'User view', route: {} },
+      { title: 'Email', route: {} },
+    ],
+  },
 ];
 
-const user = [
-  { title: 'User list', route: {} },
-  { title: 'User view', route: {} },
-];
-
-const pages = [
-  { title: 'Knowledge Base', route: {} },
-  { title: 'Account Setting', route: {} },
-  { title: 'Pricing', route: {} },
-  { title: 'FAQ', route: {} },
-];
-
-const cards = [
-  { title: 'Basic', route: {} },
-  { title: 'Statistics', route: {} },
-  { title: 'Advance', route: {} },
-  { title: 'Actions', route: {} },
-  { title: 'Chart', route: {} },
-];
-
-const components = [
-  { title: 'Alert', route: {} },
-  { title: 'Avatar', route: {} },
-  { title: 'Badge', route: {} },
-  { title: 'Button', route: {} },
-  { title: 'Chip', route: {} },
-  { title: 'Dialog', route: {} },
-  { title: 'Expansion Panel  ', route: {} },
-  { title: 'List', route: {} },
-  { title: 'Menu', route: {} },
-  { title: 'Pagination', route: {} },
-  { title: 'Snackbar', route: {} },
-  { title: 'Stepper', route: {} },
-  { title: 'Tabs', route: {} },
-  { title: 'Timeline', route: {} },
-  { title: 'Tooltip', route: {} },
-  { title: 'Treeview', route: {} },
+const UserInterface = [
+  {
+    title: 'Cards',
+    icon: CardsIcon,
+    list: [
+      { title: 'Basic', route: {} },
+      { title: 'Statistics', route: {} },
+      { title: 'Advance', route: {} },
+      { title: 'Actions', route: {} },
+      { title: 'Chart', route: {} },
+    ],
+  },
+  {
+    title: 'Components',
+    icon: ComponentsIcon,
+    list: [
+      { title: 'Alert', route: {} },
+      { title: 'Avatar', route: {} },
+      { title: 'Badge', route: {} },
+      { title: 'Button', route: {} },
+      { title: 'Chip', route: {} },
+      { title: 'Dialog', route: {} },
+      { title: 'Expansion Panel  ', route: {} },
+      { title: 'List', route: {} },
+      { title: 'Menu', route: {} },
+      { title: 'Pagination', route: {} },
+      { title: 'Snackbar', route: {} },
+      { title: 'Stepper', route: {} },
+      { title: 'Tabs', route: {} },
+      { title: 'Timeline', route: {} },
+      { title: 'Tooltip', route: {} },
+      { title: 'Treeview', route: {} },
+    ],
+  },
 ];
 </script>
 

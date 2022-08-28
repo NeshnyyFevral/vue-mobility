@@ -7,7 +7,7 @@
       active && $style.active
     ]"
     :to="to"
-    @click="choiceLink"
+    @click="$emit('choiceLink')"
   >
     <span :class="$style.prependIcon">
       <slot name="prepend" />
@@ -41,12 +41,10 @@ const props = defineProps({
     default: '',
   },
 });
-const emits = defineEmits(['choiceLink']);
-
-const choiceLink = () => { emits('choiceLink', props.title); };
 
 const active = computed(() => props.title === props.activeLink);
 </script>
+
 <style module lang="scss">
   .root {
     --text-color: rgb(94 86 105 / 87%);

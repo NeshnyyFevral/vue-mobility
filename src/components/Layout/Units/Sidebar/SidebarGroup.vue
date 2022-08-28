@@ -13,7 +13,8 @@
       @click="openList"
     >
       <span :class="$style.prependIcon">
-        <slot name="prepend" />
+
+        <component :is="icon" />
       </span>
       <h3 :class="$style.title">
         {{ title }}
@@ -27,7 +28,15 @@
         active && !closedItemsGroup && $style.listOpen,
       ]"
     >
-      <slot />
+      <SidebarItem
+        v-for="item in props.list"
+        :key="item.title"
+        :title="item.title"
+        :to="item.route"
+        default-icon
+        :active-link="activeLink"
+        @choiceLink="$emit('choiceLink', item.title)"
+      />
     </div>
   </div>
 </template>
@@ -36,6 +45,7 @@
 import { computed, ref } from 'vue';
 
 import ArrowIcon from '@/assets/icons/chevron-down.svg';
+import SidebarItem from '@/components/Layout/Units/Sidebar/SidebarItem.vue';
 
 const props = defineProps({
   title: {
@@ -57,6 +67,18 @@ const props = defineProps({
   activeList: {
     type: String,
     default: '',
+  },
+  list: {
+    type: Array,
+    default: () => [],
+  },
+  activeLink: {
+    type: String,
+    default: '',
+  },
+  icon: {
+    type: Object,
+    required: true,
   },
 });
 const emits = defineEmits(['openList', 'closeList']);

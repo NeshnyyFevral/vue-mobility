@@ -71,19 +71,18 @@ onUnmounted(() => { window.removeEventListener('scroll', scroll); });
 <style module lang="scss">
   .root {
     display: flex;
-    gap: 15px;
     max-width: 1400px;
     padding: 0 10px;
     margin: 0 auto;
   }
 
   .content {
-    margin-left: 20px;
+    margin-left: 50px;
     transition: margin 0.2s cubic-bezier(.25,.8,.5,1);
   }
 
   .openSidebar {
-    margin-left: 180px;
+    margin-left: 210px;
   }
 
   .wrapper {
@@ -103,13 +102,15 @@ onUnmounted(() => { window.removeEventListener('scroll', scroll); });
     margin-top: 110px;
   }
 
-  @media screen and (max-width: 1270px) {
-    .root {
-      gap: 30px;
-    }
-
+  @media screen and (max-width: 1500px) {
     .openSidebar {
-      margin-left: 20px;
+      margin-left: 250px;
+    }
+  }
+
+  @media screen and (max-width: 1270px) {
+    .openSidebar {
+      margin-left: 50px;
     }
 
     .modal {

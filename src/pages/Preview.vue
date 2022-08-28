@@ -469,7 +469,7 @@
         Radio direction
       </h3>
       <div :class="$style.example">
-        <RadioGroup :class="$style.example">
+        <RadioGroup :class="$style.radioGroupRow">
           <Radio
             :class="$style.radio"
             :variant="RadioVariant.PRIMARY"
@@ -512,14 +512,13 @@
       <h3 :class="$style.exampleTitle">
         Radio colors
       </h3>
-
       <RadioGroup :class="$style.example">
         <Radio
           v-for="variant in Object.values(RadioVariant)"
           :key="variant"
           :class="$style.radio"
           :variant="variant"
-          :value="`${variant.toString()}`"
+          :value="variant"
           :label="`${variant.toString()}`"
           :name="'RadioGroup3'"
           checked
@@ -1016,15 +1015,14 @@ const show2 = ref(false);
 
   .example {
     display: flex;
-    flex-flow: wrap row;
-    gap: 15px;
+    flex-flow: row wrap;
     align-items: center;
     justify-items: center;
     width: 100%;
   }
 
   .exampleTitle {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 30px;
     color: #616161;
   }
@@ -1047,13 +1045,16 @@ const show2 = ref(false);
     fill: #000;
   }
 
-  .radioGroupColumn {
+  .radioGroupColumn,
+  .radioGroupRow {
     position: relative;
-    margin-left: 30px;
+    margin-right: 30px;
+  }
 
+  .radioGroupColumn {
     &::before {
       position: absolute;
-      top: 0;
+      top: 7px;
       left: -15px;
       display: inline-block;
       width: 1.5px;
@@ -1061,6 +1062,18 @@ const show2 = ref(false);
       content: '';
       background-color: #616161;
     }
+  }
+
+  .userButton,
+  .totalStat,
+  .moneyStat,
+  .chip,
+  .avatar,
+  .checkbox,
+  .radio,
+  .radioColumn {
+    margin-top: 16px;
+    margin-right: 16px;
   }
 
   .input + .input {
@@ -1089,6 +1102,21 @@ const show2 = ref(false);
   @media screen and (max-width: 996px) {
     .container {
       grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 477px) {
+    .radioGroupRow {
+      margin-bottom: 20px;
+    }
+
+    .radioGroupColumn {
+      &::before {
+        top: -10px;
+        left: 0;
+        width: 200%;
+        height: 1.5px;
+      }
     }
   }
 </style>

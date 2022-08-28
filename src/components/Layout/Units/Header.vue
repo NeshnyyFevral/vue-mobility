@@ -91,8 +91,13 @@ const languageIcon = computed(() => new URL(`../../../assets/icons/Header/${prop
 
   .right {
     display: flex;
-    gap: 15px;
     align-items: center;
+  }
+
+  .languageButton,
+  .theme,
+  .notify {
+    margin-right: 15px;
   }
 
   .button {

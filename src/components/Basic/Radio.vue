@@ -148,14 +148,16 @@ const color = computed(() => MapRadioVarian[props.variant]);
     z-index: -1;
     opacity: 0;
 
-    &:checked + .text::before {
-      border-color: var(--radio-color);
-    }
+    &:checked + .text {
+      &::before {
+        border-color: var(--radio-color);
+      }
 
-    &:checked + .text::after {
-      background-color: var(--radio-color);
-      border-color: var(--radio-color);
-      opacity: 1;
+      &::after {
+        background-color: var(--radio-color);
+        border-color: var(--radio-color);
+        opacity: 1;
+      }
     }
 
     &:checked + .text + .cycle {

@@ -314,7 +314,7 @@
         <Checkbox
           v-for="variant in Object.values(ChecboxVariant)"
           :key="variant"
-          :label="`${variant.toString()}Checkbox`"
+          :label="`${variant}Checkbox`"
           :class="$style.checkbox"
           :value="mapCheckboxColor[variant]"
           :variant="variant"
@@ -410,7 +410,7 @@
           v-for="variant in Object.values(ChecboxVariant)"
           :key="variant"
           :class="$style.checkbox"
-          :label="`${variant.toString()}Switch`"
+          :label="`${variant}Switch`"
           :value="mapSwitchColor[variant]"
           :variant="variant"
           toggle
@@ -519,7 +519,7 @@
           :class="$style.radio"
           :variant="variant"
           :value="variant"
-          :label="`${variant.toString()}`"
+          :label="variant"
           :name="'RadioGroup3'"
           checked
         />
@@ -615,7 +615,7 @@
           :radius="InputRadius.DEFAULT"
           :class="$style.input"
           :tag="'input'"
-          :label="`${size.toString()}Size`"
+          :label="`${size}Size`"
           outlined
         />
       </div>
@@ -633,7 +633,7 @@
           :radius="radius"
           :class="$style.input"
           :tag="'input'"
-          :label="`${radius.toString()}Radius`"
+          :label="`${radius}Radius`"
           outlined
         />
       </div>

@@ -405,21 +405,25 @@ const blurInput = () => {
 
   .outlined {
     border: none;
-  }
 
-  .outlined::after {
-    display: none;
-  }
-
-  .outlined .input {
-    padding: 10px 12px;
-    border: 1px solid rgb(94 86 105 / 28%);
+    &::after {
+      display: none;
+    }
   }
 
   .solo .input {
     box-shadow: 0 1px 3px 0 rgb(94 86 105 / 20%),
       0 3px 1px -2px rgb(94 86 105 / 12%),
       0 2px 2px 0 rgb(94 86 105 / 14%);
+  }
+
+  .outlined .input {
+    padding: 10px 12px;
+    border: 1px solid rgb(94 86 105 / 28%);
+
+    &:focus {
+      outline: var(--input-color) solid 1px;
+    }
   }
 
   .error .container .input {
@@ -429,10 +433,6 @@ const blurInput = () => {
   .outlined .shaped {
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-  }
-
-  .outlined .input:focus {
-    outline: var(--input-color) solid 1px;
   }
 
   .solo .input:focus {

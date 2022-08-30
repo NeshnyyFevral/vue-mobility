@@ -178,17 +178,17 @@ const openList = () => {
 
   .defaultIcon .button .title {
     margin-left: 7px;
-  }
 
-  .defaultIcon .button .title::before {
-    position: absolute;
-    top: 50%;
-    left: -33px;
-    width: 10px;
-    height: 10px;
-    content: '';
-    border: 1px solid currentColor;
-    border-radius: 50%;
-    transform: translateY(-50%);
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: -33px;
+      width: 10px;
+      height: 10px;
+      content: '';
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
   }
 </style>

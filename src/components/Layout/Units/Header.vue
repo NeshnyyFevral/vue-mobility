@@ -20,7 +20,7 @@
       <button :class="$style.languageButton">
         <img
           :src="languageIcon"
-          :alt="`${language}`"
+          :alt="language"
           :class="$style.languageIcon"
         >
         {{ language }}

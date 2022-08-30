@@ -25,72 +25,38 @@
     </div>
     <div :class="$style.container">
       <div :class="$style.content">
-        <SidebarGroup
-          v-for="item in main"
-          :key="item.title"
-          :title="item.title"
-          :list="item.list"
-          :icon="item.icon"
-          :count="item.list.length"
-          :active-list="activeList"
-          :closed-items-group="closedItemsGroup"
-          :active-link="activeLink"
-          @openList="toggleList"
-          @closeList="toggleList"
-          @choiceLink="choiceLink"
-        />
         <div
-          :class="[
-            $style.titleWrapper,
-            !open && $style.titleWrapperHide,
-            active && $style.titleWrapperShow
-          ]"
+          v-for="node in SidebarTree"
+          :key="node.title"
         >
-          <span :class="$style.line" />
-          <h3 :class="$style.title">
-            Apps and pages
-          </h3>
+          <div
+            v-if="node.title"
+            :class="[
+              $style.titleWrapper,
+              !open && $style.titleWrapperHide,
+              active && $style.titleWrapperShow
+            ]"
+          >
+            <span :class="$style.line" />
+            <h3 :class="$style.title">
+              {{ node.title }}
+            </h3>
+          </div>
+          <SidebarGroup
+            v-for="item in node.group"
+            :key="item.title"
+            :title="item.title"
+            :list="item.list"
+            :icon="item.icon"
+            :count="item.list.length"
+            :active-list="activeList"
+            :closed-items-group="closedItemsGroup"
+            :active-link="activeLink"
+            @openList="toggleList"
+            @closeList="toggleList"
+            @choiceLink="choiceLink"
+          />
         </div>
-        <SidebarGroup
-          v-for="item in appsAndPages"
-          :key="item.title"
-          :title="item.title"
-          :list="item.list"
-          :icon="item.icon"
-          :count="item.list.length"
-          :active-list="activeList"
-          :closed-items-group="closedItemsGroup"
-          :active-link="activeLink"
-          @openList="toggleList"
-          @closeList="toggleList"
-          @choiceLink="choiceLink"
-        />
-        <div
-          :class="[
-            $style.titleWrapper,
-            !open && $style.titleWrapperHide,
-            active && $style.titleWrapperShow
-          ]"
-        >
-          <span :class="$style.line" />
-          <h3 :class="$style.title">
-            User interface
-          </h3>
-        </div>
-        <SidebarGroup
-          v-for="item in UserInterface"
-          :key="item.title"
-          :title="item.title"
-          :list="item.list"
-          :icon="item.icon"
-          :count="item.list.length"
-          :active-list="activeList"
-          :closed-items-group="closedItemsGroup"
-          :active-link="activeLink"
-          @openList="toggleList"
-          @closeList="toggleList"
-          @choiceLink="choiceLink"
-        />
       </div>
     </div>
   </div>
@@ -138,82 +104,91 @@ const toggleList = (title) => { activeList.value = title; };
 
 const closedItemsGroup = computed(() => !props.open && !props.active);
 
-const main = [
+const SidebarTree = [
   {
-    title: 'Dashboards',
-    icon: DashboardsIcon,
-    list: [
-      { title: 'CRM', route: { name: Routes.CRM } },
-      { title: 'Analytics', route: {} },
-      { title: 'eCommerce', route: {} },
-    ],
-  },
-];
-
-const appsAndPages = [
-  {
-    title: 'Pages',
-    icon: PagesIcon,
-    list: [
-      { title: 'Preview', route: { name: Routes.PREVIEW } },
-      { title: 'Knowledge Base', route: {} },
-      { title: 'Account Setting', route: {} },
-      { title: 'Pricing', route: {} },
-      { title: 'FAQ', route: {} },
+    title: '',
+    group: [
+      {
+        title: 'Dashboards',
+        icon: DashboardsIcon,
+        list: [
+          { title: 'CRM', route: { name: Routes.CRM } },
+          { title: 'Analytics', route: {} },
+          { title: 'eCommerce', route: {} },
+        ],
+      },
     ],
   },
   {
-    title: 'Invoice',
-    icon: InvoiceIcon,
-    list: [
-      { title: 'List', route: {} },
-      { title: 'Edit', route: {} },
-      { title: 'Add', route: {} },
+    title: 'apps and pages',
+    group: [
+      {
+        title: 'Pages',
+        icon: PagesIcon,
+        list: [
+          { title: 'Preview', route: { name: Routes.PREVIEW } },
+          { title: 'Knowledge Base', route: {} },
+          { title: 'Account Setting', route: {} },
+          { title: 'Pricing', route: {} },
+          { title: 'FAQ', route: {} },
+        ],
+      },
+      {
+        title: 'Invoice',
+        icon: InvoiceIcon,
+        list: [
+          { title: 'List', route: {} },
+          { title: 'Edit', route: {} },
+          { title: 'Add', route: {} },
+        ],
+      },
+      {
+        title: 'User',
+        icon: UserIcon,
+        list: [
+          { title: 'User list', route: {} },
+          { title: 'User view', route: {} },
+          { title: 'Email', route: {} },
+        ],
+      },
     ],
   },
   {
-    title: 'User',
-    icon: UserIcon,
-    list: [
-      { title: 'User list', route: {} },
-      { title: 'User view', route: {} },
-      { title: 'Email', route: {} },
-    ],
-  },
-];
-
-const UserInterface = [
-  {
-    title: 'Cards',
-    icon: CardsIcon,
-    list: [
-      { title: 'Basic', route: {} },
-      { title: 'Statistics', route: {} },
-      { title: 'Advance', route: {} },
-      { title: 'Actions', route: {} },
-      { title: 'Chart', route: {} },
-    ],
-  },
-  {
-    title: 'Components',
-    icon: ComponentsIcon,
-    list: [
-      { title: 'Alert', route: {} },
-      { title: 'Avatar', route: {} },
-      { title: 'Badge', route: {} },
-      { title: 'Button', route: {} },
-      { title: 'Chip', route: {} },
-      { title: 'Dialog', route: {} },
-      { title: 'Expansion Panel  ', route: {} },
-      { title: 'List', route: {} },
-      { title: 'Menu', route: {} },
-      { title: 'Pagination', route: {} },
-      { title: 'Snackbar', route: {} },
-      { title: 'Stepper', route: {} },
-      { title: 'Tabs', route: {} },
-      { title: 'Timeline', route: {} },
-      { title: 'Tooltip', route: {} },
-      { title: 'Treeview', route: {} },
+    title: 'user interface',
+    group: [
+      {
+        title: 'Cards',
+        icon: CardsIcon,
+        list: [
+          { title: 'Basic', route: {} },
+          { title: 'Statistics', route: {} },
+          { title: 'Advance', route: {} },
+          { title: 'Actions', route: {} },
+          { title: 'Chart', route: {} },
+        ],
+      },
+      {
+        title: 'Components',
+        icon: ComponentsIcon,
+        list: [
+          { title: 'Alert', route: {} },
+          { title: 'Avatar', route: {} },
+          { title: 'Badge', route: {} },
+          { title: 'Button', route: {} },
+          { title: 'Chip', route: {} },
+          { title: 'Dialog', route: {} },
+          { title: 'Expansion Panel  ', route: {} },
+          { title: 'List', route: {} },
+          { title: 'Menu', route: {} },
+          { title: 'Pagination', route: {} },
+          { title: 'Snackbar', route: {} },
+          { title: 'Stepper', route: {} },
+          { title: 'Tabs', route: {} },
+          { title: 'Timeline', route: {} },
+          { title: 'Tooltip', route: {} },
+          { title: 'Treeview', route: {} },
+        ],
+      },
     ],
   },
 ];
@@ -419,10 +394,6 @@ const UserInterface = [
         display: none;
       }
     }
-
-    // .open .headerButton {
-    //   right: -85px;
-    // }
 
     .menu {
       fill: rgb(94 86 105 / 87%);

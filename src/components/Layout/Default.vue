@@ -82,10 +82,6 @@ onUnmounted(() => { window.removeEventListener('scroll', scroll); });
     transition: margin 0.2s cubic-bezier(.25,.8,.5,1);
   }
 
-  // .openSidebar {
-  //   margin-left: 10px;
-  // }
-
   .wrapper {
     min-height: calc(100vh - 40px);
   }

@@ -78,12 +78,13 @@ onUnmounted(() => { window.removeEventListener('scroll', scroll); });
   }
 
   .content {
+    margin-left: 55px;
     transition: margin 0.2s cubic-bezier(.25,.8,.5,1);
   }
 
-  .openSidebar {
-    margin-left: 210px;
-  }
+  // .openSidebar {
+  //   margin-left: 10px;
+  // }
 
   .wrapper {
     min-height: calc(100vh - 40px);
@@ -101,6 +102,23 @@ onUnmounted(() => { window.removeEventListener('scroll', scroll); });
   .active .main {
     margin-top: 110px;
   }
+  @media screen and (max-width: 1800px) {
+    .openSidebar {
+      margin-left: 100px;
+    }
+  }
+
+  @media screen and (max-width: 1720px) {
+    .openSidebar {
+      margin-left: 150px;
+    }
+  }
+
+  @media screen and (max-width: 1650px) {
+    .openSidebar {
+      margin-left: 200px;
+    }
+  }
 
   @media screen and (max-width: 1500px) {
     .openSidebar {
@@ -109,6 +127,10 @@ onUnmounted(() => { window.removeEventListener('scroll', scroll); });
   }
 
   @media screen and (max-width: 1270px) {
+    .content {
+      margin-left: 0;
+    }
+
     .openSidebar {
       margin-left: 0;
     }

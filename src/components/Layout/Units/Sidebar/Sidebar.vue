@@ -19,8 +19,7 @@
           ]"
           @click="switchSidebar"
         >
-          <CrossIcon v-if="open" />
-          <MenuIcon v-else />
+          <CrossIcon />
         </button>
       </div>
     </div>
@@ -100,8 +99,8 @@
 <script setup>
 import { computed, ref } from 'vue';
 
-import CrossIcon from '@/assets/icons/cross.svg';
 // import CalendarIcon from '@/assets/icons/Sidebar/calendar.svg';
+import CrossIcon from '@/assets/icons/cross.svg';
 import CardsIcon from '@/assets/icons/Sidebar/cards.svg';
 // import ChatIcon from '@/assets/icons/Sidebar/chat.svg';
 import ComponentsIcon from '@/assets/icons/Sidebar/components.svg';
@@ -111,7 +110,6 @@ import DashboardsIcon from '@/assets/icons/Sidebar/dashboards.svg';
 // import IconsIcon from '@/assets/icons/Sidebar/icons.svg';
 import InvoiceIcon from '@/assets/icons/Sidebar/invoice.svg';
 import LogoIcon from '@/assets/icons/Sidebar/logo.svg';
-import MenuIcon from '@/assets/icons/Sidebar/menu.svg';
 import PagesIcon from '@/assets/icons/Sidebar/pages.svg';
 // import TypographyIcon from '@/assets/icons/Sidebar/typography.svg';
 import UserIcon from '@/assets/icons/Sidebar/user.svg';
@@ -252,7 +250,7 @@ const UserInterface = [
   .header {
     position: relative;
     display: flex;
-    margin: 15px 0 15px 18px;
+    margin: 22px 0 15px 18px;
   }
 
   .headerWrapper {
@@ -412,9 +410,8 @@ const UserInterface = [
     }
 
     .headerButton {
-      right: -200px;
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       border: none;
       fill: rgb(94 86 105 / 87%);
 
@@ -423,9 +420,9 @@ const UserInterface = [
       }
     }
 
-    .open .headerButton {
-      right: -85px;
-    }
+    // .open .headerButton {
+    //   right: -85px;
+    // }
 
     .menu {
       fill: rgb(94 86 105 / 87%);

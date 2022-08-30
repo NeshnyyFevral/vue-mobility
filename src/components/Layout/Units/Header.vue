@@ -5,9 +5,17 @@
       active && $style.active
     ]"
   >
-    <button :class="$style.button">
-      <SearchIcon :class="$style.search" />
-    </button>
+    <div :class="$style.left">
+      <button
+        :class="$style.button"
+        @click="$emit('switchSidebar')"
+      >
+        <MenuIcon :class="$style.mobileSidebar" />
+      </button>
+      <button :class="$style.button">
+        <SearchIcon :class="$style.search" />
+      </button>
+    </div>
     <div :class="$style.right">
       <button :class="$style.languageButton">
         <img
@@ -45,6 +53,7 @@ import { computed } from 'vue';
 import NotifyIcon from '@/assets/icons/Header/notification.svg';
 import SearchIcon from '@/assets/icons/Header/search.svg';
 import ThemeDarkIcon from '@/assets/icons/Header/themeDark.svg';
+import MenuIcon from '@/assets/icons/Sidebar/menu.svg';
 import Avatar, { AvatarCorner, AvatarSize } from '@/components/Avatar.vue';
 import GlobalColors from '@/styles/colors';
 
@@ -89,9 +98,18 @@ const languageIcon = computed(() => new URL(`../../../assets/icons/Header/${prop
       width 0.2s cubic-bezier(.25,.8,.5,1);
   }
 
+  .left {
+    display: flex;
+    align-items: center;
+  }
+
   .right {
     display: flex;
     align-items: center;
+  }
+
+  .search {
+    margin-left: 10px;
   }
 
   .languageButton,
@@ -159,10 +177,17 @@ const languageIcon = computed(() => new URL(`../../../assets/icons/Header/${prop
     z-index: 8888;
     width: var(--header-width);
     padding: 10px 20px;
-    background-color: rgba($color: #fff, $alpha: 85%);
+    background-color: #fff;
     border-radius: 0 0 10px 10px;
     box-shadow: 0 4px 8px -4px rgb(94 86 105 / 42%);
-    backdrop-filter: blur(8px);
+  }
+
+  @media screen and (max-width: 1270px) {
+    .mobileSidebar {
+      width: 23px;
+      height: 23px;
+      fill: var(--text-color);
+    }
   }
 
 </style>

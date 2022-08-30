@@ -33,6 +33,7 @@
             :width="headerWidth + 'px'"
             :active="active"
             :language="LanguageVariant.FRENCH"
+            @switchSidebar="openSidebar = !openSidebar"
           />
         </header>
         <main :class="$style.main">
@@ -72,12 +73,11 @@ onUnmounted(() => { window.removeEventListener('scroll', scroll); });
   .root {
     display: flex;
     max-width: 1400px;
-    padding: 0 10px;
+    padding: 0 15px;
     margin: 0 auto;
   }
 
   .content {
-    margin-left: 50px;
     transition: margin 0.2s cubic-bezier(.25,.8,.5,1);
   }
 
@@ -110,7 +110,7 @@ onUnmounted(() => { window.removeEventListener('scroll', scroll); });
 
   @media screen and (max-width: 1270px) {
     .openSidebar {
-      margin-left: 50px;
+      margin-left: 0;
     }
 
     .modal {

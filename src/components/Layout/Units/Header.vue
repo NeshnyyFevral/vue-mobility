@@ -7,13 +7,13 @@
   >
     <div :class="$style.left">
       <button
-        :class="$style.button"
+        :class="[$style.button, $style.mobileSidebar]"
         @click="$emit('switchSidebar')"
       >
-        <MenuIcon :class="$style.mobileSidebar" />
+        <MenuIcon />
       </button>
-      <button :class="$style.button">
-        <SearchIcon :class="$style.search" />
+      <button :class="[$style.button, $style.search]">
+        <SearchIcon />
       </button>
     </div>
     <div :class="$style.right">
@@ -25,11 +25,11 @@
         >
         {{ language }}
       </button>
-      <button :class="$style.button">
-        <ThemeDarkIcon :class="$style.theme" />
+      <button :class="[$style.button, $style.theme]">
+        <ThemeDarkIcon />
       </button>
-      <button :class="$style.button">
-        <NotifyIcon :class="$style.notify" />
+      <button :class="[$style.button, $style.notify]">
+        <NotifyIcon />
       </button>
       <button :class="$style.button">
         <Avatar
@@ -165,8 +165,8 @@ const languageIcon = computed(() => new URL(`../../../assets/icons/Header/${prop
   .search,
   .theme,
   .notify {
-    width: 23px;
-    height: 23px;
+    width: 25px;
+    height: 25px;
   }
 
   .active {

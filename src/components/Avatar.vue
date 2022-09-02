@@ -41,13 +41,6 @@ const AvatarTransparencyFontColorValue = {
   LIGHT: false,
 };
 
-export const AvatarSize = {
-  SMALL: 'small',
-  NORMAL: 'normal',
-  LARGE: 'large',
-  EXTRALARGE: 'extra large',
-};
-
 export const AvatarVariant = {
   PRIMARY: 'primary',
   WARNING: 'warning',
@@ -55,6 +48,13 @@ export const AvatarVariant = {
   SUCCESS: 'success',
   DEFAULT: 'default',
   INFO: 'info',
+};
+
+export const AvatarSize = {
+  SMALL: 'small',
+  NORMAL: 'normal',
+  LARGE: 'large',
+  EXTRALARGE: 'extra large',
 };
 
 export const AvatarCorner = {

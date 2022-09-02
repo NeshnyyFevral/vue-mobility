@@ -24,7 +24,6 @@ const alignItems = (props.column ? 'start' : 'center');
     position: relative;
     display: flex;
     flex-direction: var(--radio-flex-direction);
-    gap: 10px;
     align-items: var(--radio-align-items);
     cursor: pointer;
   }

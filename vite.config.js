@@ -22,10 +22,10 @@ export default defineConfig({
       },
     },
   },
-  base: '/vue-mobility/',
   build: {
     outDir: './docs',
   },
+  base: '/vue-mobility/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

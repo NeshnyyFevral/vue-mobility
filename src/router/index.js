@@ -1,14 +1,31 @@
-import { createRouter as _createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter as _createRouter, createWebHistory } from 'vue-router';
 
-import Home from '@/pages/Home.vue';
-import Preview from '@/pages/Preview.vue';
+export const Routes = {
+  PREVIEW: 'preview',
+  CRM: 'crm',
+};
 
 export default function createRouter() {
   return _createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: [
-      { path: '/preview', component: Preview },
-      { path: '/', component: Home },
+      {
+        path: '/vue-mobility/',
+        name: 'default',
+        component: () => import('@/components/Layout/Default.vue'),
+        children: [
+          {
+            path: '/vue-mobility/',
+            name: Routes.CRM,
+            component: () => import('@/pages/CRM.vue'),
+          },
+          {
+            path: 'preview',
+            name: Routes.PREVIEW,
+            component: () => import('@/pages/Preview.vue'),
+          },
+        ],
+      },
     ],
   });
 }

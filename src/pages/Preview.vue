@@ -314,7 +314,7 @@
         <Checkbox
           v-for="variant in Object.values(ChecboxVariant)"
           :key="variant"
-          :label="`${variant.toString()}Checkbox`"
+          :label="`${variant}Checkbox`"
           :class="$style.checkbox"
           :value="mapCheckboxColor[variant]"
           :variant="variant"
@@ -410,7 +410,7 @@
           v-for="variant in Object.values(ChecboxVariant)"
           :key="variant"
           :class="$style.checkbox"
-          :label="`${variant.toString()}Switch`"
+          :label="`${variant}Switch`"
           :value="mapSwitchColor[variant]"
           :variant="variant"
           toggle
@@ -469,7 +469,7 @@
         Radio direction
       </h3>
       <div :class="$style.example">
-        <RadioGroup>
+        <RadioGroup :class="$style.radioGroupRow">
           <Radio
             :class="$style.radio"
             :variant="RadioVariant.PRIMARY"
@@ -512,27 +512,25 @@
       <h3 :class="$style.exampleTitle">
         Radio colors
       </h3>
-      <div :class="$style.example">
-        <RadioGroup>
-          <Radio
-            v-for="variant in Object.values(RadioVariant)"
-            :key="variant"
-            :class="$style.radio"
-            :variant="variant"
-            :value="`${variant.toString()}`"
-            :label="`${variant.toString()}`"
-            :name="'RadioGroup3'"
-            checked
-          />
-        </RadioGroup>
-      </div>
+      <RadioGroup :class="$style.example">
+        <Radio
+          v-for="variant in Object.values(RadioVariant)"
+          :key="variant"
+          :class="$style.radio"
+          :variant="variant"
+          :value="variant"
+          :label="variant"
+          :name="'RadioGroup3'"
+          checked
+        />
+      </RadioGroup>
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
         Radio slot
       </h3>
       <div :class="$style.example">
-        <RadioGroup>
+        <RadioGroup :class="$style.example">
           <Radio
             :class="$style.radio"
             :variant="RadioVariant.PRIMARY"
@@ -604,7 +602,7 @@
         />
       </div>
     </div>
-    <div :class="[$style.item, $style.itemInput]">
+    <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
         Input size
       </h3>
@@ -617,12 +615,12 @@
           :radius="InputRadius.DEFAULT"
           :class="$style.input"
           :tag="'input'"
-          :label="`${size.toString()}Size`"
+          :label="`${size}Size`"
           outlined
         />
       </div>
     </div>
-    <div :class="[$style.item, $style.itemInput]">
+    <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
         Input radius
       </h3>
@@ -635,7 +633,7 @@
           :radius="radius"
           :class="$style.input"
           :tag="'input'"
-          :label="`${radius.toString()}Radius`"
+          :label="`${radius}Radius`"
           outlined
         />
       </div>
@@ -816,7 +814,7 @@
         />
       </div>
     </div>
-    <div :class="[$style.item, $style.itemInput]">
+    <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
         Input icons
       </h3>
@@ -868,7 +866,7 @@
         </UserInput>
       </div>
     </div>
-    <div :class="[$style.item, $style.itemInput]">
+    <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
         Input password
       </h3>
@@ -1011,41 +1009,29 @@ const show2 = ref(false);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
-    width: 1400px;
+    width: 100%;
     margin: 0 auto;
   }
 
   .example {
     display: flex;
-    flex-flow: wrap row;
+    flex-flow: row wrap;
     align-items: center;
     justify-items: center;
+    width: 100%;
   }
 
   .exampleTitle {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 30px;
     color: #616161;
   }
 
   .item {
-    height: 168px;
-    padding: 15px;
+    padding: 20px;
+    padding-bottom: 25px;
     background-color: #fff;
     border-radius: 12px;
-  }
-
-  .userButton + .userButton,
-  .totalStat + .totalStat,
-  .chip + .chip,
-  .avatar + .avatar {
-    margin-left: 20px;
-  }
-
-  .moneyStat + .moneyStat,
-  .radio + .radio,
-  .checkbox + .checkbox {
-    margin-left: 7px;
   }
 
   .slot {
@@ -1059,13 +1045,16 @@ const show2 = ref(false);
     fill: #000;
   }
 
-  .radioGroupColumn {
+  .radioGroupColumn,
+  .radioGroupRow {
     position: relative;
-    margin-left: 30px;
+    margin-right: 30px;
+  }
 
+  .radioGroupColumn {
     &::before {
       position: absolute;
-      top: 0;
+      top: 7px;
       left: -15px;
       display: inline-block;
       width: 1.5px;
@@ -1075,8 +1064,16 @@ const show2 = ref(false);
     }
   }
 
-  .itemInput {
-    height: 280px;
+  .userButton,
+  .totalStat,
+  .moneyStat,
+  .chip,
+  .avatar,
+  .checkbox,
+  .radio,
+  .radioColumn {
+    margin-top: 16px;
+    margin-right: 16px;
   }
 
   .input + .input {
@@ -1100,5 +1097,26 @@ const show2 = ref(false);
 
   .password + .password {
     margin-top: 60px;
+  }
+
+  @media screen and (max-width: 996px) {
+    .container {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 477px) {
+    .radioGroupRow {
+      margin-bottom: 20px;
+    }
+
+    .radioGroupColumn {
+      &::before {
+        top: -10px;
+        left: 0;
+        width: 200%;
+        height: 1.5px;
+      }
+    }
   }
 </style>

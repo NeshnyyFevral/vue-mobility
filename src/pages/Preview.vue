@@ -5,7 +5,7 @@
         Button sizes
       </h3>
       <div :class="$style.example">
-        <UserButton
+        <Button
           v-for="size in Object.values(ButtonSize)"
           :key="size"
           :variant="ButtonVariant.PRIMARY"
@@ -13,7 +13,7 @@
           :class="$style.userButton"
         >
           {{ size }}
-        </UserButton>
+        </Button>
       </div>
     </div>
     <div :class="$style.item">
@@ -21,7 +21,7 @@
         Button colors
       </h3>
       <div :class="$style.example">
-        <UserButton
+        <Button
           v-for="variant in Object.values(ButtonVariant)"
           :key="variant"
           :variant="variant"
@@ -29,7 +29,7 @@
           :class="$style.userButton"
         >
           {{ variant }}
-        </UserButton>
+        </Button>
       </div>
     </div>
     <div :class="$style.item">
@@ -564,7 +564,7 @@
         Input Basic
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Basic input'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -578,7 +578,7 @@
         Input outlined
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Outlined input'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -592,7 +592,7 @@
         Input shaped
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Shaped'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -607,7 +607,7 @@
         Input size
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           v-for="size in Object.values(InputSize)"
           :key="size"
           :placeholder="size"
@@ -625,7 +625,7 @@
         Input radius
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           v-for="radius in Object.values(InputRadius)"
           :key="radius"
           :placeholder="radius"
@@ -643,7 +643,7 @@
         Input solo
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Disabled'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -651,7 +651,7 @@
           :value="'Jhon Doe'"
           disabled
         />
-        <UserInput
+        <Input
           :placeholder="'Readonly'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -666,7 +666,7 @@
         Input counter
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Regular'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -683,7 +683,7 @@
         Input maxlength
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Regular'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -700,7 +700,7 @@
         Custom colors
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'First name'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -715,7 +715,7 @@
         Input clearable
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'First name'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -730,7 +730,7 @@
         Input prefixes and suffixes
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Email address'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -738,7 +738,7 @@
           :value="'ivan.turovskiy'"
           :suffix="'@gmail.com'"
         />
-        <UserInput
+        <Input
           :placeholder="'Amount'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -753,7 +753,7 @@
         Validation
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Email address'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -768,7 +768,7 @@
         Validate on blur
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Email address'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -784,7 +784,7 @@
         Input uses slot
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 15'"
@@ -795,7 +795,7 @@
             <span>cross</span>
             <Cross :class="$style.icon" />
           </div>
-        </UserInput>
+        </Input>
       </div>
     </div>
     <div :class="$style.item">
@@ -803,7 +803,7 @@
         Input progress
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 16'"
@@ -819,7 +819,7 @@
         Input icons
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 17'"
@@ -829,8 +829,8 @@
           <template #prepend>
             <EyeOff :class="$style.prependInputIcon" />
           </template>
-        </UserInput>
-        <UserInput
+        </Input>
+        <Input
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 18'"
@@ -841,8 +841,8 @@
           <template #prependInner>
             <EyeOn :class="$style.prependInputIcon" />
           </template>
-        </UserInput>
-        <UserInput
+        </Input>
+        <Input
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 19'"
@@ -852,8 +852,8 @@
           <template #appendInner>
             <EyeOff :class="$style.appendInputIcon" />
           </template>
-        </UserInput>
-        <UserInput
+        </Input>
+        <Input
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 20'"
@@ -863,7 +863,7 @@
           <template #append>
             <EyeOn :class="$style.appendInputIcon" />
           </template>
-        </UserInput>
+        </Input>
       </div>
     </div>
     <div :class="$style.item">
@@ -871,7 +871,7 @@
         Input password
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :size="InputSize.SMALL"
           :class="[$style.input, $style.password]"
           :label="'input 21'"
@@ -889,8 +889,8 @@
               @focus="show1 = !show1"
             />
           </template>
-        </UserInput>
-        <UserInput
+        </Input>
+        <Input
           :size="InputSize.SMALL"
           :class="[$style.input, $style.password]"
           :label="'input 22'"
@@ -908,7 +908,7 @@
               @focus="show2 = !show2"
             />
           </template>
-        </UserInput>
+        </Input>
       </div>
     </div>
     <div :class="$style.item">
@@ -916,7 +916,7 @@
         Input solo
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Solo'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -924,6 +924,41 @@
           outlined
           solo
         />
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Basic dialog
+      </h3>
+      <div :class="$style.example">
+        <Dialog>
+          <template #button>
+            <Button
+              :class="$style.button"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+            >
+              click me
+            </Button>
+          </template>
+          <template #dialog>
+            <p :class="$style.dialogText">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Aliquid inventore vero nesciunt ea voluptas adipisci,
+              exercitationem neque aliquam corporis error aspernatur animi
+              architecto impedit repellat, veritatis quos delectus minima maxime.
+            </p>
+            <div :class="$style.dialogButtons">
+              <Button
+                :class="$style.button"
+                :variant="ButtonVariant.PRIMARY"
+                :size="ButtonSize.NORMAL"
+              >
+                I accept
+              </Button>
+            </div>
+          </template>
+        </Dialog>
       </div>
     </div>
   </div>
@@ -938,11 +973,15 @@ import Cross from '@/assets/icons/cross.svg';
 import EyeOff from '@/assets/icons/eye-off.svg';
 import EyeOn from '@/assets/icons/eye-on.svg';
 import Avatar, {
-  AvatarCorner, AvatarSize, AvatarTransparency, AvatarVariant,
+  AvatarCorner,
+  AvatarSize,
+  AvatarTransparency,
+  AvatarVariant,
 } from '@/components/Avatar.vue';
-import UserButton, { ButtonSize, ButtonVariant } from '@/components/Basic/Button.vue';
+import Button, { ButtonSize, ButtonVariant } from '@/components/Basic/Button.vue';
 import Checkbox, { ChecboxVariant } from '@/components/Basic/Checkbox.vue';
-import UserInput, { InputRadius, InputSize, InputVariant } from '@/components/Basic/Input.vue';
+import Dialog from '@/components/Basic/Dialog.vue';
+import Input, { InputRadius, InputSize, InputVariant } from '@/components/Basic/Input.vue';
 import Radio, { RadioVariant } from '@/components/Basic/Radio.vue';
 import RadioGroup from '@/components/Basic/RadioGroup.vue';
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
@@ -1097,6 +1136,15 @@ const show2 = ref(false);
 
   .password + .password {
     margin-top: 60px;
+  }
+
+  .dialogText {
+    margin-bottom: 20px;
+  }
+
+  .dialogButtons {
+    display: flex;
+    justify-content: end;
   }
 
   @media screen and (max-width: 996px) {

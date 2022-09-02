@@ -13,7 +13,6 @@
       @click="openList"
     >
       <span :class="$style.prependIcon">
-
         <component :is="icon" />
       </span>
       <h3 :class="$style.title">

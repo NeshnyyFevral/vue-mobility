@@ -34,7 +34,7 @@
         :to="item.route"
         default-icon
         :active-link="activeLink"
-        @choiceLink="$emit('choiceLink', item.title)"
+        @choiceLink="choiceLink(item.title)"
       />
     </div>
   </div>
@@ -80,7 +80,7 @@ const props = defineProps({
     required: true,
   },
 });
-const emits = defineEmits(['openList', 'closeList']);
+const emits = defineEmits(['openList', 'closeList', 'choiceLink']);
 
 const items = ref(null);
 const listHeight = ref(`${props.count * 49}px`);
@@ -94,6 +94,8 @@ const openList = () => {
     emits('openList', props.title);
   }
 };
+
+const choiceLink = (title) => { emits('choiceLink', title); };
 </script>
 
 <style module lang="scss">

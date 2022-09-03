@@ -931,7 +931,11 @@
         Basic dialog
       </h3>
       <div :class="$style.example">
-        <Dialog>
+        <Dialog
+          :visiable="visiableBasicDialog"
+          @close="visiableBasicDialog = false"
+          @open="visiableBasicDialog = true"
+        >
           <template #button>
             <Button
               :class="$style.button"
@@ -941,22 +945,32 @@
               click me
             </Button>
           </template>
-          <template #dialog>
+          <template #title>
+            Police
+          </template>
+          <template #text>
             <p :class="$style.dialogText">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Aliquid inventore vero nesciunt ea voluptas adipisci,
-              exercitationem neque aliquam corporis error aspernatur animi
-              architecto impedit repellat, veritatis quos delectus minima maxime.
+              Aliquid inventore vero nesciunt ea
             </p>
-            <div :class="$style.dialogButtons">
-              <Button
-                :class="$style.button"
-                :variant="ButtonVariant.PRIMARY"
-                :size="ButtonSize.NORMAL"
-              >
-                I accept
-              </Button>
-            </div>
+          </template>
+          <template #actions>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.ERROR"
+              :size="ButtonSize.NORMAL"
+              @click="visiableBasicDialog = false"
+            >
+              Cancel
+            </Button>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+              @click="visiableBasicDialog = false"
+            >
+              I accept
+            </Button>
           </template>
         </Dialog>
       </div>
@@ -1041,6 +1055,8 @@ const rulesEmail = {
 const rulesPassword = [(value) => value.length >= 8 || 'min 8 characters'];
 const show1 = ref(true);
 const show2 = ref(false);
+
+const visiableBasicDialog = ref(false);
 </script>
 
 <style module lang="scss">
@@ -1138,13 +1154,8 @@ const show2 = ref(false);
     margin-top: 60px;
   }
 
-  .dialogText {
-    margin-bottom: 20px;
-  }
-
-  .dialogButtons {
-    display: flex;
-    justify-content: end;
+  .action:not(:last-child) {
+    margin-right: 5px;
   }
 
   @media screen and (max-width: 996px) {
@@ -1153,7 +1164,7 @@ const show2 = ref(false);
     }
   }
 
-  @media screen and (max-width: 477px) {
+  @media screen and (max-width: 405px) {
     .radioGroupRow {
       margin-bottom: 20px;
     }

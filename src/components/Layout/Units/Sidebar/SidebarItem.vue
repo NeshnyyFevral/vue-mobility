@@ -7,7 +7,7 @@
       active && $style.active
     ]"
     :to="to"
-    @click="$emit('choiceLink')"
+    @click="choiceLink"
   >
     <span :class="$style.prependIcon">
       <slot name="prepend" />
@@ -42,7 +42,10 @@ const props = defineProps({
   },
 });
 
+const emits = defineEmits(['choiceLink']);
+
 const active = computed(() => props.title === props.activeLink);
+const choiceLink = () => { emits('choiceLink'); };
 </script>
 
 <style module lang="scss">

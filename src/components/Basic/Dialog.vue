@@ -26,14 +26,23 @@
   >
     <div
       v-if="visiable"
-      :class="$style.dialog"
+      :class="[
+        $style.dialog,
+        cancel && $style.cancel
+      ]"
       @click.stop
+      @animationend="cancel = false"
     >
       <div :class="$style.title">
         <slot name="title" />
       </div>
-      <div :class="$style.text">
-        <slot name="text" />
+      <div
+        :class="[
+          $style.content,
+          scrollable && $style.scrollContent
+        ]"
+      >
+        <slot name="content" />
       </div>
       <div :class="$style.actions">
         <slot name="actions" />
@@ -43,10 +52,18 @@
 </template>
 
 <script setup>
-import { computed, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 const props = defineProps({
   visiable: {
+    type: Boolean,
+    default: false,
+  },
+  persistent: {
+    type: Boolean,
+    default: false,
+  },
+  scrollable: {
     type: Boolean,
     default: false,
   },
@@ -54,19 +71,41 @@ const props = defineProps({
 
 const emits = defineEmits(['close', 'open']);
 
+const cancel = ref(false);
+
 const visiableComp = computed(() => props.visiable);
+
+const calcScrollWidth = () => {
+  const div = document.createElement('div');
+  div.style.overflowY = 'scroll';
+  div.style.width = '50px';
+  div.style.height = '50px';
+  document.body.append(div);
+  const scrollWidth = div.offsetWidth - div.clientWidth;
+  div.remove();
+
+  return scrollWidth;
+};
+
+const scrollWidth = calcScrollWidth();
 
 watch(visiableComp, () => {
   if (visiableComp.value) {
     document.body.style.overflow = 'hidden';
-    if (document.body.offsetWidth > 1270) { document.body.style.marginRight = '17px'; }
+    if (document.body.offsetWidth > 1270) { document.body.style.marginRight = `${scrollWidth}px`; }
   } else {
     document.body.style.overflow = 'auto';
     document.body.style.marginRight = '0px';
   }
 });
 
-const close = () => { emits('close'); };
+const close = () => {
+  if (props.persistent) {
+    cancel.value = true;
+  } else {
+    emits('close');
+  }
+};
 const open = () => { emits('open'); };
 </script>
 
@@ -89,12 +128,15 @@ const open = () => { emits('open'); };
     z-index: 999999;
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 600px;
+    max-height: 450px;
     padding: 20px;
     overflow-x: auto;
+    overflow-y: auto;
     background-color: #fff;
     border-radius: 7px;
     transform: translate3d(-50%, -50%, 0);
+    transform-origin: 0 0;
   }
 
   .title {
@@ -104,11 +146,16 @@ const open = () => { emits('open'); };
     color: rgb(94 86 105 / 87%);
   }
 
-  .text {
+  .content {
     margin-bottom: 15px;
     font-size: 14px;
     line-height: 1.5;
     color: rgb(94 86 105 / 68%);
+  }
+
+  .scrollContent {
+    max-height: 200px;
+    overflow-y: auto;
   }
 
   .actions {
@@ -118,7 +165,7 @@ const open = () => { emits('open'); };
 
   .enterActive,
   .leaveActive {
-    transition: transform 0.6s cubic-bezier(.25,.8,.5,1),
+    transition: transform 0.2s cubic-bezier(.25,.8,.5,1),
       opacity 0.2s cubic-bezier(.25,.8,.5,1);
     transform-origin: -40% -50%;
   }
@@ -141,5 +188,35 @@ const open = () => { emits('open'); };
   .backEnterFrom,
   .backLeaveTo {
     opacity: 0;
+  }
+
+  .cancel {
+    animation: cancel 0.2s cubic-bezier(.25,.8,.5,1);
+  }
+
+  @keyframes cancel {
+    33% {
+      transform: scale(1) translate3d(-50%, -50%, 0);
+    }
+
+    66% {
+      transform: scale(1.05) translate3d(-50%, -50%, 0);
+    }
+
+    100% {
+      transform: scale(1) translate3d(-50%, -50%, 0);
+    }
+  }
+
+  @media screen and (max-width: 850px ) {
+    .dialog {
+      width: 400px;
+    }
+  }
+
+  @media screen and (max-width: 500px ) {
+    .dialog {
+      width: 250px;
+    }
   }
 </style>

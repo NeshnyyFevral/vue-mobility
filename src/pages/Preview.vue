@@ -948,8 +948,8 @@
           <template #title>
             Police
           </template>
-          <template #text>
-            <p :class="$style.dialogText">
+          <template #content>
+            <p :class="$style.dialogContent">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Aliquid inventore vero nesciunt ea
             </p>
@@ -968,6 +968,227 @@
               :variant="ButtonVariant.PRIMARY"
               :size="ButtonSize.NORMAL"
               @click="visiableBasicDialog = false"
+            >
+              I accept
+            </Button>
+          </template>
+        </Dialog>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Persistent dialog
+      </h3>
+      <div :class="$style.example">
+        <Dialog
+          persistent
+          :visiable="visiablePersistentDialog"
+          @close="visiablePersistentDialog = false"
+          @open="visiablePersistentDialog = true"
+        >
+          <template #button>
+            <Button
+              :class="$style.button"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+            >
+              click me
+            </Button>
+          </template>
+          <template #title>
+            Police
+          </template>
+          <template #content>
+            <p :class="$style.dialogContent">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Aliquid inventore vero nesciunt Lorem ipsum
+              dolor sit amet consectetur, adipisicing elit.
+              Assumenda repudiandae iure cum laboriosam in, amet
+              incidunt corrupti optio soluta velit, reprehenderit
+              iste? Consequatur dolor itaque quisquam ad reprehenderit
+              id. Dolore.
+              Quibusdam cum molestias reprehenderit nemo ex nam
+              nesciunt impedit totam necessitatibus, quam, alias,
+              perspiciatis deleniti iusto possimus molestiae laborum
+              voluptate. Maiores eos corrupti dolorem dignissimos est
+              delectus, autem tempora blanditiis.
+            </p>
+          </template>
+          <template #actions>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.ERROR"
+              :size="ButtonSize.NORMAL"
+              @click="visiablePersistentDialog = false"
+            >
+              Cancel
+            </Button>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+              @click="visiablePersistentDialog = false"
+            >
+              I accept
+            </Button>
+          </template>
+        </Dialog>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Scroll dialog content
+      </h3>
+      <div :class="$style.example">
+        <Dialog
+          :visiable="visiableScrollText"
+          scrollable
+          @close="visiableScrollText = false"
+          @open="visiableScrollText = true"
+        >
+          <template #button>
+            <Button
+              :class="$style.button"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+            >
+              click me
+            </Button>
+          </template>
+          <template #title>
+            Police
+          </template>
+          <template #content>
+            <p :class="$style.dialogContent">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Aliquid inventore vero nesciunt Lorem ipsum
+              dolor sit amet consectetur, adipisicing elit.
+              Assumenda repudiandae iure cum laboriosam in, amet
+              incidunt corrupti optio soluta velit, reprehenderit
+              iste? Consequatur dolor itaque
+              quisquam ad reprehenderit id. Dolore.
+              Quibusdam cum molestias reprehenderit nemo ex nam
+              nesciunt impedit totam necessitatibus, quam, alias,
+              perspiciatis deleniti iusto possimus molestiae laborum
+              voluptate. Maiores eos corrupti dolorem dignissimos est
+              delectus, autem tempora blanditiis.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Aliquid inventore vero nesciunt Lorem ipsum
+              dolor sit amet consectetur, adipisicing elit.
+              Assumenda repudiandae iure cum laboriosam in, amet
+              incidunt corrupti optio soluta velit, reprehenderit
+              iste? Consequatur dolor itaque
+              quisquam ad reprehenderit id. Dolore.
+              Quibusdam cum molestias reprehenderit nemo ex nam
+              nesciunt impedit totam necessitatibus, quam, alias,
+              perspiciatis deleniti iusto possimus molestiae laborum
+              voluptate. Maiores eos corrupti dolorem dignissimos est
+              delectus, autem tempora blanditiis.
+            </p>
+          </template>
+          <template #actions>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.ERROR"
+              :size="ButtonSize.NORMAL"
+              @click="visiableScrollText = false"
+            >
+              Cancel
+            </Button>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+              @click="visiableScrollText = false"
+            >
+              I accept
+            </Button>
+          </template>
+        </Dialog>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Overflow content
+      </h3>
+      <div :class="$style.example">
+        <Dialog
+          :visiable="visiableScrollDialog"
+          @close="visiableScrollDialog = false"
+          @open="visiableScrollDialog = true"
+        >
+          <template #button>
+            <Button
+              :class="$style.button"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+            >
+              click me
+            </Button>
+          </template>
+          <template #title>
+            Police
+          </template>
+          <template #content>
+            <p :class="$style.dialogContent">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Aliquid inventore vero nesciunt Lorem ipsum
+              dolor sit amet consectetur, adipisicing elit.
+              Assumenda repudiandae iure cum laboriosam in, amet
+              incidunt corrupti optio soluta velit, reprehenderit
+              iste? Consequatur dolor itaque quisquam ad reprehenderit
+              id. Dolore.
+              Quibusdam cum molestias reprehenderit nemo ex nam
+              nesciunt impedit totam necessitatibus, quam, alias,
+              perspiciatis deleniti iusto possimus molestiae laborum
+              voluptate. Maiores eos corrupti dolorem dignissimos est
+              delectus, autem tempora blanditiis. Lorem ipsum dolor
+              sit amet consectetur adipisicing elit. Doloremque,
+              dicta aut earum nobis accusamus odio nemo! Delectus
+              ea ipsa eius? Beatae labore praesentium alias, aperiam
+              nemo sequi saepe dolorum nisi.
+              Exercitationem iure fuga unde ut, quasi veniam, possimus
+              temporibus voluptatum, a quaerat qui facere asperiores.
+              Dolor, non! Libero numquam hic praesentium omnis repudiandae
+              animi maiores illo, voluptate possimus tempora cumque?
+              Velit, corporis quam? Aperiam sit esse iste consectetur quos
+              expedita porro vero, velit minima eius exercitationem est dicta
+              assumenda dolorum doloribus incidunt tempore qui temporibus
+              consequuntur aut placeat sed? Aliquid.
+              Autem, officia! Dicta modi debitis, quaerat saepe est, fuga
+              nostrum dolor quidem laboriosam doloribus, quod tempore.
+              Accusantium nisi deleniti labore exercitationem ipsam sequi
+              suscipit illum amet, fuga iste. Saepe, dolores.
+              Vero, neque obcaecati. Id magni ullam neque dolores
+              ro fugiat facere officia aliquam, optio fugit enim! Corporis.
+              Dolores alias non natus eius quis harum blanditiis,
+              a voluptate modi, nobis possimus ab repellat et placeat
+              audantium fuga architecto doloribus obcaecati? Dolorem,
+              nulla animi consectetur error nostrum perferendis hic.
+              Error culpa in similique enim magni cumque officia
+              amet eum repudiandae dolorem quibusdam, minima nisi
+              fugiat natus blanditiis tempora temporibus! Maiores
+              totam consectetur dolor eos suscipit unde cum sed dolore?
+              Ut accusamus sapiente eaque, aspernatur sint nobis,
+              itaque iste repellat eligendi maxime commodi ab
+              magnam aut ducimus fugit quia dignissimos optio blanditiis
+              facilis eos similique, minus nisi laborum. Quas, veniam.
+            </p>
+          </template>
+          <template #actions>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.ERROR"
+              :size="ButtonSize.NORMAL"
+              @click="visiableScrollDialog = false"
+            >
+              Cancel
+            </Button>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+              @click="visiableScrollDialog = false"
             >
               I accept
             </Button>
@@ -1057,6 +1278,9 @@ const show1 = ref(true);
 const show2 = ref(false);
 
 const visiableBasicDialog = ref(false);
+const visiablePersistentDialog = ref(false);
+const visiableScrollText = ref(false);
+const visiableScrollDialog = ref(false);
 </script>
 
 <style module lang="scss">

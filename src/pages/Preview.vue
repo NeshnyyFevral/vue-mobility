@@ -1281,6 +1281,7 @@ const visiableBasicDialog = ref(false);
 const visiablePersistentDialog = ref(false);
 const visiableScrollText = ref(false);
 const visiableScrollDialog = ref(false);
+// ref
 </script>
 
 <style module lang="scss">

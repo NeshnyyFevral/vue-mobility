@@ -1196,6 +1196,20 @@
         </Dialog>
       </div>
     </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Basic dialog
+      </h3>
+      <div :class="$style.example">
+        <Select
+          :placeholder="'Basic select'"
+          :size="InputSize.SMALL"
+          :class="$style.input"
+          :radius="InputRadius.RECTANGLE"
+          :label="'select 1'"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -1219,6 +1233,7 @@ import Dialog from '@/components/Basic/Dialog.vue';
 import Input, { InputRadius, InputSize, InputVariant } from '@/components/Basic/Input.vue';
 import Radio, { RadioVariant } from '@/components/Basic/Radio.vue';
 import RadioGroup from '@/components/Basic/RadioGroup.vue';
+import Select from '@/components/Basic/Select.vue';
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';
 import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalStat.vue';
@@ -1281,7 +1296,6 @@ const visiableBasicDialog = ref(false);
 const visiablePersistentDialog = ref(false);
 const visiableScrollText = ref(false);
 const visiableScrollDialog = ref(false);
-// ref
 </script>
 
 <style module lang="scss">

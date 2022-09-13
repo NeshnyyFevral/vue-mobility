@@ -932,12 +932,18 @@
       </h3>
       <div :class="$style.example">
         <Select
-          :placeholder="'Basic select'"
-          :size="InputSize.SMALL"
-          :class="$style.input"
-          :radius="InputRadius.RECTANGLE"
-          :label="'select 1'"
-        />
+          :items="['fe', 'ef', 'wfewef', 'wefewweffwefwefergreg']"
+          @choice="choiceSelect"
+        >
+          <UserInput
+            :placeholder="'Basic input'"
+            :size="InputSize.SMALL"
+            :class="$style.input"
+            :radius="InputRadius.RECTANGLE"
+            :label="'select 1'"
+            :value="currentSelect1"
+          />
+        </Select>
       </div>
     </div>
   </div>
@@ -1017,6 +1023,12 @@ const rulesEmail = {
 const rulesPassword = [(value) => value.length >= 8 || 'min 8 characters'];
 const show1 = ref(true);
 const show2 = ref(false);
+
+const currentSelect1 = ref('');
+
+const choiceSelect = (item) => {
+  currentSelect1.value = item;
+};
 </script>
 
 <style module lang="scss">

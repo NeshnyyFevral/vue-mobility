@@ -33,6 +33,7 @@
       <component
         :is="tag"
         :id="label"
+        autocomplete="off"
         :type="type"
         :class="[
           $style.input,
@@ -398,6 +399,8 @@ const blurInput = () => {
     font-size: 14px;
     font-weight: 400;
     color: #616161;
+
+    // cursor: default;
     background-color: transparent;
     border: none;
     border-radius: var(--input-radius);

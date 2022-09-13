@@ -928,20 +928,62 @@
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
-        Basic dialog
+        Basic select
       </h3>
       <div :class="$style.example">
         <Select
-          :items="['fe', 'ef', 'wfewef', 'wefewweffwefwefergreg']"
-          @choice="choiceSelect"
+          :items="['option 1', 'option 2', 'option 3', 'option 4']"
+          @choice="(item) => {currentSelect1 = item}"
         >
           <UserInput
-            :placeholder="'Basic input'"
+            :placeholder="'Basic'"
             :size="InputSize.SMALL"
             :class="$style.input"
             :radius="InputRadius.RECTANGLE"
             :label="'select 1'"
             :value="currentSelect1"
+          />
+        </Select>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Outlined select
+      </h3>
+      <div :class="$style.example">
+        <Select
+          :items="['option 1', 'option 2', 'option 3', 'option 4']"
+          @choice="(item) => {currentSelect2 = item}"
+        >
+          <UserInput
+            :placeholder="'Outlined'"
+            :size="InputSize.SMALL"
+            :class="$style.input"
+            :radius="InputRadius.RECTANGLE"
+            :label="'select 2'"
+            :value="currentSelect2"
+            outlined
+          />
+        </Select>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Limit view select
+      </h3>
+      <div :class="$style.example">
+        <Select
+          :items="['option 1', 'option 2', 'option 3', 'option 4']"
+          :view="2"
+          @choice="(item) => {currentSelect3 = item}"
+        >
+          <UserInput
+            :placeholder="'Limit view'"
+            :size="InputSize.SMALL"
+            :class="$style.input"
+            :radius="InputRadius.RECTANGLE"
+            :label="'select 3'"
+            :value="currentSelect3"
           />
         </Select>
       </div>
@@ -1025,10 +1067,8 @@ const show1 = ref(true);
 const show2 = ref(false);
 
 const currentSelect1 = ref('');
-
-const choiceSelect = (item) => {
-  currentSelect1.value = item;
-};
+const currentSelect2 = ref('');
+const currentSelect3 = ref('');
 </script>
 
 <style module lang="scss">

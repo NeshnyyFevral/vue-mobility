@@ -1172,7 +1172,7 @@ const currentSelect3 = ref('');
     }
   }
 
-  @media screen and (max-width: 477px) {
+  @media screen and (max-width: 403px) {
     .radioGroupRow {
       margin-bottom: 20px;
     }

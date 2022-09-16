@@ -321,7 +321,6 @@ const clearInput = () => {
 
 const blurInput = () => {
   focus.value = false;
-  // dirty.value = !!props.value || !!finnalyValue.value;
   checkRules(props.rules);
 };
 </script>

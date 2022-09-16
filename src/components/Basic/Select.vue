@@ -83,6 +83,15 @@ watch(open, () => {
     z-index: 110;
     width: 100%;
     cursor: pointer;
+
+    &::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      content: '';
+    }
   }
 
   .list {

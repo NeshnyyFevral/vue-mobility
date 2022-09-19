@@ -7,7 +7,7 @@
       active && $style.active
     ]"
     :to="to"
-    @click="$emit('choiceLink')"
+    @click="onClick"
   >
     <span :class="$style.prependIcon">
       <slot name="prepend" />
@@ -15,14 +15,18 @@
     <h3 :class="$style.title">
       {{ title }}
     </h3>
+    <Ripple :items="items" />
   </router-link>
 </template>
 
 <script setup>
 import { computed } from 'vue';
 
+import Ripple from '@/components/Ripple.vue';
+import { useRipple } from '@/hooks/useRipple';
 import GlobalColors from '@/styles/colors';
 
+const emits = defineEmits(['choiceLink']);
 const props = defineProps({
   title: {
     type: String,
@@ -43,6 +47,22 @@ const props = defineProps({
 });
 
 const active = computed(() => props.title === props.activeLink);
+
+const {
+  add,
+  items,
+} = useRipple();
+
+const onClick = (event) => {
+  emits('choiceLink');
+  const button = event.target;
+
+  const left = event.pageX - button.clientLeft - 15;
+  const top = event.offsetY - button.clientTop - 15;
+  const rippleColor = getComputedStyle(button).color;
+
+  add(top, left, rippleColor);
+};
 </script>
 
 <style module lang="scss">
@@ -57,6 +77,8 @@ const active = computed(() => props.title === props.activeLink);
     min-width: 230px;
     padding: 10px 18px 10px 22px;
     margin-bottom: 5px;
+    overflow: hidden;
+    color: #fff;
     text-decoration: none;
     cursor: pointer;
     background: transparent;
@@ -64,6 +86,19 @@ const active = computed(() => props.title === props.activeLink);
     border-top-right-radius: 32px;
     border-bottom-right-radius: 32px;
     transition: background 0.3s cubic-bezier(.25,.8,.5,1);
+
+    &::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      display: block;
+      content: '';
+      background-color: none;
+      opacity: 0;
+    }
 
     &:hover {
       background: rgb(94 86 105 / 8%);

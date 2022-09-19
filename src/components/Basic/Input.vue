@@ -33,7 +33,7 @@
       <component
         :is="tag"
         :id="label"
-        autocomplete="off"
+        :autocomplete="autocomplete ?? name"
         :type="type"
         :class="[
           $style.input,
@@ -146,6 +146,15 @@ const props = defineProps({
   type: {
     type: String,
     default: 'text',
+  },
+  name: {
+    type: String,
+    default: '',
+  },
+  autocomplete: {
+    type: String,
+    default: 'off',
+    validator: (value) => ['off', 'on'].includes(value),
   },
   placeholder: {
     type: String,

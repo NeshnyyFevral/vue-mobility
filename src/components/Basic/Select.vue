@@ -37,25 +37,15 @@ import { ref, watch } from 'vue';
 import Arrow from '@/assets/icons/chevron-down.svg';
 
 const emits = defineEmits(['choice']);
-const props = defineProps({
+defineProps({
   items: {
     type: Array,
     default: () => [],
-  },
-  focus: {
-    type: Boolean,
-    default: false,
-  },
-  view: {
-    type: Number,
-    default: Number.MAX_VALUE,
   },
 });
 
 const open = ref(false);
 const root = ref(null);
-
-const listHeight = `${29.2 * props.view + 5}px`;
 
 const listClose = (event) => {
   if (!root.value?.contains(event.target)) {
@@ -83,27 +73,16 @@ watch(open, () => {
     z-index: 110;
     width: 100%;
     cursor: pointer;
-
-    &::after {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      content: '';
-    }
   }
 
   .list {
-    --list-height: v-bind(listHeight);
-
     position: absolute;
     top: 10px;
     z-index: 100;
     width: 100%;
-    height: var(--list-height);
+    max-height: 150px;
     padding: 5px 0;
-    overflow-y: auto;
+    overflow-y: scroll;
     background-color: #fff;
     border-radius: 2px;
     box-shadow: 0 4px 14px 0 rgb(94 86 105 / 14%);

@@ -941,7 +941,9 @@
             :class="$style.input"
             :radius="InputRadius.RECTANGLE"
             :label="'select 1'"
+            :autocomplete="'off'"
             :value="currentSelect1"
+            readonly
           />
         </Select>
       </div>
@@ -961,29 +963,10 @@
             :class="$style.input"
             :radius="InputRadius.RECTANGLE"
             :label="'select 2'"
+            :autocomplete="'off'"
             :value="currentSelect2"
+            readonly
             outlined
-          />
-        </Select>
-      </div>
-    </div>
-    <div :class="$style.item">
-      <h3 :class="$style.exampleTitle">
-        Limit view select
-      </h3>
-      <div :class="$style.example">
-        <Select
-          :items="['option 1', 'option 2', 'option 3', 'option 4']"
-          :view="2"
-          @choice="(item) => {currentSelect3 = item}"
-        >
-          <UserInput
-            :placeholder="'Limit view'"
-            :size="InputSize.SMALL"
-            :class="$style.input"
-            :radius="InputRadius.RECTANGLE"
-            :label="'select 3'"
-            :value="currentSelect3"
           />
         </Select>
       </div>
@@ -1068,7 +1051,6 @@ const show2 = ref(false);
 
 const currentSelect1 = ref('');
 const currentSelect2 = ref('');
-const currentSelect3 = ref('');
 </script>
 
 <style module lang="scss">

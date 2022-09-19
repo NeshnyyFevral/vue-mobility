@@ -21,14 +21,14 @@
         Button block
       </h3>
       <div :class="$style.example">
-        <UserButton
+        <Button
           :variant="ButtonVariant.PRIMARY"
           :size="ButtonSize.NORMAL"
           :class="$style.userButton"
           block
         >
           Button block
-        </UserButton>
+        </Button>
       </div>
     </div>
     <div :class="$style.item">
@@ -52,29 +52,29 @@
         Button borders
       </h3>
       <div :class="$style.example">
-        <UserButton
+        <Button
           :variant="ButtonVariant.PRIMARY"
           :size="ButtonSize.SMALL"
           :class="$style.userButton"
         >
           default
-        </UserButton>
-        <UserButton
+        </Button>
+        <Button
           :variant="ButtonVariant.PRIMARY"
           :size="ButtonSize.SMALL"
           :class="$style.userButton"
           outlined
         >
           outlined
-        </UserButton>
-        <UserButton
+        </Button>
+        <Button
           :variant="ButtonVariant.PRIMARY"
           :size="ButtonSize.SMALL"
           :class="$style.userButton"
           unlimited
         >
           unlimited
-        </UserButton>
+        </Button>
       </div>
     </div>
     <div :class="$style.item">

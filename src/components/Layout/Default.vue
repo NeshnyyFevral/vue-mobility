@@ -48,7 +48,9 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import {
+  onMounted, onUnmounted, ref,
+} from 'vue';
 
 import Footer from '@/components/Layout/Units/Footer.vue';
 import Header, { LanguageVariant } from '@/components/Layout/Units/Header.vue';

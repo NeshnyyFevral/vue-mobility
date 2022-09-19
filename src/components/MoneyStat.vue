@@ -23,35 +23,35 @@ const MoneyStatSizeMainValue = {
   SMALL: '14px',
   NORMAL: '24px',
   LARGE: '30px',
-  EXTRALARGE: '36px',
+  EXTRA_LARGE: '36px',
 };
 
 const MoneyStatSizeAfterValue = {
   SMALL: '11px',
   NORMAL: '14px',
   LARGE: '20px',
-  EXTRALARGE: '24px',
+  EXTRA_LARGE: '24px',
 };
 
 const MoneyStatSizeIconValue = {
   SMALL: '20px',
   NORMAL: '20px',
   LARGE: '25px',
-  EXTRALARGE: '30px',
+  EXTRA_LARGE: '30px',
 };
 
 const MoneyStatTopValue = {
   SMALL: '5px',
   NORMAL: '5px',
   LARGE: '6px',
-  EXTRALARGE: '7px',
+  EXTRA_LARGE: '7px',
 };
 
 const MoneyStatLeftValue = {
   SMALL: '3px',
   NORMAL: '3px',
   LARGE: '4px',
-  EXTRALARGE: '5px',
+  EXTRA_LARGE: '5px',
 };
 
 export const MoneyStatVariant = {
@@ -63,7 +63,7 @@ export const MoneyStatSize = {
   SMALL: 'small',
   NORMAL: 'normal',
   LARGE: 'large',
-  EXTRALARGE: 'extra large',
+  EXTRA_LARGE: 'extralarge',
 };
 </script>
 
@@ -85,47 +85,48 @@ const MapMonotone = {
   [MoneyStatVariant.UP]: GlobalColors.SUCCESS,
   [MoneyStatVariant.DOWN]: GlobalColors.ERROR,
 };
+
 const MapSizeMain = {
   [MoneyStatSize.SMALL]: MoneyStatSizeMainValue.SMALL,
   [MoneyStatSize.NORMAL]: MoneyStatSizeMainValue.NORMAL,
   [MoneyStatSize.LARGE]: MoneyStatSizeMainValue.LARGE,
-  [MoneyStatSize.EXTRALARGE]: MoneyStatSizeMainValue.EXTRALARGE,
+  [MoneyStatSize.EXTRA_LARGE]: MoneyStatSizeMainValue.EXTRA_LARGE,
 };
 
 const MapSizeAfter = {
   [MoneyStatSize.SMALL]: MoneyStatSizeAfterValue.SMALL,
   [MoneyStatSize.NORMAL]: MoneyStatSizeAfterValue.NORMAL,
   [MoneyStatSize.LARGE]: MoneyStatSizeAfterValue.LARGE,
-  [MoneyStatSize.EXTRALARGE]: MoneyStatSizeAfterValue.EXTRALARGE,
+  [MoneyStatSize.EXTRA_LARGE]: MoneyStatSizeAfterValue.EXTRA_LARGE,
 };
 
 const MapSizeIcon = {
   [MoneyStatSize.SMALL]: MoneyStatSizeIconValue.SMALL,
   [MoneyStatSize.NORMAL]: MoneyStatSizeIconValue.NORMAL,
   [MoneyStatSize.LARGE]: MoneyStatSizeIconValue.LARGE,
-  [MoneyStatSize.EXTRALARGE]: MoneyStatSizeIconValue.EXTRALARGE,
+  [MoneyStatSize.EXTRA_LARGE]: MoneyStatSizeIconValue.EXTRA_LARGE,
 };
 
 const MapSizeTop = {
   [MoneyStatSize.SMALL]: MoneyStatTopValue.SMALL,
   [MoneyStatSize.NORMAL]: MoneyStatTopValue.NORMAL,
   [MoneyStatSize.LARGE]: MoneyStatTopValue.LARGE,
-  [MoneyStatSize.EXTRALARGE]: MoneyStatTopValue.EXTRALARGE,
+  [MoneyStatSize.EXTRA_LARGE]: MoneyStatTopValue.EXTRA_LARGE,
 };
 
 const MapSizeLeft = {
   [MoneyStatSize.SMALL]: MoneyStatLeftValue.SMALL,
   [MoneyStatSize.NORMAL]: MoneyStatLeftValue.NORMAL,
   [MoneyStatSize.LARGE]: MoneyStatLeftValue.LARGE,
-  [MoneyStatSize.EXTRALARGE]: MoneyStatLeftValue.EXTRALARGE,
+  [MoneyStatSize.EXTRA_LARGE]: MoneyStatLeftValue.EXTRA_LARGE,
 };
+
 const afterColor = computed(() => MapMonotone[props.monotone]);
 const sizeMain = computed(() => MapSizeMain[props.size]);
 const sizeAfter = computed(() => MapSizeAfter[props.size]);
 const sizeIcon = computed(() => MapSizeIcon[props.size]);
 const top = computed(() => MapSizeTop[props.size]);
 const left = computed(() => MapSizeLeft[props.size]);
-
 </script>
 
 <style module lang="scss">

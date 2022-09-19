@@ -1,12 +1,23 @@
 <template>
-  <button :class="$style.button">
+  <button
+    :class="[
+      $style.button,
+      block && $style.block,
+      outlined && $style.outlined,
+      unlimited && $style.unlimited
+    ]"
+    @click="onClick"
+  >
     <slot />
+    <Ripple :items="items" />
   </button>
 </template>
 
 <script>
 import { computed } from '@vue/reactivity';
 
+import Ripple from '@/components/Ripple.vue';
+import { useRipple } from '@/hooks/useRipple';
 import GlobalColors from '@/styles/colors';
 
 const ButtonSizeValue = {
@@ -43,6 +54,18 @@ const props = defineProps({
     default: ButtonSize.NORMAL,
     validator: (value) => Object.values(ButtonSize).includes(value),
   },
+  block: {
+    type: Boolean,
+    default: false,
+  },
+  outlined: {
+    type: Boolean,
+    default: false,
+  },
+  unlimited: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const MapButtonVariant = {
@@ -62,6 +85,20 @@ const MapButtonSizes = {
 
 const color = computed(() => MapButtonVariant[props.variant]);
 const size = computed(() => MapButtonSizes[props.size]);
+
+const {
+  add,
+  items,
+} = useRipple();
+
+const onClick = (event) => {
+  const button = event.target;
+  const left = event.pageX - button.offsetLeft - 15;
+  const top = event.pageY - button.offsetTop - 15;
+
+  const rippleColor = getComputedStyle(button).color;
+  add(top, left, rippleColor);
+};
 </script>
 
 <style module lang="scss">
@@ -69,20 +106,70 @@ const size = computed(() => MapButtonSizes[props.size]);
     --button-color: v-bind(color);
     --button-size: v-bind(size);
 
+    position: relative;
+    z-index: 1000;
     padding: var(--button-size);
+    overflow: hidden;
     font-weight: 600;
     color: #fff;
     text-transform: uppercase;
     cursor: pointer;
     background-color: var(--button-color);
     border: none;
+    border-color: var(--button-color);
     border-radius: 5px;
     box-shadow: 0 4px 8px -4px var(--button-color);
     transition: box-shadow 0.25s linear, opacity 0.25s linear;
 
+    &::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      display: block;
+      content: '';
+      background-color: none;
+      opacity: 0;
+      transition: opacity 0.2s linear;
+    }
+
     &:hover {
-      box-shadow: 0 6px 20px -8px  var(--button-color);
+      box-shadow: 0 6px 20px -8px var(--button-color);
       opacity: 0.9;
+    }
+  }
+
+  .block {
+    min-width: 100%;
+    text-align: center;
+  }
+
+  .outlined {
+    color: var(--button-color);
+    border: 1px solid var(--button-color);
+  }
+
+  .unlimited {
+    color: var(--button-color);
+  }
+
+  .outlined,
+  .unlimited {
+    background-color: transparent;
+    box-shadow: none;
+
+    &::after {
+      background-color: var(--button-color);
+    }
+
+    &:hover::after {
+      opacity: 0.15;
+    }
+
+    &:hover {
+      box-shadow: none;
     }
   }
 </style>

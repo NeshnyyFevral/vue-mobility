@@ -18,6 +18,21 @@
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
+        Button block
+      </h3>
+      <div :class="$style.example">
+        <UserButton
+          :variant="ButtonVariant.PRIMARY"
+          :size="ButtonSize.NORMAL"
+          :class="$style.userButton"
+          block
+        >
+          Button block
+        </UserButton>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
         Button colors
       </h3>
       <div :class="$style.example">
@@ -29,6 +44,36 @@
           :class="$style.userButton"
         >
           {{ variant }}
+        </UserButton>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Button borders
+      </h3>
+      <div :class="$style.example">
+        <UserButton
+          :variant="ButtonVariant.PRIMARY"
+          :size="ButtonSize.SMALL"
+          :class="$style.userButton"
+        >
+          default
+        </UserButton>
+        <UserButton
+          :variant="ButtonVariant.PRIMARY"
+          :size="ButtonSize.SMALL"
+          :class="$style.userButton"
+          outlined
+        >
+          outlined
+        </UserButton>
+        <UserButton
+          :variant="ButtonVariant.PRIMARY"
+          :size="ButtonSize.SMALL"
+          :class="$style.userButton"
+          unlimited
+        >
+          unlimited
         </UserButton>
       </div>
     </div>
@@ -938,16 +983,30 @@ import Cross from '@/assets/icons/cross.svg';
 import EyeOff from '@/assets/icons/eye-off.svg';
 import EyeOn from '@/assets/icons/eye-on.svg';
 import Avatar, {
-  AvatarCorner, AvatarSize, AvatarTransparency, AvatarVariant,
+  AvatarCorner,
+  AvatarSize,
+  AvatarTransparency,
+  AvatarVariant,
 } from '@/components/Avatar.vue';
-import UserButton, { ButtonSize, ButtonVariant } from '@/components/Basic/Button.vue';
+import UserButton, {
+  ButtonSize,
+  ButtonVariant,
+} from '@/components/Basic/Button.vue';
 import Checkbox, { ChecboxVariant } from '@/components/Basic/Checkbox.vue';
-import UserInput, { InputRadius, InputSize, InputVariant } from '@/components/Basic/Input.vue';
+import UserInput, {
+  InputRadius, InputSize, InputVariant,
+} from '@/components/Basic/Input.vue';
 import Radio, { RadioVariant } from '@/components/Basic/Radio.vue';
 import RadioGroup from '@/components/Basic/RadioGroup.vue';
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
-import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';
-import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalStat.vue';
+import MoneyStat, {
+  MoneyStatSize,
+  MoneyStatVariant,
+} from '@/components/MoneyStat.vue';
+import TotalStat, {
+  TotalStatSize,
+  TotalStatVariant,
+} from '@/components/TotalStat.vue';
 
 const checkboxFirstValue = ref(true);
 const checkboxSecondValue = ref(false);

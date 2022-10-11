@@ -6,54 +6,58 @@
     <slot name="button" />
   </div>
 
-  <transition
-    :enter-active-class="$style.backEnterActive"
-    :leave-active-class="$style.backLeaveActive"
-    :enter-from-class="$style.backEnterFrom"
-    :leave-to-class="$style.backLeaveTo"
-  >
-    <div
-      v-if="visiable"
-      :class="$style.backdrop"
-      @click="close"
-    />
-  </transition>
-  <transition
-    :enter-active-class="$style.enterActive"
-    :leave-active-class="$style.leaveActive"
-    :enter-from-class="$style.enterFrom"
-    :leave-to-class="$style.leaveTo"
-  >
-    <div
-      v-if="visiable"
-      :class="[
-        $style.dialog,
-        cancel && $style.cancel
-      ]"
-      @click.stop
-      @animationend="cancel = false"
+  <Teleport to="body">
+    <transition
+      :enter-active-class="$style.backEnterActive"
+      :leave-active-class="$style.backLeaveActive"
+      :enter-from-class="$style.backEnterFrom"
+      :leave-to-class="$style.backLeaveTo"
     >
-      <div :class="$style.title">
-        <slot name="title" />
-      </div>
       <div
+        v-if="visiable"
+        :class="$style.backdrop"
+        @click="close"
+      />
+    </transition>
+    <transition
+      :enter-active-class="$style.enterActive"
+      :leave-active-class="$style.leaveActive"
+      :enter-from-class="$style.enterFrom"
+      :leave-to-class="$style.leaveTo"
+    >
+      <div
+        v-if="visiable"
         :class="[
-          $style.content,
-          scrollable && $style.scrollContent
+          $style.dialog,
+          cancel && $style.cancel
         ]"
+        @click.stop
+        @animationend="cancel = false"
       >
-        <slot name="content" />
+        <div :class="$style.title">
+          <slot name="title" />
+        </div>
+        <div
+          :class="[
+            $style.content,
+            scrollable && $style.scrollContent
+          ]"
+        >
+          <slot name="content" />
+        </div>
+        <div :class="$style.actions">
+          <slot name="actions" />
+        </div>
       </div>
-      <div :class="$style.actions">
-        <slot name="actions" />
-      </div>
-    </div>
-  </transition>
+    </transition>
+  </Teleport>
 </template>
 
 <script setup>
 import {
-  computed, ref, watch,
+  computed,
+  ref,
+  watch,
 } from 'vue';
 
 const props = defineProps({

@@ -81,18 +81,7 @@ const cancel = ref(false);
 
 const visiableComp = computed(() => props.visiable);
 
-const calcScrollWidth = () => {
-  const div = document.createElement('div');
-  div.style.overflowY = 'scroll';
-  div.style.width = '50px';
-  div.style.height = '50px';
-  document.body.append(div);
-  const scrollWidth = div.offsetWidth - div.clientWidth;
-  div.remove();
-
-  return scrollWidth;
-};
-
+const calcScrollWidth = () => window.innerWidth - document.documentElement.clientWidth;
 const scrollWidth = calcScrollWidth();
 
 watch(visiableComp, () => {

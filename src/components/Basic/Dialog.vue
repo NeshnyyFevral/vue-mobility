@@ -78,13 +78,12 @@ const props = defineProps({
 const emits = defineEmits(['close', 'open']);
 
 const cancel = ref(false);
-
 const visiableComp = computed(() => props.visiable);
 
 const calcScrollWidth = () => window.innerWidth - document.documentElement.clientWidth;
-const scrollWidth = calcScrollWidth();
 
 watch(visiableComp, () => {
+  const scrollWidth = calcScrollWidth();
   if (visiableComp.value) {
     document.body.style.overflow = 'hidden';
     if (document.body.offsetWidth > 1270) { document.body.style.marginRight = `${scrollWidth}px`; }

@@ -685,7 +685,7 @@
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
-        Input solo
+        Input disabled and readonly
       </h3>
       <div :class="$style.example">
         <Input

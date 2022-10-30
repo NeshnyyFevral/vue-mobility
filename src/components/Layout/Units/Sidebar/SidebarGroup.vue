@@ -19,9 +19,10 @@
         {{ title }}
       </h3>
       <ArrowIcon :class="$style.arrowIcon" />
+      <Ripple :items="items" />
     </button>
     <div
-      ref="items"
+      ref="listItems"
       :class="[
         $style.listItems,
         active && !closedItemsGroup && $style.listOpen,
@@ -45,6 +46,8 @@ import { computed, ref } from 'vue';
 
 import ArrowIcon from '@/assets/icons/chevron-down.svg';
 import SidebarItem from '@/components/Layout/Units/Sidebar/SidebarItem.vue';
+import Ripple from '@/components/Ripple.vue';
+import { useRipple } from '@/hooks/useRipple';
 
 const props = defineProps({
   title: {
@@ -82,12 +85,25 @@ const props = defineProps({
 });
 const emits = defineEmits(['openList', 'closeList', 'choiceLink']);
 
-const items = ref(null);
+const listItems = ref(null);
 const listHeight = ref(`${props.count * 49}px`);
 
 const active = computed(() => (props.activeList === props.title));
 
-const openList = () => {
+const {
+  add,
+  items,
+} = useRipple();
+
+const openList = (event) => {
+  const button = event.target;
+
+  const left = event.pageX - button.clientLeft - 15;
+  const top = event.offsetY - button.clientTop - 15;
+  const rippleColor = getComputedStyle(button).color;
+
+  add(top, left, rippleColor);
+
   if (active.value) {
     emits('closeList', '');
   } else {
@@ -115,13 +131,28 @@ const choiceLink = (title) => { emits('choiceLink', title); };
     width: 100%;
     padding: 10px 18px 10px 22px;
     margin-bottom: 5px;
+    overflow: hidden;
     font-size: 16px;
+    color: var(--text-color);
     cursor: pointer;
     background: #F5F5F5;
     border: none;
     border-top-right-radius: 32px;
     border-bottom-right-radius: 32px;
     transition: background-color 0.3s cubic-bezier(.25,.8,.5,1);
+
+    &::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      display: block;
+      content: '';
+      background-color: none;
+      opacity: 0;
+    }
 
     &:hover {
       background-color: rgb(94 86 105 / 8%);

@@ -1022,6 +1022,28 @@
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
+        Basic select
+      </h3>
+      <div :class="$style.example">
+        <Select
+          :items="['option 1', 'option 2', 'option 3', 'option 4']"
+          @choice="(item) => {currentSelect1 = item}"
+        >
+          <Input
+            :placeholder="'Basic'"
+            :size="InputSize.SMALL"
+            :class="$style.input"
+            :radius="InputRadius.RECTANGLE"
+            :label="'select 1'"
+            :autocomplete="'off'"
+            :value="currentSelect1"
+            readonly
+          />
+        </Select>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
         Persistent dialog
       </h3>
       <div :class="$style.example">
@@ -1078,6 +1100,29 @@
             </Button>
           </template>
         </Dialog>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Outlined select
+      </h3>
+      <div :class="$style.example">
+        <Select
+          :items="['option 1', 'option 2', 'option 3', 'option 4']"
+          @choice="(item) => {currentSelect2 = item}"
+        >
+          <Input
+            :placeholder="'Outlined'"
+            :size="InputSize.SMALL"
+            :class="$style.input"
+            :radius="InputRadius.RECTANGLE"
+            :label="'select 2'"
+            :autocomplete="'off'"
+            :value="currentSelect2"
+            readonly
+            outlined
+          />
+        </Select>
       </div>
     </div>
     <div :class="$style.item">
@@ -1268,6 +1313,7 @@ import Input, {
 } from '@/components/Basic/Input.vue';
 import Radio, { RadioVariant } from '@/components/Basic/Radio.vue';
 import RadioGroup from '@/components/Basic/RadioGroup.vue';
+import Select from '@/components/Basic/Select.vue';
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
 import MoneyStat, {
   MoneyStatSize,
@@ -1332,6 +1378,8 @@ const rulesPassword = [(value) => value.length >= 8 || 'min 8 characters'];
 const show1 = ref(true);
 const show2 = ref(false);
 
+const currentSelect1 = ref('');
+const currentSelect2 = ref('');
 const visiableBasicDialog = ref(false);
 const visiablePersistentDialog = ref(false);
 const visiableScrollText = ref(false);
@@ -1443,7 +1491,7 @@ const visiableScrollDialog = ref(false);
     }
   }
 
-  @media screen and (max-width: 405px) {
+  @media screen and (max-width: 403px) {
     .radioGroupRow {
       margin-bottom: 20px;
     }

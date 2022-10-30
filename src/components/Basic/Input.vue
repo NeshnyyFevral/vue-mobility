@@ -33,6 +33,7 @@
       <component
         :is="tag"
         :id="label"
+        :autocomplete="autocomplete ?? name"
         :type="type"
         :class="[
           $style.input,
@@ -96,7 +97,9 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue';
+import {
+  computed, ref, watch,
+} from 'vue';
 
 import Cross from '@/assets/icons/cross.svg';
 import GlobalColors from '@/styles/colors';
@@ -145,6 +148,15 @@ const props = defineProps({
   type: {
     type: String,
     default: 'text',
+  },
+  name: {
+    type: String,
+    default: '',
+  },
+  autocomplete: {
+    type: String,
+    default: 'off',
+    validator: (value) => ['off', 'on'].includes(value),
   },
   placeholder: {
     type: String,
@@ -241,6 +253,11 @@ const focus = ref(false);
 const error = ref(false);
 const dirty = ref(!!finnalyValue.value);
 
+watch(() => props.value, () => {
+  inputValue.value = props.value;
+  dirty.value = !!props.value;
+});
+
 const MapInputVariant = {
   [InputVariant.ERROR]: GlobalColors.ERROR,
   [InputVariant.PRIMARY]: GlobalColors.PRIMARY,
@@ -294,7 +311,7 @@ const checkRules = (rules) => {
 const checkValue = (event) => {
   inputValue.value = event.target.value;
   finnalyValue.value = props.prefix + inputValue.value + props.suffix;
-  dirty.value = !!finnalyValue.value;
+  dirty.value = !!props.value || !!finnalyValue.value;
   focus.value = true;
 
   if (props.progress) {
@@ -392,6 +409,8 @@ const blurInput = () => {
     font-size: 14px;
     font-weight: 400;
     color: #616161;
+
+    // cursor: default;
     background-color: transparent;
     border: none;
     border-radius: var(--input-radius);

@@ -97,7 +97,9 @@
 </template>
 
 <script>
-import { computed, ref, watch } from 'vue';
+import {
+  computed, ref, watch,
+} from 'vue';
 
 import Cross from '@/assets/icons/cross.svg';
 import GlobalColors from '@/styles/colors';

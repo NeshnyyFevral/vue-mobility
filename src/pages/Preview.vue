@@ -5,7 +5,7 @@
         Button sizes
       </h3>
       <div :class="$style.example">
-        <UserButton
+        <Button
           v-for="size in Object.values(ButtonSize)"
           :key="size"
           :variant="ButtonVariant.PRIMARY"
@@ -13,7 +13,22 @@
           :class="$style.userButton"
         >
           {{ size }}
-        </UserButton>
+        </Button>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Button block
+      </h3>
+      <div :class="$style.example">
+        <Button
+          :variant="ButtonVariant.PRIMARY"
+          :size="ButtonSize.NORMAL"
+          :class="$style.userButton"
+          block
+        >
+          Button block
+        </Button>
       </div>
     </div>
     <div :class="$style.item">
@@ -21,7 +36,7 @@
         Button colors
       </h3>
       <div :class="$style.example">
-        <UserButton
+        <Button
           v-for="variant in Object.values(ButtonVariant)"
           :key="variant"
           :variant="variant"
@@ -29,7 +44,37 @@
           :class="$style.userButton"
         >
           {{ variant }}
-        </UserButton>
+        </Button>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Button borders
+      </h3>
+      <div :class="$style.example">
+        <Button
+          :variant="ButtonVariant.PRIMARY"
+          :size="ButtonSize.SMALL"
+          :class="$style.userButton"
+        >
+          default
+        </Button>
+        <Button
+          :variant="ButtonVariant.PRIMARY"
+          :size="ButtonSize.SMALL"
+          :class="$style.userButton"
+          outlined
+        >
+          outlined
+        </Button>
+        <Button
+          :variant="ButtonVariant.PRIMARY"
+          :size="ButtonSize.SMALL"
+          :class="$style.userButton"
+          unlimited
+        >
+          unlimited
+        </Button>
       </div>
     </div>
     <div :class="$style.item">
@@ -564,7 +609,7 @@
         Input Basic
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Basic input'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -578,7 +623,7 @@
         Input outlined
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Outlined input'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -592,7 +637,7 @@
         Input shaped
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Shaped'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -607,7 +652,7 @@
         Input size
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           v-for="size in Object.values(InputSize)"
           :key="size"
           :placeholder="size"
@@ -625,7 +670,7 @@
         Input radius
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           v-for="radius in Object.values(InputRadius)"
           :key="radius"
           :placeholder="radius"
@@ -643,7 +688,7 @@
         Input solo
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Disabled'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -651,7 +696,7 @@
           :value="'Jhon Doe'"
           disabled
         />
-        <UserInput
+        <Input
           :placeholder="'Readonly'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -666,7 +711,7 @@
         Input counter
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Regular'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -683,7 +728,7 @@
         Input maxlength
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Regular'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -700,7 +745,7 @@
         Custom colors
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'First name'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -715,7 +760,7 @@
         Input clearable
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'First name'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -730,7 +775,7 @@
         Input prefixes and suffixes
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Email address'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -738,7 +783,7 @@
           :value="'ivan.turovskiy'"
           :suffix="'@gmail.com'"
         />
-        <UserInput
+        <Input
           :placeholder="'Amount'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -753,7 +798,7 @@
         Validation
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Email address'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -768,7 +813,7 @@
         Validate on blur
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Email address'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -784,7 +829,7 @@
         Input uses slot
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 15'"
@@ -795,7 +840,7 @@
             <span>cross</span>
             <Cross :class="$style.icon" />
           </div>
-        </UserInput>
+        </Input>
       </div>
     </div>
     <div :class="$style.item">
@@ -803,7 +848,7 @@
         Input progress
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 16'"
@@ -819,7 +864,7 @@
         Input icons
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 17'"
@@ -829,8 +874,8 @@
           <template #prepend>
             <EyeOff :class="$style.prependInputIcon" />
           </template>
-        </UserInput>
-        <UserInput
+        </Input>
+        <Input
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 18'"
@@ -841,8 +886,8 @@
           <template #prependInner>
             <EyeOn :class="$style.prependInputIcon" />
           </template>
-        </UserInput>
-        <UserInput
+        </Input>
+        <Input
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 19'"
@@ -852,8 +897,8 @@
           <template #appendInner>
             <EyeOff :class="$style.appendInputIcon" />
           </template>
-        </UserInput>
-        <UserInput
+        </Input>
+        <Input
           :size="InputSize.SMALL"
           :class="$style.input"
           :label="'input 20'"
@@ -863,7 +908,7 @@
           <template #append>
             <EyeOn :class="$style.appendInputIcon" />
           </template>
-        </UserInput>
+        </Input>
       </div>
     </div>
     <div :class="$style.item">
@@ -871,7 +916,7 @@
         Input password
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :size="InputSize.SMALL"
           :class="[$style.input, $style.password]"
           :label="'input 21'"
@@ -889,8 +934,8 @@
               @focus="show1 = !show1"
             />
           </template>
-        </UserInput>
-        <UserInput
+        </Input>
+        <Input
           :size="InputSize.SMALL"
           :class="[$style.input, $style.password]"
           :label="'input 22'"
@@ -908,7 +953,7 @@
               @focus="show2 = !show2"
             />
           </template>
-        </UserInput>
+        </Input>
       </div>
     </div>
     <div :class="$style.item">
@@ -916,7 +961,7 @@
         Input solo
       </h3>
       <div :class="$style.example">
-        <UserInput
+        <Input
           :placeholder="'Solo'"
           :size="InputSize.SMALL"
           :class="$style.input"
@@ -928,6 +973,55 @@
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
+        Basic dialog
+      </h3>
+      <div :class="$style.example">
+        <Dialog
+          :visiable="visiableBasicDialog"
+          @close="visiableBasicDialog = false"
+          @open="visiableBasicDialog = true"
+        >
+          <template #button>
+            <Button
+              :class="$style.button"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+            >
+              click me
+            </Button>
+          </template>
+          <template #title>
+            Police
+          </template>
+          <template #content>
+            <p :class="$style.dialogContent">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Aliquid inventore vero nesciunt ea
+            </p>
+          </template>
+          <template #actions>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.ERROR"
+              :size="ButtonSize.NORMAL"
+              @click="visiableBasicDialog = false"
+            >
+              Cancel
+            </Button>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+              @click="visiableBasicDialog = false"
+            >
+              I accept
+            </Button>
+          </template>
+        </Dialog>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
         Basic select
       </h3>
       <div :class="$style.example">
@@ -935,7 +1029,7 @@
           :items="['option 1', 'option 2', 'option 3', 'option 4']"
           @choice="(item) => {currentSelect1 = item}"
         >
-          <UserInput
+          <Input
             :placeholder="'Basic'"
             :size="InputSize.SMALL"
             :class="$style.input"
@@ -950,6 +1044,66 @@
     </div>
     <div :class="$style.item">
       <h3 :class="$style.exampleTitle">
+        Persistent dialog
+      </h3>
+      <div :class="$style.example">
+        <Dialog
+          persistent
+          :visiable="visiablePersistentDialog"
+          @close="visiablePersistentDialog = false"
+          @open="visiablePersistentDialog = true"
+        >
+          <template #button>
+            <Button
+              :class="$style.button"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+            >
+              click me
+            </Button>
+          </template>
+          <template #title>
+            Police
+          </template>
+          <template #content>
+            <p :class="$style.dialogContent">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Aliquid inventore vero nesciunt Lorem ipsum
+              dolor sit amet consectetur, adipisicing elit.
+              Assumenda repudiandae iure cum laboriosam in, amet
+              incidunt corrupti optio soluta velit, reprehenderit
+              iste? Consequatur dolor itaque quisquam ad reprehenderit
+              id. Dolore.
+              Quibusdam cum molestias reprehenderit nemo ex nam
+              nesciunt impedit totam necessitatibus, quam, alias,
+              perspiciatis deleniti iusto possimus molestiae laborum
+              voluptate. Maiores eos corrupti dolorem dignissimos est
+              delectus, autem tempora blanditiis.
+            </p>
+          </template>
+          <template #actions>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.ERROR"
+              :size="ButtonSize.NORMAL"
+              @click="visiablePersistentDialog = false"
+            >
+              Cancel
+            </Button>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+              @click="visiablePersistentDialog = false"
+            >
+              I accept
+            </Button>
+          </template>
+        </Dialog>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
         Outlined select
       </h3>
       <div :class="$style.example">
@@ -957,7 +1111,7 @@
           :items="['option 1', 'option 2', 'option 3', 'option 4']"
           @choice="(item) => {currentSelect2 = item}"
         >
-          <UserInput
+          <Input
             :placeholder="'Outlined'"
             :size="InputSize.SMALL"
             :class="$style.input"
@@ -969,6 +1123,167 @@
             outlined
           />
         </Select>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Scroll dialog content
+      </h3>
+      <div :class="$style.example">
+        <Dialog
+          :visiable="visiableScrollText"
+          scrollable
+          @close="visiableScrollText = false"
+          @open="visiableScrollText = true"
+        >
+          <template #button>
+            <Button
+              :class="$style.button"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+            >
+              click me
+            </Button>
+          </template>
+          <template #title>
+            Police
+          </template>
+          <template #content>
+            <p :class="$style.dialogContent">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Aliquid inventore vero nesciunt Lorem ipsum
+              dolor sit amet consectetur, adipisicing elit.
+              Assumenda repudiandae iure cum laboriosam in, amet
+              incidunt corrupti optio soluta velit, reprehenderit
+              iste? Consequatur dolor itaque
+              quisquam ad reprehenderit id. Dolore.
+              Quibusdam cum molestias reprehenderit nemo ex nam
+              nesciunt impedit totam necessitatibus, quam, alias,
+              perspiciatis deleniti iusto possimus molestiae laborum
+              voluptate. Maiores eos corrupti dolorem dignissimos est
+              delectus, autem tempora blanditiis.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Aliquid inventore vero nesciunt Lorem ipsum
+              dolor sit amet consectetur, adipisicing elit.
+              Assumenda repudiandae iure cum laboriosam in, amet
+              incidunt corrupti optio soluta velit, reprehenderit
+              iste? Consequatur dolor itaque
+              quisquam ad reprehenderit id. Dolore.
+              Quibusdam cum molestias reprehenderit nemo ex nam
+              nesciunt impedit totam necessitatibus, quam, alias,
+              perspiciatis deleniti iusto possimus molestiae laborum
+              voluptate. Maiores eos corrupti dolorem dignissimos est
+              delectus, autem tempora blanditiis.
+            </p>
+          </template>
+          <template #actions>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.ERROR"
+              :size="ButtonSize.NORMAL"
+              @click="visiableScrollText = false"
+            >
+              Cancel
+            </Button>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+              @click="visiableScrollText = false"
+            >
+              I accept
+            </Button>
+          </template>
+        </Dialog>
+      </div>
+    </div>
+    <div :class="$style.item">
+      <h3 :class="$style.exampleTitle">
+        Overflow content
+      </h3>
+      <div :class="$style.example">
+        <Dialog
+          :visiable="visiableScrollDialog"
+          @close="visiableScrollDialog = false"
+          @open="visiableScrollDialog = true"
+        >
+          <template #button>
+            <Button
+              :class="$style.button"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+            >
+              click me
+            </Button>
+          </template>
+          <template #title>
+            Police
+          </template>
+          <template #content>
+            <p :class="$style.dialogContent">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Aliquid inventore vero nesciunt Lorem ipsum
+              dolor sit amet consectetur, adipisicing elit.
+              Assumenda repudiandae iure cum laboriosam in, amet
+              incidunt corrupti optio soluta velit, reprehenderit
+              iste? Consequatur dolor itaque quisquam ad reprehenderit
+              id. Dolore.
+              Quibusdam cum molestias reprehenderit nemo ex nam
+              nesciunt impedit totam necessitatibus, quam, alias,
+              perspiciatis deleniti iusto possimus molestiae laborum
+              voluptate. Maiores eos corrupti dolorem dignissimos est
+              delectus, autem tempora blanditiis. Lorem ipsum dolor
+              sit amet consectetur adipisicing elit. Doloremque,
+              dicta aut earum nobis accusamus odio nemo! Delectus
+              ea ipsa eius? Beatae labore praesentium alias, aperiam
+              nemo sequi saepe dolorum nisi.
+              Exercitationem iure fuga unde ut, quasi veniam, possimus
+              temporibus voluptatum, a quaerat qui facere asperiores.
+              Dolor, non! Libero numquam hic praesentium omnis repudiandae
+              animi maiores illo, voluptate possimus tempora cumque?
+              Velit, corporis quam? Aperiam sit esse iste consectetur quos
+              expedita porro vero, velit minima eius exercitationem est dicta
+              assumenda dolorum doloribus incidunt tempore qui temporibus
+              consequuntur aut placeat sed? Aliquid.
+              Autem, officia! Dicta modi debitis, quaerat saepe est, fuga
+              nostrum dolor quidem laboriosam doloribus, quod tempore.
+              Accusantium nisi deleniti labore exercitationem ipsam sequi
+              suscipit illum amet, fuga iste. Saepe, dolores.
+              Vero, neque obcaecati. Id magni ullam neque dolores
+              ro fugiat facere officia aliquam, optio fugit enim! Corporis.
+              Dolores alias non natus eius quis harum blanditiis,
+              a voluptate modi, nobis possimus ab repellat et placeat
+              audantium fuga architecto doloribus obcaecati? Dolorem,
+              nulla animi consectetur error nostrum perferendis hic.
+              Error culpa in similique enim magni cumque officia
+              amet eum repudiandae dolorem quibusdam, minima nisi
+              fugiat natus blanditiis tempora temporibus! Maiores
+              totam consectetur dolor eos suscipit unde cum sed dolore?
+              Ut accusamus sapiente eaque, aspernatur sint nobis,
+              itaque iste repellat eligendi maxime commodi ab
+              magnam aut ducimus fugit quia dignissimos optio blanditiis
+              facilis eos similique, minus nisi laborum. Quas, veniam.
+            </p>
+          </template>
+          <template #actions>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.ERROR"
+              :size="ButtonSize.NORMAL"
+              @click="visiableScrollDialog = false"
+            >
+              Cancel
+            </Button>
+            <Button
+              :class="$style.action"
+              :variant="ButtonVariant.PRIMARY"
+              :size="ButtonSize.NORMAL"
+              @click="visiableScrollDialog = false"
+            >
+              I accept
+            </Button>
+          </template>
+        </Dialog>
       </div>
     </div>
   </div>
@@ -983,17 +1298,31 @@ import Cross from '@/assets/icons/cross.svg';
 import EyeOff from '@/assets/icons/eye-off.svg';
 import EyeOn from '@/assets/icons/eye-on.svg';
 import Avatar, {
-  AvatarCorner, AvatarSize, AvatarTransparency, AvatarVariant,
+  AvatarCorner,
+  AvatarSize,
+  AvatarTransparency,
+  AvatarVariant,
 } from '@/components/Avatar.vue';
-import UserButton, { ButtonSize, ButtonVariant } from '@/components/Basic/Button.vue';
+import Button, { ButtonSize, ButtonVariant } from '@/components/Basic/Button.vue';
 import Checkbox, { ChecboxVariant } from '@/components/Basic/Checkbox.vue';
-import UserInput, { InputRadius, InputSize, InputVariant } from '@/components/Basic/Input.vue';
+import Dialog from '@/components/Basic/Dialog.vue';
+import Input, {
+  InputRadius,
+  InputSize,
+  InputVariant,
+} from '@/components/Basic/Input.vue';
 import Radio, { RadioVariant } from '@/components/Basic/Radio.vue';
 import RadioGroup from '@/components/Basic/RadioGroup.vue';
 import Select from '@/components/Basic/Select.vue';
 import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
-import MoneyStat, { MoneyStatSize, MoneyStatVariant } from '@/components/MoneyStat.vue';
-import TotalStat, { TotalStatSize, TotalStatVariant } from '@/components/TotalStat.vue';
+import MoneyStat, {
+  MoneyStatSize,
+  MoneyStatVariant,
+} from '@/components/MoneyStat.vue';
+import TotalStat, {
+  TotalStatSize,
+  TotalStatVariant,
+} from '@/components/TotalStat.vue';
 
 const checkboxFirstValue = ref(true);
 const checkboxSecondValue = ref(false);
@@ -1051,6 +1380,10 @@ const show2 = ref(false);
 
 const currentSelect1 = ref('');
 const currentSelect2 = ref('');
+const visiableBasicDialog = ref(false);
+const visiablePersistentDialog = ref(false);
+const visiableScrollText = ref(false);
+const visiableScrollDialog = ref(false);
 </script>
 
 <style module lang="scss">
@@ -1146,6 +1479,10 @@ const currentSelect2 = ref('');
 
   .password + .password {
     margin-top: 60px;
+  }
+
+  .action:not(:last-child) {
+    margin-right: 5px;
   }
 
   @media screen and (max-width: 996px) {

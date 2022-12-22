@@ -1,42 +1,33 @@
-$InterFontBold: 
-  700,
+$InterFontBold: 700,
   'Inter-Bold.woff2',
   'Inter-Bold.woff',
   'Inter-Bold';
-
-$InterFontSemiBold: 
-  600,
+$InterFontSemiBold: 600,
   'Inter-SemiBold.woff2',
   'Inter-SemiBold.woff',
   'Inter-SemiBold';
-
-$InterFontMedium:
-  500,
+$InterFontMedium: 500,
   'Inter-Medium.woff2',
   'Inter-Medium.woff',
   'Inter-Medium';
-
-$InterFontRegular:
-  400,
+$InterFontRegular: 400,
   'Inter-Regular.woff2',
   'Inter-Regular.woff',
   'Inter-Regular';
-
-$InterFontLight:
-  300,
+$InterFontLight: 300,
   'Inter-LightBETA.woff2',
   'Inter-LightBETA.woff',
   'Inter-LightBETA';
 
 @each $weight, $woff2, $woff, $local in 
-$InterFontBold, $InterFontSemiBold, $InterFontMedium, $InterFontRegular, $InterFontLight {
-  @font-face{
-    font-family: 'Inter';
-    font-weight: $weight;
+  $InterFontBold, $InterFontSemiBold, $InterFontMedium, $InterFontRegular, $InterFontLight {
+  @font-face {
+    font-family: Inter;
     font-style: normal;
+    font-weight: $weight;
     src: local($local),
-    url('../fonts/#{$woff2}') format('woff2'),
-    url('../fonts/#{$woff}') format('woff');
+      url('../fonts/#{$woff2}') format('woff2'),
+      url('../fonts/#{$woff}') format('woff');
     font-display: swap;
   }
 }

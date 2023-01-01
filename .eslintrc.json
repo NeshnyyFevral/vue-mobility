@@ -15,7 +15,6 @@
     "simple-import-sort",
     "vue",
     "unicorn"
-    // "modules-newlines"
   ],
   "settings": {
     "import/resolver": {
@@ -30,6 +29,7 @@
     "no-console": "off",
     "import/no-extraneous-dependencies": "off",
     "no-param-reassign": "off",
+    "class-methods-use-this": "off",
     "import/prefer-default-export": "off",
     "no-restricted-syntax": "off",
     "simple-import-sort/imports": "error",
@@ -42,13 +42,11 @@
       "ImportDeclaration": { "multiline": true, "minProperties": 3 },
       "ExportDeclaration": { "multiline": true, "minProperties": 3 }
     }],
-    // "modules-newlines/import-declaration-newline": "error",
-    // "modules-newlines/export-declaration-newline": "error",
     "import/extensions": [
-      "error", 
-      "never", { 
-        "js": "never", 
-        "vue": "always" 
+      "error",
+      "never", {
+        "js": "never",
+        "vue": "always"
       }
     ],
     "indent": [

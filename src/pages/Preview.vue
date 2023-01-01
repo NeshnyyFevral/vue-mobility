@@ -335,7 +335,7 @@
           :label="'checkbox 1'"
           :class="$style.checkbox"
           :value="checkboxFirstValue"
-          :variant="ChecboxVariant.PRIMARY"
+          :variant="CheckboxVariant.PRIMARY"
           @changeValue="checkboxFirstValue = !checkboxFirstValue"
         >
           {{ computedCheckboxFirstValue }}
@@ -344,7 +344,7 @@
           :label="'checkbox 2'"
           :class="$style.checkbox"
           :value="checkboxSecondValue"
-          :variant="ChecboxVariant.PRIMARY"
+          :variant="CheckboxVariant.PRIMARY"
           @changeValue="checkboxSecondValue = !checkboxSecondValue"
         >
           {{ computedCheckboxSecondValue }}
@@ -357,7 +357,7 @@
       </h3>
       <div :class="$style.example">
         <Checkbox
-          v-for="variant in Object.values(ChecboxVariant)"
+          v-for="variant in Object.values(CheckboxVariant)"
           :key="variant"
           :label="`${variant}Checkbox`"
           :class="$style.checkbox"
@@ -378,7 +378,7 @@
           :label="'onDisabledCheckbox'"
           :class="$style.checkbox"
           :value="true"
-          :variant="ChecboxVariant.PRIMARY"
+          :variant="CheckboxVariant.PRIMARY"
           disabled
         >
           on disabled
@@ -387,7 +387,7 @@
           :label="'offDisabledCheckbox'"
           :class="$style.checkbox"
           :value="false"
-          :variant="ChecboxVariant.PRIMARY"
+          :variant="CheckboxVariant.PRIMARY"
           disabled
         >
           off disabled
@@ -403,7 +403,7 @@
           :label="'anotherValueFirst'"
           :class="$style.checkbox"
           :value="checkboxAnotherFirstValue"
-          :variant="ChecboxVariant.PRIMARY"
+          :variant="CheckboxVariant.PRIMARY"
           @changeValue="checkboxAnotherFirstValue = !checkboxAnotherFirstValue"
         >
           {{ anotherValueFirst }}
@@ -412,7 +412,7 @@
           :label="'anotherValueSecond'"
           :class="$style.checkbox"
           :value="checkboxAnotherSecondValue"
-          :variant="ChecboxVariant.SUCCESS"
+          :variant="CheckboxVariant.SUCCESS"
           @changeValue="checkboxAnotherSecondValue = !checkboxAnotherSecondValue"
         >
           {{ anotherValueSecond }}
@@ -428,7 +428,7 @@
           :class="$style.checkbox"
           :label="'switch 1'"
           :value="switchFirstValue"
-          :variant="ChecboxVariant.PRIMARY"
+          :variant="CheckboxVariant.PRIMARY"
           toggle
           @changeValue="switchFirstValue = !switchFirstValue"
         >
@@ -438,7 +438,7 @@
           :class="$style.checkbox"
           :label="'switch 2'"
           :value="switchSecondValue"
-          :variant="ChecboxVariant.PRIMARY"
+          :variant="CheckboxVariant.PRIMARY"
           toggle
           @changeValue="switchSecondValue = !switchSecondValue"
         >
@@ -452,7 +452,7 @@
       </h3>
       <div :class="$style.example">
         <Checkbox
-          v-for="variant in Object.values(ChecboxVariant)"
+          v-for="variant in Object.values(CheckboxVariant)"
           :key="variant"
           :class="$style.checkbox"
           :label="`${variant}Switch`"
@@ -474,7 +474,7 @@
           :class="$style.checkbox"
           :label="'switch 3'"
           :value="false"
-          :variant="ChecboxVariant.PRIMARY"
+          :variant="CheckboxVariant.PRIMARY"
           toggle
           disabled
         >
@@ -484,7 +484,7 @@
           :class="$style.checkbox"
           :label="'switch 4'"
           :value="true"
-          :variant="ChecboxVariant.PRIMARY"
+          :variant="CheckboxVariant.PRIMARY"
           toggle
           disabled
         >
@@ -501,7 +501,7 @@
           :class="$style.checkbox"
           :label="'switch 5'"
           :value="switchMergeValue"
-          :variant="ChecboxVariant.PRIMARY"
+          :variant="CheckboxVariant.PRIMARY"
           toggle
           @changeValue="switchMergeValue = !switchMergeValue"
         >
@@ -1304,7 +1304,7 @@ import Avatar, {
   AvatarVariant,
 } from '@/components/Avatar.vue';
 import Button, { ButtonSize, ButtonVariant } from '@/components/Basic/Button.vue';
-import Checkbox, { ChecboxVariant } from '@/components/Basic/Checkbox.vue';
+import Checkbox, { CheckboxVariant } from '@/components/Basic/Checkbox.vue';
 import Dialog from '@/components/Basic/Dialog.vue';
 import Input, {
   InputRadius,

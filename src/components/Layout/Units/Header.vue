@@ -17,6 +17,16 @@
       </button>
     </div>
     <div :class="$style.right">
+      <Checkbox
+        :class="$style.checkbox"
+        :label="'switch 5'"
+        :value="themeValue"
+        :variant="CheckboxVariant.DARK"
+        toggle
+        @changeValue="themeValue = !themeValue"
+      >
+        {{ displayedThemeValue }}
+      </Checkbox>
       <button :class="$style.languageButton">
         <img
           :src="languageIcon"
@@ -48,13 +58,17 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import {
+  computed, ref, watch,
+} from 'vue';
 
+import appStorage from '@/appStorage';
 import NotifyIcon from '@/assets/icons/Header/notification.svg';
 import SearchIcon from '@/assets/icons/Header/search.svg';
 import ThemeDarkIcon from '@/assets/icons/Header/themeDark.svg';
 import MenuIcon from '@/assets/icons/Sidebar/menu.svg';
 import Avatar, { AvatarCorner, AvatarSize } from '@/components/Avatar.vue';
+import Checkbox, { CheckboxVariant } from '@/components/Basic/Checkbox.vue';
 import GlobalColors from '@/styles/colors';
 
 export const LanguageVariant = {
@@ -70,15 +84,24 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+
   language: {
     type: String,
     default: LanguageVariant.ENGLISH,
     validator: (value) => Object.values(LanguageVariant).includes(value),
   },
+
   width: {
     type: String,
     required: true,
   },
+});
+
+const themeValue = ref(false);
+const displayedThemeValue = computed(() => (themeValue.value === true ? 'Dark' : 'Light'));
+
+watch(themeValue, () => {
+  appStorage.set('themeColor', themeValue.value ? 1 : 0);
 });
 
 const languageIcon = computed(() => new URL(`../../../assets/icons/Header/${props.language}.png`, import.meta.url));
@@ -147,6 +170,7 @@ const languageIcon = computed(() => new URL(`../../../assets/icons/Header/${prop
 
   .languageButton {
     position: relative;
+    margin-left: 40px;
     color: var(--text-color);
     cursor: pointer;
     background: transparent;

@@ -1,8 +1,6 @@
 import vitePluginVue from '@vitejs/plugin-vue';
 import path from 'path';
-import {
-  defineConfig,
-} from 'vite';
+import { defineConfig } from 'vite';
 import vitePluginEslint from 'vite-plugin-eslint';
 import viteStylelintPlugin from 'vite-plugin-stylelint';
 import viteSvgLoader from 'vite-svg-loader';
@@ -24,13 +22,7 @@ export default defineConfig({
       },
     },
   },
-  build: {
-    outDir: './docs',
-  },
+  build: { outDir: './docs' },
   base: '/vue-mobility/',
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-  },
+  resolve: { alias: { '@': path.resolve(__dirname, './src') } },
 });

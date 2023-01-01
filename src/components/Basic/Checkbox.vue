@@ -35,20 +35,23 @@
 <script>
 import { computed } from 'vue';
 
+import appStorage from '@/appStorage';
 import CheckIcon from '@/assets/icons/check-mark.svg';
 import GlobalColors from '@/styles/colors';
 
-export const ChecboxVariant = {
+export const CheckboxVariant = {
   PRIMARY: 'primary',
   WARNING: 'warning',
   ERROR: 'error',
   SUCCESS: 'success',
   DEFAULT: 'default',
   INFO: 'info',
+  DARK: 'dark',
 };
 </script>
 
 <script setup>
+
 const emits = defineEmits(['changeValue']);
 
 const props = defineProps({
@@ -70,21 +73,26 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: ChecboxVariant.DEFAULT,
-    validator: (value) => Object.values(ChecboxVariant).includes(value),
+    default: CheckboxVariant.DEFAULT,
+    validator: (value) => Object.values(CheckboxVariant).includes(value),
   },
 });
 
-const MapCheckboxVarian = {
-  [ChecboxVariant.DEFAULT]: GlobalColors.DEFAULT,
-  [ChecboxVariant.ERROR]: GlobalColors.ERROR,
-  [ChecboxVariant.INFO]: GlobalColors.INFO,
-  [ChecboxVariant.PRIMARY]: GlobalColors.PRIMARY,
-  [ChecboxVariant.SUCCESS]: GlobalColors.SUCCESS,
-  [ChecboxVariant.WARNING]: GlobalColors.WARNING,
+const MapCheckboxVariant = {
+  [CheckboxVariant.DEFAULT]: GlobalColors.DEFAULT,
+  [CheckboxVariant.ERROR]: GlobalColors.ERROR,
+  [CheckboxVariant.INFO]: GlobalColors.INFO,
+  [CheckboxVariant.PRIMARY]: GlobalColors.PRIMARY,
+  [CheckboxVariant.SUCCESS]: GlobalColors.SUCCESS,
+  [CheckboxVariant.WARNING]: GlobalColors.WARNING,
+  [CheckboxVariant.DARK]: '#2b2b2b',
 };
 
-const color = computed(() => MapCheckboxVarian[props.variant]);
+const color = computed(() => MapCheckboxVariant[props.variant]);
+const textColor = computed(() => {
+  console.log(appStorage.get('colorTheme') ? '#fff' : GlobalColors.DEFAULT);
+  return appStorage.get('colorTheme') ? '#fff' : GlobalColors.DEFAULT;
+});
 </script>
 
 <style module lang="scss">
@@ -96,7 +104,7 @@ const color = computed(() => MapCheckboxVarian[props.variant]);
   }
 
   .text {
-    --checkbox-color: v-bind(GlobalColors.DEFAULT);
+    --checkbox-color: v-bind(textColor);
 
     display: flex;
     align-items: center;

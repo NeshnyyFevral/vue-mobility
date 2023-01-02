@@ -120,6 +120,7 @@ const selectHover = computed(() => (themeStore.theme ? theme.LIGHT_TEXT : theme.
     z-index: 10;
     width: 25px;
     height: 25px;
+    fill: var(--select-text);
     transition: transform 0.2s cubic-bezier(.25,.8,.5,1);
     transform: translateY(-50%);
   }

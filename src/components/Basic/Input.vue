@@ -102,7 +102,9 @@ import {
 } from 'vue';
 
 import Cross from '@/assets/icons/cross.svg';
+import { useThemeStore } from '@/stores/theme';
 import GlobalColors from '@/styles/colors';
+import theme from '@/styles/theme';
 
 const InputSizeValue = {
   SMALL: '40px',
@@ -139,6 +141,7 @@ export const InputVariant = {
 </script>
 
 <script setup>
+const themeStore = useThemeStore();
 const props = defineProps({
   variant: {
     type: String,
@@ -290,6 +293,8 @@ const progressColor = computed(
     GlobalColors.SUCCESS,
   ][Math.floor(Number.parseInt(progressWidth.value, 10) / 40)],
 );
+const inputColor = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT));
+const descBg = computed(() => (themeStore.theme ? theme.DARK_BG_CARD : theme.LIGHT_BG_CARD));
 
 const checkRules = (rules) => {
   let fail = false;
@@ -339,6 +344,8 @@ const blurInput = () => {
 <style module lang="scss">
 
   .root {
+    --text-color: v-bind(inputColor);
+
     display: flex;
     align-items: center;
     width: 100%;
@@ -408,9 +415,7 @@ const blurInput = () => {
     padding: 13px 0 4px;
     font-size: 14px;
     font-weight: 400;
-    color: #616161;
-
-    // cursor: default;
+    color: var(--text-color);
     background-color: transparent;
     border: none;
     border-radius: var(--input-radius);
@@ -460,15 +465,18 @@ const blurInput = () => {
   }
 
   .desc {
-    --desc-color: v-bind(GlobalColors.DEFAULT);
+    --desc-color: v-bind(inputColor);
+    --desc-bg: v-bind(descBg);
 
     position: absolute;
     top: 50%;
     left: 0;
+    padding: 0 5px;
     font-size: 16px;
     font-weight: 400;
     color: var(--desc-color);
     pointer-events: none;
+    border-radius: 10px;
     transition: transform 0.3s cubic-bezier(.25,.8,.5,1),
       scale 0.3s cubic-bezier(.25,.8,.5,1),
       top 0.3s cubic-bezier(.25,.8,.5,1),
@@ -483,13 +491,14 @@ const blurInput = () => {
 
   .outlined .details .desc {
     left: 12px;
-    background-color: #fff;
+    background-color: var(--desc-bg);
+    transition: background-color 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
   .dirty + .details .desc {
     top: 0;
-    color: #616161;
-    transform: translateY(-20%) scale(0.75);
+    color: var(--text-color);
+    transform: translateY(-35%) scale(0.75);
   }
 
   .error .container .details .desc {
@@ -503,7 +512,7 @@ const blurInput = () => {
 
     top: 0;
     color: var(--desc-color);
-    transform: translateY(-20%) scale(0.75);
+    transform: translateY(-35%) scale(0.75);
   }
 
   .solo .dirty + .details .desc {
@@ -617,7 +626,7 @@ const blurInput = () => {
     width: 20px;
     height: 20px;
     cursor: pointer;
-    fill: #616161;
+    fill: var(--text-color);
     transition: fill 0.2s linear;
   }
 
@@ -656,6 +665,7 @@ const blurInput = () => {
   .appendInner,
   .prependInner {
     cursor: pointer;
+    fill: var(--text-color);
     transition: fill 0.2s cubic-bezier(.25,.8,.5,1);
   }
 

@@ -19,7 +19,7 @@
     <div :class="$style.right">
       <Checkbox
         :class="$style.checkbox"
-        :label="'switch 5'"
+        :label="'switchTheme'"
         :value="themeValue"
         :variant="CheckboxVariant.DARK"
         toggle
@@ -59,7 +59,8 @@
 
 <script>
 import {
-  computed, ref, watch,
+  computed, onMounted,
+  ref, watch,
 } from 'vue';
 
 import appStorage from '@/appStorage';
@@ -69,7 +70,8 @@ import ThemeDarkIcon from '@/assets/icons/Header/themeDark.svg';
 import MenuIcon from '@/assets/icons/Sidebar/menu.svg';
 import Avatar, { AvatarCorner, AvatarSize } from '@/components/Avatar.vue';
 import Checkbox, { CheckboxVariant } from '@/components/Basic/Checkbox.vue';
-import GlobalColors from '@/styles/colors';
+import { useThemeStore } from '@/stores/theme';
+import theme from '@/styles/theme';
 
 export const LanguageVariant = {
   ENGLISH: 'English',
@@ -79,6 +81,8 @@ export const LanguageVariant = {
 </script>
 
 <script setup>
+
+const themeStore = useThemeStore();
 const props = defineProps({
   active: {
     type: Boolean,
@@ -98,18 +102,27 @@ const props = defineProps({
 });
 
 const themeValue = ref(false);
-const displayedThemeValue = computed(() => (themeValue.value === true ? 'Dark' : 'Light'));
+const displayedThemeValue = computed(() => (themeValue.value ? 'Dark' : 'Light'));
 
 watch(themeValue, () => {
   appStorage.set('themeColor', themeValue.value ? 1 : 0);
+  themeStore.changeTheme();
 });
 
 const languageIcon = computed(() => new URL(`../../../assets/icons/Header/${props.language}.png`, import.meta.url));
+
+onMounted(() => {
+  themeValue.value = !!appStorage.get('themeColor');
+  themeStore.changeTheme();
+});
+
+const background = computed(() => (themeStore.theme ? theme.DARK_BG_HEADER : theme.LIGHT_BG_HEADER));
+const color = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT));
 </script>
 
 <style module lang="scss">
   .root {
-    --text-color: v-bind(GlobalColors.DEFAULT);
+    --text-color: v-bind(color);
 
     display: flex;
     align-items: center;
@@ -117,7 +130,7 @@ const languageIcon = computed(() => new URL(`../../../assets/icons/Header/${prop
     padding: 10px 0;
     margin-bottom: 40px;
     transition: padding 0.2s cubic-bezier(.25,.8,.5,1),
-      background-color 0.2s cubic-bezier(.25,.8,.5,1),
+      background-color 0.3s cubic-bezier(.25,.8,.5,1),
       width 0.2s cubic-bezier(.25,.8,.5,1);
   }
 
@@ -195,13 +208,14 @@ const languageIcon = computed(() => new URL(`../../../assets/icons/Header/${prop
 
   .active {
     --header-width: v-bind(props.width);
+    --header-bg: v-bind(background);
 
     position: fixed;
     top: 0;
     z-index: 8888;
     width: var(--header-width);
     padding: 10px 20px;
-    background-color: #fff;
+    background-color: var(--header-bg);
     border-radius: 0 0 10px 10px;
     box-shadow: 0 4px 8px -4px rgb(94 86 105 / 42%);
   }

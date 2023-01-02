@@ -49,13 +49,17 @@
 
 <script setup>
 import {
+  computed,
   onMounted, onUnmounted, ref,
 } from 'vue';
 
 import Footer from '@/components/Layout/Units/Footer.vue';
 import Header, { LanguageVariant } from '@/components/Layout/Units/Header.vue';
 import Sidebar from '@/components/Layout/Units/Sidebar/Sidebar.vue';
+import { useThemeStore } from '@/stores/theme';
+import theme from '@/styles/theme';
 
+const themeStore = useThemeStore();
 const active = ref(false);
 const openSidebar = ref(false);
 const activeSidebar = ref(false);
@@ -69,14 +73,19 @@ const scroll = () => {
 
 onMounted(() => { window.addEventListener('scroll', scroll); });
 onUnmounted(() => { window.removeEventListener('scroll', scroll); });
+
+const colorText = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT));
 </script>
 
 <style module lang="scss">
   .root {
+    --color-text: v-bind(colorText);
+
     display: flex;
     max-width: 1400px;
     padding: 0 15px;
     margin: 0 auto;
+    color: var(--color-text);
   }
 
   .content {

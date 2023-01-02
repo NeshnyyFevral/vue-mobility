@@ -35,9 +35,10 @@
 <script>
 import { computed } from 'vue';
 
-import appStorage from '@/appStorage';
 import CheckIcon from '@/assets/icons/check-mark.svg';
+import { useThemeStore } from '@/stores/theme';
 import GlobalColors from '@/styles/colors';
+import theme from '@/styles/theme';
 
 export const CheckboxVariant = {
   PRIMARY: 'primary',
@@ -51,6 +52,7 @@ export const CheckboxVariant = {
 </script>
 
 <script setup>
+const themeStore = useThemeStore();
 
 const emits = defineEmits(['changeValue']);
 
@@ -88,11 +90,9 @@ const MapCheckboxVariant = {
   [CheckboxVariant.DARK]: '#2b2b2b',
 };
 
+const textColor = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT));
 const color = computed(() => MapCheckboxVariant[props.variant]);
-const textColor = computed(() => {
-  console.log(appStorage.get('colorTheme') ? '#fff' : GlobalColors.DEFAULT);
-  return appStorage.get('colorTheme') ? '#fff' : GlobalColors.DEFAULT;
-});
+
 </script>
 
 <style module lang="scss">

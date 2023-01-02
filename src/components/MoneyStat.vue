@@ -17,7 +17,9 @@
 <script>
 import { computed } from '@vue/reactivity';
 
+import { useThemeStore } from '@/stores/theme';
 import GlobalColors from '@/styles/colors';
+import theme from '@/styles/theme';
 
 const MoneyStatSizeMainValue = {
   SMALL: '14px',
@@ -68,6 +70,7 @@ export const MoneyStatSize = {
 </script>
 
 <script setup>
+const themeStore = useThemeStore();
 const props = defineProps({
   monotone: {
     type: String,
@@ -127,6 +130,7 @@ const sizeAfter = computed(() => MapSizeAfter[props.size]);
 const sizeIcon = computed(() => MapSizeIcon[props.size]);
 const top = computed(() => MapSizeTop[props.size]);
 const left = computed(() => MapSizeLeft[props.size]);
+const color = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT));
 </script>
 
 <style module lang="scss">
@@ -138,12 +142,13 @@ const left = computed(() => MapSizeLeft[props.size]);
 
   .main {
     --stat-size: v-bind(sizeMain);
+    --text-color: v-bind(color);
 
     margin-right: 5px;
     font-size: var(--stat-size);
     font-weight: 500;
     line-height: var(--stat-size);
-    color: #616161;
+    color: var(--text-color);
   }
 
   .after {

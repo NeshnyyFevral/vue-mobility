@@ -24,7 +24,11 @@ import { computed } from 'vue';
 
 import Ripple from '@/components/Ripple.vue';
 import { useRipple } from '@/hooks/useRipple';
+import { useThemeStore } from '@/stores/theme';
 import GlobalColors from '@/styles/colors';
+import theme from '@/styles/theme';
+
+const themeStore = useThemeStore();
 
 const emits = defineEmits(['choiceLink']);
 const props = defineProps({
@@ -63,11 +67,13 @@ const onClick = (event) => {
 
   add(top, left, rippleColor);
 };
+
+const color = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT));
 </script>
 
 <style module lang="scss">
   .root {
-    --text-color: rgb(94 86 105 / 87%);
+    --text-color: v-bind(color);
 
     position: relative;
     z-index: 99;
@@ -96,7 +102,7 @@ const onClick = (event) => {
       z-index: 100;
       display: block;
       content: '';
-      background-color: none;
+      background: none;
       opacity: 0;
     }
 

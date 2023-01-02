@@ -48,7 +48,10 @@ import ArrowIcon from '@/assets/icons/chevron-down.svg';
 import SidebarItem from '@/components/Layout/Units/Sidebar/SidebarItem.vue';
 import Ripple from '@/components/Ripple.vue';
 import { useRipple } from '@/hooks/useRipple';
+import { useThemeStore } from '@/stores/theme';
+import theme from '@/styles/theme';
 
+const themeStore = useThemeStore();
 const props = defineProps({
   title: {
     type: String,
@@ -112,11 +115,14 @@ const openList = (event) => {
 };
 
 const choiceLink = (title) => { emits('choiceLink', title); };
+const background = computed(() => (themeStore.theme ? theme.DARK_BG_SIDEBAR : theme.LIGHT_BG_SIDEBAR));
+const textColor = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT));
 </script>
 
 <style module lang="scss">
   .root {
-    --text-color: rgb(94 86 105 / 87%);
+    --text-color: v-bind(textColor);
+    --group-bg: v-bind(background);
 
     position: relative;
     z-index: 100;
@@ -135,7 +141,7 @@ const choiceLink = (title) => { emits('choiceLink', title); };
     font-size: 16px;
     color: var(--text-color);
     cursor: pointer;
-    background: #F5F5F5;
+    background-color: var(--group-bg);
     border: none;
     border-top-right-radius: 32px;
     border-bottom-right-radius: 32px;
@@ -150,7 +156,7 @@ const choiceLink = (title) => { emits('choiceLink', title); };
       z-index: 100;
       display: block;
       content: '';
-      background-color: none;
+      background: none;
       opacity: 0;
     }
 

@@ -65,22 +65,20 @@
 <script setup>
 import { computed, ref } from 'vue';
 
-// import CalendarIcon from '@/assets/icons/Sidebar/calendar.svg';
 import CrossIcon from '@/assets/icons/cross.svg';
 import CardsIcon from '@/assets/icons/Sidebar/cards.svg';
-// import ChatIcon from '@/assets/icons/Sidebar/chat.svg';
 import ComponentsIcon from '@/assets/icons/Sidebar/components.svg';
 import DashboardsIcon from '@/assets/icons/Sidebar/dashboards.svg';
-// import EmailIcon from '@/assets/icons/Sidebar/email.svg';
-// import GamificationIcon from '@/assets/icons/Sidebar/gamification.svg';
-// import IconsIcon from '@/assets/icons/Sidebar/icons.svg';
 import InvoiceIcon from '@/assets/icons/Sidebar/invoice.svg';
 import LogoIcon from '@/assets/icons/Sidebar/logo.svg';
 import PagesIcon from '@/assets/icons/Sidebar/pages.svg';
-// import TypographyIcon from '@/assets/icons/Sidebar/typography.svg';
 import UserIcon from '@/assets/icons/Sidebar/user.svg';
 import SidebarGroup from '@/components/Layout/Units/Sidebar/SidebarGroup.vue';
 import { Routes } from '@/router';
+import { useThemeStore } from '@/stores/theme';
+import theme from '@/styles/theme';
+
+const themeStore = useThemeStore();
 
 const props = defineProps({
   open: {
@@ -192,10 +190,16 @@ const SidebarTree = [
     ],
   },
 ];
+
+const background = computed(() => (themeStore.theme ? theme.DARK_BG_SIDEBAR : theme.LIGHT_BG_SIDEBAR));
+const colorTitle = computed(() => (themeStore.theme ? theme.DARK_TITLE : theme.LIGHT_TITLE));
 </script>
 
 <style module lang="scss">
   .root {
+    --sidebar-bg: v-bind(background);
+    --title-color: v-bind(colorTitle);
+
     position: fixed;
     top: 0;
     left: 0;
@@ -204,9 +208,10 @@ const SidebarTree = [
     height: 100vh;
     padding: 0;
     overflow: hidden;
-    background-color: #F5F5F5;
+    background-color: var(--sidebar-bg);
     transition: width 0.3s cubic-bezier(.25,.8,.5,1),
-      transform 0.3s cubic-bezier(.25,.8,.5,1);
+      transform 0.3s cubic-bezier(.25,.8,.5,1),
+      background-color 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
   .open {
@@ -237,7 +242,7 @@ const SidebarTree = [
   .titleLogo {
     display: block;
     font-size: 20px;
-    color: rgb(94 86 105 / 87%);
+    color: var(--title-color);
     text-transform: uppercase;
   }
 
@@ -257,9 +262,10 @@ const SidebarTree = [
     height: 16px;
     cursor: pointer;
     background-color: transparent;
-    border: 2px solid rgb(94 86 105 / 87%);
+    border: 2px solid var(--title-color);
     border-radius: 50%;
-    transition: right 0.3s cubic-bezier(.25,.8,.5,1);
+    transition: right 0.3s cubic-bezier(.25,.8,.5,1),
+      background-color 0.3s cubic-bezier(.25,.8,.5,1);
     transform: translateY(-50%);
 
     &::after {
@@ -269,10 +275,11 @@ const SidebarTree = [
       width: 5px;
       height: 5px;
       content: '';
-      background-color: rgb(94 86 105 / 87%);
+      background-color: var(--title-color);
       border-radius: 50%;
       opacity: 0;
-      transition: opacity 0.2s cubic-bezier(.25,.8,.5,1);
+      transition: opacity 0.2s cubic-bezier(.25,.8,.5,1),
+        background-color 0.3s cubic-bezier(.25,.8,.5,1);
       transform: translate3d(-50%, -50%, 0);
     }
   }
@@ -321,7 +328,7 @@ const SidebarTree = [
     height: 100%;
     padding-right: 10px;
     font-size: 16px;
-    color: rgb(94 86 105 / 87%);
+    color: var(--title-color);
 
   }
 
@@ -340,7 +347,8 @@ const SidebarTree = [
     font-weight: 400;
     text-transform: uppercase;
     white-space: nowrap;
-    background-color: #F5F5F5;
+    background-color: var(--sidebar-bg);
+    transition: background-color 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
   .line {
@@ -388,7 +396,7 @@ const SidebarTree = [
       width: 28px;
       height: 28px;
       border: none;
-      fill: rgb(94 86 105 / 87%);
+      fill: var(--title-color);
 
       &::after {
         display: none;
@@ -396,7 +404,7 @@ const SidebarTree = [
     }
 
     .menu {
-      fill: rgb(94 86 105 / 87%);
+      fill: var(--title-color);
     }
   }
 </style>

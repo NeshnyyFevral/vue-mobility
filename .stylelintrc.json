@@ -13,6 +13,7 @@
     "declaration-block-trailing-semicolon": "always",
     "block-opening-brace-space-before": "always",
     "selector-combinator-space-before": "always",
+    "scss/double-slash-comment-whitespace-inside": null,
     "declaration-colon-space-after": "always-single-line",
     "value-keyword-case": [
       "lower", {

@@ -1323,6 +1323,10 @@ import TotalStat, {
   TotalStatSize,
   TotalStatVariant,
 } from '@/components/TotalStat.vue';
+import { useThemeStore } from '@/stores/theme';
+import theme from '@/styles/theme';
+
+const themeStore = useThemeStore();
 
 const checkboxFirstValue = ref(true);
 const checkboxSecondValue = ref(false);
@@ -1384,10 +1388,15 @@ const visiableBasicDialog = ref(false);
 const visiablePersistentDialog = ref(false);
 const visiableScrollText = ref(false);
 const visiableScrollDialog = ref(false);
+
+const cardBg = computed(() => (themeStore.theme ? theme.DARK_BG_CARD : theme.LIGHT_BG_CARD));
+const titleColor = computed(() => (themeStore.theme ? theme.DARK_TITLE : theme.LIGHT_TITLE));
 </script>
 
 <style module lang="scss">
   .container {
+    --title-color: v-bind(titleColor);
+
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
@@ -1406,14 +1415,17 @@ const visiableScrollDialog = ref(false);
   .exampleTitle {
     margin-bottom: 10px;
     font-size: 30px;
-    color: #616161;
+    color: var(--title-color);
   }
 
   .item {
+    --color-bg: v-bind(cardBg);
+
     padding: 20px;
     padding-bottom: 25px;
-    background-color: #fff;
+    background-color: var(--color-bg);
     border-radius: 12px;
+    transition: background-color 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
   .slot {

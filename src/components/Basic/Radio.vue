@@ -23,7 +23,9 @@
 <script>
 import { computed } from 'vue';
 
+import { useThemeStore } from '@/stores/theme';
 import GlobalColors from '@/styles/colors';
+import theme from '@/styles/theme';
 
 export const RadioVariant = {
   PRIMARY: 'primary',
@@ -36,6 +38,7 @@ export const RadioVariant = {
 </script>
 
 <script setup>
+const themeStore = useThemeStore();
 const props = defineProps({
   label: {
     type: String,
@@ -74,11 +77,14 @@ const MapRadioVarian = {
 };
 
 const color = computed(() => MapRadioVarian[props.variant]);
+const textColor = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT));
+const cycleColor = computed(() => (themeStore.theme ? theme.LIGHT_TEXT : theme.DARK_TEXT));
 </script>
 
 <style module lang="scss">
   .container {
     --radio-color: v-bind(color);
+    --text-color: v-bind(textColor);
 
     position: relative;
     display: flex;
@@ -87,8 +93,6 @@ const color = computed(() => MapRadioVarian[props.variant]);
   }
 
   .text {
-    --text-color: v-bind(GlobalColors.DEFAULT);
-
     position: relative;
     display: flex;
     align-items: center;
@@ -124,7 +128,7 @@ const color = computed(() => MapRadioVarian[props.variant]);
   }
 
   .cycle {
-    --cycle-color: v-bind(GlobalColors.DEFAULT);
+    --cycle-color: v-bind(cycleColor);
 
     position: absolute;
     top: -11px;

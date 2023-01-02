@@ -12,7 +12,9 @@
 <script>
 import { computed } from '@vue/reactivity';
 
+import { useThemeStore } from '@/stores/theme';
 import GlobalColors from '@/styles/colors';
+import theme from '@/styles/theme';
 
 const TotalStatSizeMainValue = {
   SMALL: '16px',
@@ -50,6 +52,8 @@ export const TotalStatSize = {
 </script>
 
 <script setup>
+const themeStore = useThemeStore();
+
 const props = defineProps({
   monotone: {
     type: String,
@@ -93,7 +97,7 @@ const afterColor = computed(() => MapMonotone[props.monotone]);
 const sizeMain = computed(() => MapSizeMain[props.size]);
 const sizeAfter = computed(() => MapSizeAfter[props.size]);
 const top = computed(() => MapSizeTop[props.size]);
-
+const color = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT));
 </script>
 
 <style module lang="scss">
@@ -105,11 +109,12 @@ const top = computed(() => MapSizeTop[props.size]);
 
   .main {
     --stat-size: v-bind(sizeMain);
+    --text-color: v-bind(color);
 
     margin-right: 5px;
     font-size: var(--stat-size);
     font-weight: 500;
-    color: #616161;
+    color: var(--text-color);
   }
 
   .after {

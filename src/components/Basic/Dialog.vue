@@ -60,6 +60,10 @@ import {
   watch,
 } from 'vue';
 
+import { useThemeStore } from '@/stores/theme';
+import theme from '@/styles/theme';
+
+const themeStore = useThemeStore();
 const props = defineProps({
   visiable: {
     type: Boolean,
@@ -101,6 +105,8 @@ const close = () => {
   }
 };
 const open = () => { emits('open'); };
+const dialogBg = computed(() => (themeStore.theme ? theme.DARK_BG_CARD : theme.LIGHT_BG_CARD));
+const color = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT));
 </script>
 
 <style module lang="scss">
@@ -116,6 +122,9 @@ const open = () => { emits('open'); };
   }
 
   .dialog {
+    --dialog-bg: v-bind(dialogBg);
+    --dialog-text: v-bind(color);
+
     position: fixed;
     top: 50%;
     left: 50%;
@@ -137,14 +146,14 @@ const open = () => { emits('open'); };
     margin-bottom: 10px;
     font-size: 20px;
     font-weight: 600;
-    color: rgb(94 86 105 / 87%);
+    color: #333;
   }
 
   .content {
     margin-bottom: 15px;
     font-size: 14px;
     line-height: 1.5;
-    color: rgb(94 86 105 / 68%);
+    color: #333;
   }
 
   .scrollContent {

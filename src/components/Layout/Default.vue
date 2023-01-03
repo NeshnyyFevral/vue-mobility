@@ -50,12 +50,17 @@
 <script setup>
 import {
   computed,
+  onBeforeMount,
   onMounted, onUnmounted, ref,
 } from 'vue';
+import { useRouter } from 'vue-router';
 
+import appStorage from '@/appStorage';
 import Footer from '@/components/Layout/Units/Footer.vue';
-import Header, { LanguageVariant } from '@/components/Layout/Units/Header.vue';
+import Header from '@/components/Layout/Units/Header.vue';
 import Sidebar from '@/components/Layout/Units/Sidebar/Sidebar.vue';
+import { LanguageVariant } from '@/model/header';
+import { Routes } from '@/router';
 import { useThemeStore } from '@/stores/theme';
 import theme from '@/styles/theme';
 
@@ -70,8 +75,15 @@ const scroll = () => {
   headerWidth.value = wrapper.value?.clientWidth || 0;
   active.value = !!window.scrollY;
 };
-
+onBeforeMount(() => {
+  if (!appStorage.get('authUser')) { // user
+    useRouter().push(Routes.LOGIN);
+  } else {
+    useRouter().push(Routes.CRM);
+  }
+});
 onMounted(() => { window.addEventListener('scroll', scroll); });
+
 onUnmounted(() => { window.removeEventListener('scroll', scroll); });
 
 const colorText = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT));

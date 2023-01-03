@@ -20,24 +20,14 @@
   </label>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue';
 
+import { RadioVariant } from '@/model/radio';
 import { useThemeStore } from '@/stores/theme';
 import GlobalColors from '@/styles/colors';
 import theme from '@/styles/theme';
 
-export const RadioVariant = {
-  PRIMARY: 'primary',
-  WARNING: 'warning',
-  ERROR: 'error',
-  SUCCESS: 'success',
-  DEFAULT: 'default',
-  INFO: 'info',
-};
-</script>
-
-<script setup>
 const themeStore = useThemeStore();
 const props = defineProps({
   label: {

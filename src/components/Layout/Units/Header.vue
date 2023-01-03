@@ -38,7 +38,10 @@
       <button :class="[$style.button, $style.notify]">
         <NotifyIcon />
       </button>
-      <button :class="$style.button">
+      <button
+        :class="$style.button"
+        @click="exit"
+      >
         <Avatar
           :corner="AvatarCorner.DEFAULT"
           :class="$style.avatar"
@@ -54,30 +57,27 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import {
   computed, onMounted,
   ref, watch,
 } from 'vue';
+import { useRouter } from 'vue-router';
 
 import appStorage from '@/appStorage';
 import NotifyIcon from '@/assets/icons/Header/notification.svg';
 import SearchIcon from '@/assets/icons/Header/search.svg';
 import MenuIcon from '@/assets/icons/Sidebar/menu.svg';
-import Avatar, { AvatarCorner, AvatarSize } from '@/components/Avatar.vue';
-import Checkbox, { CheckboxVariant } from '@/components/Basic/Checkbox.vue';
+import Avatar from '@/components/Avatar.vue';
+import Checkbox from '@/components/Basic/Checkbox.vue';
+import { AvatarCorner, AvatarSize } from '@/model/avatar';
+import { CheckboxVariant } from '@/model/checkbox';
+import { LanguageVariant } from '@/model/header';
+import { Routes } from '@/router';
 import { useThemeStore } from '@/stores/theme';
 import theme from '@/styles/theme';
 
-export const LanguageVariant = {
-  ENGLISH: 'English',
-  FRENCH: 'French',
-  ARABIC: 'Arabic',
-};
-</script>
-
-<script setup>
-
+const router = useRouter();
 const themeStore = useThemeStore();
 const props = defineProps({
   active: {
@@ -111,6 +111,11 @@ onMounted(() => {
   themeValue.value = !!appStorage.get('themeColor');
   themeStore.changeTheme();
 });
+
+const exit = () => {
+  appStorage.removeItem('authUser');
+  router.push(Routes.LOGIN);
+};
 
 const background = computed(() => (themeStore.theme ? theme.DARK_BG_HEADER : theme.LIGHT_BG_HEADER));
 const color = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT));

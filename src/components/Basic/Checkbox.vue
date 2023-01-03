@@ -32,26 +32,15 @@
   </label>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue';
 
 import CheckIcon from '@/assets/icons/check-mark.svg';
+import { CheckboxVariant } from '@/model/checkbox';
 import { useThemeStore } from '@/stores/theme';
 import GlobalColors from '@/styles/colors';
 import theme from '@/styles/theme';
 
-export const CheckboxVariant = {
-  PRIMARY: 'primary',
-  WARNING: 'warning',
-  ERROR: 'error',
-  SUCCESS: 'success',
-  DEFAULT: 'default',
-  INFO: 'info',
-  DARK: 'dark',
-};
-</script>
-
-<script setup>
 const themeStore = useThemeStore();
 
 const emits = defineEmits(['changeValue']);

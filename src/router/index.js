@@ -4,6 +4,7 @@ export const Routes = {
   PREVIEW: 'preview',
   CRM: 'crm',
   LOGIN: 'login',
+  REGISTRATION: 'registration',
 };
 
 export default function createRouter() {
@@ -11,9 +12,14 @@ export default function createRouter() {
     history: createWebHistory(),
     routes: [
       {
-        path: '/vue-mobility/',
+        path: '/vue-mobility/login',
         name: Routes.LOGIN,
         component: () => import('@/pages/Login.vue'),
+      },
+      {
+        path: '/vue-mobility/registration',
+        name: Routes.REGISTRATION,
+        component: () => import('@/pages/Registration.vue'),
       },
       {
         path: '/vue-mobility/',
@@ -21,7 +27,7 @@ export default function createRouter() {
         component: () => import('@/components/Layout/Default.vue'),
         children: [
           {
-            path: '/vue-mobility/CRM',
+            path: 'CRM',
             name: Routes.CRM,
             component: () => import('@/pages/CRM.vue'),
           },

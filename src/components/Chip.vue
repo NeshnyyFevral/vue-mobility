@@ -4,34 +4,16 @@
   </span>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue';
 
+import {
+  ChipSize,
+  ChipSizeValue,
+  ChipVariant,
+} from '@/model/chip';
 import GlobalColors from '@/styles/colors';
 
-const ChipSizeValue = {
-  SMALL: '2px 7px',
-  NORMAL: '5px 10px',
-  LARGE: '7px 12px',
-};
-
-export const ChipSize = {
-  SMALL: 'small',
-  NORMAL: 'normal',
-  LARGE: 'large',
-};
-
-export const ChipVariant = {
-  PRIMARY: 'primary',
-  WARNING: 'warning',
-  ERROR: 'error',
-  SUCCESS: 'success',
-  DEFAULT: 'default',
-  INFO: 'info',
-};
-</script>
-
-<script setup>
 const props = defineProps({
   variant: {
     type: String,

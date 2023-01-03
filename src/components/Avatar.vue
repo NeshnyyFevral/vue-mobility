@@ -6,70 +6,22 @@
   </div>
 </template>
 
-<script>
-import { computed } from '@vue/reactivity';
+<script setup>
+import { computed } from 'vue';
 
+import {
+  AvatarBorderRadiusValue,
+  AvatarCorner,
+  AvatarFontSizeValue,
+  AvatarSize,
+  AvatarSizeValue,
+  AvatarTransparency,
+  AvatarTransparencyFontColorValue,
+  AvatarTransparencyValue,
+  AvatarVariant,
+} from '@/model/avatar';
 import GlobalColors from '@/styles/colors';
 
-const AvatarSizeValue = {
-  SMALL: '21px',
-  NORMAL: '35px',
-  LARGE: '49px',
-  EXTRALARGE: '70px',
-};
-
-const AvatarFontSizeValue = {
-  SMALL: '11px',
-  NORMAL: '14px',
-  LARGE: '24px',
-  EXTRALARGE: '36px',
-};
-
-const AvatarBorderRadiusValue = {
-  DEFAULT: '50%',
-  ROUNTED: '4px',
-  RECTANGLE: '0px',
-};
-
-const AvatarTransparencyValue = {
-  DEFAULT: '1',
-  LIGHT: '0.12',
-};
-
-const AvatarTransparencyFontColorValue = {
-  DEFAULT: '#fff',
-  LIGHT: false,
-};
-
-export const AvatarVariant = {
-  PRIMARY: 'primary',
-  WARNING: 'warning',
-  ERROR: 'error',
-  SUCCESS: 'success',
-  DEFAULT: 'default',
-  INFO: 'info',
-};
-
-export const AvatarSize = {
-  SMALL: 'small',
-  NORMAL: 'normal',
-  LARGE: 'large',
-  EXTRALARGE: 'extra large',
-};
-
-export const AvatarCorner = {
-  DEFAULT: 'default',
-  ROUNTED: 'rounted',
-  RECTANGLE: 'rectangle',
-};
-
-export const AvatarTransparency = {
-  DEFAULT: 'default',
-  LIGHT: 'light',
-};
-</script>
-
-<script setup>
 const props = defineProps({
   variant: {
     type: String,

@@ -42,6 +42,7 @@ import theme from '@/styles/theme';
 
 const themeStore = useThemeStore();
 const emits = defineEmits(['choice']);
+
 defineProps({
   items: {
     type: Array,

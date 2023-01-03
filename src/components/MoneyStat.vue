@@ -14,62 +14,22 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from '@vue/reactivity';
 
+import {
+  MoneyStatLeftValue,
+  MoneyStatSize,
+  MoneyStatSizeAfterValue,
+  MoneyStatSizeIconValue,
+  MoneyStatSizeMainValue,
+  MoneyStatTopValue,
+  MoneyStatVariant,
+} from '@/model/moneyStat';
 import { useThemeStore } from '@/stores/theme';
 import GlobalColors from '@/styles/colors';
 import theme from '@/styles/theme';
 
-const MoneyStatSizeMainValue = {
-  SMALL: '14px',
-  NORMAL: '24px',
-  LARGE: '30px',
-  EXTRA_LARGE: '36px',
-};
-
-const MoneyStatSizeAfterValue = {
-  SMALL: '11px',
-  NORMAL: '14px',
-  LARGE: '20px',
-  EXTRA_LARGE: '24px',
-};
-
-const MoneyStatSizeIconValue = {
-  SMALL: '20px',
-  NORMAL: '20px',
-  LARGE: '25px',
-  EXTRA_LARGE: '30px',
-};
-
-const MoneyStatTopValue = {
-  SMALL: '5px',
-  NORMAL: '5px',
-  LARGE: '6px',
-  EXTRA_LARGE: '7px',
-};
-
-const MoneyStatLeftValue = {
-  SMALL: '3px',
-  NORMAL: '3px',
-  LARGE: '4px',
-  EXTRA_LARGE: '5px',
-};
-
-export const MoneyStatVariant = {
-  UP: 'up',
-  DOWN: 'down',
-};
-
-export const MoneyStatSize = {
-  SMALL: 'small',
-  NORMAL: 'normal',
-  LARGE: 'large',
-  EXTRA_LARGE: 'extralarge',
-};
-</script>
-
-<script setup>
 const themeStore = useThemeStore();
 const props = defineProps({
   monotone: {

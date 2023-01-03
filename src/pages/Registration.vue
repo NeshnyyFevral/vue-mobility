@@ -12,15 +12,22 @@
       <div :class="$style.authBox">
         <div :class="$style.main">
           <h3 :class="$style.title">
-            Welcome to Materio
+            Registration
           </h3>
-          <p :class="$style.desc">
-            Please sign-in to your account and start the adventure
-          </p>
           <form
             :class="$style.form"
             @submit.prevent="submit"
           >
+            <Input
+              :placeholder="'Login'"
+              :size="InputSize.SMALL"
+              :class="[$style.input, $style.login]"
+              :label="'login'"
+              :value="loginValue"
+              :hint="'Your login'"
+              @input="inputLogin"
+              @error="loginError"
+            />
             <Input
               :placeholder="'Email address'"
               :size="InputSize.SMALL"
@@ -28,7 +35,7 @@
               :label="'email'"
               :value="emailValue"
               :hint="'Your email'"
-              :rules="[rulesEmail.email]"
+              :rules="[rulesEmail.required, rulesEmail.email]"
               validate-on-blur
               @input="inputEmail"
               @error="emailError"
@@ -39,9 +46,12 @@
               :label="'password'"
               :value="passwordValue"
               :placeholder="'Your password'"
-              :hint="'Your password'"
+              :hint="'At least 8 characters'"
               :type="passwordShow ? 'text' : 'password'"
+              :rules="rulesPassword"
+              :counter="8"
               @input="inputPassword"
+              @error="passwordError"
             >
               <template #appendInner>
                 <component
@@ -59,15 +69,15 @@
                 :class="$style.button"
                 type="submit"
               >
-                Log in
+                Sigh up
               </Button>
             </div>
             <div :class="$style.registration">
-              New on our platform? <button
+              Already have an account? <button
                 type="button"
-                @click="registration"
+                @click="login"
               >
-                Create account
+                Sign in instead
               </button>
             </div>
           </form>
@@ -99,10 +109,14 @@ import theme from '@/styles/theme';
 
 const themeStore = useThemeStore();
 const router = useRouter();
+const loginValue = ref('');
 const emailValue = ref('');
 const passwordValue = ref('');
 const passwordShow = ref(false);
-const error = ref(false);
+
+const loginErrorValue = ref(false);
+const emailErrorValue = ref(false);
+const passwordErrorValue = ref(false);
 
 const rulesEmail = {
   required: (value) => !!value || 'Required.',
@@ -111,29 +125,35 @@ const rulesEmail = {
     return pattern.test(value) || 'Invalid e-mail.';
   },
 };
+const rulesPassword = [(value) => value.length >= 8 || 'min 8 characters'];
 
+const inputLogin = (val) => { loginValue.value = val; };
 const inputEmail = (val) => { emailValue.value = val; };
 const inputPassword = (val) => { passwordValue.value = val; };
-const emailError = (val) => { error.value = val; };
+
+const loginError = (val) => { loginErrorValue.value = val; };
+const emailError = (val) => { emailErrorValue.value = val; };
+const passwordError = (val) => { passwordErrorValue.value = val; };
 
 const submit = () => {
-  if (!emailValue.value || !passwordValue.value) {
+  if (!emailValue.value || !passwordValue.value || !loginValue.value) {
     alert('Заполните все поля!');
     return;
   }
 
-  if (error.value) return;
+  if (loginErrorValue.value || emailErrorValue.value || passwordErrorValue.value) return;
 
-  if (emailValue.value === appStorage.get('user').email
-      && passwordValue.value === appStorage.get('user').password) {
-    appStorage.set('authUser', { key: Math.random().toString(16).substring(2, 8) });
-  } else return;
-
+  appStorage.set('user', {
+    login: loginValue.value,
+    email: emailValue.value,
+    password: passwordValue.value,
+  });
+  appStorage.set('authUser', { key: Math.random().toString(16).substring(2, 8) });
   router.push(Routes.CRM);
 };
 
-const registration = () => {
-  router.push(Routes.REGISTRATION);
+const login = () => {
+  router.push(Routes.LOGIN);
 };
 
 onBeforeMount(() => {
@@ -178,6 +198,7 @@ const color = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_T
 
   .authBox:last-child {
     justify-content: flex-start;
+
     @media (max-width: 900px) {
       display: block;
       width: 100%;

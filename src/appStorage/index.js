@@ -7,6 +7,10 @@ class Storage {
   set = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
   };
+
+  removeItem = (key) => {
+    localStorage.removeItem(key);
+  };
 }
 
 const appStorage = new Storage();

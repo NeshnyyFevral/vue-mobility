@@ -13,36 +13,18 @@
   </button>
 </template>
 
-<script>
+<script setup>
 import { computed } from '@vue/reactivity';
 
 import Ripple from '@/components/Ripple.vue';
 import { useRipple } from '@/hooks/useRipple';
+import {
+  ButtonSize,
+  ButtonSizeValue,
+  ButtonVariant,
+} from '@/model/button';
 import GlobalColors from '@/styles/colors';
 
-const ButtonSizeValue = {
-  SMALL: '7px 15px',
-  NORMAL: '10px 20px',
-  LARGE: '13px 35px',
-};
-
-export const ButtonSize = {
-  SMALL: 'small',
-  NORMAL: 'normal',
-  LARGE: 'large',
-};
-
-export const ButtonVariant = {
-  PRIMARY: 'primary',
-  WARNING: 'warning',
-  ERROR: 'error',
-  SUCCESS: 'success',
-  DEFAULT: 'default',
-  INFO: 'info',
-};
-</script>
-
-<script setup>
 const props = defineProps({
   variant: {
     type: String,

@@ -96,51 +96,23 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import {
   computed, ref, watch,
 } from 'vue';
 
 import Cross from '@/assets/icons/cross.svg';
+import {
+  InputRadius,
+  InputRadiusValue,
+  InputSize,
+  InputSizeValue,
+  InputVariant,
+} from '@/model/input';
 import { useThemeStore } from '@/stores/theme';
 import GlobalColors from '@/styles/colors';
 import theme from '@/styles/theme';
 
-const InputSizeValue = {
-  SMALL: '40px',
-  NORMAL: '46px',
-  LARGE: '58px',
-};
-
-const InputRadiusValue = {
-  DEFAULT: '5px',
-  ROUNTED: '28px',
-  RECTANGLE: '0px',
-};
-
-export const InputSize = {
-  SMALL: 'small',
-  NORMAL: 'normal',
-  LARGE: 'large',
-};
-
-export const InputRadius = {
-  DEFAULT: 'dafault',
-  ROUNTED: 'rounted',
-  RECTANGLE: 'rectangle',
-};
-
-export const InputVariant = {
-  PRIMARY: 'primary',
-  WARNING: 'warning',
-  ERROR: 'error',
-  SUCCESS: 'success',
-  DEFAULT: 'default',
-  INFO: 'info',
-};
-</script>
-
-<script setup>
 const themeStore = useThemeStore();
 const props = defineProps({
   variant: {
@@ -504,7 +476,11 @@ const blurInput = () => {
   .outlined .details .desc {
     left: 12px;
     background-color: var(--desc-bg);
-    transition: background-color 0.3s cubic-bezier(.25,.8,.5,1);
+    transition: background-color 0.3s cubic-bezier(.25,.8,.5,1),
+      transform 0.3s cubic-bezier(.25,.8,.5,1),
+      scale 0.3s cubic-bezier(.25,.8,.5,1),
+      top 0.3s cubic-bezier(.25,.8,.5,1),
+      color 0.3s cubic-bezier(.25,.8,.5,1);
   }
 
   .dirty + .details .desc {

@@ -1297,32 +1297,34 @@ import ArrowUp from '@/assets/icons/chevron-up.svg';
 import Cross from '@/assets/icons/cross.svg';
 import EyeOff from '@/assets/icons/eye-off.svg';
 import EyeOn from '@/assets/icons/eye-on.svg';
-import Avatar, {
+import Avatar from '@/components/Avatar.vue';
+import Button from '@/components/Basic/Button.vue';
+import Checkbox from '@/components/Basic/Checkbox.vue';
+import Dialog from '@/components/Basic/Dialog.vue';
+import Input from '@/components/Basic/Input.vue';
+import Radio from '@/components/Basic/Radio.vue';
+import RadioGroup from '@/components/Basic/RadioGroup.vue';
+import Select from '@/components/Basic/Select.vue';
+import Chip from '@/components/Chip.vue';
+import MoneyStat from '@/components/MoneyStat.vue';
+import TotalStat from '@/components/TotalStat.vue';
+import {
   AvatarCorner,
   AvatarSize,
   AvatarTransparency,
   AvatarVariant,
-} from '@/components/Avatar.vue';
-import Button, { ButtonSize, ButtonVariant } from '@/components/Basic/Button.vue';
-import Checkbox, { CheckboxVariant } from '@/components/Basic/Checkbox.vue';
-import Dialog from '@/components/Basic/Dialog.vue';
-import Input, {
+} from '@/model/avatar';
+import { ButtonSize, ButtonVariant } from '@/model/button';
+import { CheckboxVariant } from '@/model/checkbox';
+import { ChipSize, ChipVariant } from '@/model/chip';
+import {
   InputRadius,
   InputSize,
   InputVariant,
-} from '@/components/Basic/Input.vue';
-import Radio, { RadioVariant } from '@/components/Basic/Radio.vue';
-import RadioGroup from '@/components/Basic/RadioGroup.vue';
-import Select from '@/components/Basic/Select.vue';
-import Chip, { ChipSize, ChipVariant } from '@/components/Chip.vue';
-import MoneyStat, {
-  MoneyStatSize,
-  MoneyStatVariant,
-} from '@/components/MoneyStat.vue';
-import TotalStat, {
-  TotalStatSize,
-  TotalStatVariant,
-} from '@/components/TotalStat.vue';
+} from '@/model/input';
+import { MoneyStatSize, MoneyStatVariant } from '@/model/moneyStat';
+import { RadioVariant } from '@/model/radio';
+import { TotalStatSize, TotalStatVariant } from '@/model/totalStat';
 import { useThemeStore } from '@/stores/theme';
 import theme from '@/styles/theme';
 

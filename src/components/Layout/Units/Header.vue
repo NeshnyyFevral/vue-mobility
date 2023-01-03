@@ -35,9 +35,6 @@
         >
         {{ language }}
       </button>
-      <button :class="[$style.button, $style.theme]">
-        <ThemeDarkIcon />
-      </button>
       <button :class="[$style.button, $style.notify]">
         <NotifyIcon />
       </button>
@@ -66,7 +63,6 @@ import {
 import appStorage from '@/appStorage';
 import NotifyIcon from '@/assets/icons/Header/notification.svg';
 import SearchIcon from '@/assets/icons/Header/search.svg';
-import ThemeDarkIcon from '@/assets/icons/Header/themeDark.svg';
 import MenuIcon from '@/assets/icons/Sidebar/menu.svg';
 import Avatar, { AvatarCorner, AvatarSize } from '@/components/Avatar.vue';
 import Checkbox, { CheckboxVariant } from '@/components/Basic/Checkbox.vue';

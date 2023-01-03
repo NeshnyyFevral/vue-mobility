@@ -3,6 +3,7 @@ import { createRouter as _createRouter, createWebHistory } from 'vue-router';
 export const Routes = {
   PREVIEW: 'preview',
   CRM: 'crm',
+  LOGIN: 'login',
 };
 
 export default function createRouter() {
@@ -11,11 +12,16 @@ export default function createRouter() {
     routes: [
       {
         path: '/vue-mobility/',
+        name: Routes.LOGIN,
+        component: () => import('@/pages/Login.vue'),
+      },
+      {
+        path: '/vue-mobility/',
         name: 'default',
         component: () => import('@/components/Layout/Default.vue'),
         children: [
           {
-            path: '/vue-mobility/',
+            path: '/vue-mobility/CRM',
             name: Routes.CRM,
             component: () => import('@/pages/CRM.vue'),
           },

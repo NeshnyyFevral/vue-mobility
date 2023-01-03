@@ -249,6 +249,8 @@ const props = defineProps({
   },
 });
 
+const emits = defineEmits(['input', 'error']);
+
 const inputValue = ref(props.value);
 const hintValue = ref(props.hint);
 const finnalyValue = ref(props.prefix + inputValue.value + props.suffix);
@@ -293,7 +295,14 @@ const progressColor = computed(
     GlobalColors.SUCCESS,
   ][Math.floor(Number.parseInt(progressWidth.value, 10) / 40)],
 );
-const inputColor = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT));
+
+const inputColor = computed(() => {
+  if (error.value) {
+    return GlobalColors.ERROR;
+  }
+  return themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT;
+});
+
 const descBg = computed(() => (themeStore.theme ? theme.DARK_BG_CARD : theme.LIGHT_BG_CARD));
 
 const checkRules = (rules) => {
@@ -311,6 +320,7 @@ const checkRules = (rules) => {
       error.value = false;
     }
   });
+  emits('error', error.value);
 };
 
 const checkValue = (event) => {
@@ -328,6 +338,8 @@ const checkValue = (event) => {
   if (props.validateOnBlur) {
     error.value = !props.validateOnBlur;
   }
+
+  emits('input', inputValue.value);
 };
 
 const clearInput = () => {

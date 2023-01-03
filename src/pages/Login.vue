@@ -4,8 +4,8 @@
       <div :class="$style.authBox">
         <div :class="$style.image">
           <img
-            src="../assets/images/bg-authorisation.svg"
-            alt="auth-image"
+            src="../assets/images/auth.svg"
+            alt="auth image"
           >
         </div>
       </div>
@@ -81,9 +81,7 @@
 </template>
 
 <script setup>
-import {
-  computed, onBeforeMount, ref,
-} from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import appStorage from '@/appStorage';
@@ -94,10 +92,7 @@ import Input from '@/components/Basic/Input.vue';
 import { ButtonSize, ButtonVariant } from '@/model/button';
 import { InputSize } from '@/model/input';
 import { Routes } from '@/router';
-import { useThemeStore } from '@/stores/theme';
-import theme from '@/styles/theme';
 
-const themeStore = useThemeStore();
 const router = useRouter();
 const emailValue = ref('');
 const passwordValue = ref('');
@@ -142,13 +137,10 @@ onBeforeMount(() => {
   }
 });
 
-const color = computed(() => (themeStore.theme ? theme.DARK_TEXT : theme.LIGHT_TEXT));
 </script>
 
 <style module lang="scss">
   .root {
-    --text-color: v-bind(color);
-
     height: 100vh;
   }
 

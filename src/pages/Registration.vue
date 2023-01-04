@@ -73,12 +73,13 @@
               </Button>
             </div>
             <div :class="$style.registration">
-              Already have an account? <button
-                type="button"
-                @click="login"
+              Already have an account?
+              <router-link
+                :class="$style.reg"
+                :to="Routes.LOGIN"
               >
                 Sign in instead
-              </button>
+              </router-link>
             </div>
           </form>
           <div :class="$style.copyright">
@@ -145,10 +146,6 @@ const submit = () => {
   });
   appStorage.set('authUser', { key: Math.random().toString(16).substring(2, 8) });
   router.push(Routes.CRM);
-};
-
-const login = () => {
-  router.push(Routes.LOGIN);
 };
 
 onBeforeMount(() => {
@@ -253,7 +250,7 @@ onBeforeMount(() => {
     margin-left: 20px;
   }
 
-  .registration button {
+  .registration .reg {
     margin-left: 5px;
     font-size: 16px;
     color: var(--text-color);

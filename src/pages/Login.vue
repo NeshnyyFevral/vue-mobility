@@ -63,12 +63,13 @@
               </Button>
             </div>
             <div :class="$style.registration">
-              New on our platform? <button
-                type="button"
-                @click="registration"
+              New on our platform?
+              <router-link
+                :class="$style.reg"
+                :to="Routes.REGISTRATION"
               >
                 Create account
-              </button>
+              </router-link>
             </div>
           </form>
           <div :class="$style.copyright">
@@ -125,10 +126,6 @@ const submit = () => {
   } else return;
 
   router.push(Routes.CRM);
-};
-
-const registration = () => {
-  router.push(Routes.REGISTRATION);
 };
 
 onBeforeMount(() => {
@@ -232,7 +229,7 @@ onBeforeMount(() => {
     margin-left: 20px;
   }
 
-  .registration button {
+  .registration .reg {
     margin-left: 5px;
     font-size: 16px;
     color: var(--text-color);
